@@ -11,10 +11,11 @@
 
 
 @interface MainMenuViewController ()
-
+@property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @end
 
 @implementation MainMenuViewController
+@synthesize selectedIndexPath = _selectedIndexPath;
 
 - (void)viewDidLoad
 {
@@ -26,6 +27,17 @@
     } else {
         [self.navigationController.navigationBar setBarTintColor:[UIColor darkGrayColor]];
     }
+    
+    [self setSelectedIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.tableView selectRowAtIndexPath:[self selectedIndexPath]
+                                animated:YES
+                          scrollPosition:UITableViewScrollPositionNone];
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,12 +59,18 @@
     return 53.0;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self setSelectedIndexPath:indexPath];
+}
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue isKindOfClass:[SWRevealViewControllerSegue class]] && [segue.destinationViewController isKindOfClass:[UINavigationController class]]) {
         
         [(SWRevealViewControllerSegue *)segue setPerformBlock:^(SWRevealViewControllerSegue *segue, UIViewController *startVC, UIViewController *destinationVC) {
+            
             [self.revealViewController setFrontViewController:destinationVC];
             [self.revealViewController setFrontViewPosition:FrontViewPositionLeft animated:YES];
         }];
