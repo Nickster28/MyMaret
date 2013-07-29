@@ -15,9 +15,9 @@
 
 @implementation AnnouncementsTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)init
 {
-    self = [super initWithStyle:style];
+    self = [super init];
     if (self) {
         // Custom initialization
     }
@@ -33,12 +33,6 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    [self.navigationController.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-    
-    if ([UIApplication isPrevIOS]) {
-        [self.drawerButton setImage:[UIImage imageNamed:@"DrawerIcon6"]];
-    } else [self.drawerButton setImage:[UIImage imageNamed:@"DrawerIcon7"]];
 }
 
 
@@ -52,15 +46,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
     return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
     return 0;
 }
 
@@ -124,9 +114,5 @@
 }
 
  */
-
-- (IBAction)toggleMainMenu:(id)sender {
-    [self.revealViewController revealToggle:sender];
-}
 
 @end

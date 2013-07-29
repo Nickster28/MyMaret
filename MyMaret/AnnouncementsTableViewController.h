@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyMaretNavigationBarViewController.h"
 
-@interface AnnouncementsTableViewController : UITableViewController
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *drawerButton;
-- (IBAction)toggleMainMenu:(id)sender;
+@interface AnnouncementsTableViewController : MyMaretNavigationBarViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

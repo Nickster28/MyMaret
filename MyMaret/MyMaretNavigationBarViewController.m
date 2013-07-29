@@ -7,6 +7,7 @@
 //
 
 #import "MyMaretNavigationBarViewController.h"
+#import "SWRevealViewController.h"
 
 @implementation MyMaretNavigationBarViewController
 
@@ -26,13 +27,14 @@
                                                                           alpha:1.0]];
     
     
-    UIBarButtonItem *drawerButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                                  target:self.revealViewController
-                                                                                  action:@selector(revealToggle:)];
+    UIBarButtonItem *drawerButton = [[UIBarButtonItem alloc] init];
     
     if ([UIApplication isPrevIOS]) {
         [drawerButton setImage:[UIImage imageNamed:@"DrawerIcon6"]];
     } else [drawerButton setImage:[UIImage imageNamed:@"DrawerIcon7"]];
+    
+    [drawerButton setTarget:self.revealViewController];
+    [drawerButton setAction:@selector(revealToggle:)];
     
     [self.navigationItem setLeftBarButtonItem:drawerButton];
 }

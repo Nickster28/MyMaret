@@ -7,6 +7,7 @@
 //
 
 #import "MainMenuViewController.h"
+#import "SWRevealViewController.h"
 
 
 @interface MainMenuViewController ()

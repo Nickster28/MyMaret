@@ -31,6 +31,16 @@
 		01DAA6AC17A7031200B23BB2 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AA17A7031200B23BB2 /* TodayViewController.m */; };
 		01DAA6B017A7041E00B23BB2 /* MyMaretNavigationBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AF17A7041E00B23BB2 /* MyMaretNavigationBarViewController.m */; };
 		01DAA6B117A7041E00B23BB2 /* MyMaretNavigationBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AF17A7041E00B23BB2 /* MyMaretNavigationBarViewController.m */; };
+		01DAA6B417A709E900B23BB2 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6B317A709E900B23BB2 /* CalendarViewController.m */; };
+		01DAA6B517A709E900B23BB2 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6B317A709E900B23BB2 /* CalendarViewController.m */; };
+		01DAA6B917A70A1B00B23BB2 /* NewspaperTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6B817A70A1B00B23BB2 /* NewspaperTableViewController.m */; };
+		01DAA6BA17A70A1B00B23BB2 /* NewspaperTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6B817A70A1B00B23BB2 /* NewspaperTableViewController.m */; };
+		01DAA6BE17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6BD17A70A4700B23BB2 /* ClassScheduleTableViewController.m */; };
+		01DAA6BF17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6BD17A70A4700B23BB2 /* ClassScheduleTableViewController.m */; };
+		01DAA6C317A70A6800B23BB2 /* AssignmentBookCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6C217A70A6800B23BB2 /* AssignmentBookCollectionViewController.m */; };
+		01DAA6C417A70A6800B23BB2 /* AssignmentBookCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6C217A70A6800B23BB2 /* AssignmentBookCollectionViewController.m */; };
+		01DAA6C817A70ABF00B23BB2 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6C717A70ABF00B23BB2 /* SettingsTableViewController.m */; };
+		01DAA6C917A70ABF00B23BB2 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6C717A70ABF00B23BB2 /* SettingsTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,8 +81,18 @@
 		0177457F17A60B5E001625BF /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		01DAA6A917A7031200B23BB2 /* TodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
 		01DAA6AA17A7031200B23BB2 /* TodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
-		01DAA6AE17A7041E00B23BB2 /* MyMaretNavigationBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMaretNavigationBarViewController.h; sourceTree = "<group>"; };
-		01DAA6AF17A7041E00B23BB2 /* MyMaretNavigationBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMaretNavigationBarViewController.m; sourceTree = "<group>"; };
+		01DAA6AE17A7041E00B23BB2 /* MyMaretNavigationBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyMaretNavigationBarViewController.h; path = ../MyMaretNavigationBarViewController.h; sourceTree = "<group>"; };
+		01DAA6AF17A7041E00B23BB2 /* MyMaretNavigationBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyMaretNavigationBarViewController.m; path = ../MyMaretNavigationBarViewController.m; sourceTree = "<group>"; };
+		01DAA6B217A709E900B23BB2 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalendarViewController.h; path = ../CalendarViewController.h; sourceTree = "<group>"; };
+		01DAA6B317A709E900B23BB2 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalendarViewController.m; path = ../CalendarViewController.m; sourceTree = "<group>"; };
+		01DAA6B717A70A1B00B23BB2 /* NewspaperTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewspaperTableViewController.h; sourceTree = "<group>"; };
+		01DAA6B817A70A1B00B23BB2 /* NewspaperTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewspaperTableViewController.m; sourceTree = "<group>"; };
+		01DAA6BC17A70A4700B23BB2 /* ClassScheduleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassScheduleTableViewController.h; sourceTree = "<group>"; };
+		01DAA6BD17A70A4700B23BB2 /* ClassScheduleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassScheduleTableViewController.m; sourceTree = "<group>"; };
+		01DAA6C117A70A6800B23BB2 /* AssignmentBookCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentBookCollectionViewController.h; sourceTree = "<group>"; };
+		01DAA6C217A70A6800B23BB2 /* AssignmentBookCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentBookCollectionViewController.m; sourceTree = "<group>"; };
+		01DAA6C617A70ABF00B23BB2 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		01DAA6C717A70ABF00B23BB2 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,7 +159,12 @@
 				0177455E17A60AC3001625BF /* MainMenuViewController.m */,
 				01DAA6AD17A7031800B23BB2 /* Today */,
 				01DAA6A817A7002600B23BB2 /* Announcements */,
-				0177457D17A60B5E001625BF /* SWRevealViewController */,
+				01DAA6B617A709FA00B23BB2 /* Calendar */,
+				01DAA6BB17A70A2400B23BB2 /* Newspaper */,
+				01DAA6C017A70A4B00B23BB2 /* Class Schedule */,
+				01DAA6C517A70A6D00B23BB2 /* Assignment Book */,
+				01DAA6CA17A70AC200B23BB2 /* Settings */,
+				0177457D17A60B5E001625BF /* Core View Controllers */,
 				0177456017A60AC3001625BF /* Images.xcassets */,
 				0177454F17A60AC3001625BF /* Supporting Files */,
 			);
@@ -177,12 +202,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0177457D17A60B5E001625BF /* SWRevealViewController */ = {
+		0177457D17A60B5E001625BF /* Core View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				01DAA6AE17A7041E00B23BB2 /* MyMaretNavigationBarViewController.h */,
+				01DAA6AF17A7041E00B23BB2 /* MyMaretNavigationBarViewController.m */,
 				0177457E17A60B5E001625BF /* SWRevealViewController.h */,
 				0177457F17A60B5E001625BF /* SWRevealViewController.m */,
 			);
+			name = "Core View Controllers";
 			path = SWRevealViewController;
 			sourceTree = "<group>";
 		};
@@ -191,8 +219,6 @@
 			children = (
 				0171AEC117A6244700F3284C /* AnnouncementsTableViewController.h */,
 				0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */,
-				01DAA6AE17A7041E00B23BB2 /* MyMaretNavigationBarViewController.h */,
-				01DAA6AF17A7041E00B23BB2 /* MyMaretNavigationBarViewController.m */,
 			);
 			name = Announcements;
 			sourceTree = "<group>";
@@ -204,6 +230,51 @@
 				01DAA6AA17A7031200B23BB2 /* TodayViewController.m */,
 			);
 			name = Today;
+			sourceTree = "<group>";
+		};
+		01DAA6B617A709FA00B23BB2 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				01DAA6B217A709E900B23BB2 /* CalendarViewController.h */,
+				01DAA6B317A709E900B23BB2 /* CalendarViewController.m */,
+			);
+			name = Calendar;
+			sourceTree = "<group>";
+		};
+		01DAA6BB17A70A2400B23BB2 /* Newspaper */ = {
+			isa = PBXGroup;
+			children = (
+				01DAA6B717A70A1B00B23BB2 /* NewspaperTableViewController.h */,
+				01DAA6B817A70A1B00B23BB2 /* NewspaperTableViewController.m */,
+			);
+			name = Newspaper;
+			sourceTree = "<group>";
+		};
+		01DAA6C017A70A4B00B23BB2 /* Class Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				01DAA6BC17A70A4700B23BB2 /* ClassScheduleTableViewController.h */,
+				01DAA6BD17A70A4700B23BB2 /* ClassScheduleTableViewController.m */,
+			);
+			name = "Class Schedule";
+			sourceTree = "<group>";
+		};
+		01DAA6C517A70A6D00B23BB2 /* Assignment Book */ = {
+			isa = PBXGroup;
+			children = (
+				01DAA6C117A70A6800B23BB2 /* AssignmentBookCollectionViewController.h */,
+				01DAA6C217A70A6800B23BB2 /* AssignmentBookCollectionViewController.m */,
+			);
+			name = "Assignment Book";
+			sourceTree = "<group>";
+		};
+		01DAA6CA17A70AC200B23BB2 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				01DAA6C617A70ABF00B23BB2 /* SettingsTableViewController.h */,
+				01DAA6C717A70ABF00B23BB2 /* SettingsTableViewController.m */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,11 +383,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				01DAA6AB17A7031200B23BB2 /* TodayViewController.m in Sources */,
+				01DAA6B417A709E900B23BB2 /* CalendarViewController.m in Sources */,
+				01DAA6C317A70A6800B23BB2 /* AssignmentBookCollectionViewController.m in Sources */,
 				0177455F17A60AC3001625BF /* MainMenuViewController.m in Sources */,
+				01DAA6BE17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */,
 				01DAA6B017A7041E00B23BB2 /* MyMaretNavigationBarViewController.m in Sources */,
 				0177455917A60AC3001625BF /* AppDelegate.m in Sources */,
 				0171AEC317A6244700F3284C /* AnnouncementsTableViewController.m in Sources */,
+				01DAA6C817A70ABF00B23BB2 /* SettingsTableViewController.m in Sources */,
 				0177455517A60AC3001625BF /* main.m in Sources */,
+				01DAA6B917A70A1B00B23BB2 /* NewspaperTableViewController.m in Sources */,
 				016780DB17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */,
 				0177458017A60B5E001625BF /* SWRevealViewController.m in Sources */,
 			);
@@ -328,10 +404,15 @@
 			files = (
 				016780DC17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */,
 				0177457417A60AC3001625BF /* MyMaretTests.m in Sources */,
+				01DAA6C417A70A6800B23BB2 /* AssignmentBookCollectionViewController.m in Sources */,
 				0171AEC417A6244700F3284C /* AnnouncementsTableViewController.m in Sources */,
 				0177458117A60B5E001625BF /* SWRevealViewController.m in Sources */,
 				01DAA6B117A7041E00B23BB2 /* MyMaretNavigationBarViewController.m in Sources */,
+				01DAA6BA17A70A1B00B23BB2 /* NewspaperTableViewController.m in Sources */,
 				01DAA6AC17A7031200B23BB2 /* TodayViewController.m in Sources */,
+				01DAA6BF17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */,
+				01DAA6C917A70ABF00B23BB2 /* SettingsTableViewController.m in Sources */,
+				01DAA6B517A709E900B23BB2 /* CalendarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
