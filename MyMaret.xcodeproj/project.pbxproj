@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0171AEC317A6244700F3284C /* AnnouncementsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */; };
+		0171AEC417A6244700F3284C /* AnnouncementsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */; };
 		0177454917A60AC3001625BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454817A60AC3001625BF /* Foundation.framework */; };
 		0177454B17A60AC3001625BF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454A17A60AC3001625BF /* CoreGraphics.framework */; };
 		0177454D17A60AC3001625BF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454C17A60AC3001625BF /* UIKit.framework */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0171AEC117A6244700F3284C /* AnnouncementsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementsTableViewController.h; sourceTree = "<group>"; };
+		0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementsTableViewController.m; sourceTree = "<group>"; };
 		0177454517A60AC3001625BF /* MyMaret.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMaret.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0177454817A60AC3001625BF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0177454A17A60AC3001625BF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -121,6 +125,8 @@
 				0177455A17A60AC3001625BF /* Main.storyboard */,
 				0177455D17A60AC3001625BF /* MainMenuViewController.h */,
 				0177455E17A60AC3001625BF /* MainMenuViewController.m */,
+				0171AEC117A6244700F3284C /* AnnouncementsTableViewController.h */,
+				0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */,
 				0177456017A60AC3001625BF /* Images.xcassets */,
 				0177457D17A60B5E001625BF /* SWRevealViewController */,
 				0177454F17A60AC3001625BF /* Supporting Files */,
@@ -273,6 +279,7 @@
 			files = (
 				0177455F17A60AC3001625BF /* MainMenuViewController.m in Sources */,
 				0177455917A60AC3001625BF /* AppDelegate.m in Sources */,
+				0171AEC317A6244700F3284C /* AnnouncementsTableViewController.m in Sources */,
 				0177455517A60AC3001625BF /* main.m in Sources */,
 				0177458017A60B5E001625BF /* SWRevealViewController.m in Sources */,
 			);
@@ -283,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0177457417A60AC3001625BF /* MyMaretTests.m in Sources */,
+				0171AEC417A6244700F3284C /* AnnouncementsTableViewController.m in Sources */,
 				0177458117A60B5E001625BF /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
