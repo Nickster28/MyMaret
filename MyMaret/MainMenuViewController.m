@@ -1,18 +1,18 @@
 //
-//  ViewController.m
+//  MainMenuViewController.m
 //  MyMaret
 //
 //  Created by Nick Troccoli on 7/28/13.
 //  Copyright (c) 2013 Nick. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "MainMenuViewController.h"
 
-@interface ViewController ()
+@interface MainMenuViewController ()
 
 @end
 
-@implementation ViewController
+@implementation MainMenuViewController
 
 - (void)viewDidLoad
 {
