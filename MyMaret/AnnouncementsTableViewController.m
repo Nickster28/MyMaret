@@ -7,7 +7,7 @@
 //
 
 #import "AnnouncementsTableViewController.h"
-#import "SWRevealViewController.h"
+
 
 @interface AnnouncementsTableViewController ()
 
@@ -34,7 +34,11 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+    [self.navigationController.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+    
+    if ([UIApplication isPrevIOS]) {
+        [self.drawerButton setImage:[UIImage imageNamed:@"DrawerIcon6"]];
+    } else [self.drawerButton setImage:[UIImage imageNamed:@"DrawerIcon7"]];
 }
 
 
@@ -120,5 +124,9 @@
 }
 
  */
+
+- (IBAction)toggleMainMenu:(id)sender {
+    [self.revealViewController revealToggle:sender];
+}
 
 @end

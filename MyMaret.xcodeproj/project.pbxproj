@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		016780DB17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */; };
+		016780DC17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */; };
 		0171AEC317A6244700F3284C /* AnnouncementsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */; };
 		0171AEC417A6244700F3284C /* AnnouncementsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */; };
 		0177454917A60AC3001625BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454817A60AC3001625BF /* Foundation.framework */; };
@@ -25,6 +27,10 @@
 		0177457417A60AC3001625BF /* MyMaretTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177457317A60AC3001625BF /* MyMaretTests.m */; };
 		0177458017A60B5E001625BF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177457F17A60B5E001625BF /* SWRevealViewController.m */; };
 		0177458117A60B5E001625BF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177457F17A60B5E001625BF /* SWRevealViewController.m */; };
+		01DAA6AB17A7031200B23BB2 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AA17A7031200B23BB2 /* TodayViewController.m */; };
+		01DAA6AC17A7031200B23BB2 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AA17A7031200B23BB2 /* TodayViewController.m */; };
+		01DAA6B017A7041E00B23BB2 /* MyMaretNavigationBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AF17A7041E00B23BB2 /* MyMaretNavigationBarViewController.m */; };
+		01DAA6B117A7041E00B23BB2 /* MyMaretNavigationBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AF17A7041E00B23BB2 /* MyMaretNavigationBarViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		016780D917A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+iOSVersionChecker.h"; sourceTree = "<group>"; };
+		016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+iOSVersionChecker.m"; sourceTree = "<group>"; };
 		0171AEC117A6244700F3284C /* AnnouncementsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementsTableViewController.h; sourceTree = "<group>"; };
 		0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementsTableViewController.m; sourceTree = "<group>"; };
 		0177454517A60AC3001625BF /* MyMaret.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMaret.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,6 +69,10 @@
 		0177457317A60AC3001625BF /* MyMaretTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyMaretTests.m; sourceTree = "<group>"; };
 		0177457E17A60B5E001625BF /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		0177457F17A60B5E001625BF /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		01DAA6A917A7031200B23BB2 /* TodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		01DAA6AA17A7031200B23BB2 /* TodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		01DAA6AE17A7041E00B23BB2 /* MyMaretNavigationBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMaretNavigationBarViewController.h; sourceTree = "<group>"; };
+		01DAA6AF17A7041E00B23BB2 /* MyMaretNavigationBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMaretNavigationBarViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,10 +137,10 @@
 				0177455A17A60AC3001625BF /* Main.storyboard */,
 				0177455D17A60AC3001625BF /* MainMenuViewController.h */,
 				0177455E17A60AC3001625BF /* MainMenuViewController.m */,
-				0171AEC117A6244700F3284C /* AnnouncementsTableViewController.h */,
-				0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */,
-				0177456017A60AC3001625BF /* Images.xcassets */,
+				01DAA6AD17A7031800B23BB2 /* Today */,
+				01DAA6A817A7002600B23BB2 /* Announcements */,
 				0177457D17A60B5E001625BF /* SWRevealViewController */,
+				0177456017A60AC3001625BF /* Images.xcassets */,
 				0177454F17A60AC3001625BF /* Supporting Files */,
 			);
 			path = MyMaret;
@@ -141,6 +153,8 @@
 				0177455117A60AC3001625BF /* InfoPlist.strings */,
 				0177455417A60AC3001625BF /* main.m */,
 				0177455617A60AC3001625BF /* MyMaret-Prefix.pch */,
+				016780D917A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.h */,
+				016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -170,6 +184,26 @@
 				0177457F17A60B5E001625BF /* SWRevealViewController.m */,
 			);
 			path = SWRevealViewController;
+			sourceTree = "<group>";
+		};
+		01DAA6A817A7002600B23BB2 /* Announcements */ = {
+			isa = PBXGroup;
+			children = (
+				0171AEC117A6244700F3284C /* AnnouncementsTableViewController.h */,
+				0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */,
+				01DAA6AE17A7041E00B23BB2 /* MyMaretNavigationBarViewController.h */,
+				01DAA6AF17A7041E00B23BB2 /* MyMaretNavigationBarViewController.m */,
+			);
+			name = Announcements;
+			sourceTree = "<group>";
+		};
+		01DAA6AD17A7031800B23BB2 /* Today */ = {
+			isa = PBXGroup;
+			children = (
+				01DAA6A917A7031200B23BB2 /* TodayViewController.h */,
+				01DAA6AA17A7031200B23BB2 /* TodayViewController.m */,
+			);
+			name = Today;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,10 +311,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01DAA6AB17A7031200B23BB2 /* TodayViewController.m in Sources */,
 				0177455F17A60AC3001625BF /* MainMenuViewController.m in Sources */,
+				01DAA6B017A7041E00B23BB2 /* MyMaretNavigationBarViewController.m in Sources */,
 				0177455917A60AC3001625BF /* AppDelegate.m in Sources */,
 				0171AEC317A6244700F3284C /* AnnouncementsTableViewController.m in Sources */,
 				0177455517A60AC3001625BF /* main.m in Sources */,
+				016780DB17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */,
 				0177458017A60B5E001625BF /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,9 +326,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				016780DC17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */,
 				0177457417A60AC3001625BF /* MyMaretTests.m in Sources */,
 				0171AEC417A6244700F3284C /* AnnouncementsTableViewController.m in Sources */,
 				0177458117A60B5E001625BF /* SWRevealViewController.m in Sources */,
+				01DAA6B117A7041E00B23BB2 /* MyMaretNavigationBarViewController.m in Sources */,
+				01DAA6AC17A7031200B23BB2 /* TodayViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

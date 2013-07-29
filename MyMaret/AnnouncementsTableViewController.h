@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface AnnouncementsTableViewController : UITableViewController
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *drawerButton;
+- (IBAction)toggleMainMenu:(id)sender;
 
 @end
