@@ -39,4 +39,28 @@
     [self.navigationItem setLeftBarButtonItem:drawerButton];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    NSAssert(!self.revealViewController.delegate, @"Reveal controller delegate already set!");
+    
+    [self.revealViewController setDelegate:self];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self.revealViewController setDelegate:nil];
+}
+
+- (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position
+{
+    if (position == FrontViewPositionLeft) {
+        [self.view setUserInteractionEnabled:YES];
+    } else if (position == FrontViewPositionRight) {
+        [self.view setUserInteractionEnabled:NO];
+    }
+}
+
 @end

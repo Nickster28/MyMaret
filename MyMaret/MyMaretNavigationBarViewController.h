@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWRevealViewController.h"
 
-@interface MyMaretNavigationBarViewController : UIViewController
+@interface MyMaretNavigationBarViewController : UIViewController <SWRevealViewControllerDelegate>
 
 @end
