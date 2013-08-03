@@ -29,6 +29,12 @@
 		0177458117A60B5E001625BF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177457F17A60B5E001625BF /* SWRevealViewController.m */; };
 		017A96DB17A7EB6C003D8A40 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017A96DA17A7EB6C003D8A40 /* CalendarViewController.m */; };
 		017A96DC17A7EB6C003D8A40 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017A96DA17A7EB6C003D8A40 /* CalendarViewController.m */; };
+		01BF139817A89A3B00731690 /* AnnouncementsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139717A89A3B00731690 /* AnnouncementsStore.m */; };
+		01BF139917A89A3B00731690 /* AnnouncementsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139717A89A3B00731690 /* AnnouncementsStore.m */; };
+		01BF139C17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139A17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld */; };
+		01BF139D17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139A17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld */; };
+		01BF13A017A89F7D00731690 /* Announcement.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139F17A89F7D00731690 /* Announcement.m */; };
+		01BF13A117A89F7D00731690 /* Announcement.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139F17A89F7D00731690 /* Announcement.m */; };
 		01DAA6AB17A7031200B23BB2 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AA17A7031200B23BB2 /* TodayViewController.m */; };
 		01DAA6AC17A7031200B23BB2 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AA17A7031200B23BB2 /* TodayViewController.m */; };
 		01DAA6B017A7041E00B23BB2 /* MyMaretNavigationBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AF17A7041E00B23BB2 /* MyMaretNavigationBarViewController.m */; };
@@ -81,6 +87,11 @@
 		0177457F17A60B5E001625BF /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		017A96D917A7EB6C003D8A40 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		017A96DA17A7EB6C003D8A40 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
+		01BF139617A89A3B00731690 /* AnnouncementsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementsStore.h; sourceTree = "<group>"; };
+		01BF139717A89A3B00731690 /* AnnouncementsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementsStore.m; sourceTree = "<group>"; };
+		01BF139B17A89B8500731690 /* AnnouncementsCDModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AnnouncementsCDModel.xcdatamodel; sourceTree = "<group>"; };
+		01BF139E17A89F7D00731690 /* Announcement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Announcement.h; sourceTree = "<group>"; };
+		01BF139F17A89F7D00731690 /* Announcement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Announcement.m; sourceTree = "<group>"; };
 		01DAA6A917A7031200B23BB2 /* TodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
 		01DAA6AA17A7031200B23BB2 /* TodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
 		01DAA6AE17A7041E00B23BB2 /* MyMaretNavigationBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyMaretNavigationBarViewController.h; path = ../MyMaretNavigationBarViewController.h; sourceTree = "<group>"; };
@@ -219,6 +230,11 @@
 			children = (
 				0171AEC117A6244700F3284C /* AnnouncementsTableViewController.h */,
 				0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */,
+				01BF139617A89A3B00731690 /* AnnouncementsStore.h */,
+				01BF139717A89A3B00731690 /* AnnouncementsStore.m */,
+				01BF139E17A89F7D00731690 /* Announcement.h */,
+				01BF139F17A89F7D00731690 /* Announcement.m */,
+				01BF139A17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld */,
 			);
 			name = Announcements;
 			sourceTree = "<group>";
@@ -384,13 +400,16 @@
 			files = (
 				01DAA6AB17A7031200B23BB2 /* TodayViewController.m in Sources */,
 				01DAA6C317A70A6800B23BB2 /* AssignmentBookCollectionViewController.m in Sources */,
+				01BF139817A89A3B00731690 /* AnnouncementsStore.m in Sources */,
 				0177455F17A60AC3001625BF /* MainMenuViewController.m in Sources */,
+				01BF13A017A89F7D00731690 /* Announcement.m in Sources */,
 				01DAA6BE17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */,
 				01DAA6B017A7041E00B23BB2 /* MyMaretNavigationBarViewController.m in Sources */,
 				017A96DB17A7EB6C003D8A40 /* CalendarViewController.m in Sources */,
 				0177455917A60AC3001625BF /* AppDelegate.m in Sources */,
 				0171AEC317A6244700F3284C /* AnnouncementsTableViewController.m in Sources */,
 				01DAA6C817A70ABF00B23BB2 /* SettingsTableViewController.m in Sources */,
+				01BF139C17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld in Sources */,
 				0177455517A60AC3001625BF /* main.m in Sources */,
 				01DAA6B917A70A1B00B23BB2 /* NewspaperTableViewController.m in Sources */,
 				016780DB17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */,
@@ -410,8 +429,11 @@
 				0177458117A60B5E001625BF /* SWRevealViewController.m in Sources */,
 				01DAA6B117A7041E00B23BB2 /* MyMaretNavigationBarViewController.m in Sources */,
 				01DAA6BA17A70A1B00B23BB2 /* NewspaperTableViewController.m in Sources */,
+				01BF139D17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld in Sources */,
 				01DAA6AC17A7031200B23BB2 /* TodayViewController.m in Sources */,
 				01DAA6BF17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */,
+				01BF139917A89A3B00731690 /* AnnouncementsStore.m in Sources */,
+				01BF13A117A89F7D00731690 /* Announcement.m in Sources */,
 				01DAA6C917A70ABF00B23BB2 /* SettingsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -623,6 +645,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		01BF139A17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				01BF139B17A89B8500731690 /* AnnouncementsCDModel.xcdatamodel */,
+			);
+			currentVersion = 01BF139B17A89B8500731690 /* AnnouncementsCDModel.xcdatamodel */;
+			path = AnnouncementsCDModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0177453D17A60AC2001625BF /* Project object */;
 }
