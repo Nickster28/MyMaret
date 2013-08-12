@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MyMaretNavigationBarViewController.h"
+#import "MyMaretFrontTableViewController.h"
 
-@interface AnnouncementsTableViewController : MyMaretNavigationBarViewController <UITableViewDataSource, UITableViewDelegate>
+@interface AnnouncementsTableViewController : MyMaretFrontTableViewController
 
 @end

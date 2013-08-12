@@ -7,6 +7,8 @@
 //
 
 #import "AnnouncementsTableViewController.h"
+#import "AnnouncementsStore.h"
+#import "UIColor+SchoolColor.h"
 
 
 @interface AnnouncementsTableViewController ()
@@ -33,6 +35,13 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl setTintColor:[UIColor schoolColor]];
+    [self.refreshControl addTarget:self
+                            action:@selector(refreshAnnouncements)
+                  forControlEvents:UIControlEventValueChanged];
+    
 }
 
 
@@ -42,11 +51,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)refreshAnnouncements
+{
+    [self.refreshControl beginRefreshing];
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.refreshControl endRefreshing];
+    });
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

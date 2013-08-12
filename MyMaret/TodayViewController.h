@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MyMaretNavigationBarViewController.h"
+#import "MyMaretFrontTableViewController.h"
 
-@interface TodayViewController : MyMaretNavigationBarViewController
+@interface TodayViewController : MyMaretFrontTableViewController
 
 @end

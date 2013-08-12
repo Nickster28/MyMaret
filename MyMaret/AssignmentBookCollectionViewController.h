@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Nick. All rights reserved.
 //
 
-#import "MyMaretNavigationBarViewController.h"
 
-@interface AssignmentBookCollectionViewController : MyMaretNavigationBarViewController <UICollectionViewDataSource, UICollectionViewDelegate>
-
+@interface AssignmentBookCollectionViewController : UICollectionViewController
 @end

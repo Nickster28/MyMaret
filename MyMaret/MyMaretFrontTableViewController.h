@@ -1,5 +1,5 @@
 //
-//  MyMaretNavigationBarViewController.h
+//  MyMaretFrontTableViewController.h
 //  MyMaret
 //
 //  Created by Nick Troccoli on 7/29/13.
@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "SWRevealViewController.h"
 
-@interface MyMaretNavigationBarViewController : UIViewController <SWRevealViewControllerDelegate>
+@interface MyMaretFrontTableViewController : UITableViewController <SWRevealViewControllerDelegate>
 
 @end

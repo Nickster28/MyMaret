@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Nick. All rights reserved.
 //
 
-#import "MyMaretNavigationBarViewController.h"
+#import "MyMaretFrontTableViewController.h"
 
-@interface ClassScheduleTableViewController : MyMaretNavigationBarViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ClassScheduleTableViewController : MyMaretFrontTableViewController
 
 @end

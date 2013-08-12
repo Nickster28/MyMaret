@@ -6,8 +6,7 @@
 //  Copyright (c) 2013 Nick. All rights reserved.
 //
 
-#import "MyMaretNavigationBarViewController.h"
 
-@interface CalendarViewController : MyMaretNavigationBarViewController
+@interface CalendarViewController : UIViewController
 
 @end

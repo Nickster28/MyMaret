@@ -26,6 +26,7 @@
 		01A4FE1E17B97304007FAB5C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454C17A60AC3001625BF /* UIKit.framework */; };
 		01A4FE2417B97304007FAB5C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01A4FE2217B97304007FAB5C /* InfoPlist.strings */; };
 		01A4FE2617B97304007FAB5C /* MyMaret_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A4FE2517B97304007FAB5C /* MyMaret_Tests.m */; };
+		01A4FE3517B97C08007FAB5C /* UIColor+SchoolColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A4FE3417B97C08007FAB5C /* UIColor+SchoolColor.m */; };
 		01B0BB9417ACA6FA0035B3FE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BB9317ACA6FA0035B3FE /* Parse.framework */; };
 		01B0BB9917ACA74C0035B3FE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BB9817ACA74C0035B3FE /* CFNetwork.framework */; };
 		01B0BB9A17ACA7540035B3FE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BB9617ACA7440035B3FE /* AudioToolbox.framework */; };
@@ -39,7 +40,7 @@
 		01BF139C17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139A17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld */; };
 		01BF13A017A89F7D00731690 /* Announcement.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139F17A89F7D00731690 /* Announcement.m */; };
 		01DAA6AB17A7031200B23BB2 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AA17A7031200B23BB2 /* TodayViewController.m */; };
-		01DAA6B017A7041E00B23BB2 /* MyMaretNavigationBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AF17A7041E00B23BB2 /* MyMaretNavigationBarViewController.m */; };
+		01DAA6B017A7041E00B23BB2 /* MyMaretFrontTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AF17A7041E00B23BB2 /* MyMaretFrontTableViewController.m */; };
 		01DAA6B917A70A1B00B23BB2 /* NewspaperTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6B817A70A1B00B23BB2 /* NewspaperTableViewController.m */; };
 		01DAA6BE17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6BD17A70A4700B23BB2 /* ClassScheduleTableViewController.m */; };
 		01DAA6C317A70A6800B23BB2 /* AssignmentBookCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6C217A70A6800B23BB2 /* AssignmentBookCollectionViewController.m */; };
@@ -74,20 +75,21 @@
 		0177455717A60AC3001625BF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0177455817A60AC3001625BF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0177455B17A60AC3001625BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0177455D17A60AC3001625BF /* MainMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
-		0177455E17A60AC3001625BF /* MainMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
+		0177455D17A60AC3001625BF /* MainMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MainMenuViewController.h; path = ../MainMenuViewController.h; sourceTree = "<group>"; };
+		0177455E17A60AC3001625BF /* MainMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MainMenuViewController.m; path = ../MainMenuViewController.m; sourceTree = "<group>"; };
 		0177456017A60AC3001625BF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0177456717A60AC3001625BF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		0177457E17A60B5E001625BF /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		0177457F17A60B5E001625BF /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		017A96D917A7EB6C003D8A40 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		017A96DA17A7EB6C003D8A40 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
-		01A4FE1517B97295007FAB5C /* AnnouncementsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementsTests.m; sourceTree = "<group>"; };
 		01A4FE1B17B97304007FAB5C /* MyMaret Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MyMaret Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01A4FE2117B97304007FAB5C /* MyMaret Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MyMaret Tests-Info.plist"; sourceTree = "<group>"; };
 		01A4FE2317B97304007FAB5C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		01A4FE2517B97304007FAB5C /* MyMaret_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyMaret_Tests.m; sourceTree = "<group>"; };
 		01A4FE2717B97304007FAB5C /* MyMaret Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyMaret Tests-Prefix.pch"; sourceTree = "<group>"; };
+		01A4FE3317B97C08007FAB5C /* UIColor+SchoolColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+SchoolColor.h"; sourceTree = "<group>"; };
+		01A4FE3417B97C08007FAB5C /* UIColor+SchoolColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SchoolColor.m"; sourceTree = "<group>"; };
 		01B0BB9317ACA6FA0035B3FE /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		01B0BB9617ACA7440035B3FE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		01B0BB9817ACA74C0035B3FE /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -104,8 +106,8 @@
 		01BF139F17A89F7D00731690 /* Announcement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Announcement.m; sourceTree = "<group>"; };
 		01DAA6A917A7031200B23BB2 /* TodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
 		01DAA6AA17A7031200B23BB2 /* TodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
-		01DAA6AE17A7041E00B23BB2 /* MyMaretNavigationBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyMaretNavigationBarViewController.h; path = ../MyMaretNavigationBarViewController.h; sourceTree = "<group>"; };
-		01DAA6AF17A7041E00B23BB2 /* MyMaretNavigationBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyMaretNavigationBarViewController.m; path = ../MyMaretNavigationBarViewController.m; sourceTree = "<group>"; };
+		01DAA6AE17A7041E00B23BB2 /* MyMaretFrontTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyMaretFrontTableViewController.h; path = ../MyMaretFrontTableViewController.h; sourceTree = "<group>"; };
+		01DAA6AF17A7041E00B23BB2 /* MyMaretFrontTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyMaretFrontTableViewController.m; path = ../MyMaretFrontTableViewController.m; sourceTree = "<group>"; };
 		01DAA6B717A70A1B00B23BB2 /* NewspaperTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewspaperTableViewController.h; sourceTree = "<group>"; };
 		01DAA6B817A70A1B00B23BB2 /* NewspaperTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewspaperTableViewController.m; sourceTree = "<group>"; };
 		01DAA6BC17A70A4700B23BB2 /* ClassScheduleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassScheduleTableViewController.h; sourceTree = "<group>"; };
@@ -152,7 +154,6 @@
 		0177453C17A60AC2001625BF = {
 			isa = PBXGroup;
 			children = (
-				01A4FE1517B97295007FAB5C /* AnnouncementsTests.m */,
 				0177454E17A60AC3001625BF /* MyMaret */,
 				01A4FE1F17B97304007FAB5C /* MyMaret Tests */,
 				0177454717A60AC3001625BF /* Frameworks */,
@@ -195,8 +196,6 @@
 				0177455717A60AC3001625BF /* AppDelegate.h */,
 				0177455817A60AC3001625BF /* AppDelegate.m */,
 				0177455A17A60AC3001625BF /* Main.storyboard */,
-				0177455D17A60AC3001625BF /* MainMenuViewController.h */,
-				0177455E17A60AC3001625BF /* MainMenuViewController.m */,
 				01DAA6AD17A7031800B23BB2 /* Today */,
 				01DAA6A817A7002600B23BB2 /* Announcements */,
 				01DAA6B617A709FA00B23BB2 /* Calendar */,
@@ -216,12 +215,14 @@
 			children = (
 				016F9D7A17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.h */,
 				016F9D7B17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m */,
+				01A4FE3317B97C08007FAB5C /* UIColor+SchoolColor.h */,
+				01A4FE3417B97C08007FAB5C /* UIColor+SchoolColor.m */,
+				016780D917A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.h */,
+				016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */,
 				0177455017A60AC3001625BF /* MyMaret-Info.plist */,
 				0177455117A60AC3001625BF /* InfoPlist.strings */,
 				0177455417A60AC3001625BF /* main.m */,
 				0177455617A60AC3001625BF /* MyMaret-Prefix.pch */,
-				016780D917A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.h */,
-				016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -229,8 +230,10 @@
 		0177457D17A60B5E001625BF /* Core View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				01DAA6AE17A7041E00B23BB2 /* MyMaretNavigationBarViewController.h */,
-				01DAA6AF17A7041E00B23BB2 /* MyMaretNavigationBarViewController.m */,
+				0177455D17A60AC3001625BF /* MainMenuViewController.h */,
+				0177455E17A60AC3001625BF /* MainMenuViewController.m */,
+				01DAA6AE17A7041E00B23BB2 /* MyMaretFrontTableViewController.h */,
+				01DAA6AF17A7041E00B23BB2 /* MyMaretFrontTableViewController.m */,
 				0177457E17A60B5E001625BF /* SWRevealViewController.h */,
 				0177457F17A60B5E001625BF /* SWRevealViewController.m */,
 			);
@@ -434,13 +437,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				01DAA6AB17A7031200B23BB2 /* TodayViewController.m in Sources */,
+				01A4FE3517B97C08007FAB5C /* UIColor+SchoolColor.m in Sources */,
 				016F9D7C17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m in Sources */,
 				01DAA6C317A70A6800B23BB2 /* AssignmentBookCollectionViewController.m in Sources */,
 				01BF139817A89A3B00731690 /* AnnouncementsStore.m in Sources */,
 				0177455F17A60AC3001625BF /* MainMenuViewController.m in Sources */,
 				01BF13A017A89F7D00731690 /* Announcement.m in Sources */,
 				01DAA6BE17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */,
-				01DAA6B017A7041E00B23BB2 /* MyMaretNavigationBarViewController.m in Sources */,
+				01DAA6B017A7041E00B23BB2 /* MyMaretFrontTableViewController.m in Sources */,
 				017A96DB17A7EB6C003D8A40 /* CalendarViewController.m in Sources */,
 				0177455917A60AC3001625BF /* AppDelegate.m in Sources */,
 				0171AEC317A6244700F3284C /* AnnouncementsTableViewController.m in Sources */,

@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Nick. All rights reserved.
 //
 
-#import "MyMaretNavigationBarViewController.h"
+#import "MyMaretFrontTableViewController.h"
 
-@interface NewspaperTableViewController : MyMaretNavigationBarViewController <UITableViewDataSource, UITableViewDelegate>
+@interface NewspaperTableViewController : MyMaretFrontTableViewController
 
 @end
