@@ -10,6 +10,8 @@
 #import <CoreData/CoreData.h>
 #import "Announcement.h"
 #import "NSDate+TwoWeeksAgo.h"
+#import <Parse/Parse.h>
+
 
 @interface AnnouncementsStore() {
     // Core Data
@@ -30,6 +32,7 @@ NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsU
 
 @implementation AnnouncementsStore
 @synthesize numUnreadAnnouncements = _numUnreadAnnouncements;
+@synthesize lastAnnouncementsUpdate = _lastAnnouncementsUpdate;
 
 
 + (void)initialize
@@ -151,13 +154,72 @@ NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsU
 }
 
 
+- (NSDate *)lastAnnouncementsUpdate
+{
+    // Read from NSUserDefaults if we haven't set lastAnnouncementsUpdate yet
+    // (value will default to two weeks ago the very first time)
+    if (!_lastAnnouncementsUpdate) {
+        _lastAnnouncementsUpdate = [[NSUserDefaults standardUserDefaults] objectForKey:MyMaretLastAnnouncementsUpdateKey];
+    }
+    
+    return _lastAnnouncementsUpdate;
+}
+
+
+- (void)setLastAnnouncementsUpdate:(NSDate *)lastAnnouncementsUpdate
+{
+    _lastAnnouncementsUpdate = lastAnnouncementsUpdate;
+    [[NSUserDefaults standardUserDefaults] setObject:_lastAnnouncementsUpdate
+                                              forKey:MyMaretLastAnnouncementsUpdateKey];
+}
+
+
+- (void)addAnnouncements:(NSArray *)announcementsToAdd
+{
+    for (PFObject *object in announcementsToAdd) {
+        Announcement *announcement = [Announcement announcementWithTitle:[object objectForKey:@"title"]
+                                                                    body:[object objectForKey:@"body"]
+                                                                  author:[object objectForKey:@"author"]
+                                                                postDate:object.createdAt
+                                                  inManagedObjectContext:context];
+        
+        // Set the ordering value
+        if ([self numberOfAnnouncements] == 0) announcement.orderingValue = 1.0;
+        else announcement.orderingValue = [[self announcementAtIndex:0] orderingValue] / 2.0;
+        
+        // Insert the new announcement into the announcements array
+        [[self announcements] insertObject:announcement atIndex:0];
+        
+        [self setNumUnreadAnnouncements:[self numUnreadAnnouncements] + 1];
+    }
+}
 
 
 #pragma mark Public APIs
 
-- (void)fetchAnnouncementsWithCompletionBlock:(void (^)(int, NSError *))completionBlock
+- (void)fetchAnnouncementsWithCompletionBlock:(void (^)(NSUInteger, NSError *))completionBlock
 {
+    // Query for announcements posted after we last checked for announcements
+    PFQuery *query = [PFQuery queryWithClassName:@"Announcement"];
+    [query whereKey:@"createdAt" greaterThan:[self lastAnnouncementsUpdate]];
     
+    // Sort the results so we have them newest to oldest
+    [query orderByDescending:@"createdAt"];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // Update lastAnnouncementsUpdate to now
+            [self setLastAnnouncementsUpdate:[NSDate date]];
+            
+            // Add the new announcements to our current array of announcements
+            [self addAnnouncements:objects];
+            [self saveChanges];
+            
+            completionBlock([objects count], nil);
+        } else {
+            completionBlock(0, error);
+        }
+    }];
 }
 
 
@@ -177,25 +239,25 @@ NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsU
 }
 
 
--(int)numberOfAnnouncements
+-(NSUInteger)numberOfAnnouncements
 {
     return [[self announcements] count];
 }
 
 
-- (int)numberOfUnreadAnnouncements
+- (NSUInteger)numberOfUnreadAnnouncements
 {
     return [self numUnreadAnnouncements];
 }
 
 
-- (Announcement *)announcementAtIndex:(int)index
+- (Announcement *)announcementAtIndex:(NSUInteger)index
 {
     return [[self announcements] objectAtIndex:index];
 }
 
 
-- (void)markAnnouncementAtIndexAsRead:(int)readIndex
+- (void)markAnnouncementAtIndexAsRead:(NSUInteger)readIndex
 {
     [[[self announcements] objectAtIndex:readIndex] setIsUnread:FALSE];
     [self saveChanges];
@@ -205,7 +267,7 @@ NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsU
 }
 
 
-- (void)moveAnnouncementFromIndex:(int)fromIndex toIndex:(int)toIndex
+- (void)moveAnnouncementFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex
 {
     if (fromIndex == toIndex) return;
 
@@ -238,7 +300,7 @@ NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsU
 }
 
 
-- (void)deleteAnnouncementAtIndex:(int)deleteIndex
+- (void)deleteAnnouncementAtIndex:(NSUInteger)deleteIndex
 {
     Announcement *announcementToDelete = [self announcementAtIndex:deleteIndex];
     

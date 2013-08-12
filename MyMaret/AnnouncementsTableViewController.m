@@ -8,6 +8,7 @@
 
 #import "AnnouncementsTableViewController.h"
 #import "AnnouncementsStore.h"
+#import "Announcement.h"
 #import "UIColor+SchoolColor.h"
 
 
@@ -55,11 +56,30 @@
 - (void)refreshAnnouncements
 {
     [self.refreshControl beginRefreshing];
-    double delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+    
+    [[AnnouncementsStore sharedStore] fetchAnnouncementsWithCompletionBlock:^(NSUInteger numAdded, NSError *err) {
+        if (err) {
+            UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Refresh Error"
+                                                         message:[err localizedDescription]
+                                                        delegate:Nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+            [av show];
+        } else {
+            // Make an array of all the NSIndexPaths to insert
+            NSMutableArray *rowsToInsert = [NSMutableArray array];
+            for (int i = 0; i < numAdded; i++) {
+                NSIndexPath *ip = [NSIndexPath indexPathForRow:i
+                                                     inSection:0];
+                [rowsToInsert addObject:ip];
+            }
+            
+            [self.tableView insertRowsAtIndexPaths:rowsToInsert
+                                  withRowAnimation:UITableViewRowAnimationTop];
+        }
+        
         [self.refreshControl endRefreshing];
-    });
+    }];
 }
 
 #pragma mark - Table view data source
@@ -71,15 +91,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return [[AnnouncementsStore sharedStore] numberOfAnnouncements];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"announcementCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    Announcement *announcement = [[AnnouncementsStore sharedStore] announcementAtIndex:[indexPath row]];
+    [[cell textLabel] setText:announcement.title];
+    [[cell detailTextLabel] setText:announcement.author];
     
     return cell;
 }

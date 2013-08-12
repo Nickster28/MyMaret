@@ -19,4 +19,10 @@
 @property (nonatomic) BOOL isUnread;
 @property (nonatomic) double orderingValue;
 
++ (Announcement *)announcementWithTitle:(NSString *)announcementTitle
+                                   body:(NSString *)announcementBody
+                                 author:(NSString *)announcementAuthor
+                               postDate:(NSDate *)datePosted
+                 inManagedObjectContext:(NSManagedObjectContext *)context;
+
 @end

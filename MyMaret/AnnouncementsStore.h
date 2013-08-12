@@ -19,25 +19,25 @@
 // **** ALL ANNOUNCEMENT ACCESS IS DONE VIA INDICES **** //
 // This works more easily with tableViews/row indices
 
-- (void)fetchAnnouncementsWithCompletionBlock:(void (^)(int numAdded, NSError *err))completionBlock;
+- (void)fetchAnnouncementsWithCompletionBlock:(void (^)(NSUInteger numAdded, NSError *err))completionBlock;
 
 // Get the announcement at a given index
-- (Announcement *)announcementAtIndex:(int)index;
+- (Announcement *)announcementAtIndex:(NSUInteger)index;
 
 // Mark the announcement at readIndex as read
-- (void)markAnnouncementAtIndexAsRead:(int)readIndex;
+- (void)markAnnouncementAtIndexAsRead:(NSUInteger)readIndex;
 
 // Delete the announcement at deleteIndex
-- (void)deleteAnnouncementAtIndex:(int)deleteIndex;
+- (void)deleteAnnouncementAtIndex:(NSUInteger)deleteIndex;
 
 // Switch the announcements at fromIndex and toIndex
-- (void)moveAnnouncementFromIndex:(int)fromIndex toIndex:(int)toIndex;
+- (void)moveAnnouncementFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 
 // Returns the number of unread announcements
-- (int)numberOfUnreadAnnouncements;
+- (NSUInteger)numberOfUnreadAnnouncements;
 
 // Returns the total number of announcements
-- (int)numberOfAnnouncements;
+- (NSUInteger)numberOfAnnouncements;
 
 // Saves all Core Data changes
 - (void)saveChanges;
