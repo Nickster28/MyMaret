@@ -13,12 +13,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Set up Parse
     [Parse setApplicationId:@"9HFg8b0VNdu68bNj0XGW4zhQS2JJuJyeV8DlCFge"
                   clientKey:@"LsKBiPVVNUD8QxTWTr4QI4OJvIy92mWaknqYlsns"];
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    // Override point for customization after application launch.
+    // Change the status bar on iOS 6 to not be tinted
+    // Thanks to http://stackoverflow.com/questions/4456474/how-to-change-the-color-of-status-bar
+    if ([UIApplication isPrevIOS]) [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    
     return YES;
 }
 							
