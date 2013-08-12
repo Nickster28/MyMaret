@@ -20,6 +20,20 @@
                ReferencedContainer = "container:MyMaret.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "01A4FE0417B97276007FAB5C"
+               BuildableName = "MyMaretTests.xctest"
+               BlueprintName = "MyMaretTests"
+               ReferencedContainer = "container:MyMaret.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -32,9 +46,19 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0177456517A60AC3001625BF"
+               BlueprintIdentifier = "01A4FE0417B97276007FAB5C"
                BuildableName = "MyMaretTests.xctest"
                BlueprintName = "MyMaretTests"
+               ReferencedContainer = "container:MyMaret.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "01A4FE1A17B97304007FAB5C"
+               BuildableName = "MyMaret Tests.xctest"
+               BlueprintName = "MyMaret Tests"
                ReferencedContainer = "container:MyMaret.xcodeproj">
             </BuildableReference>
          </TestableReference>

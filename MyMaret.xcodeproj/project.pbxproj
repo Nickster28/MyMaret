@@ -8,9 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		016780DB17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */; };
-		016780DC17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */; };
+		016F9D7C17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F9D7B17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m */; };
 		0171AEC317A6244700F3284C /* AnnouncementsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */; };
-		0171AEC417A6244700F3284C /* AnnouncementsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */; };
 		0177454917A60AC3001625BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454817A60AC3001625BF /* Foundation.framework */; };
 		0177454B17A60AC3001625BF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454A17A60AC3001625BF /* CoreGraphics.framework */; };
 		0177454D17A60AC3001625BF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454C17A60AC3001625BF /* UIKit.framework */; };
@@ -20,37 +19,35 @@
 		0177455C17A60AC3001625BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0177455A17A60AC3001625BF /* Main.storyboard */; };
 		0177455F17A60AC3001625BF /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177455E17A60AC3001625BF /* MainMenuViewController.m */; };
 		0177456117A60AC3001625BF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0177456017A60AC3001625BF /* Images.xcassets */; };
-		0177456817A60AC3001625BF /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177456717A60AC3001625BF /* XCTest.framework */; };
-		0177456917A60AC3001625BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454817A60AC3001625BF /* Foundation.framework */; };
-		0177456A17A60AC3001625BF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454C17A60AC3001625BF /* UIKit.framework */; };
-		0177457217A60AC3001625BF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0177457017A60AC3001625BF /* InfoPlist.strings */; };
-		0177457417A60AC3001625BF /* MyMaretTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177457317A60AC3001625BF /* MyMaretTests.m */; };
 		0177458017A60B5E001625BF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177457F17A60B5E001625BF /* SWRevealViewController.m */; };
-		0177458117A60B5E001625BF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177457F17A60B5E001625BF /* SWRevealViewController.m */; };
 		017A96DB17A7EB6C003D8A40 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017A96DA17A7EB6C003D8A40 /* CalendarViewController.m */; };
-		017A96DC17A7EB6C003D8A40 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017A96DA17A7EB6C003D8A40 /* CalendarViewController.m */; };
+		01A4FE1C17B97304007FAB5C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177456717A60AC3001625BF /* XCTest.framework */; };
+		01A4FE1D17B97304007FAB5C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454817A60AC3001625BF /* Foundation.framework */; };
+		01A4FE1E17B97304007FAB5C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454C17A60AC3001625BF /* UIKit.framework */; };
+		01A4FE2417B97304007FAB5C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01A4FE2217B97304007FAB5C /* InfoPlist.strings */; };
+		01A4FE2617B97304007FAB5C /* MyMaret_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A4FE2517B97304007FAB5C /* MyMaret_Tests.m */; };
+		01B0BB9417ACA6FA0035B3FE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BB9317ACA6FA0035B3FE /* Parse.framework */; };
+		01B0BB9917ACA74C0035B3FE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BB9817ACA74C0035B3FE /* CFNetwork.framework */; };
+		01B0BB9A17ACA7540035B3FE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BB9617ACA7440035B3FE /* AudioToolbox.framework */; };
+		01B0BB9C17ACA7640035B3FE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BB9B17ACA7640035B3FE /* CoreLocation.framework */; };
+		01B0BB9E17ACA7710035B3FE /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BB9D17ACA7710035B3FE /* libz.1.1.3.dylib */; };
+		01B0BBA017ACA7790035B3FE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BB9F17ACA7790035B3FE /* MobileCoreServices.framework */; };
+		01B0BBA217ACA7810035B3FE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BBA117ACA7810035B3FE /* QuartzCore.framework */; };
+		01B0BBA417ACA78A0035B3FE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BBA317ACA78A0035B3FE /* Security.framework */; };
+		01B0BBA817ACA7980035B3FE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BBA717ACA7980035B3FE /* SystemConfiguration.framework */; };
 		01BF139817A89A3B00731690 /* AnnouncementsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139717A89A3B00731690 /* AnnouncementsStore.m */; };
-		01BF139917A89A3B00731690 /* AnnouncementsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139717A89A3B00731690 /* AnnouncementsStore.m */; };
 		01BF139C17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139A17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld */; };
-		01BF139D17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139A17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld */; };
 		01BF13A017A89F7D00731690 /* Announcement.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139F17A89F7D00731690 /* Announcement.m */; };
-		01BF13A117A89F7D00731690 /* Announcement.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139F17A89F7D00731690 /* Announcement.m */; };
 		01DAA6AB17A7031200B23BB2 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AA17A7031200B23BB2 /* TodayViewController.m */; };
-		01DAA6AC17A7031200B23BB2 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AA17A7031200B23BB2 /* TodayViewController.m */; };
 		01DAA6B017A7041E00B23BB2 /* MyMaretNavigationBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AF17A7041E00B23BB2 /* MyMaretNavigationBarViewController.m */; };
-		01DAA6B117A7041E00B23BB2 /* MyMaretNavigationBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AF17A7041E00B23BB2 /* MyMaretNavigationBarViewController.m */; };
 		01DAA6B917A70A1B00B23BB2 /* NewspaperTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6B817A70A1B00B23BB2 /* NewspaperTableViewController.m */; };
-		01DAA6BA17A70A1B00B23BB2 /* NewspaperTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6B817A70A1B00B23BB2 /* NewspaperTableViewController.m */; };
 		01DAA6BE17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6BD17A70A4700B23BB2 /* ClassScheduleTableViewController.m */; };
-		01DAA6BF17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6BD17A70A4700B23BB2 /* ClassScheduleTableViewController.m */; };
 		01DAA6C317A70A6800B23BB2 /* AssignmentBookCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6C217A70A6800B23BB2 /* AssignmentBookCollectionViewController.m */; };
-		01DAA6C417A70A6800B23BB2 /* AssignmentBookCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6C217A70A6800B23BB2 /* AssignmentBookCollectionViewController.m */; };
 		01DAA6C817A70ABF00B23BB2 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6C717A70ABF00B23BB2 /* SettingsTableViewController.m */; };
-		01DAA6C917A70ABF00B23BB2 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6C717A70ABF00B23BB2 /* SettingsTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0177456B17A60AC3001625BF /* PBXContainerItemProxy */ = {
+		01A4FE2817B97304007FAB5C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0177453D17A60AC2001625BF /* Project object */;
 			proxyType = 1;
@@ -62,6 +59,8 @@
 /* Begin PBXFileReference section */
 		016780D917A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+iOSVersionChecker.h"; sourceTree = "<group>"; };
 		016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+iOSVersionChecker.m"; sourceTree = "<group>"; };
+		016F9D7A17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TwoWeeksAgo.h"; sourceTree = "<group>"; };
+		016F9D7B17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TwoWeeksAgo.m"; sourceTree = "<group>"; };
 		0171AEC117A6244700F3284C /* AnnouncementsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementsTableViewController.h; sourceTree = "<group>"; };
 		0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementsTableViewController.m; sourceTree = "<group>"; };
 		0177454517A60AC3001625BF /* MyMaret.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMaret.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,15 +77,26 @@
 		0177455D17A60AC3001625BF /* MainMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		0177455E17A60AC3001625BF /* MainMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		0177456017A60AC3001625BF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0177456617A60AC3001625BF /* MyMaretTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyMaretTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0177456717A60AC3001625BF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		0177456F17A60AC3001625BF /* MyMaretTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MyMaretTests-Info.plist"; sourceTree = "<group>"; };
-		0177457117A60AC3001625BF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0177457317A60AC3001625BF /* MyMaretTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyMaretTests.m; sourceTree = "<group>"; };
 		0177457E17A60B5E001625BF /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		0177457F17A60B5E001625BF /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		017A96D917A7EB6C003D8A40 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		017A96DA17A7EB6C003D8A40 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
+		01A4FE1517B97295007FAB5C /* AnnouncementsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementsTests.m; sourceTree = "<group>"; };
+		01A4FE1B17B97304007FAB5C /* MyMaret Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MyMaret Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		01A4FE2117B97304007FAB5C /* MyMaret Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MyMaret Tests-Info.plist"; sourceTree = "<group>"; };
+		01A4FE2317B97304007FAB5C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		01A4FE2517B97304007FAB5C /* MyMaret_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyMaret_Tests.m; sourceTree = "<group>"; };
+		01A4FE2717B97304007FAB5C /* MyMaret Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyMaret Tests-Prefix.pch"; sourceTree = "<group>"; };
+		01B0BB9317ACA6FA0035B3FE /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		01B0BB9617ACA7440035B3FE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		01B0BB9817ACA74C0035B3FE /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		01B0BB9B17ACA7640035B3FE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		01B0BB9D17ACA7710035B3FE /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
+		01B0BB9F17ACA7790035B3FE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		01B0BBA117ACA7810035B3FE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		01B0BBA317ACA78A0035B3FE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		01B0BBA717ACA7980035B3FE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		01BF139617A89A3B00731690 /* AnnouncementsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementsStore.h; sourceTree = "<group>"; };
 		01BF139717A89A3B00731690 /* AnnouncementsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementsStore.m; sourceTree = "<group>"; };
 		01BF139B17A89B8500731690 /* AnnouncementsCDModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AnnouncementsCDModel.xcdatamodel; sourceTree = "<group>"; };
@@ -111,19 +121,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01B0BB9A17ACA7540035B3FE /* AudioToolbox.framework in Frameworks */,
+				01B0BB9917ACA74C0035B3FE /* CFNetwork.framework in Frameworks */,
 				0177454B17A60AC3001625BF /* CoreGraphics.framework in Frameworks */,
+				01B0BB9C17ACA7640035B3FE /* CoreLocation.framework in Frameworks */,
+				01B0BB9E17ACA7710035B3FE /* libz.1.1.3.dylib in Frameworks */,
+				01B0BBA017ACA7790035B3FE /* MobileCoreServices.framework in Frameworks */,
+				01B0BBA217ACA7810035B3FE /* QuartzCore.framework in Frameworks */,
+				01B0BBA417ACA78A0035B3FE /* Security.framework in Frameworks */,
+				01B0BBA817ACA7980035B3FE /* SystemConfiguration.framework in Frameworks */,
 				0177454D17A60AC3001625BF /* UIKit.framework in Frameworks */,
+				01B0BB9417ACA6FA0035B3FE /* Parse.framework in Frameworks */,
 				0177454917A60AC3001625BF /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0177456317A60AC3001625BF /* Frameworks */ = {
+		01A4FE1817B97304007FAB5C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0177456817A60AC3001625BF /* XCTest.framework in Frameworks */,
-				0177456A17A60AC3001625BF /* UIKit.framework in Frameworks */,
-				0177456917A60AC3001625BF /* Foundation.framework in Frameworks */,
+				01A4FE1C17B97304007FAB5C /* XCTest.framework in Frameworks */,
+				01A4FE1E17B97304007FAB5C /* UIKit.framework in Frameworks */,
+				01A4FE1D17B97304007FAB5C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,8 +152,9 @@
 		0177453C17A60AC2001625BF = {
 			isa = PBXGroup;
 			children = (
+				01A4FE1517B97295007FAB5C /* AnnouncementsTests.m */,
 				0177454E17A60AC3001625BF /* MyMaret */,
-				0177456D17A60AC3001625BF /* MyMaretTests */,
+				01A4FE1F17B97304007FAB5C /* MyMaret Tests */,
 				0177454717A60AC3001625BF /* Frameworks */,
 				0177454617A60AC3001625BF /* Products */,
 			);
@@ -144,7 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				0177454517A60AC3001625BF /* MyMaret.app */,
-				0177456617A60AC3001625BF /* MyMaretTests.xctest */,
+				01A4FE1B17B97304007FAB5C /* MyMaret Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,6 +172,15 @@
 		0177454717A60AC3001625BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01B0BBA717ACA7980035B3FE /* SystemConfiguration.framework */,
+				01B0BBA317ACA78A0035B3FE /* Security.framework */,
+				01B0BBA117ACA7810035B3FE /* QuartzCore.framework */,
+				01B0BB9F17ACA7790035B3FE /* MobileCoreServices.framework */,
+				01B0BB9D17ACA7710035B3FE /* libz.1.1.3.dylib */,
+				01B0BB9B17ACA7640035B3FE /* CoreLocation.framework */,
+				01B0BB9817ACA74C0035B3FE /* CFNetwork.framework */,
+				01B0BB9617ACA7440035B3FE /* AudioToolbox.framework */,
+				01B0BB9317ACA6FA0035B3FE /* Parse.framework */,
 				0177454817A60AC3001625BF /* Foundation.framework */,
 				0177454A17A60AC3001625BF /* CoreGraphics.framework */,
 				0177454C17A60AC3001625BF /* UIKit.framework */,
@@ -185,30 +214,14 @@
 		0177454F17A60AC3001625BF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				016F9D7A17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.h */,
+				016F9D7B17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m */,
 				0177455017A60AC3001625BF /* MyMaret-Info.plist */,
 				0177455117A60AC3001625BF /* InfoPlist.strings */,
 				0177455417A60AC3001625BF /* main.m */,
 				0177455617A60AC3001625BF /* MyMaret-Prefix.pch */,
 				016780D917A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.h */,
 				016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		0177456D17A60AC3001625BF /* MyMaretTests */ = {
-			isa = PBXGroup;
-			children = (
-				0177457317A60AC3001625BF /* MyMaretTests.m */,
-				0177456E17A60AC3001625BF /* Supporting Files */,
-			);
-			path = MyMaretTests;
-			sourceTree = "<group>";
-		};
-		0177456E17A60AC3001625BF /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				0177456F17A60AC3001625BF /* MyMaretTests-Info.plist */,
-				0177457017A60AC3001625BF /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -223,6 +236,25 @@
 			);
 			name = "Core View Controllers";
 			path = SWRevealViewController;
+			sourceTree = "<group>";
+		};
+		01A4FE1F17B97304007FAB5C /* MyMaret Tests */ = {
+			isa = PBXGroup;
+			children = (
+				01A4FE2517B97304007FAB5C /* MyMaret_Tests.m */,
+				01A4FE2017B97304007FAB5C /* Supporting Files */,
+			);
+			path = "MyMaret Tests";
+			sourceTree = "<group>";
+		};
+		01A4FE2017B97304007FAB5C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				01A4FE2117B97304007FAB5C /* MyMaret Tests-Info.plist */,
+				01A4FE2217B97304007FAB5C /* InfoPlist.strings */,
+				01A4FE2717B97304007FAB5C /* MyMaret Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		01DAA6A817A7002600B23BB2 /* Announcements */ = {
@@ -313,22 +345,22 @@
 			productReference = 0177454517A60AC3001625BF /* MyMaret.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0177456517A60AC3001625BF /* MyMaretTests */ = {
+		01A4FE1A17B97304007FAB5C /* MyMaret Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0177457A17A60AC3001625BF /* Build configuration list for PBXNativeTarget "MyMaretTests" */;
+			buildConfigurationList = 01A4FE2A17B97304007FAB5C /* Build configuration list for PBXNativeTarget "MyMaret Tests" */;
 			buildPhases = (
-				0177456217A60AC3001625BF /* Sources */,
-				0177456317A60AC3001625BF /* Frameworks */,
-				0177456417A60AC3001625BF /* Resources */,
+				01A4FE1717B97304007FAB5C /* Sources */,
+				01A4FE1817B97304007FAB5C /* Frameworks */,
+				01A4FE1917B97304007FAB5C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0177456C17A60AC3001625BF /* PBXTargetDependency */,
+				01A4FE2917B97304007FAB5C /* PBXTargetDependency */,
 			);
-			name = MyMaretTests;
-			productName = MyMaretTests;
-			productReference = 0177456617A60AC3001625BF /* MyMaretTests.xctest */;
+			name = "MyMaret Tests";
+			productName = "MyMaret Tests";
+			productReference = 01A4FE1B17B97304007FAB5C /* MyMaret Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -346,9 +378,12 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
 						};
 					};
-					0177456517A60AC3001625BF = {
+					01A4FE1A17B97304007FAB5C = {
 						TestTargetID = 0177454417A60AC2001625BF;
 					};
 				};
@@ -367,7 +402,7 @@
 			projectRoot = "";
 			targets = (
 				0177454417A60AC2001625BF /* MyMaret */,
-				0177456517A60AC3001625BF /* MyMaretTests */,
+				01A4FE1A17B97304007FAB5C /* MyMaret Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -383,11 +418,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0177456417A60AC3001625BF /* Resources */ = {
+		01A4FE1917B97304007FAB5C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0177457217A60AC3001625BF /* InfoPlist.strings in Resources */,
+				01A4FE2417B97304007FAB5C /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01DAA6AB17A7031200B23BB2 /* TodayViewController.m in Sources */,
+				016F9D7C17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m in Sources */,
 				01DAA6C317A70A6800B23BB2 /* AssignmentBookCollectionViewController.m in Sources */,
 				01BF139817A89A3B00731690 /* AnnouncementsStore.m in Sources */,
 				0177455F17A60AC3001625BF /* MainMenuViewController.m in Sources */,
@@ -417,34 +453,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0177456217A60AC3001625BF /* Sources */ = {
+		01A4FE1717B97304007FAB5C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				016780DC17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */,
-				0177457417A60AC3001625BF /* MyMaretTests.m in Sources */,
-				01DAA6C417A70A6800B23BB2 /* AssignmentBookCollectionViewController.m in Sources */,
-				0171AEC417A6244700F3284C /* AnnouncementsTableViewController.m in Sources */,
-				017A96DC17A7EB6C003D8A40 /* CalendarViewController.m in Sources */,
-				0177458117A60B5E001625BF /* SWRevealViewController.m in Sources */,
-				01DAA6B117A7041E00B23BB2 /* MyMaretNavigationBarViewController.m in Sources */,
-				01DAA6BA17A70A1B00B23BB2 /* NewspaperTableViewController.m in Sources */,
-				01BF139D17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld in Sources */,
-				01DAA6AC17A7031200B23BB2 /* TodayViewController.m in Sources */,
-				01DAA6BF17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */,
-				01BF139917A89A3B00731690 /* AnnouncementsStore.m in Sources */,
-				01BF13A117A89F7D00731690 /* Announcement.m in Sources */,
-				01DAA6C917A70ABF00B23BB2 /* SettingsTableViewController.m in Sources */,
+				01A4FE2617B97304007FAB5C /* MyMaret_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0177456C17A60AC3001625BF /* PBXTargetDependency */ = {
+		01A4FE2917B97304007FAB5C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0177454417A60AC2001625BF /* MyMaret */;
-			targetProxy = 0177456B17A60AC3001625BF /* PBXContainerItemProxy */;
+			targetProxy = 01A4FE2817B97304007FAB5C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -465,10 +488,10 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		0177457017A60AC3001625BF /* InfoPlist.strings */ = {
+		01A4FE2217B97304007FAB5C /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0177457117A60AC3001625BF /* en */,
+				01A4FE2317B97304007FAB5C /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -550,6 +573,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Nick/Desktop/MyMaret,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyMaret/MyMaret-Prefix.pch";
 				INFOPLIST_FILE = "MyMaret/MyMaret-Info.plist";
@@ -565,6 +592,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Nick/Desktop/MyMaret,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyMaret/MyMaret-Prefix.pch";
 				INFOPLIST_FILE = "MyMaret/MyMaret-Info.plist";
@@ -574,40 +605,42 @@
 			};
 			name = Release;
 		};
-		0177457B17A60AC3001625BF /* Debug */ = {
+		01A4FE2B17B97304007FAB5C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MyMaret.app/MyMaret";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
-					"$(SYSTEM_APPS_DIR)/Xcode5-DP3.app/Contents/Developer/Library/Frameworks",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MyMaret/MyMaret-Prefix.pch";
+				GCC_PREFIX_HEADER = "MyMaret Tests/MyMaret Tests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "MyMaretTests/MyMaretTests-Info.plist";
+				INFOPLIST_FILE = "MyMaret Tests/MyMaret Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
 		};
-		0177457C17A60AC3001625BF /* Release */ = {
+		01A4FE2C17B97304007FAB5C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MyMaret.app/MyMaret";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
-					"$(SYSTEM_APPS_DIR)/Xcode5-DP3.app/Contents/Developer/Library/Frameworks",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MyMaret/MyMaret-Prefix.pch";
-				INFOPLIST_FILE = "MyMaretTests/MyMaretTests-Info.plist";
+				GCC_PREFIX_HEADER = "MyMaret Tests/MyMaret Tests-Prefix.pch";
+				INFOPLIST_FILE = "MyMaret Tests/MyMaret Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -635,14 +668,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0177457A17A60AC3001625BF /* Build configuration list for PBXNativeTarget "MyMaretTests" */ = {
+		01A4FE2A17B97304007FAB5C /* Build configuration list for PBXNativeTarget "MyMaret Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0177457B17A60AC3001625BF /* Debug */,
-				0177457C17A60AC3001625BF /* Release */,
+				01A4FE2B17B97304007FAB5C /* Debug */,
+				01A4FE2C17B97304007FAB5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

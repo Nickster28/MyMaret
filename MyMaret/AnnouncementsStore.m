@@ -9,19 +9,38 @@
 #import "AnnouncementsStore.h"
 #import <CoreData/CoreData.h>
 #import "Announcement.h"
+#import "NSDate+TwoWeeksAgo.h"
 
 @interface AnnouncementsStore() {
+    // Core Data
     NSManagedObjectModel *model;
     NSManagedObjectContext *context;
 }
 
+// The array that holds all of the announcements
 @property (nonatomic, strong) NSMutableArray *announcements;
+
+@property (nonatomic) NSUInteger numUnreadAnnouncements;
+@property (nonatomic, strong) NSDate *lastAnnouncementsUpdate;
 @end
 
+// NSUserDefaults keys
+NSString * const MyMaretNumUnreadAnnouncementsKey = @"MyMaretNumUnreadAnnouncementsKey";
+NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsUpdateKey";
+
 @implementation AnnouncementsStore
-@synthesize announcements = _announcements;
+@synthesize numUnreadAnnouncements = _numUnreadAnnouncements;
 
 
++ (void)initialize
+{
+    NSDictionary *defaults = [NSDictionary dictionaryWithObject:[NSDate dateTwoWeeksAgo]
+                                                         forKey:MyMaretLastAnnouncementsUpdateKey];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
+}
+
+
+// Singleton instance
 + (AnnouncementsStore *)sharedStore
 {
     static AnnouncementsStore *sharedStore;
@@ -34,11 +53,12 @@
     return sharedStore;
 }
 
+
 - (id)init {
     self = [super init];
     
     if (self) {
-        // Read in MyMaret.xcdatamodeld
+        // Read in AnnouncementsCDModel.xcdatamodeld
         model = [NSManagedObjectModel mergedModelFromBundles:nil];
         
         NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
@@ -69,6 +89,7 @@
     return self;
 }
 
+
 - (NSString *)announcementsArchivePath
 {
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -76,6 +97,67 @@
     NSString *directory = [documentDirectories objectAtIndex:0];
     
     return [directory stringByAppendingPathComponent:@"announcementsstore.data"];
+}
+
+
+
+- (NSMutableArray *)announcements
+{
+    // If needed, read in announcements from Core Data
+    if (!_announcements) {
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        
+        // Get all announcements, sorted by orderingValue
+        NSEntityDescription *description = [[model entitiesByName] objectForKey:@"Announcement"];
+        [request setEntity:description];
+        
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"orderingValue"
+                                                                         ascending:YES];
+        [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+        
+        NSError *error;
+        NSArray *result = [context executeFetchRequest:request
+                                                 error:&error];
+        
+        if (!result) {
+            [NSException raise:@"Fetch failed" format:@"Reason: %@", [error localizedDescription]];
+        }
+             
+        _announcements = [[NSMutableArray alloc] initWithArray:result];
+    }
+    
+    return _announcements;
+}
+
+
+- (NSUInteger)numUnreadAnnouncements
+{
+    // Read from NSUserDefaults if we haven't set numUnreadAnnouncements yet
+    // (value will default to 0 the very first time)
+    if (!_numUnreadAnnouncements) {
+        _numUnreadAnnouncements =
+        [[NSUserDefaults standardUserDefaults] integerForKey:MyMaretNumUnreadAnnouncementsKey];
+    }
+    
+    return _numUnreadAnnouncements;
+}
+
+
+- (void)setNumUnreadAnnouncements:(NSUInteger)numUnreadAnnouncements
+{
+    _numUnreadAnnouncements = numUnreadAnnouncements;
+    [[NSUserDefaults standardUserDefaults] setInteger:_numUnreadAnnouncements
+                                               forKey:MyMaretNumUnreadAnnouncementsKey];
+}
+
+
+
+
+#pragma mark Public APIs
+
+- (void)fetchAnnouncementsWithCompletionBlock:(void (^)(int, NSError *))completionBlock
+{
+    
 }
 
 
@@ -100,16 +182,28 @@
     return [[self announcements] count];
 }
 
+
+- (int)numberOfUnreadAnnouncements
+{
+    return [self numUnreadAnnouncements];
+}
+
+
 - (Announcement *)announcementAtIndex:(int)index
 {
     return [[self announcements] objectAtIndex:index];
 }
 
+
 - (void)markAnnouncementAtIndexAsRead:(int)readIndex
 {
     [[[self announcements] objectAtIndex:readIndex] setIsUnread:FALSE];
     [self saveChanges];
+    
+    // Update the number of unread announcements
+    [self setNumUnreadAnnouncements:[self numUnreadAnnouncements] - 1];
 }
+
 
 - (void)moveAnnouncementFromIndex:(int)fromIndex toIndex:(int)toIndex
 {
@@ -143,9 +237,17 @@
     [self saveChanges];
 }
 
+
 - (void)deleteAnnouncementAtIndex:(int)deleteIndex
 {
-    [context deleteObject:[self announcementAtIndex:deleteIndex]];
+    Announcement *announcementToDelete = [self announcementAtIndex:deleteIndex];
+    
+    // Update the number of unread announcements if needed
+    if ([announcementToDelete isUnread]) {
+        [self setNumUnreadAnnouncements:[self numUnreadAnnouncements] - 1];
+    }
+    
+    [context deleteObject:announcementToDelete];
     [[self announcements] removeObjectAtIndex:deleteIndex];
     [self saveChanges];
 }
