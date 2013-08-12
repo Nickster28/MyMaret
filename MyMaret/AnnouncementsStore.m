@@ -204,7 +204,7 @@ NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsU
     [query whereKey:@"createdAt" greaterThan:[self lastAnnouncementsUpdate]];
     
     // Sort the results so we have them newest to oldest
-    [query orderByDescending:@"createdAt"];
+    [query orderByAscending:@"createdAt"];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
