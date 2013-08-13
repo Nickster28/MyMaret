@@ -111,7 +111,7 @@
                                                     <rect key="frame" x="10" y="7" width="300" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="L2G-Il-JwZ" id="oOO-o0-CSy"/>
                                                     </connections>

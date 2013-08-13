@@ -89,6 +89,17 @@
     NSString *announcementTitle = [self.titleTextField text];
     NSString *announcementBody = [self.bodyTextView text];
     
+    if ([announcementTitle isEqualToString:@""] || [announcementBody isEqualToString:@""]) {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Announcement Error"
+                                                     message:@"Please complete all fields before posting an announcement."
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        
+        [av show];
+        return;
+    }
+    
     // Animate the activity Indicator and disable the cancel button
     [self.activityIndicator startAnimating];
     [self.cancelButton setEnabled:NO];
