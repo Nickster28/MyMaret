@@ -217,6 +217,7 @@ NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsU
             
             completionBlock([objects count], nil);
         } else {
+            #warning Fix error message
             completionBlock(0, error);
         }
     }];
@@ -312,6 +313,32 @@ NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsU
     [context deleteObject:announcementToDelete];
     [[self announcements] removeObjectAtIndex:deleteIndex];
     [self saveChanges];
+}
+
+
+- (void)postAnnouncementWithTitle:(NSString *)title
+                             body:(NSString *)body
+                  completionBlock:(void (^)(NSError *))completionBlock
+{
+    // Create a new Parse announcement
+    PFObject *newAnnouncement = [PFObject objectWithClassName:@"Announcement"];
+    [newAnnouncement setObject:title forKey:@"title"];
+    [newAnnouncement setObject:body forKey:@"body"];
+    
+    #warning incomplete implementation
+    [newAnnouncement setObject:@"Nick" forKey:@"author"];
+    
+    // Save it and execute the completion block
+    [newAnnouncement saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) completionBlock(nil);
+        else {
+            if (error.code == kPFErrorConnectionFailed) {
+                [error.userInfo setValue:@"Connection error.  Please make sure you are connected to the internet"
+                                  forKey:NSLocalizedDescriptionKey];
+            }
+            completionBlock(error);
+        }
+    }];
 }
 
 @end

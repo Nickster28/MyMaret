@@ -42,5 +42,10 @@
 // Saves all Core Data changes
 - (void)saveChanges;
 
+// Post a new announcement
+- (void)postAnnouncementWithTitle:(NSString *)title
+                             body:(NSString *)body
+                  completionBlock:(void (^)(NSError *err))completionBlock;
+
 
 @end

@@ -10,5 +10,6 @@
 #import "MyMaretFrontTableViewController.h"
 
 @interface AnnouncementsTableViewController : MyMaretFrontTableViewController
+- (IBAction)newAnnouncement:(id)sender;
 
 @end

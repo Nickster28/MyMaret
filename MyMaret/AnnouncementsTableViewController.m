@@ -37,12 +37,12 @@
     // Add an Edit button in the navigation bar
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    // Add the tableView's refresh control for refreshing announcements
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl setTintColor:[UIColor schoolColor]];
     [self.refreshControl addTarget:self
                             action:@selector(refreshAnnouncements)
                   forControlEvents:UIControlEventValueChanged];
-    
 }
 
 
@@ -61,7 +61,7 @@
         if (err) {
             UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Refresh Error"
                                                          message:[err localizedDescription]
-                                                        delegate:Nil
+                                                        delegate:nil
                                                cancelButtonTitle:@"OK"
                                                otherButtonTitles:nil];
             [av show];
@@ -81,6 +81,7 @@
         [self.refreshControl endRefreshing];
     }];
 }
+
 
 #pragma mark - Table view data source
 
@@ -130,9 +131,9 @@
 
 
 
-/*
-#pragma mark - Navigation
 
+#pragma mark - Navigation
+/*
 // In a story board-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -141,5 +142,12 @@
 }
 
  */
+
+
+- (IBAction)newAnnouncement:(id)sender {
+    
+    
+}
+
 
 @end
