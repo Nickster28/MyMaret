@@ -10,6 +10,7 @@
 #import "AnnouncementsStore.h"
 #import "Announcement.h"
 #import "UIColor+SchoolColor.h"
+#import "AnnouncementCell.h"
 
 
 @interface AnnouncementsTableViewController ()
@@ -95,15 +96,32 @@
     return [[AnnouncementsStore sharedStore] numberOfAnnouncements];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 74.0;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"announcementCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    AnnouncementCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
     Announcement *announcement = [[AnnouncementsStore sharedStore] announcementAtIndex:[indexPath row]];
-    [[cell textLabel] setText:announcement.title];
-    [[cell detailTextLabel] setText:announcement.author];
+    [[cell titleLabel] setText:announcement.title];
+    
+    if (announcement.isUnread) {
+        [[cell titleLabel] setFont:[UIFont boldSystemFontOfSize:19.0]];
+        [[cell titleLabel] setTextColor:[UIColor schoolColor]];
+        [[cell bodyLabel] setTextColor:[UIColor blackColor]];
+    } else {
+        [[cell titleLabel] setFont:[UIFont systemFontOfSize:17.0]];
+        [[cell titleLabel] setTextColor:[UIColor blackColor]];
+        [[cell bodyLabel] setTextColor:[UIColor darkGrayColor]];
+    }
+    
+    [[cell bodyLabel] setText:announcement.body];
+    [[cell dateLabel] setText:[announcement postDateAsString]];
     
     return cell;
 }
@@ -130,7 +148,12 @@
 }
 
 
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [[AnnouncementsStore sharedStore] markAnnouncementAtIndexAsRead:[indexPath row]];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
 
 #pragma mark - Navigation
 /*
@@ -142,12 +165,5 @@
 }
 
  */
-
-
-- (IBAction)newAnnouncement:(id)sender {
-    
-    
-}
-
 
 @end

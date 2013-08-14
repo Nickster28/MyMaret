@@ -25,4 +25,7 @@
                                postDate:(NSDate *)datePosted
                  inManagedObjectContext:(NSManagedObjectContext *)context;
 
+
+- (NSString *)postDateAsString;
+
 @end

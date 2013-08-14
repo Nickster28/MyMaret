@@ -65,6 +65,7 @@
         tableHeight -= 88.0;
         
         // Subtract the height of the navigation bar and status bar
+    #warning Doesn't account for in-call status bar
         tableHeight -= 64.0;
         
         return tableHeight;
