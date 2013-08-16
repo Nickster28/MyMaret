@@ -1,5 +1,5 @@
 //
-//  AnnouncementCreationTableViewController.h
+//  AnnouncementCreationViewController.h
 //  MyMaret
 //
 //  Created by Nick Troccoli on 8/13/13.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AnnouncementCreationTableViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate>
+@interface AnnouncementCreationViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 
 // Made bodyTextView instead of a UITextField because only text views are multi-line
@@ -17,9 +17,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *bodyTextView;
 @property (weak, nonatomic) IBOutlet UILabel *bodyPlaceholderText;
 
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *postButton;
 
 - (IBAction)postAnnouncement:(id)sender;
 - (IBAction)cancelAnnouncement:(id)sender;

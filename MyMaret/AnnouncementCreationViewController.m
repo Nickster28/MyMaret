@@ -1,19 +1,21 @@
 //
-//  AnnouncementCreationTableViewController.m
+//  AnnouncementCreationViewController.m
 //  MyMaret
 //
 //  Created by Nick Troccoli on 8/13/13.
 //  Copyright (c) 2013 Nick. All rights reserved.
 //
 
-#import "AnnouncementCreationTableViewController.h"
+#import "AnnouncementCreationViewController.h"
 #import "AnnouncementsStore.h"
+#import "UIColor+SchoolColor.h"
 
-@interface AnnouncementCreationTableViewController ()
+
+@interface AnnouncementCreationViewController ()
 
 @end
 
-@implementation AnnouncementCreationTableViewController
+@implementation AnnouncementCreationViewController
 
 - (id)init
 {
@@ -47,32 +49,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // The first and third rows are normally-sized (for title text field and post button)
-    if ([indexPath row] == 2 || [indexPath row] == 0) {
-        return 44.0;
-        
-    // The second row is large to hold the text field for the announcement body (we want it
-    // and the other two cells to fill the whole screen)
-    } else if ([indexPath row] == 1) {
-        // Get the height of the table
-        CGFloat tableHeight = tableView.window.bounds.size.height;
-        
-        // Subtract off the height of the two other cells
-        tableHeight -= 88.0;
-        
-        // Subtract the height of the navigation bar and status bar
-    #warning Doesn't account for in-call status bar
-        tableHeight -= 64.0;
-        
-        return tableHeight;
-    } else return 0.0;
-}
-
-
 
 /*
 #pragma mark - Navigation
@@ -101,9 +77,11 @@
         return;
     }
     
-    // Animate the activity Indicator and disable the cancel button
-    [self.activityIndicator startAnimating];
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [activityIndicator startAnimating];
+    
     [self.cancelButton setEnabled:NO];
+    [self.postButton setCustomView:activityIndicator];
     
     // Post the announcement
     [[AnnouncementsStore sharedStore] postAnnouncementWithTitle:announcementTitle
@@ -119,11 +97,12 @@
                                                         [av show];
                                                         
                                                         // Stop the activity indicator and re-enable the cancel button
-                                                        [self.activityIndicator stopAnimating];
+                                                        [activityIndicator stopAnimating];
                                                         [self.cancelButton setEnabled:YES];
+                                                        [self.postButton setTitle:@"Post"];
                                                         
                                                     // Otherwise, dismiss the modal screen
-                                                    } else [self cancelAnnouncement:nil];
+                                                    } else [self cancelAnnouncement:self.cancelButton];
                                                 }];
 }
 
@@ -140,15 +119,18 @@
 // Hide the fake placeholder text
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
-    // Animate the placeholder text out (make it completely transparent)
-    CABasicAnimation *fadeAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    [fadeAnimation setDuration:0.25];
-    [fadeAnimation setFromValue:[NSNumber numberWithFloat:1.0]];
-    [fadeAnimation setToValue:[NSNumber numberWithFloat:0.0]];
-
-    [self.bodyPlaceholderText.layer setOpacity:0.0];
+    if (self.bodyPlaceholderText.layer.opacity == 1.0) {
+        // Animate the placeholder text out (make it completely transparent)
+        CABasicAnimation *fadeAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        [fadeAnimation setDuration:0.25];
+        [fadeAnimation setFromValue:[NSNumber numberWithFloat:1.0]];
+        [fadeAnimation setToValue:[NSNumber numberWithFloat:0.0]];
+        
+        [self.bodyPlaceholderText.layer setOpacity:0.0];
+        
+        [self.bodyPlaceholderText.layer addAnimation:fadeAnimation forKey:@"Fade"];
+    }
     
-    [self.bodyPlaceholderText.layer addAnimation:fadeAnimation forKey:@"Fade"];
     return YES;
 }
 
@@ -171,7 +153,6 @@
     
     return YES;
 }
-
 
 
 // Hide the keyboard when the user taps the "Done" keyboard

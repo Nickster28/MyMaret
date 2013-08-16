@@ -114,62 +114,101 @@
                         <color key="tintColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="KxW-LR-egR" kind="relationship" relationship="rootViewController" id="H3l-U8-u9m"/>
+                        <segue destination="Xi1-iR-Xo3" kind="relationship" relationship="rootViewController" id="wvw-sN-oKW"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y0C-GD-WMJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2554" y="-2393"/>
         </scene>
-        <!--Announcement Creation Table View Controller - New Announcement-->
-        <scene sceneID="mHK-Cr-BAO">
+        <!--Announcement Creation View Controller - New Announcement-->
+        <scene sceneID="fxU-31-3ty">
             <objects>
-                <viewController id="KxW-LR-egR" customClass="AnnouncementCreationTableViewController" sceneMemberID="viewController">
+                <viewController id="Xi1-iR-Xo3" customClass="AnnouncementCreationViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="gTa-SB-emQ"/>
-                        <viewControllerLayoutGuide type="bottom" id="20J-gs-SV0"/>
+                        <viewControllerLayoutGuide type="top" id="FOP-bg-1b1"/>
+                        <viewControllerLayoutGuide type="bottom" id="59H-qb-GAw"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="TIw-mZ-sss">
+                    <view key="view" contentMode="scaleToFill" id="xfx-2X-PTJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Announcement Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cVM-7W-4wj">
-                                <rect key="frame" x="20" y="82" width="280" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Announcement Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q3F-q7-sYG">
+                                <rect key="frame" x="20" y="86" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="La2-ce-sDl"/>
+                                    <constraint firstAttribute="width" constant="280" id="zfK-K3-jwM"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                                 <connections>
-                                    <outlet property="delegate" destination="KxW-LR-egR" id="7vm-iW-Bp4"/>
+                                    <outlet property="delegate" destination="Xi1-iR-Xo3" id="w1l-5W-iTv"/>
                                 </connections>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QqP-yb-JBF">
-                                <rect key="frame" x="20" y="120" width="280" height="340"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ohx-NS-Kro">
+                                <rect key="frame" x="20" y="124" width="280" height="336"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="rey-es-ii6"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
-                                    <outlet property="delegate" destination="KxW-LR-egR" id="Qyd-Vj-Ypc"/>
+                                    <outlet property="delegate" destination="Xi1-iR-Xo3" id="oh8-vI-fQh"/>
                                 </connections>
                             </textView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Announcement Body" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7gZ-r8-wGx">
-                                <rect key="frame" x="27" y="126" width="136" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Announcement Body" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bk7-jL-AOk">
+                                <rect key="frame" x="28" y="131" width="136" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="3Tx-na-Zgi"/>
+                                    <constraint firstAttribute="width" constant="136" id="Zsw-eR-dEv"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bk7-jL-AOk" firstAttribute="leading" secondItem="xfx-2X-PTJ" secondAttribute="leading" constant="28" id="37Z-TK-RaX"/>
+                            <constraint firstItem="ohx-NS-Kro" firstAttribute="top" secondItem="q3F-q7-sYG" secondAttribute="bottom" constant="8" id="EET-7c-oQS"/>
+                            <constraint firstItem="ohx-NS-Kro" firstAttribute="leading" secondItem="xfx-2X-PTJ" secondAttribute="leading" constant="20" id="ERq-LO-Hpg"/>
+                            <constraint firstItem="59H-qb-GAw" firstAttribute="top" secondItem="ohx-NS-Kro" secondAttribute="bottom" constant="20" id="Ft9-pC-fJI"/>
+                            <constraint firstItem="q3F-q7-sYG" firstAttribute="top" secondItem="FOP-bg-1b1" secondAttribute="bottom" constant="22" id="LAM-pl-plr"/>
+                            <constraint firstAttribute="trailing" secondItem="ohx-NS-Kro" secondAttribute="trailing" constant="20" id="ORC-Fd-Kx7"/>
+                            <constraint firstItem="ohx-NS-Kro" firstAttribute="top" secondItem="FOP-bg-1b1" secondAttribute="bottom" constant="60" id="Rzr-dj-zmx"/>
+                            <constraint firstItem="q3F-q7-sYG" firstAttribute="leading" secondItem="xfx-2X-PTJ" secondAttribute="leading" constant="20" id="fYy-II-h4U"/>
+                            <constraint firstItem="bk7-jL-AOk" firstAttribute="top" secondItem="FOP-bg-1b1" secondAttribute="bottom" constant="67" id="gM6-7A-cjH"/>
+                            <constraint firstAttribute="trailing" secondItem="q3F-q7-sYG" secondAttribute="trailing" constant="20" id="jGE-Jf-7gK"/>
+                            <constraint firstAttribute="trailing" secondItem="bk7-jL-AOk" secondAttribute="trailing" constant="156" id="use-Iv-FQV"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="New Announcement" id="yc5-Gi-eKE">
-                        <barButtonItem key="leftBarButtonItem" title="Item" systemItem="cancel" id="wL6-I4-jWI"/>
-                        <barButtonItem key="rightBarButtonItem" title="Post" id="Rlc-lM-r21"/>
+                    <navigationItem key="navigationItem" title="New Announcement" id="jEW-Gr-S5I">
+                        <barButtonItem key="leftBarButtonItem" title="Item" systemItem="cancel" id="4nE-PF-GjS">
+                            <connections>
+                                <action selector="cancelAnnouncement:" destination="Xi1-iR-Xo3" id="4c4-z6-fL2"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Post" style="done" id="LjL-pT-m6o">
+                            <connections>
+                                <action selector="postAnnouncement:" destination="Xi1-iR-Xo3" id="v78-sx-CLJ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="bodyPlaceholderText" destination="bk7-jL-AOk" id="A2t-Yk-Aec"/>
+                        <outlet property="bodyTextView" destination="ohx-NS-Kro" id="51x-61-3ns"/>
+                        <outlet property="cancelButton" destination="4nE-PF-GjS" id="ZTp-yi-K8e"/>
+                        <outlet property="postButton" destination="LjL-pT-m6o" id="TLE-2s-vwa"/>
+                        <outlet property="titleTextField" destination="q3F-q7-sYG" id="m2j-ma-v6E"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4yS-qT-dcP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mkf-lI-fov" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2930" y="-2393"/>
+            <point key="canvasLocation" x="2962" y="-2393"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0V8-yz-e6V">

@@ -34,7 +34,7 @@
 {
     [super viewDidAppear:animated];
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:MyMaretIsFirstOpenKey]) {
+    /*if ([[NSUserDefaults standardUserDefaults] boolForKey:MyMaretIsFirstOpenKey]) {
         
         double delayInSeconds = 2.0;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -43,7 +43,7 @@
                                       sender:self];
         });
         
-    }
+    }*/
 }
 
 
