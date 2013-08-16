@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AnnouncementCreationTableViewController : UITableViewController <UITextViewDelegate, UITextFieldDelegate>
+@interface AnnouncementCreationTableViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 
 // Made bodyTextView instead of a UITextField because only text views are multi-line

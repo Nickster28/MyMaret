@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 
+NSString * const MyMaretIsFirstOpenKey = @"MyMaretIsFirstOpenKey";
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -26,6 +28,11 @@
     // Change the status bar on iOS 6 to not be tinted
     // Thanks to http://stackoverflow.com/questions/4456474/how-to-change-the-color-of-status-bar
     if ([UIApplication isPrevIOS]) [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    
+    
+    NSDictionary *defaults = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:TRUE]
+                                                         forKey:MyMaretIsFirstOpenKey];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     
     return YES;
 }

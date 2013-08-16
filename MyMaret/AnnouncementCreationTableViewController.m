@@ -15,9 +15,9 @@
 
 @implementation AnnouncementCreationTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)init
 {
-    self = [super initWithStyle:style];
+    self = [super init];
     if (self) {
         // Custom initialization
     }
