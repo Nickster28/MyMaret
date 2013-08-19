@@ -46,7 +46,7 @@
 		01DAA6BE17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6BD17A70A4700B23BB2 /* ClassScheduleTableViewController.m */; };
 		01DAA6C317A70A6800B23BB2 /* AssignmentBookCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6C217A70A6800B23BB2 /* AssignmentBookCollectionViewController.m */; };
 		01DAA6C817A70ABF00B23BB2 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6C717A70ABF00B23BB2 /* SettingsTableViewController.m */; };
-		01F9997217BA824A00D641DD /* AnnouncementCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F9997117BA824A00D641DD /* AnnouncementCreationViewController.m */; };
+		01F9997217BA824A00D641DD /* AnnouncementCreationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F9997117BA824A00D641DD /* AnnouncementCreationTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,8 +120,8 @@
 		01DAA6C217A70A6800B23BB2 /* AssignmentBookCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentBookCollectionViewController.m; sourceTree = "<group>"; };
 		01DAA6C617A70ABF00B23BB2 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		01DAA6C717A70ABF00B23BB2 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
-		01F9997017BA824A00D641DD /* AnnouncementCreationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementCreationViewController.h; sourceTree = "<group>"; };
-		01F9997117BA824A00D641DD /* AnnouncementCreationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementCreationViewController.m; sourceTree = "<group>"; };
+		01F9997017BA824A00D641DD /* AnnouncementCreationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementCreationTableViewController.h; sourceTree = "<group>"; };
+		01F9997117BA824A00D641DD /* AnnouncementCreationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementCreationTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,8 +278,8 @@
 				01BF139E17A89F7D00731690 /* Announcement.h */,
 				01BF139F17A89F7D00731690 /* Announcement.m */,
 				01BF139A17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld */,
-				01F9997017BA824A00D641DD /* AnnouncementCreationViewController.h */,
-				01F9997117BA824A00D641DD /* AnnouncementCreationViewController.m */,
+				01F9997017BA824A00D641DD /* AnnouncementCreationTableViewController.h */,
+				01F9997117BA824A00D641DD /* AnnouncementCreationTableViewController.m */,
 			);
 			name = Announcements;
 			sourceTree = "<group>";
@@ -465,7 +465,7 @@
 				01DAA6B917A70A1B00B23BB2 /* NewspaperTableViewController.m in Sources */,
 				016780DB17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */,
 				0177458017A60B5E001625BF /* SWRevealViewController.m in Sources */,
-				01F9997217BA824A00D641DD /* AnnouncementCreationViewController.m in Sources */,
+				01F9997217BA824A00D641DD /* AnnouncementCreationTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 //
-//  AnnouncementCreationViewController.h
+//  AnnouncementCreationTableViewController.h
 //  MyMaret
 //
 //  Created by Nick Troccoli on 8/13/13.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AnnouncementCreationViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate>
+@interface AnnouncementCreationTableViewController : UITableViewController <UITextViewDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 
 // Made bodyTextView instead of a UITextField because only text views are multi-line

@@ -1,21 +1,21 @@
 //
-//  AnnouncementCreationViewController.m
+//  AnnouncementCreationTableViewController.m
 //  MyMaret
 //
 //  Created by Nick Troccoli on 8/13/13.
 //  Copyright (c) 2013 Nick. All rights reserved.
 //
 
-#import "AnnouncementCreationViewController.h"
+#import "AnnouncementCreationTableViewController.h"
 #import "AnnouncementsStore.h"
 #import "UIColor+SchoolColor.h"
 
 
-@interface AnnouncementCreationViewController ()
+@interface AnnouncementCreationTableViewController ()
 
 @end
 
-@implementation AnnouncementCreationViewController
+@implementation AnnouncementCreationTableViewController
 
 - (id)init
 {
@@ -43,10 +43,32 @@
     self.bodyTextView.layer.cornerRadius = 8.0f;
 }
 
+
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([indexPath row] == 0) return 44.0;
+    else if ([indexPath row] == 1) {
+        CGFloat tableHeight = tableView.bounds.size.height;
+        tableHeight -= [self tableView:tableView
+               heightForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+        
+        if (![UIApplication isPrevIOS]) {
+            tableHeight -= (self.navigationController.navigationBar.bounds.size.height + 20.0);
+        }
+        
+        return tableHeight;
+    } else return 0.0;
+
 }
 
 
