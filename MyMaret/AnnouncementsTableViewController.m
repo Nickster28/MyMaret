@@ -120,7 +120,7 @@
     
     if (announcement.isUnread) {
         [[cell titleLabel] setFont:[UIFont boldSystemFontOfSize:19.0]];
-        [[cell titleLabel] setTextColor:[UIColor schoolComplementaryColor]];
+        [[cell titleLabel] setTextColor:[UIColor schoolLightColor]];
         [[cell bodyLabel] setTextColor:[UIColor blackColor]];
     } else {
         [[cell titleLabel] setFont:[UIFont systemFontOfSize:17.0]];

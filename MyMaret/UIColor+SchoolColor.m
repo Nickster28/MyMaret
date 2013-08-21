@@ -21,7 +21,7 @@
 + (UIColor *)schoolLightColor
 {
     return [UIColor colorWithRed:16.0/255.0
-                           green:191.0/255.0
+                           green:150.0/255.0
                             blue:53.0/255.0
                            alpha:1.0];
 }
