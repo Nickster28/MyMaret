@@ -42,9 +42,23 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search Announcements" id="9sG-ya-XM4">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="tintColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="barTintColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <scopeButtonTitles>
+                                <string>Title</string>
+                                <string>Title</string>
+                            </scopeButtonTitles>
+                            <connections>
+                                <outlet property="delegate" destination="APQ-ye-1MG" id="PLN-9c-IMk"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="announcementCell" rowHeight="74" id="Unt-ZP-fBe" customClass="AnnouncementCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="74"/>
+                                <rect key="frame" x="0.0" y="66" width="320" height="74"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="Unt-ZP-fBe" id="P1J-IP-eKB">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="73"/>
@@ -54,7 +68,6 @@
                                             <rect key="frame" x="28" y="12" width="205" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sep-yh-qLW">
@@ -101,8 +114,20 @@
                         <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="FvY-7n-IaZ"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Announcements" id="TcA-8u-mTP"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="91F-HV-WTm" id="h2d-3W-C5z"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VAu-xG-WO6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="91F-HV-WTm">
+                    <connections>
+                        <outlet property="delegate" destination="APQ-ye-1MG" id="R1p-p3-G1y"/>
+                        <outlet property="searchBar" destination="9sG-ya-XM4" id="ywa-wv-fPv"/>
+                        <outlet property="searchContentsController" destination="APQ-ye-1MG" id="UvD-QT-PdM"/>
+                        <outlet property="searchResultsDataSource" destination="APQ-ye-1MG" id="szc-3p-lSF"/>
+                        <outlet property="searchResultsDelegate" destination="APQ-ye-1MG" id="E7H-gj-7Bc"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="2155" y="-2393"/>
         </scene>
@@ -134,23 +159,42 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1u-27-DS3">
-                                <rect key="frame" x="0.0" y="33" width="320" height="53"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1u-27-DS3">
+                                <rect key="frame" x="2" y="33" width="316" height="383"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="316" id="H6U-1l-TlY"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Rf0-Xu-MXC" id="meB-jO-rNC"/>
+                                </connections>
                             </textView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Volleyball Game This Thursday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKK-zC-FrB">
-                                <rect key="frame" x="7" y="10" width="300" height="23"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volleyball Game This Thursday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKK-zC-FrB">
+                                <rect key="frame" x="10" y="10" width="300" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="c0f-xZ-Hzs"/>
+                                    <constraint firstAttribute="height" constant="23" id="nZW-if-0C7"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.70980392156862748" green="0.50588235294117645" blue="0.050980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="d1u-27-DS3" firstAttribute="leading" secondItem="JtP-9g-jJa" secondAttribute="leading" constant="2" id="Qah-Ka-OE0"/>
+                            <constraint firstAttribute="bottom" secondItem="d1u-27-DS3" secondAttribute="bottom" id="XHK-Tc-Kfb"/>
+                            <constraint firstItem="YKK-zC-FrB" firstAttribute="leading" secondItem="JtP-9g-jJa" secondAttribute="leading" constant="10" id="jYU-7s-JgF"/>
+                            <constraint firstItem="YKK-zC-FrB" firstAttribute="top" secondItem="Df1-Ld-TgY" secondAttribute="bottom" constant="10" id="jue-XO-4Vr"/>
+                            <constraint firstItem="d1u-27-DS3" firstAttribute="top" secondItem="YKK-zC-FrB" secondAttribute="bottom" id="lt8-D8-Jhx"/>
+                            <constraint firstAttribute="trailing" secondItem="d1u-27-DS3" secondAttribute="trailing" constant="2" id="mbs-cQ-QGS"/>
+                            <constraint firstAttribute="trailing" secondItem="YKK-zC-FrB" secondAttribute="trailing" constant="10" id="yOe-Dx-6Sc"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="aZv-xD-DsH">

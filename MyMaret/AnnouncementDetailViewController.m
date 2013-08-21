@@ -50,16 +50,15 @@
     [self.bodyTextView setText:self.announcement.description];
     
     
-    CALayer *lineLayer = [[CALayer alloc] init];
-    [lineLayer setBounds:CGRectMake(0,0,self.bodyTextView.bounds.size.width - 20.0, 1.0)];
-    [lineLayer setPosition:CGPointMake(self.bodyTextView.frame.size.width / 2.0,
+    // Configure the layer used to draw the divider line
+    CALayer *dividerLayer = [[CALayer alloc] init];
+    [dividerLayer setBounds:CGRectMake(0,0,self.bodyTextView.bounds.size.width - 20.0, 1.0)];
+    [dividerLayer setPosition:CGPointMake(self.bodyTextView.frame.size.width / 2.0,
                                        self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height)];
     
-    [lineLayer setBackgroundColor:[[UIColor lightGrayColor] CGColor]];
-    [lineLayer setShadowOpacity:1.0];
-    [lineLayer setShadowOffset:CGSizeMake(0.0, 3.0)];
+    [dividerLayer setBackgroundColor:[[UIColor lightGrayColor] CGColor]];
     
-    [[self.view layer] addSublayer:lineLayer];
+    [[self.view layer] addSublayer:dividerLayer];
 }
 
 
@@ -116,6 +115,9 @@
         [mailErrorAlertView show];
     }
 }
+
+
+
 
 
 @end
