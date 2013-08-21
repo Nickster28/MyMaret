@@ -21,10 +21,10 @@
     NSAssert(self.navigationController, @"Must have a navigation controller!");
     NSAssert(self.revealViewController, @"Must have a reveal view controller!");
     
-    [self.navigationController.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     [self.navigationController.navigationBar setTintColor:[UIColor schoolColor]];
     
     
+    // Add the button to open the drawer
     UIBarButtonItem *drawerButton = [[UIBarButtonItem alloc] init];
     
     if ([UIApplication isPrevIOS]) {
@@ -42,6 +42,8 @@
     [super viewWillAppear:animated];
     NSAssert(!self.revealViewController.delegate, @"Reveal controller delegate already set!");
     
+    // Set the reveal controller delegate and add a pan gesture to open it
+    [self.navigationController.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     [self.revealViewController setDelegate:self];
 }
 
@@ -49,7 +51,9 @@
 {
     [super viewWillDisappear:animated];
     
+    // Remove the reveal controller delegate and remove the pan gesture
     [self.revealViewController setDelegate:nil];
+    [self.navigationController.view removeGestureRecognizer:self.revealViewController.panGestureRecognizer];
 }
 
 - (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position

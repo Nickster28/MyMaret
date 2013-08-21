@@ -27,5 +27,6 @@
 
 
 - (NSString *)postDateAsString;
+- (NSString *)description;
 
 @end

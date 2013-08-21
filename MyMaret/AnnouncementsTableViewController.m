@@ -11,6 +11,7 @@
 #import "Announcement.h"
 #import "UIColor+SchoolColor.h"
 #import "AnnouncementCell.h"
+#import "AnnouncementDetailViewController.h"
 
 
 @interface AnnouncementsTableViewController ()
@@ -44,6 +45,13 @@
     [self.refreshControl addTarget:self
                             action:@selector(refreshAnnouncements)
                   forControlEvents:UIControlEventValueChanged];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self.navigationController setToolbarHidden:NO animated:YES];
 }
 
 
@@ -148,22 +156,27 @@
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [[AnnouncementsStore sharedStore] markAnnouncementAtIndexAsRead:[indexPath row]];
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-}
-
 #pragma mark - Navigation
-/*
-// In a story board-based application, you will often want to do a little preparation before navigation
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([[segue identifier] isEqualToString:@"showAnnouncement"] && [[segue destinationViewController] isKindOfClass:[AnnouncementDetailViewController class]]) {
+        
+        NSIndexPath *selectedIndexPath = [self.tableView indexPathForCell:sender];
+        
+        [[AnnouncementsStore sharedStore] markAnnouncementAtIndexAsRead:[selectedIndexPath row]];
+        [self.tableView deselectRowAtIndexPath:selectedIndexPath
+                                      animated:YES];
+        [self.tableView reloadRowsAtIndexPaths:@[selectedIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        
+        [[segue destinationViewController] setAnnouncement:[[AnnouncementsStore sharedStore] announcementAtIndex:[selectedIndexPath row]]];
+    }
 }
 
- */
+
 
 @end

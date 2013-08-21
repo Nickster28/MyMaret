@@ -91,4 +91,12 @@
     return @"ERROR";
 }
 
+
+- (NSString *)description
+{
+    NSString *fullAnnouncement = [NSString stringWithFormat:@"%@\n\nPosted on %@ by %@", self.body, self.postDateAsString, self.author];
+    
+    return fullAnnouncement;
+}
+
 @end
