@@ -198,7 +198,7 @@ NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsU
 }
 
 
-#pragma mark Public APIs
+#pragma mark Public API
 
 - (void)fetchAnnouncementsWithCompletionBlock:(void (^)(NSUInteger, NSError *))completionBlock
 {
@@ -245,7 +245,13 @@ NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsU
 
 -(NSUInteger)numberOfAnnouncements
 {
-    return [[self announcements] count];
+    // Return whichever array (the search results or all announcements)
+    // we want to count
+    if (!self.filteredAnnouncements) {
+        return [[self announcements] count];
+    } else {
+        return [[self filteredAnnouncements] count];
+    }
 }
 
 
@@ -257,17 +263,34 @@ NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsU
 
 - (Announcement *)announcementAtIndex:(NSUInteger)index
 {
-    return [[self announcements] objectAtIndex:index];
+    // Return the corresponding announcement from whichever array
+    // (The search results or all announcements) we want to access
+    if (!self.filteredAnnouncements) {
+        return [[self announcements] objectAtIndex:index];
+    } else {
+        return [[self filteredAnnouncements] objectAtIndex:index];
+    }
 }
 
 
 - (void)markAnnouncementAtIndexAsRead:(NSUInteger)readIndex
 {
-    [[[self announcements] objectAtIndex:readIndex] setIsUnread:FALSE];
-    [self saveChanges];
+    // If we're currently working with the filtered announcements,
+    // we need to convert readIndex to be an index in the full announcements
+    // array
+    if (self.filteredAnnouncements) {
+        Announcement *selectedFilteredAnnouncement = [self.filteredAnnouncements objectAtIndex:readIndex];
+        readIndex = [self.announcements indexOfObject:selectedFilteredAnnouncement];
+    }
     
-    // Update the number of unread announcements
-    [self setNumUnreadAnnouncements:[self numUnreadAnnouncements] - 1];
+    // Change to read if the announcement is unread
+    if ([[self.announcements objectAtIndex:readIndex] isUnread]) {
+        [[[self announcements] objectAtIndex:readIndex] setIsUnread:FALSE];
+        [self saveChanges];
+        
+        // Update the number of unread announcements
+        [self setNumUnreadAnnouncements:[self numUnreadAnnouncements] - 1];
+    }
 }
 
 
@@ -345,40 +368,20 @@ NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsU
 }
 
 
+// The searchString being nil or not determines whether
+// the AnnouncementsStore is in "search mode" or not
 - (void)setSearchFilterString:(NSString *)searchString
 {
-    // Use NSPredicate - http://ygamretuta.me/2011/08/10/ios-implementing-a-basic-search-uisearchdisplaycontroller-and-interface-builder/
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                              @"(description contains[cd] %@) OR (title contains[cd] %@)", searchString, searchString];
-    
-    [self setFilteredAnnouncements:[self.announcements filteredArrayUsingPredicate:predicate]];
-}
-
-
-- (Announcement *)searchFilterAnnouncementAtIndex:(NSUInteger)index
-{
-    if (!self.filteredAnnouncements) {
-        NSAssert(false, @"Must set search string before accessing filtered announcements.");
+    if (searchString) {
+        // Use NSPredicate - http://ygamretuta.me/2011/08/10/ios-implementing-a-basic-search-uisearchdisplaycontroller-and-interface-builder/
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                  @"(description contains[cd] %@) OR (title contains[cd] %@)", searchString, searchString];
+        
+        [self setFilteredAnnouncements:[self.announcements filteredArrayUsingPredicate:predicate]];
+    } else {
+        [self setFilteredAnnouncements:nil];
     }
-    return [[self filteredAnnouncements] objectAtIndex:index];
 }
 
-
-- (NSUInteger)numberOfFilteredAnnouncements
-{
-    if (!self.filteredAnnouncements) return 0;
-    return [[self filteredAnnouncements] count];
-}
-
-
-- (void)markFilteredAnnouncementAtIndexAsRead:(NSUInteger)readIndex
-{
-    // Convert the index of the announcement in the filtered array
-    // to its corresponding index in the full announcements array and
-    // mark it as read
-    Announcement *selectedAnnouncement = [self.filteredAnnouncements objectAtIndex:readIndex];
-    
-    [self markAnnouncementAtIndexAsRead:[self.announcements indexOfObject:selectedAnnouncement]];
-}
 
 @end

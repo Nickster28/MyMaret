@@ -104,9 +104,7 @@
 {
     // Return the count for both the regular announcements tableview and the
     // search results tableview
-    if (tableView == self.tableView) {
-        return [[AnnouncementsStore sharedStore] numberOfAnnouncements];
-    } else return [[AnnouncementsStore sharedStore] numberOfFilteredAnnouncements];
+    return [[AnnouncementsStore sharedStore] numberOfAnnouncements];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -125,12 +123,7 @@
                                                              forIndexPath:indexPath];
     
     // Get the selected announcement
-    Announcement *announcement;
-    if (tableView == self.tableView) {
-        announcement = [[AnnouncementsStore sharedStore] announcementAtIndex:[indexPath row]];
-    } else {
-        announcement = [[AnnouncementsStore sharedStore] searchFilterAnnouncementAtIndex:[indexPath row]];
-    }
+    Announcement *announcement = [[AnnouncementsStore sharedStore] announcementAtIndex:[indexPath row]];
     
     // Configure the cell
     [cell bindAnnouncementToCell:announcement];
@@ -178,6 +171,12 @@ shouldReloadTableForSearchString:(NSString *)searchString
 }
 
 
+- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller
+{
+    [[AnnouncementsStore sharedStore] setSearchFilterString:nil];
+}
+
+
 
 #pragma mark - Navigation
 
@@ -198,16 +197,9 @@ shouldReloadTableForSearchString:(NSString *)searchString
         
         // Mark the selected announcement as read and pass the
         // announcement to the detail view controller
-        if (self.searchDisplayController.isActive) {
-            [[AnnouncementsStore sharedStore] markFilteredAnnouncementAtIndexAsRead:[selectedIndexPath row]];
+        [[AnnouncementsStore sharedStore] markAnnouncementAtIndexAsRead:[selectedIndexPath row]];
             
-            [[segue destinationViewController] setAnnouncement:[[AnnouncementsStore sharedStore] searchFilterAnnouncementAtIndex:[selectedIndexPath row]]];
-            
-        } else {
-            [[AnnouncementsStore sharedStore] markAnnouncementAtIndexAsRead:[selectedIndexPath row]];
-            
-            [[segue destinationViewController] setAnnouncement:[[AnnouncementsStore sharedStore] announcementAtIndex:[selectedIndexPath row]]];
-        }
+        [[segue destinationViewController] setAnnouncement:[[AnnouncementsStore sharedStore] announcementAtIndex:[selectedIndexPath row]]];
     }
 }
 

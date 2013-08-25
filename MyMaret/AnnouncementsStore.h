@@ -21,10 +21,10 @@
 
 - (void)fetchAnnouncementsWithCompletionBlock:(void (^)(NSUInteger numAdded, NSError *err))completionBlock;
 
-// Get the announcement at a given index
+// Get the announcement at a given index (filtered and all)
 - (Announcement *)announcementAtIndex:(NSUInteger)index;
 
-// Mark the announcement at readIndex as read
+// Mark the announcement at readIndex as read (filtered and all)
 - (void)markAnnouncementAtIndexAsRead:(NSUInteger)readIndex;
 
 // Delete the announcement at deleteIndex
@@ -36,7 +36,7 @@
 // Returns the number of unread announcements
 - (NSUInteger)numberOfUnreadAnnouncements;
 
-// Returns the total number of announcements
+// Returns the total number of announcements (filtered and all)
 - (NSUInteger)numberOfAnnouncements;
 
 // Saves all Core Data changes
@@ -52,14 +52,10 @@
 // ****** FOR USING A SEARCH DISPLAY CONTROLLER ******** //
 // Set the string the user is searching by
 // MUST SET THIS BEFORE ACCESSING FILTERED ANNOUNCMENTS
+// The marked methods above (announcementAtIndex, markAnnouncementAtIndexAsRead,
+// and numberOfAnnouncements) will return different values
+// depending on whether the search filter string is nil or not.
 - (void)setSearchFilterString:(NSString *)searchString;
-
-// Get the filtered announcements array index by index
-- (Announcement *)searchFilterAnnouncementAtIndex:(NSUInteger)index;
-
-- (NSUInteger)numberOfFilteredAnnouncements;
-
-- (void)markFilteredAnnouncementAtIndexAsRead:(NSUInteger)readIndex;
 
 
 @end
