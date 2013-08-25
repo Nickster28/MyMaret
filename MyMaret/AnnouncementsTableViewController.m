@@ -47,6 +47,7 @@
                   forControlEvents:UIControlEventValueChanged];
 }
 
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -115,15 +116,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // Register the cell's NIB file
     [tableView registerNib:[UINib nibWithNibName:@"AnnouncementCell"
                                           bundle:nil]
     forCellReuseIdentifier:@"announcementCell"];
     
-    static NSString *CellIdentifier = @"announcementCell";
+    AnnouncementCell *cell = [tableView dequeueReusableCellWithIdentifier:@"announcementCell"
+                                                             forIndexPath:indexPath];
     
-    AnnouncementCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
+    // Get the selected announcement
     Announcement *announcement;
     if (tableView == self.tableView) {
         announcement = [[AnnouncementsStore sharedStore] announcementAtIndex:[indexPath row]];
@@ -131,23 +132,9 @@
         announcement = [[AnnouncementsStore sharedStore] searchFilterAnnouncementAtIndex:[indexPath row]];
     }
     
-    [[cell titleLabel] setText:announcement.title];
-    
-    if (announcement.isUnread) {
-        [[cell titleLabel] setFont:[UIFont boldSystemFontOfSize:19.0]];
-        [[cell titleLabel] setTextColor:[UIColor schoolLightColor]];
-        [[cell bodyLabel] setTextColor:[UIColor blackColor]];
-        [[cell unreadImageView] setImage:[UIImage imageNamed:@"UnreadAnnouncementIcon"]];
-    } else {
-        [[cell titleLabel] setFont:[UIFont systemFontOfSize:17.0]];
-        [[cell titleLabel] setTextColor:[UIColor blackColor]];
-        [[cell bodyLabel] setTextColor:[UIColor darkGrayColor]];
-        [[cell unreadImageView] setImage:nil];
-    }
-    
-    [[cell bodyLabel] setText:announcement.body];
-    [[cell dateLabel] setText:[announcement postDateAsString]];
-    
+    // Configure the cell
+    [cell bindAnnouncementToCell:announcement];
+
     return cell;
 }
 
@@ -173,6 +160,13 @@
 }
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"showAnnouncement"
+                              sender:[tableView cellForRowAtIndexPath:indexPath]];
+}
+
+
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller
 shouldReloadTableForSearchString:(NSString *)searchString
 {
@@ -191,18 +185,29 @@ shouldReloadTableForSearchString:(NSString *)searchString
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected Announcement to the new view controller.
-    
     if ([[segue identifier] isEqualToString:@"showAnnouncement"] && [[segue destinationViewController] isKindOfClass:[AnnouncementDetailViewController class]]) {
         
-        NSIndexPath *selectedIndexPath = [self.tableView indexPathForCell:sender];
+        // Get the index path of the selected cell
+        NSIndexPath *selectedIndexPath;
+        if (self.searchDisplayController.isActive) {
+            selectedIndexPath = [self.searchDisplayController.searchResultsTableView indexPathForCell:sender];
+        } else {
+            selectedIndexPath = [self.tableView indexPathForCell:sender];
+        }
+
         
-        [[AnnouncementsStore sharedStore] markAnnouncementAtIndexAsRead:[selectedIndexPath row]];
-        [self.tableView deselectRowAtIndexPath:selectedIndexPath
-                                      animated:YES];
-        [self.tableView reloadRowsAtIndexPaths:@[selectedIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-        
-        [[segue destinationViewController] setAnnouncement:[[AnnouncementsStore sharedStore] announcementAtIndex:[selectedIndexPath row]]];
+        // Mark the selected announcement as read and pass the
+        // announcement to the detail view controller
+        if (self.searchDisplayController.isActive) {
+            [[AnnouncementsStore sharedStore] markFilteredAnnouncementAtIndexAsRead:[selectedIndexPath row]];
+            
+            [[segue destinationViewController] setAnnouncement:[[AnnouncementsStore sharedStore] searchFilterAnnouncementAtIndex:[selectedIndexPath row]]];
+            
+        } else {
+            [[AnnouncementsStore sharedStore] markAnnouncementAtIndexAsRead:[selectedIndexPath row]];
+            
+            [[segue destinationViewController] setAnnouncement:[[AnnouncementsStore sharedStore] announcementAtIndex:[selectedIndexPath row]]];
+        }
     }
 }
 

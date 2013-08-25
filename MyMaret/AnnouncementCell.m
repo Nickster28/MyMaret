@@ -7,6 +7,8 @@
 //
 
 #import "AnnouncementCell.h"
+#import "Announcement.h"
+#import "UIColor+SchoolColor.h"
 
 @implementation AnnouncementCell
 
@@ -30,6 +32,29 @@
 {
     [super setHighlighted:highlighted animated:animated];
     
+}
+
+
+// Set the cell to display all of the given announcement's info
+- (void)bindAnnouncementToCell:(Announcement *)announcement
+{
+    [self.titleLabel setText:announcement.title];
+    
+    if (announcement.isUnread) {
+        [self.titleLabel setFont:[UIFont boldSystemFontOfSize:19.0]];
+        [self.titleLabel setTextColor:[UIColor schoolLightColor]];
+        [self.bodyLabel setTextColor:[UIColor blackColor]];
+        [self.unreadImageView setImage:[UIImage imageNamed:@"UnreadAnnouncementIcon"]];
+    } else {
+        [self.titleLabel setFont:[UIFont systemFontOfSize:17.0]];
+        [self.titleLabel setTextColor:[UIColor blackColor]];
+        [self.bodyLabel setTextColor:[UIColor darkGrayColor]];
+        [self.imageView setImage:nil];
+    }
+    
+    [self.bodyLabel setText:announcement.body];
+    [self.dateLabel setText:[announcement postDateAsString]];
+
 }
 
 @end

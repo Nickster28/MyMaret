@@ -59,5 +59,7 @@
 
 - (NSUInteger)numberOfFilteredAnnouncements;
 
+- (void)markFilteredAnnouncementAtIndexAsRead:(NSUInteger)readIndex;
+
 
 @end

@@ -370,4 +370,15 @@ NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsU
     return [[self filteredAnnouncements] count];
 }
 
+
+- (void)markFilteredAnnouncementAtIndexAsRead:(NSUInteger)readIndex
+{
+    // Convert the index of the announcement in the filtered array
+    // to its corresponding index in the full announcements array and
+    // mark it as read
+    Announcement *selectedAnnouncement = [self.filteredAnnouncements objectAtIndex:readIndex];
+    
+    [self markAnnouncementAtIndexAsRead:[self.announcements indexOfObject:selectedAnnouncement]];
+}
+
 @end
