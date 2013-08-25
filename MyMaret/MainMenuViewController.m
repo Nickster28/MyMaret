@@ -11,6 +11,11 @@
 
 
 @interface MainMenuViewController ()
+{
+    // The background image
+    IBOutlet UIView *mainMenuBackgroundView;
+}
+
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @end
 
@@ -23,6 +28,9 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     [self setSelectedIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    
+    // Set the background image
+    [self.tableView setBackgroundView:[self mainMenuBackgroundView]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -38,6 +46,21 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (UIView *)mainMenuBackgroundView
+{
+    if (!mainMenuBackgroundView) {
+        
+        // If we haven't already, load the XIB file containing the
+        // background view
+        [[NSBundle mainBundle] loadNibNamed:@"MainMenuBackgroundView"
+                                      owner:self
+                                    options:nil];
+    }
+    
+    return mainMenuBackgroundView;
 }
 
 
