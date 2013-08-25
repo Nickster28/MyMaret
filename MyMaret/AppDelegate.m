@@ -17,24 +17,24 @@ NSString * const MyMaretNewAnnouncementNotification = @"MyMaretNewAnnouncementNo
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    #warning Need to set MyMaretIsFirstOpenKey to no somewhere
+    NSDictionary *defaults = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:TRUE]
+                                                         forKey:MyMaretIsFirstOpenKey];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
+    
     // Set up Parse
     [Parse setApplicationId:@"9HFg8b0VNdu68bNj0XGW4zhQS2JJuJyeV8DlCFge"
                   clientKey:@"LsKBiPVVNUD8QxTWTr4QI4OJvIy92mWaknqYlsns"];
     
-    // Track app usage
-    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-    
     // Register for push notifications
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+    
+    // Track app usage
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     // Change the status bar on iOS 6 to not be tinted
     // Thanks to http://stackoverflow.com/questions/4456474/how-to-change-the-color-of-status-bar
     if ([UIApplication isPrevIOS]) [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-    
-    
-    NSDictionary *defaults = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:TRUE]
-                                                         forKey:MyMaretIsFirstOpenKey];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     
     return YES;
 }
@@ -54,6 +54,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
     
+    // Notify others that a new announcement came in
     [[NSNotificationCenter defaultCenter] postNotificationName:MyMaretNewAnnouncementNotification
                                                         object:nil];
 }

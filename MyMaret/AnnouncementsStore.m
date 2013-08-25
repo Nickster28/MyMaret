@@ -152,6 +152,10 @@ NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsU
 - (void)setNumUnreadAnnouncements:(NSUInteger)numUnreadAnnouncements
 {
     _numUnreadAnnouncements = numUnreadAnnouncements;
+    
+    [[PFInstallation currentInstallation] setBadge:numUnreadAnnouncements];
+    [[PFInstallation currentInstallation] saveInBackground];
+    
     [[NSUserDefaults standardUserDefaults] setInteger:_numUnreadAnnouncements
                                                forKey:MyMaretNumUnreadAnnouncementsKey];
 }

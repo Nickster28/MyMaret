@@ -21,17 +21,15 @@
 
 @implementation AnnouncementsTableViewController
 
-- (id)init
+
+- (void)awakeFromNib
 {
-    self = [super init];
-    if (self) {
-        // Register for the new announcement notification
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(refreshAnnouncements)
-                                                     name:MyMaretNewAnnouncementNotification
-                                                   object:nil];
-    }
-    return self;
+    // Register for the new announcement notification
+    // to have the table refresh when a notification comes in
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshAnnouncements)
+                                                 name:MyMaretNewAnnouncementNotification
+                                               object:nil];
 }
 
 
