@@ -49,7 +49,7 @@
         [self.titleLabel setFont:[UIFont systemFontOfSize:17.0]];
         [self.titleLabel setTextColor:[UIColor blackColor]];
         [self.bodyLabel setTextColor:[UIColor darkGrayColor]];
-        [self.imageView setImage:nil];
+        [self.unreadImageView setImage:nil];
     }
     
     [self.bodyLabel setText:announcement.body];

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 extern NSString * const MyMaretIsFirstOpenKey;
+extern NSString * const MyMaretNewAnnouncementNotification;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

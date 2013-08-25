@@ -8,8 +8,10 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "AnnouncementsStore.h"
 
 NSString * const MyMaretIsFirstOpenKey = @"MyMaretIsFirstOpenKey";
+NSString * const MyMaretNewAnnouncementNotification = @"MyMaretNewAnnouncementNotification";
 
 @implementation AppDelegate
 
@@ -51,6 +53,9 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:MyMaretNewAnnouncementNotification
+                                                        object:nil];
 }
 
 

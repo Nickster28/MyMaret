@@ -12,6 +12,7 @@
 #import "UIColor+SchoolColor.h"
 #import "AnnouncementCell.h"
 #import "AnnouncementDetailViewController.h"
+#import "AppDelegate.h"
 
 
 @interface AnnouncementsTableViewController () <UISearchDisplayDelegate>
@@ -24,9 +25,20 @@
 {
     self = [super init];
     if (self) {
-        // Custom initialization
+        // Register for the new announcement notification
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(refreshAnnouncements)
+                                                     name:MyMaretNewAnnouncementNotification
+                                                   object:nil];
     }
     return self;
+}
+
+
+- (void)dealloc
+{
+    // Remove ourselves from NSNotificationCenter
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad
@@ -93,7 +105,7 @@
 }
 
 
-#pragma mark - Table view data source
+#pragma mark - Tableview Data Source and Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -155,9 +167,27 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"showAnnouncement"
+    [[AnnouncementsStore sharedStore] markAnnouncementAtIndexAsRead:[indexPath row]];
+    
+    // Reload the cell to reflect that it's been read,
+    // but make sure it's still selected!
+    [tableView reloadRowsAtIndexPaths:@[indexPath]
+                     withRowAnimation:UITableViewRowAnimationNone];
+    [tableView selectRowAtIndexPath:indexPath animated:NO
+                     scrollPosition:UITableViewScrollPositionNone];
+    
+    NSString *segueIdentifier = @"showAnnouncement7";
+    if ([UIApplication isPrevIOS]) {
+        segueIdentifier = @"showAnnouncement6";
+    }
+    
+    // Trigger the detail view controller segue
+    [self performSegueWithIdentifier:segueIdentifier
                               sender:[tableView cellForRowAtIndexPath:indexPath]];
 }
+
+
+#pragma mark Search Display Delegate
 
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller
@@ -173,7 +203,11 @@ shouldReloadTableForSearchString:(NSString *)searchString
 
 - (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller
 {
+    // Set the filter string to nil so the AnnouncementsStore knows
+    // we're done searching and want info about ALL announcements now
     [[AnnouncementsStore sharedStore] setSearchFilterString:nil];
+    
+    [self.tableView reloadData];
 }
 
 
@@ -184,7 +218,9 @@ shouldReloadTableForSearchString:(NSString *)searchString
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected Announcement to the new view controller.
-    if ([[segue identifier] isEqualToString:@"showAnnouncement"] && [[segue destinationViewController] isKindOfClass:[AnnouncementDetailViewController class]]) {
+    if (([[segue identifier] isEqualToString:@"showAnnouncement6"] ||
+         [[segue identifier] isEqualToString:@"showAnnouncement7"]) &&
+         [[segue destinationViewController] isKindOfClass:[AnnouncementDetailViewController class]]) {
         
         // Get the index path of the selected cell
         NSIndexPath *selectedIndexPath;
@@ -195,10 +231,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
         }
 
         
-        // Mark the selected announcement as read and pass the
-        // announcement to the detail view controller
-        [[AnnouncementsStore sharedStore] markAnnouncementAtIndexAsRead:[selectedIndexPath row]];
-            
+        // Pass the announcement to the detail view controller
         [[segue destinationViewController] setAnnouncement:[[AnnouncementsStore sharedStore] announcementAtIndex:[selectedIndexPath row]]];
     }
 }
