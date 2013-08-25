@@ -14,30 +14,62 @@
                 <rect key="frame" x="0.0" y="0.0" width="287" height="73"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Today" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pg1-pF-qOD">
-                        <rect key="frame" x="237" y="12" width="50" height="50"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pg1-pF-qOD">
+                        <rect key="frame" x="237" y="21" width="50" height="31"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="31" id="Yvq-w4-bFl"/>
+                            <constraint firstAttribute="width" constant="50" id="hKf-Jn-7Qv"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Volleyball Game This Sunday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERg-xF-lIi">
-                        <rect key="frame" x="28" y="12" width="205" height="21"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volleyball Game This Sunday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERg-xF-lIi">
+                        <rect key="frame" x="28" y="8" width="209" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="iNF-y0-e3h"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Everyone should come out to the volleyball game this coming sunday" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="205" translatesAutoresizingMaskIntoConstraints="NO" id="tdB-QP-oti">
-                        <rect key="frame" x="28" y="31" width="205" height="37"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Everyone should come out to the volleyball game this coming sunday" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="209" translatesAutoresizingMaskIntoConstraints="NO" id="tdB-QP-oti">
+                        <rect key="frame" x="28" y="29" width="209" height="37"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="37" id="o0T-FT-dgb"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qjw-gQ-giq">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qjw-gQ-giq">
                         <rect key="frame" x="8" y="31" width="12" height="12"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="12" id="fYa-DJ-jru"/>
+                            <constraint firstAttribute="height" constant="12" id="j2F-Nc-roS"/>
+                        </constraints>
                     </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="tdB-QP-oti" secondAttribute="bottom" constant="7" id="0lY-Wg-DEr"/>
+                    <constraint firstItem="qjw-gQ-giq" firstAttribute="leading" secondItem="nZl-HX-zZf" secondAttribute="leading" constant="8" id="6mh-q7-FXA"/>
+                    <constraint firstAttribute="bottom" secondItem="qjw-gQ-giq" secondAttribute="bottom" constant="30" id="88F-kR-CbE"/>
+                    <constraint firstItem="tdB-QP-oti" firstAttribute="leading" secondItem="qjw-gQ-giq" secondAttribute="trailing" constant="8" id="A3V-lL-2Ja"/>
+                    <constraint firstItem="qjw-gQ-giq" firstAttribute="top" secondItem="nZl-HX-zZf" secondAttribute="top" constant="31" id="IdL-nq-Ybz"/>
+                    <constraint firstItem="tdB-QP-oti" firstAttribute="top" secondItem="ERg-xF-lIi" secondAttribute="bottom" id="Mbc-Vy-J92"/>
+                    <constraint firstAttribute="bottom" secondItem="pg1-pF-qOD" secondAttribute="bottom" constant="21" id="RKU-qp-vot"/>
+                    <constraint firstItem="pg1-pF-qOD" firstAttribute="top" secondItem="nZl-HX-zZf" secondAttribute="top" constant="21" id="VbT-WZ-5bg"/>
+                    <constraint firstItem="tdB-QP-oti" firstAttribute="leading" secondItem="qjw-gQ-giq" secondAttribute="trailing" constant="8" id="aoQ-tn-VHN"/>
+                    <constraint firstItem="pg1-pF-qOD" firstAttribute="leading" secondItem="ERg-xF-lIi" secondAttribute="trailing" id="b94-N1-fBZ"/>
+                    <constraint firstItem="pg1-pF-qOD" firstAttribute="leading" secondItem="tdB-QP-oti" secondAttribute="trailing" id="fdN-x2-NzC"/>
+                    <constraint firstItem="ERg-xF-lIi" firstAttribute="top" secondItem="nZl-HX-zZf" secondAttribute="top" constant="8" id="l0j-Zf-thP"/>
+                    <constraint firstItem="ERg-xF-lIi" firstAttribute="leading" secondItem="qjw-gQ-giq" secondAttribute="trailing" constant="8" id="oKR-Qt-e2D"/>
+                    <constraint firstItem="tdB-QP-oti" firstAttribute="top" secondItem="ERg-xF-lIi" secondAttribute="bottom" id="ubH-yt-fZO"/>
+                    <constraint firstItem="pg1-pF-qOD" firstAttribute="leading" secondItem="tdB-QP-oti" secondAttribute="trailing" id="w6f-Fn-E26"/>
+                    <constraint firstAttribute="trailing" secondItem="pg1-pF-qOD" secondAttribute="trailing" id="xog-vG-MJE"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="bodyLabel" destination="tdB-QP-oti" id="i8c-w9-A5J"/>
