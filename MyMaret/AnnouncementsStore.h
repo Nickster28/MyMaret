@@ -48,4 +48,16 @@
                   completionBlock:(void (^)(NSError *err))completionBlock;
 
 
+
+// ****** FOR USING A SEARCH DISPLAY CONTROLLER ******** //
+// Set the string the user is searching by
+// MUST SET THIS BEFORE ACCESSING FILTERED ANNOUNCMENTS
+- (void)setSearchFilterString:(NSString *)searchString;
+
+// Get the filtered announcements array index by index
+- (Announcement *)searchFilterAnnouncementAtIndex:(NSUInteger)index;
+
+- (NSUInteger)numberOfFilteredAnnouncements;
+
+
 @end

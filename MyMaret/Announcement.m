@@ -94,7 +94,7 @@
 
 - (NSString *)description
 {
-    NSString *fullAnnouncement = [NSString stringWithFormat:@"%@\n\nPosted on %@ by %@", self.body, self.postDateAsString, self.author];
+    NSString *fullAnnouncement = [NSString stringWithFormat:@"%@\n\nPosted %@ by %@", self.body, self.postDateAsString, self.author];
     
     return fullAnnouncement;
 }

@@ -22,12 +22,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    if ([UIApplication isPrevIOS]) {
-        [self.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
-    } else {
-        [self.navigationController.navigationBar setBarTintColor:[UIColor darkGrayColor]];
-    }
-    
     [self setSelectedIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
 }
 

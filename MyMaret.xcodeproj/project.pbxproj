@@ -41,6 +41,7 @@
 		01B0BBA217ACA7810035B3FE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BBA117ACA7810035B3FE /* QuartzCore.framework */; };
 		01B0BBA417ACA78A0035B3FE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BBA317ACA78A0035B3FE /* Security.framework */; };
 		01B0BBA817ACA7980035B3FE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BBA717ACA7980035B3FE /* SystemConfiguration.framework */; };
+		01BD435C17C9BB22005EF174 /* AnnouncementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01BD435B17C9BB22005EF174 /* AnnouncementCell.xib */; };
 		01BF139817A89A3B00731690 /* AnnouncementsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139717A89A3B00731690 /* AnnouncementsStore.m */; };
 		01BF139C17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139A17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld */; };
 		01BF13A017A89F7D00731690 /* Announcement.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139F17A89F7D00731690 /* Announcement.m */; };
@@ -113,6 +114,7 @@
 		01B0BBA117ACA7810035B3FE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		01B0BBA317ACA78A0035B3FE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		01B0BBA717ACA7980035B3FE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		01BD435B17C9BB22005EF174 /* AnnouncementCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnnouncementCell.xib; sourceTree = "<group>"; };
 		01BF139617A89A3B00731690 /* AnnouncementsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementsStore.h; sourceTree = "<group>"; };
 		01BF139717A89A3B00731690 /* AnnouncementsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementsStore.m; sourceTree = "<group>"; };
 		01BF139B17A89B8500731690 /* AnnouncementsCDModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AnnouncementsCDModel.xcdatamodel; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 				0197389817C2C21100CB5221 /* AnnouncementDetailViewController.m */,
 				0125F75A17BB1C750042EB6F /* AnnouncementCell.h */,
 				0125F75B17BB1C750042EB6F /* AnnouncementCell.m */,
+				01BD435B17C9BB22005EF174 /* AnnouncementCell.xib */,
 				01BF139617A89A3B00731690 /* AnnouncementsStore.h */,
 				01BF139717A89A3B00731690 /* AnnouncementsStore.m */,
 				01BF139E17A89F7D00731690 /* Announcement.h */,
@@ -439,6 +442,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01BD435C17C9BB22005EF174 /* AnnouncementCell.xib in Resources */,
 				0177456117A60AC3001625BF /* Images.xcassets in Resources */,
 				0177455317A60AC3001625BF /* InfoPlist.strings in Resources */,
 				0177455C17A60AC3001625BF /* Main.storyboard in Resources */,

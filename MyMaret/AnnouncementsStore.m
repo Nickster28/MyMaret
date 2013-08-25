@@ -22,6 +22,9 @@
 // The array that holds all of the announcements
 @property (nonatomic, strong) NSMutableArray *announcements;
 
+// The array pertaining to the user's announcement search
+@property (nonatomic, strong) NSArray *filteredAnnouncements;
+
 @property (nonatomic) NSUInteger numUnreadAnnouncements;
 @property (nonatomic, strong) NSDate *lastAnnouncementsUpdate;
 @end
@@ -339,6 +342,32 @@ NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsU
             completionBlock(error);
         }
     }];
+}
+
+
+- (void)setSearchFilterString:(NSString *)searchString
+{
+    // Use NSPredicate - http://ygamretuta.me/2011/08/10/ios-implementing-a-basic-search-uisearchdisplaycontroller-and-interface-builder/
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"(description contains[cd] %@) OR (title contains[cd] %@)", searchString, searchString];
+    
+    [self setFilteredAnnouncements:[self.announcements filteredArrayUsingPredicate:predicate]];
+}
+
+
+- (Announcement *)searchFilterAnnouncementAtIndex:(NSUInteger)index
+{
+    if (!self.filteredAnnouncements) {
+        NSAssert(false, @"Must set search string before accessing filtered announcements.");
+    }
+    return [[self filteredAnnouncements] objectAtIndex:index];
+}
+
+
+- (NSUInteger)numberOfFilteredAnnouncements
+{
+    if (!self.filteredAnnouncements) return 0;
+    return [[self filteredAnnouncements] count];
 }
 
 @end

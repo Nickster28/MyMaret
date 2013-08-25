@@ -14,7 +14,7 @@
 #import "AnnouncementDetailViewController.h"
 
 
-@interface AnnouncementsTableViewController ()
+@interface AnnouncementsTableViewController () <UISearchDisplayDelegate>
 
 @end
 
@@ -101,7 +101,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[AnnouncementsStore sharedStore] numberOfAnnouncements];
+    // Return the count for both the regular announcements tableview and the
+    // search results tableview
+    if (tableView == self.tableView) {
+        return [[AnnouncementsStore sharedStore] numberOfAnnouncements];
+    } else return [[AnnouncementsStore sharedStore] numberOfFilteredAnnouncements];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -111,21 +115,34 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView registerNib:[UINib nibWithNibName:@"AnnouncementCell"
+                                          bundle:nil]
+    forCellReuseIdentifier:@"announcementCell"];
+    
     static NSString *CellIdentifier = @"announcementCell";
+    
     AnnouncementCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    Announcement *announcement = [[AnnouncementsStore sharedStore] announcementAtIndex:[indexPath row]];
+    Announcement *announcement;
+    if (tableView == self.tableView) {
+        announcement = [[AnnouncementsStore sharedStore] announcementAtIndex:[indexPath row]];
+    } else {
+        announcement = [[AnnouncementsStore sharedStore] searchFilterAnnouncementAtIndex:[indexPath row]];
+    }
+    
     [[cell titleLabel] setText:announcement.title];
     
     if (announcement.isUnread) {
         [[cell titleLabel] setFont:[UIFont boldSystemFontOfSize:19.0]];
         [[cell titleLabel] setTextColor:[UIColor schoolLightColor]];
         [[cell bodyLabel] setTextColor:[UIColor blackColor]];
+        [[cell unreadImageView] setImage:[UIImage imageNamed:@"UnreadAnnouncementIcon"]];
     } else {
         [[cell titleLabel] setFont:[UIFont systemFontOfSize:17.0]];
         [[cell titleLabel] setTextColor:[UIColor blackColor]];
         [[cell bodyLabel] setTextColor:[UIColor darkGrayColor]];
+        [[cell unreadImageView] setImage:nil];
     }
     
     [[cell bodyLabel] setText:announcement.body];
@@ -156,12 +173,24 @@
 }
 
 
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller
+shouldReloadTableForSearchString:(NSString *)searchString
+{
+    // Set the announcements store search string so it filters out
+    // the announcements we want
+    [[AnnouncementsStore sharedStore] setSearchFilterString:searchString];
+    
+    return YES;
+}
+
+
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    // Pass the selected Announcement to the new view controller.
     
     if ([[segue identifier] isEqualToString:@"showAnnouncement"] && [[segue destinationViewController] isKindOfClass:[AnnouncementDetailViewController class]]) {
         

@@ -53,6 +53,13 @@
     return YES;
 }
 
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if (self.bodyTextView.text.length > 0) {
+        [textView scrollRangeToVisible:NSMakeRange(self.bodyTextView.text.length - 1, 1)];
+    }
+}
+
 
 - (IBAction)postAnnouncement:(id)sender {
     NSString *announcementTitle = self.announcementTitle;
