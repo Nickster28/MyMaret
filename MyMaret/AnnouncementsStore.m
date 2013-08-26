@@ -28,11 +28,18 @@
 
 @property (nonatomic) NSUInteger numUnreadAnnouncements;
 @property (nonatomic, strong) NSDate *lastAnnouncementsUpdate;
+
+
+// Saves all Core Data changes
+- (void)saveChanges;
+
 @end
 
 // NSUserDefaults keys
 NSString * const MyMaretNumUnreadAnnouncementsKey = @"MyMaretNumUnreadAnnouncementsKey";
 NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsUpdateKey";
+
+NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilterStringToday";
 
 @implementation AnnouncementsStore
 @synthesize numUnreadAnnouncements = _numUnreadAnnouncements;
@@ -203,6 +210,22 @@ NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsU
 }
 
 
+// Save Core Data changes
+- (void)saveChanges
+{
+    NSError *err = nil;
+    BOOL successful = [context save:&err];
+    if (!successful) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Saving Announcements"
+                                                            message:[err localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+
+
 #pragma mark Public API
 
 - (void)fetchAnnouncementsWithCompletionBlock:(void (^)(NSUInteger, NSError *))completionBlock
@@ -244,22 +267,6 @@ NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsU
             completionBlock(0, error);
         }
     }];
-}
-
-
-// Save Core Data changes
-- (void)saveChanges
-{
-    NSError *err = nil;
-    BOOL successful = [context save:&err];
-    if (!successful) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Saving Announcements"
-                                                            message:[err localizedDescription]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-    }
 }
 
 
@@ -389,15 +396,24 @@ NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsU
 
 
 // The searchString being nil or not determines whether
-// the AnnouncementsStore is in "search mode" or not
+// the AnnouncementsStore is in "filter mode" or not
 - (void)setSearchFilterString:(NSString *)searchString
 {
-    if (searchString) {
+    // If we want only today's announcements, filter out those whose postDateAsString is "Today"
+    if (searchString && [searchString isEqualToString:AnnouncementsStoreFilterStringToday]) {
+        NSPredicate *todayPredicate = [NSPredicate predicateWithFormat:@"postDateAsString like \"Today\""];
+        
+        [self setFilteredAnnouncements:[self.announcements filteredArrayUsingPredicate:todayPredicate]];
+    
+    // Otherwise, filter them by whether they contain the given searchString
+    } else if (searchString) {
         // Use NSPredicate - http://ygamretuta.me/2011/08/10/ios-implementing-a-basic-search-uisearchdisplaycontroller-and-interface-builder/
         NSPredicate *predicate = [NSPredicate predicateWithFormat:
                                   @"(description contains[cd] %@) OR (title contains[cd] %@)", searchString, searchString];
         
         [self setFilteredAnnouncements:[self.announcements filteredArrayUsingPredicate:predicate]];
+        
+    // Otherwise, we want all announcements now
     } else {
         [self setFilteredAnnouncements:nil];
     }
