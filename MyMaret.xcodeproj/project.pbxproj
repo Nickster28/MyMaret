@@ -11,6 +11,7 @@
 		0113855317C1DA2500F8A965 /* AnnouncementCreationBodyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0113855217C1DA2500F8A965 /* AnnouncementCreationBodyViewController.m */; };
 		0125F75C17BB1C750042EB6F /* AnnouncementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125F75B17BB1C750042EB6F /* AnnouncementCell.m */; };
 		01271A1217C9CB2E003C487C /* MainMenuBackgroundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01271A1117C9CB2E003C487C /* MainMenuBackgroundView.xib */; };
+		013BB66E17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 013BB66D17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m */; };
 		016780DB17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */; };
 		016F9D7C17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F9D7B17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m */; };
 		0171AEC317A6244700F3284C /* AnnouncementsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */; };
@@ -72,6 +73,8 @@
 		0125F75A17BB1C750042EB6F /* AnnouncementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementCell.h; sourceTree = "<group>"; };
 		0125F75B17BB1C750042EB6F /* AnnouncementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementCell.m; sourceTree = "<group>"; };
 		01271A1117C9CB2E003C487C /* MainMenuBackgroundView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenuBackgroundView.xib; sourceTree = "<group>"; };
+		013BB66C17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+HasNetworkConnection.h"; sourceTree = "<group>"; };
+		013BB66D17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+HasNetworkConnection.m"; sourceTree = "<group>"; };
 		016780D917A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+iOSVersionChecker.h"; sourceTree = "<group>"; };
 		016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+iOSVersionChecker.m"; sourceTree = "<group>"; };
 		016F9D7A17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TwoWeeksAgo.h"; sourceTree = "<group>"; };
@@ -239,6 +242,8 @@
 				01A4FE3417B97C08007FAB5C /* UIColor+SchoolColor.m */,
 				016780D917A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.h */,
 				016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */,
+				013BB66C17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.h */,
+				013BB66D17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m */,
 				0177455017A60AC3001625BF /* MyMaret-Info.plist */,
 				0177455117A60AC3001625BF /* InfoPlist.strings */,
 				0177455417A60AC3001625BF /* main.m */,
@@ -475,6 +480,7 @@
 				01DAA6C317A70A6800B23BB2 /* AssignmentBookCollectionViewController.m in Sources */,
 				01BF139817A89A3B00731690 /* AnnouncementsStore.m in Sources */,
 				0177455F17A60AC3001625BF /* MainMenuViewController.m in Sources */,
+				013BB66E17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m in Sources */,
 				01BF13A017A89F7D00731690 /* Announcement.m in Sources */,
 				01DAA6BE17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */,
 				0125F75C17BB1C750042EB6F /* AnnouncementCell.m in Sources */,

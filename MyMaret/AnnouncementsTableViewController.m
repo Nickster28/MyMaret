@@ -79,7 +79,7 @@
     
     [[AnnouncementsStore sharedStore] fetchAnnouncementsWithCompletionBlock:^(NSUInteger numAdded, NSError *err) {
         if (err) {
-            UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Refresh Error"
+            UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Whoops!"
                                                          message:[err localizedDescription]
                                                         delegate:nil
                                                cancelButtonTitle:@"OK"

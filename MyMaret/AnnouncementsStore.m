@@ -11,6 +11,7 @@
 #import "Announcement.h"
 #import "NSDate+TwoWeeksAgo.h"
 #import <Parse/Parse.h>
+#import "UIApplication+HasNetworkConnection.h"
 
 
 @interface AnnouncementsStore() {
@@ -206,6 +207,21 @@ NSString * const MyMaretLastAnnouncementsUpdateKey = @"MyMaretLastAnnouncementsU
 
 - (void)fetchAnnouncementsWithCompletionBlock:(void (^)(NSUInteger, NSError *))completionBlock
 {
+    // If we're not connected to the internet, send an error back
+    if (![UIApplication hasNetworkConnection]) {
+        
+        // Make the error info dictionary
+        NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[@"Looks like you're not connected to the Internet.  Check your WiFi or Cellular connection and try refreshing again."]
+                                                         forKeys:@[NSLocalizedDescriptionKey]];
+                               
+        NSError *error = [NSError errorWithDomain:@"NSConnectionErrorDomain"
+                                             code:2012
+                                         userInfo:dict];
+        
+        completionBlock(0, error);
+        return;
+    }
+    
     // Query for announcements posted after we last checked for announcements
     PFQuery *query = [PFQuery queryWithClassName:@"Announcement"];
     [query whereKey:@"createdAt" greaterThan:[self lastAnnouncementsUpdate]];
