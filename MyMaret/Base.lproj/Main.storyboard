@@ -134,7 +134,7 @@
                                     <constraint firstAttribute="width" constant="300" id="c0f-xZ-Hzs"/>
                                     <constraint firstAttribute="height" constant="23" id="nZW-if-0C7"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
