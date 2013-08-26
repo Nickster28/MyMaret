@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString * const MyMaretIsFirstOpenKey;
+extern NSString * const MyMaretIsLoggedInKey;
+extern NSString * const MyMaretUserEmailKey;
+extern NSString * const MyMaretUserNameKey;
 extern NSString * const MyMaretNewAnnouncementNotification;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

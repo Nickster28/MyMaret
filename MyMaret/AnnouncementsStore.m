@@ -12,6 +12,7 @@
 #import "NSDate+TwoWeeksAgo.h"
 #import <Parse/Parse.h>
 #import "UIApplication+HasNetworkConnection.h"
+#import "AppDelegate.h"
 
 
 @interface AnnouncementsStore() {
@@ -263,7 +264,6 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
             
             completionBlock([objects count], nil);
         } else {
-            #warning Fix error message
             completionBlock(0, error);
         }
     }];
@@ -378,8 +378,8 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
     [newAnnouncement setObject:title forKey:@"title"];
     [newAnnouncement setObject:body forKey:@"body"];
     
-    #warning incomplete implementation
-    [newAnnouncement setObject:@"Nick" forKey:@"author"];
+    [newAnnouncement setObject:[[NSUserDefaults standardUserDefaults] stringForKey:MyMaretUserNameKey]
+                        forKey:@"author"];
     
     // Save it and execute the completion block
     [newAnnouncement saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

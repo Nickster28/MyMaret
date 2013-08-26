@@ -5,6 +5,61 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3734.1"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="q5x-WG-gTk">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="Z5g-X9-WQE" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gpJ-F3-iO9">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="uR0-SO-UTd" kind="relationship" relationship="rootViewController" id="N8P-p5-Bqc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g2T-j9-XfP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2150" y="-3657"/>
+        </scene>
+        <!--Login View Controller - Welcome to MyMaret-->
+        <scene sceneID="NDs-3v-hd0">
+            <objects>
+                <viewController id="uR0-SO-UTd" customClass="LoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Hgp-Kh-Y1K"/>
+                        <viewControllerLayoutGuide type="bottom" id="Tt3-dF-kJ1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="trO-TC-QzO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MyMaret" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qPi-Mw-4Xb">
+                                <rect key="frame" x="29" y="77" width="262" height="107"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="64"/>
+                                <color key="textColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y70-XP-NjS">
+                                <rect key="frame" x="121" y="337" width="78" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Log In">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showLoginScreen:" destination="uR0-SO-UTd" eventType="touchUpInside" id="Cs8-4t-uu6"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Welcome to MyMaret" id="bPA-EA-dNc"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rlk-AG-KDk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2792" y="-3657"/>
+        </scene>
         <!--Today View Controller - Today-->
         <scene sceneID="yJd-h3-9Qh">
             <objects>
@@ -29,6 +84,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Today" id="e54-ts-4mG"/>
+                    <connections>
+                        <segue destination="Z5g-X9-WQE" kind="modal" identifier="showLoginScreen" id="gRi-KV-8rN"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xi3-4m-A2E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

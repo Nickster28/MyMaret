@@ -10,16 +10,20 @@
 #import <Parse/Parse.h>
 #import "AnnouncementsStore.h"
 
-NSString * const MyMaretIsFirstOpenKey = @"MyMaretIsFirstOpenKey";
+NSString * const MyMaretIsLoggedInKey = @"MyMaretIsLoggedInKey";
+NSString * const MyMaretUserEmailKey = @"MyMaretUserEmailKey";
+NSString * const MyMaretUserNameKey = @"MyMaretUserNameKey";
 NSString * const MyMaretNewAnnouncementNotification = @"MyMaretNewAnnouncementNotification";
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    #warning Need to set MyMaretIsFirstOpenKey to no somewhere
-    NSDictionary *defaults = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:TRUE]
-                                                         forKey:MyMaretIsFirstOpenKey];
+    // Set the initial values for the user info keys
+    NSDictionary *defaults = @{MyMaretIsLoggedInKey: [NSNumber numberWithBool:NO],
+                               MyMaretUserEmailKey: @"",
+                               MyMaretUserNameKey: @""};
+    
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     
     // Set up Parse

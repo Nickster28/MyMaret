@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0107E01917CBC8E60099E4E4 /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 0107E01817CBC8E60099E4E4 /* GTMOAuth2Authentication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0107E01C17CBC9430099E4E4 /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 0107E01B17CBC9430099E4E4 /* GTMHTTPFetcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0107E02017CBC9940099E4E4 /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 0107E01F17CBC9940099E4E4 /* GTMOAuth2SignIn.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0107E02317CBE1840099E4E4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0107E02217CBE1840099E4E4 /* LoginViewController.m */; };
 		010BC6A517CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 010BC6A317CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		010BC6A617CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 010BC6A417CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib */; };
 		0113855017C1D97700F8A965 /* AnnouncementCreationTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0113854F17C1D97700F8A965 /* AnnouncementCreationTitleViewController.m */; };
@@ -68,6 +72,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0107E01717CBC8E60099E4E4 /* GTMOAuth2Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2Authentication.h; sourceTree = "<group>"; };
+		0107E01817CBC8E60099E4E4 /* GTMOAuth2Authentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2Authentication.m; sourceTree = "<group>"; };
+		0107E01A17CBC9430099E4E4 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetcher.h; sourceTree = "<group>"; };
+		0107E01B17CBC9430099E4E4 /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMHTTPFetcher.m; sourceTree = "<group>"; };
+		0107E01E17CBC9940099E4E4 /* GTMOAuth2SignIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2SignIn.h; sourceTree = "<group>"; };
+		0107E01F17CBC9940099E4E4 /* GTMOAuth2SignIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2SignIn.m; sourceTree = "<group>"; };
+		0107E02117CBE1840099E4E4 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = MyMaret/LoginViewController.h; sourceTree = SOURCE_ROOT; };
+		0107E02217CBE1840099E4E4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = MyMaret/LoginViewController.m; sourceTree = SOURCE_ROOT; };
 		010BC6A217CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2ViewControllerTouch.h; sourceTree = "<group>"; };
 		010BC6A317CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2ViewControllerTouch.m; sourceTree = "<group>"; };
 		010BC6A417CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
@@ -178,6 +190,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0107E01D17CBC9680099E4E4 /* Google Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				010BC6A217CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.h */,
+				010BC6A317CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.m */,
+				010BC6A417CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib */,
+				0107E01817CBC8E60099E4E4 /* GTMOAuth2Authentication.m */,
+				0107E01717CBC8E60099E4E4 /* GTMOAuth2Authentication.h */,
+				0107E01A17CBC9430099E4E4 /* GTMHTTPFetcher.h */,
+				0107E01B17CBC9430099E4E4 /* GTMHTTPFetcher.m */,
+				0107E01E17CBC9940099E4E4 /* GTMOAuth2SignIn.h */,
+				0107E01F17CBC9940099E4E4 /* GTMOAuth2SignIn.m */,
+			);
+			name = "Google Authentication";
+			sourceTree = "<group>";
+		};
 		0177453C17A60AC2001625BF = {
 			isa = PBXGroup;
 			children = (
@@ -241,9 +269,7 @@
 		0177454F17A60AC3001625BF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				010BC6A217CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.h */,
-				010BC6A317CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.m */,
-				010BC6A417CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib */,
+				0107E01D17CBC9680099E4E4 /* Google Authentication */,
 				016F9D7A17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.h */,
 				016F9D7B17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m */,
 				01A4FE3317B97C08007FAB5C /* UIColor+SchoolColor.h */,
@@ -270,6 +296,8 @@
 				01DAA6AF17A7041E00B23BB2 /* MyMaretFrontTableViewController.m */,
 				0177457E17A60B5E001625BF /* SWRevealViewController.h */,
 				0177457F17A60B5E001625BF /* SWRevealViewController.m */,
+				0107E02117CBE1840099E4E4 /* LoginViewController.h */,
+				0107E02217CBE1840099E4E4 /* LoginViewController.m */,
 			);
 			name = "Core View Controllers";
 			path = SWRevealViewController;
@@ -483,8 +511,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				01DAA6AB17A7031200B23BB2 /* TodayViewController.m in Sources */,
+				0107E02017CBC9940099E4E4 /* GTMOAuth2SignIn.m in Sources */,
 				01A4FE3517B97C08007FAB5C /* UIColor+SchoolColor.m in Sources */,
 				0113855317C1DA2500F8A965 /* AnnouncementCreationBodyViewController.m in Sources */,
+				0107E02317CBE1840099E4E4 /* LoginViewController.m in Sources */,
 				016F9D7C17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m in Sources */,
 				01DAA6C317A70A6800B23BB2 /* AssignmentBookCollectionViewController.m in Sources */,
 				01BF139817A89A3B00731690 /* AnnouncementsStore.m in Sources */,
@@ -504,7 +534,9 @@
 				01BF139C17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld in Sources */,
 				0177455517A60AC3001625BF /* main.m in Sources */,
 				01DAA6B917A70A1B00B23BB2 /* NewspaperTableViewController.m in Sources */,
+				0107E01917CBC8E60099E4E4 /* GTMOAuth2Authentication.m in Sources */,
 				016780DB17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */,
+				0107E01C17CBC9430099E4E4 /* GTMHTTPFetcher.m in Sources */,
 				0177458017A60B5E001625BF /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
