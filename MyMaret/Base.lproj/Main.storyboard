@@ -342,10 +342,15 @@
         <!--Navigation Controller-->
         <scene sceneID="0V8-yz-e6V">
             <objects>
-                <navigationController definesPresentationContext="YES" id="etN-C7-pTG" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" toolbarHidden="NO" id="etN-C7-pTG" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4vW-Xz-qKr">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="yzM-qw-1Lz">
+                        <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                    </toolbar>
                     <connections>
                         <segue destination="Seq-rs-83b" kind="relationship" relationship="rootViewController" id="Kiv-rd-UOq"/>
                     </connections>
@@ -365,9 +370,36 @@
                     <view key="view" contentMode="scaleToFill" id="hT5-f8-whX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rA5-tD-F3O">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Seq-rs-83b" id="ecd-ES-yNJ"/>
+                                </connections>
+                            </webView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="QLP-gM-6PJ">
+                                <rect key="frame" x="150" y="230" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="t7d-G2-G7t"/>
+                        <barButtonItem title="Item" style="plain" id="2sK-rm-wgt">
+                            <color key="tintColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="WCy-1g-mfk"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Calendar" id="hxt-Z1-wGc"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="QLP-gM-6PJ" id="b77-SK-jiI"/>
+                        <outlet property="bottomToolbarButton" destination="2sK-rm-wgt" id="0Au-Ys-9EF"/>
+                        <outlet property="calendarWebView" destination="rA5-tD-F3O" id="9qz-9R-iA4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fLV-Lo-tu0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
