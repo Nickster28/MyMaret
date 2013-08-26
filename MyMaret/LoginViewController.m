@@ -37,7 +37,31 @@ NSString * const schoolDomain = @"maret.org";
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+
+    [self.loginButton.layer setOpacity:0.0];
+    [self.mymaretTitle.layer setOpacity:0.0];
 }
+
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    //Fade in the title and login button
+    CABasicAnimation *fadeAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    
+    [fadeAnimation setDuration:1.0];
+    [fadeAnimation setFromValue:[NSNumber numberWithFloat:0.0]];
+    [fadeAnimation setToValue:[NSNumber numberWithFloat:1.0]];
+    
+    // Set the real opacities
+    [self.loginButton.layer setOpacity:1.0];
+    [self.mymaretTitle.layer setOpacity:1.0];
+    
+    [self.loginButton.layer addAnimation:fadeAnimation forKey:@"fade"];
+    [self.mymaretTitle.layer addAnimation:fadeAnimation forKey:@"fade"];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -57,6 +81,8 @@ NSString * const schoolDomain = @"maret.org";
     [av show];
 }
 
+
+#pragma mark Google Login and Authentication
 
 - (IBAction)showLoginScreen:(id)sender
 {
@@ -81,8 +107,7 @@ NSString * const schoolDomain = @"maret.org";
                                                                 delegate:self
                                                         finishedSelector:@selector(viewController:finishedWithAuth:error:)];
     
-    [[self navigationController] pushViewController:viewController
-                                           animated:YES];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 
@@ -140,6 +165,36 @@ NSString * const schoolDomain = @"maret.org";
 }
 
 
+- (void)setUserInfo:(NSDictionary *)userInfoDictionary
+{
+    // JSON KEYS:
+    // email_verified -> boolean
+    // email -> string
+    // sub -> string
+    // hd -> string
+    NSString *domain = [userInfoDictionary objectForKey:@"hd"];
+    if (![domain isEqualToString:schoolDomain]) {
+        
+        // Only allow Maret students and teachers to log in
+        [self showAlertWithTitle:@"Sorry"
+                         message:@"In order to use MyMaret you have to log in with a Maret username and password.  Please try again."];
+    } else {
+        // Store the user's info and mark them as logged in
+        NSString *userEmail = [userInfoDictionary objectForKey:@"email"];
+        [[NSUserDefaults standardUserDefaults] setObject:userEmail
+                                                  forKey:MyMaretUserEmailKey];
+        [[NSUserDefaults standardUserDefaults] setBool:YES
+                                                forKey:MyMaretIsLoggedInKey];
+        
+        // Go to the welcome screen
+        [self performSegueWithIdentifier:@"showWelcomeScreen"
+                                  sender:self];
+    }
+}
+
+
+#pragma mark NSURLConnectionDataDelegate
+
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     // Add the incoming data to our JSONData object
@@ -166,33 +221,6 @@ NSString * const schoolDomain = @"maret.org";
     [self setJSONData:nil];
     
     [self showAlertWithTitle:@"Whoops!" message:@"Looks like we couldn't authenticate with Google.  Try logging in again."];
-}
-
-
-- (void)setUserInfo:(NSDictionary *)userInfoDictionary
-{
-    // JSON KEYS:
-    // email_verified -> boolean
-    // email -> string
-    // sub -> string
-    // hd -> string
-    NSString *domain = [userInfoDictionary objectForKey:@"hd"];
-    if (![domain isEqualToString:schoolDomain]) {
-        
-        // Only allow Maret students and teachers to log in
-        [self showAlertWithTitle:@"Sorry"
-                         message:@"In order to use MyMaret you have to log in with a Maret username and password.  Please try again."];
-    } else {
-        // Store the user's info and mark them as logged in
-        NSString *userEmail = [userInfoDictionary objectForKey:@"email"];
-        [[NSUserDefaults standardUserDefaults] setObject:userEmail
-                                                  forKey:MyMaretUserEmailKey];
-        [[NSUserDefaults standardUserDefaults] setBool:YES
-                                                forKey:MyMaretIsLoggedInKey];
-        
-        [[self presentingViewController] dismissViewControllerAnimated:YES
-                                                            completion:nil];
-    }
 }
 
 @end

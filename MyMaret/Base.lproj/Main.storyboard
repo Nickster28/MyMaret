@@ -14,7 +14,7 @@
                         <color key="tintColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="uR0-SO-UTd" kind="relationship" relationship="rootViewController" id="N8P-p5-Bqc"/>
+                        <segue destination="puK-va-Ick" kind="relationship" relationship="rootViewController" id="5P9-Nc-6ch"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g2T-j9-XfP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -22,43 +22,84 @@
             <point key="canvasLocation" x="2150" y="-3657"/>
         </scene>
         <!--Login View Controller - Welcome to MyMaret-->
-        <scene sceneID="NDs-3v-hd0">
+        <scene sceneID="WqJ-0l-RyP">
             <objects>
-                <viewController id="uR0-SO-UTd" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController id="puK-va-Ick" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Hgp-Kh-Y1K"/>
-                        <viewControllerLayoutGuide type="bottom" id="Tt3-dF-kJ1"/>
+                        <viewControllerLayoutGuide type="top" id="qRT-Pm-4eR"/>
+                        <viewControllerLayoutGuide type="bottom" id="MPU-GZ-8g6"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="trO-TC-QzO">
+                    <view key="view" contentMode="scaleToFill" id="eXQ-Gg-Y4d">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MyMaret" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qPi-Mw-4Xb">
-                                <rect key="frame" x="29" y="77" width="262" height="107"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MyMaret" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2NU-3U-Id3">
+                                <rect key="frame" x="29" y="94" width="262" height="95"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="64"/>
                                 <color key="textColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y70-XP-NjS">
-                                <rect key="frame" x="121" y="337" width="78" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wkB-vB-dD2">
+                                <rect key="frame" x="122" y="328" width="77" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Log In">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="showLoginScreen:" destination="uR0-SO-UTd" eventType="touchUpInside" id="Cs8-4t-uu6"/>
+                                    <action selector="showLoginScreen:" destination="puK-va-Ick" eventType="touchUpInside" id="Xzc-pV-ptX"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Welcome to MyMaret" id="bPA-EA-dNc"/>
+                    <navigationItem key="navigationItem" title="Welcome to MyMaret" id="Syr-Os-Mbq"/>
+                    <connections>
+                        <outlet property="loginButton" destination="wkB-vB-dD2" id="CjJ-8T-bG0"/>
+                        <outlet property="mymaretTitle" destination="2NU-3U-Id3" id="cHy-Sg-44d"/>
+                        <segue destination="AZa-e7-umb" kind="push" identifier="showWelcomeScreen" id="Lf9-Gf-1wx"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Rlk-AG-KDk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5v-nn-ouh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2792" y="-3657"/>
+            <point key="canvasLocation" x="2538" y="-3657"/>
+        </scene>
+        <!--Welcome View Controller - Tour-->
+        <scene sceneID="uOY-0J-cZ9">
+            <objects>
+                <viewController id="AZa-e7-umb" customClass="WelcomeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1MF-aE-d5C"/>
+                        <viewControllerLayoutGuide type="bottom" id="3in-Pv-aip"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Uh2-VI-3hM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zbr-dc-Efp">
+                                <rect key="frame" x="121" y="209" width="78" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Tour" id="bYe-Iu-9QO">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="D0q-gM-XW8">
+                            <connections>
+                                <action selector="dismissWelcomeScreen:" destination="AZa-e7-umb" id="ItA-7w-QCW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="doneButton" destination="D0q-gM-XW8" id="WCH-fo-jAN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="peB-s6-qKu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2922" y="-3657"/>
         </scene>
         <!--Today View Controller - Today-->
         <scene sceneID="yJd-h3-9Qh">
@@ -85,7 +126,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Today" id="e54-ts-4mG"/>
                     <connections>
-                        <segue destination="Z5g-X9-WQE" kind="modal" identifier="showLoginScreen" id="gRi-KV-8rN"/>
+                        <segue destination="Z5g-X9-WQE" kind="modal" identifier="showLoginScreen" id="qiH-yY-aX7"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xi3-4m-A2E" userLabel="First Responder" sceneMemberID="firstResponder"/>

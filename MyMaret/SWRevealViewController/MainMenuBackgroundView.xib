@@ -35,6 +35,6 @@
         </view>
     </objects>
     <resources>
-        <image name="DrawerMenuBackground" width="320" height="568"/>
+        <image name="DrawerMenuBackground" width="320" height="480"/>
     </resources>
 </document>
