@@ -703,7 +703,7 @@ static Class gSignInClass = Nil;
 
   if (!isViewShown_) {
     isViewShown_ = YES;
-    if ([self isNavigationBarTranslucent]) {
+    if ([self isNavigationBarTranslucent] && [UIApplication isPrevIOS]) {
       [self moveWebViewFromUnderNavigationBar];
     }
     if (![signIn_ startSigningIn]) {

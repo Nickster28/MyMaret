@@ -65,7 +65,7 @@
             </objects>
             <point key="canvasLocation" x="2538" y="-3657"/>
         </scene>
-        <!--Welcome View Controller - Tour-->
+        <!--Welcome View Controller-->
         <scene sceneID="uOY-0J-cZ9">
             <objects>
                 <viewController id="AZa-e7-umb" customClass="WelcomeViewController" sceneMemberID="viewController">
@@ -83,18 +83,22 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N0L-q8-6R2">
+                                <rect key="frame" x="74" y="329" width="173" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Start Using MyMaret">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissWelcomeScreen:" destination="AZa-e7-umb" eventType="touchUpInside" id="dDA-nT-wYt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Tour" id="bYe-Iu-9QO">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="D0q-gM-XW8">
-                            <connections>
-                                <action selector="dismissWelcomeScreen:" destination="AZa-e7-umb" id="ItA-7w-QCW"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="bYe-Iu-9QO"/>
                     <connections>
-                        <outlet property="doneButton" destination="D0q-gM-XW8" id="WCH-fo-jAN"/>
+                        <outlet property="doneButton" destination="N0L-q8-6R2" id="z0S-ka-cbN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="peB-s6-qKu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -159,7 +163,7 @@
                         <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="02V-8a-Rap"/>
                         <barButtonItem title="New Announcement" width="280" id="z9v-rH-mO6">
                             <connections>
-                                <segue destination="5SZ-X8-Io7" kind="modal" id="pWq-W5-nQ1"/>
+                                <segue destination="5SZ-X8-Io7" kind="modal" modalTransitionStyle="crossDissolve" id="pWq-W5-nQ1"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="FvY-7n-IaZ"/>
@@ -478,13 +482,17 @@
                                     <outlet property="delegate" destination="Seq-rs-83b" id="ecd-ES-yNJ"/>
                                 </connections>
                             </webView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="QLP-gM-6PJ">
-                                <rect key="frame" x="150" y="230" width="20" height="20"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="QLP-gM-6PJ">
+                                <rect key="frame" x="142" y="222" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="QLP-gM-6PJ" secondAttribute="centerX" id="Onq-t5-how"/>
+                            <constraint firstAttribute="centerY" secondItem="QLP-gM-6PJ" secondAttribute="centerY" id="qD0-By-7Nm"/>
+                        </constraints>
                     </view>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="t7d-G2-G7t"/>

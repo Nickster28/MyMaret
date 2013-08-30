@@ -5,14 +5,14 @@
       "idiom" : "iphone",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "iPhoneSplash@2x.png",
+      "filename" : "Splash3,5retina.png",
       "scale" : "2x"
     },
     {
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "retina4",
-      "filename" : "iPhoneSpash1136.png",
+      "filename" : "Splash4.png",
       "minimum-system-version" : "7.0",
       "orientation" : "portrait",
       "scale" : "2x"
@@ -21,21 +21,21 @@
       "orientation" : "portrait",
       "idiom" : "iphone",
       "extent" : "full-screen",
-      "filename" : "iPhoneSplash.png",
+      "filename" : "Splash3,5.png",
       "scale" : "1x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
       "extent" : "full-screen",
-      "filename" : "iPhoneSplash@2x-1.png",
+      "filename" : "Splash3,5retina-1.png",
       "scale" : "2x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
       "extent" : "full-screen",
-      "filename" : "iPhoneSpash1136-1.png",
+      "filename" : "Splash4-1.png",
       "subtype" : "retina4",
       "scale" : "2x"
     }
