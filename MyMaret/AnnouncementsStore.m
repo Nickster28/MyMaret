@@ -235,8 +235,8 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
     if (![UIApplication hasNetworkConnection]) {
         
         // Make the error info dictionary
-        NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[@"Looks like you're not connected to the Internet.  Check your WiFi or Cellular connection and try refreshing again."]
-                                                         forKeys:@[NSLocalizedDescriptionKey]];
+        NSDictionary *dict = [NSDictionary dictionaryWithObject:@"Looks like you're not connected to the Internet.  Check your WiFi or Cellular connection and try refreshing again."
+                                                         forKey:NSLocalizedDescriptionKey];
                                
         NSError *error = [NSError errorWithDomain:@"NSConnectionErrorDomain"
                                              code:2012
@@ -245,6 +245,44 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
         completionBlock(0, error);
         return;
     }
+    
+    
+    // If the user hasn't yet connected to Parse to sync with his/her "Person" object,
+    // do that now
+    if ([[[NSUserDefaults standardUserDefaults] stringForKey:MyMaretUserNameKey] isEqualToString:@""]) {
+        
+        // Query for the "Person" object for this user
+        PFQuery *query = [PFQuery queryWithClassName:@"Person"];
+        [query whereKey:@"emailAddress" equalTo:[[NSUserDefaults standardUserDefaults] stringForKey:MyMaretUserEmailKey]];
+        
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            
+            // Save their name in NSUserDefaults and update their Person object in Parse
+            if (!error) {
+                NSString *userFullName = [NSString stringWithFormat:@"%@ %@",
+                                          [object objectForKey:@"firstName"],
+                                          [object objectForKey:@"lastName"]];
+                
+                [[NSUserDefaults standardUserDefaults] setObject:userFullName
+                                                          forKey:MyMaretUserNameKey];
+                
+                
+                // Update the object so the user won't receive email (since they have the app)
+                [object setObject: [NSNumber numberWithBool:NO] forKey:@"shouldReceiveEmail"];
+                [object saveInBackground];
+            } else {
+                NSDictionary *dict = [NSDictionary dictionaryWithObject:@"Sorry, there was an error fetching your user profile from our server.  Unfortunately, we need to download your profile before you can start posting announcements.  Double check that you're connected to the internet and try again." forKey:NSLocalizedDescriptionKey];
+                
+                NSError *error = [NSError errorWithDomain:@"NSConnectionErrorDomain"
+                                                     code:2012
+                                                 userInfo:dict];
+                
+                completionBlock(0, error);
+                return;
+            }
+        }];
+    }
+    
     
     // Query for announcements posted after we last checked for announcements
     PFQuery *query = [PFQuery queryWithClassName:@"Announcement"];
