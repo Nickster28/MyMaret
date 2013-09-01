@@ -109,7 +109,7 @@
         
         // If we need to, jump right to the newest announcement added (if the user
         // tapped on a push notification, for example)
-        if (self.shouldDisplayNewestAnnouncement) {
+        if ([[self shouldDisplayNewestAnnouncement] boolValue]) {
             [self setShouldDisplayNewestAnnouncement:[NSNumber numberWithBool:NO]];
             [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         }

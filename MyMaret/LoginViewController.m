@@ -46,7 +46,7 @@
 - (IBAction)showLoginScreen:(id)sender
 {
     if (![UIApplication hasNetworkConnection]) {
-        NSString *errorMsg = @"Looks like you're not connected to the Internet.  You'll need an Internet connection to log in.  Make sure your WiFi or Cellular connection is on and try again.";
+        NSString *errorMsg = @"Looks like you're not connected to the Internet.  You'll need an Internet connection to log in.  Make sure your WiFi or Cellular connection is on, quit out and relaunch MyMaret, and try again.";
         
         UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Whoops!"
                                                      message:errorMsg

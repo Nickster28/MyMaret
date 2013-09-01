@@ -47,6 +47,14 @@ NSString * const MyMaretCalendarPrefKey = @"MyMaretCalendarPrefKey";
 }
 
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self setUpSegmentedControl];
+}
+
+
 
 - (void)setUpSegmentedControl
 {
