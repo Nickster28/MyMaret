@@ -7,6 +7,7 @@
 //
 
 #import "MyMaretFrontTableViewController.h"
+#import <UIKit/UIKit.h>
 
 @interface ClassScheduleTableViewController : MyMaretFrontTableViewController
 

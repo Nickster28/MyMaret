@@ -1,18 +1,23 @@
 //
-//  MyMaretFrontTableViewController.m
+//  MyMaretFrontViewController.m
 //  MyMaret
 //
-//  Created by Nick Troccoli on 7/29/13.
+//  Created by Nick Troccoli on 8/31/13.
 //  Copyright (c) 2013 Nick. All rights reserved.
 //
 
-#import "MyMaretFrontTableViewController.h"
+#import "MyMaretFrontViewController.h"
 #import "UIColor+SchoolColor.h"
 #import "UIApplication+iOSVersionChecker.h"
 #import "AppDelegate.h"
 #import "MainMenuViewController.h"
 
-@implementation MyMaretFrontTableViewController
+@interface MyMaretFrontViewController ()
+
+@end
+
+@implementation MyMaretFrontViewController
+
 
 
 - (void)awakeFromNib
@@ -106,5 +111,6 @@
         [self.view setUserInteractionEnabled:NO];
     }
 }
+
 
 @end

@@ -28,15 +28,25 @@
 
 #import "GTMOAuth2SignIn.h"
 #import "GTMOAuth2Authentication.h"
+#import "AppDelegate.h"
+#import "UIApplication+iOSVersionChecker.h"
+#import "WelcomeViewController.h"
+#import <Parse/Parse.h>
 
 NSString *const kGTMOAuth2KeychainErrorDomain = @"com.google.GTMOAuthKeychain";
+
+// The school domain to compare with logged in user's domains
+NSString * const schoolDomain = @"maret.org";
 
 static NSString * const kGTMOAuth2AccountName = @"OAuth";
 static GTMOAuth2Keychain* sDefaultKeychain = nil;
 
-@interface GTMOAuth2ViewControllerTouch()
+@interface GTMOAuth2ViewControllerTouch() <NSURLConnectionDataDelegate>
 
 @property (nonatomic, copy) NSURLRequest *request;
+
+// The data returned from Google with the user info
+@property (nonatomic, strong) NSMutableData *JSONData;
 
 - (void)signIn:(GTMOAuth2SignIn *)signIn displayRequest:(NSURLRequest *)request;
 - (void)signIn:(GTMOAuth2SignIn *)signIn
@@ -57,7 +67,8 @@ finishedWithAuth:(GTMOAuth2Authentication *)auth
             navButtonsView = navButtonsView_,
             rightBarButtonItem = rightBarButtonItem_,
             webView = webView_,
-            initialActivityIndicator = initialActivityIndicator_;
+            initialActivityIndicator = initialActivityIndicator_,
+            JSONData = JSONData_;
 
 @synthesize keychainItemName = keychainItemName_,
             keychainItemAccessibility = keychainItemAccessibility_,
@@ -622,7 +633,7 @@ static Class gSignInClass = Nil;
     }
   } else {
     // request was nil.
-    [self popView];
+    //[self popView];
   }
 }
 
@@ -649,7 +660,7 @@ static Class gSignInClass = Nil;
       }
     }
 
-    if (delegate_ && finishedSelector_) {
+    /*if (delegate_ && finishedSelector_) {
       SEL sel = finishedSelector_;
       NSMethodSignature *sig = [delegate_ methodSignatureForSelector:sel];
       NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig];
@@ -659,7 +670,31 @@ static Class gSignInClass = Nil;
       [invocation setArgument:&auth atIndex:3];
       [invocation setArgument:&error atIndex:4];
       [invocation invoke];
+    }*/
+      
+      
+    // If the user completed login and there is an error
+    if (error != nil && [error code] != -1000) {
+        
+        [self popView];
+        
+        NSString *errorMessage = [NSString stringWithFormat:@"Hold up!  Looks like Google couldn't verify your login info.  Try logging in again.  Error: %@", [error localizedDescription]];
+          
+        [self showAlertWithTitle:@"Whoops!" message:errorMessage];
+          
+    // If the user didn't complete login
+    } else if (error != nil) {
+        
+        NSString *errorMessage = @"In order to use MyMaret, you need to log in with your Maret username and password.  That way we can identify you and only give you access to Maret information if you are a Maret student or teacher.";
+          
+        [self showAlertWithTitle:@"Please Log In" message:errorMessage];
+          
+    } else {
+        // Now check to see if the user is a school user
+        // if so, store the user's info
+        [self setUserInfo:auth.userEmail];
     }
+      
 
     [delegate_ autorelease];
     delegate_ = nil;
@@ -675,6 +710,83 @@ static Class gSignInClass = Nil;
 #endif
   }
 }
+
+
+
+#pragma mark Nick's added methods
+/********* NICK'S ADDED CODE START **************/
+
+// Generic method to show an alert view with a given title and message
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message
+{
+    UIAlertView *av = [[[UIAlertView alloc] initWithTitle:title
+                                                 message:message
+                                                delegate:nil
+                                       cancelButtonTitle:@"OK"
+                                       otherButtonTitles:nil] autorelease];
+    [av show];
+}
+
+
+- (void)setUserInfo:(NSString *)emailAddr
+{
+    NSUInteger domainStart = [emailAddr rangeOfString:@"@"].location + 1;
+    NSString *domain = [emailAddr substringFromIndex:domainStart];
+    if (![domain isEqualToString:schoolDomain]) {
+        
+        [self popView];
+        
+        // Only allow Maret students and teachers to log in
+        [self showAlertWithTitle:@"Sorry"
+                         message:@"In order to use MyMaret you have to log in with a Maret username and password.  Please try again."];
+    } else {
+        // Store the user's info and mark them as logged in
+        [[NSUserDefaults standardUserDefaults] setObject:emailAddr
+                                                  forKey:MyMaretUserEmailKey];
+        [[NSUserDefaults standardUserDefaults] setBool:YES
+                                                forKey:MyMaretIsLoggedInKey];
+        
+        // Set up Parse
+        [Parse setApplicationId:@"9HFg8b0VNdu68bNj0XGW4zhQS2JJuJyeV8DlCFge"
+                      clientKey:@"LsKBiPVVNUD8QxTWTr4QI4OJvIy92mWaknqYlsns"];
+        
+        // Register for push notifications
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+        
+        
+        // Query for the "Person" object for this user
+        PFQuery *query = [PFQuery queryWithClassName:@"Person"];
+        [query whereKey:@"emailAddress" equalTo:emailAddr];
+        
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            
+            // Save their name in NSUserDefaults and update their Person object in Parse
+            if (!error) {
+                NSString *userFullName = [NSString stringWithFormat:@"%@ %@",
+                                          [object objectForKey:@"firstName"],
+                                          [object objectForKey:@"lastName"]];
+                
+                [[NSUserDefaults standardUserDefaults] setObject:userFullName
+                                                          forKey:MyMaretUserNameKey];
+                
+                
+                // Update the object so the user won't receive email (since they have the app)
+                [object setObject: [NSNumber numberWithBool:NO] forKey:@"shouldReceiveEmail"];
+                [object saveInBackground];
+            }
+        }];
+        
+        // Go to the welcome screen
+        WelcomeViewController *welcomeVC = [[WelcomeViewController alloc] init];
+        [self.navigationController pushViewController:welcomeVC animated:YES];
+    }
+}
+
+
+
+/**************** NICK'S ADDED CODE END ******************/
+
+
 
 - (void)moveWebViewFromUnderNavigationBar {
   CGRect dontCare;
@@ -774,8 +886,8 @@ static Class gSignInClass = Nil;
 }
 
 - (void)updateUI {
-  [backButton_ setEnabled:[[self webView] canGoBack]];
-  [forwardButton_ setEnabled:[[self webView] canGoForward]];
+  //[backButton_ setEnabled:[[self webView] canGoBack]];
+  //[forwardButton_ setEnabled:[[self webView] canGoForward]];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {

@@ -13,9 +13,14 @@
 #import "AnnouncementCell.h"
 #import "AnnouncementDetailViewController.h"
 #import "AppDelegate.h"
-
+#import "UIApplication+iOSVersionChecker.h"
 
 @interface AnnouncementsTableViewController () <UISearchDisplayDelegate>
+
+// Boolean to keep track of whether it should display the newest announcement
+// upon finishing update (we want this to happen when the user launches the app
+// by tapping on a New Announcement push notification)
+@property (nonatomic, strong) NSNumber *shouldDisplayNewestAnnouncement;
 
 @end
 
@@ -24,20 +29,12 @@
 
 - (void)awakeFromNib
 {
-    // Register for the new announcement notification
-    // to have the table refresh when a notification comes in
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refreshAnnouncements)
                                                  name:MyMaretNewAnnouncementNotification
                                                object:nil];
 }
 
-
-- (void)dealloc
-{
-    // Remove ourselves from NSNotificationCenter
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
 - (void)viewDidLoad
 {
@@ -63,6 +60,10 @@
     [super viewDidAppear:animated];
     
     [self.navigationController setToolbarHidden:NO animated:YES];
+    
+    if ([self.shouldDisplayNewestAnnouncement boolValue]) {
+        [self refreshAnnouncements];
+    }
 }
 
 
@@ -70,6 +71,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)reloadWhenShown
+{
+    [self setShouldDisplayNewestAnnouncement:[NSNumber numberWithBool:YES]];
 }
 
 
@@ -99,6 +106,13 @@
         }
         
         [self.refreshControl endRefreshing];
+        
+        // If we need to, jump right to the newest announcement added (if the user
+        // tapped on a push notification, for example)
+        if (self.shouldDisplayNewestAnnouncement) {
+            [self setShouldDisplayNewestAnnouncement:[NSNumber numberWithBool:NO]];
+            [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        }
     }];
 }
 
@@ -188,6 +202,13 @@
 #pragma mark Search Display Delegate
 
 
+- (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
+{
+    // Hide the "Post Announcement" button
+    [self.navigationController setToolbarHidden:YES animated:NO];
+}
+
+
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller
 shouldReloadTableForSearchString:(NSString *)searchString
 {
@@ -204,6 +225,9 @@ shouldReloadTableForSearchString:(NSString *)searchString
     // Set the filter string to nil so the AnnouncementsStore knows
     // we're done searching and want info about ALL announcements now
     [[AnnouncementsStore sharedStore] setSearchFilterString:nil];
+    
+    // Show the "Post Announcement" button
+    [self.navigationController setToolbarHidden:NO animated:YES];
     
     [self.tableView reloadData];
 }

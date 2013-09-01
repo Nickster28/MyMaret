@@ -8,6 +8,8 @@
 
 #import "MainMenuViewController.h"
 #import "SWRevealViewController.h"
+#import "UIApplication+iOSVersionChecker.h"
+#import "PushNotificationUpdateable.h"
 
 
 @interface MainMenuViewController ()
@@ -16,11 +18,10 @@
     IBOutlet UIView *mainMenuBackgroundView;
 }
 
-@property (nonatomic, strong) NSIndexPath *selectedIndexPath;
+
 @end
 
 @implementation MainMenuViewController
-@synthesize selectedIndexPath = _selectedIndexPath;
 
 - (void)viewDidLoad
 {
@@ -91,6 +92,17 @@
             [self.revealViewController setFrontViewController:destinationVC];
             [self.revealViewController setFrontViewPosition:FrontViewPositionLeft animated:YES];
         }];
+    }
+    
+    // If a UITableViewCell didn't trigger the segue, then another
+    // view controller did, telling us that a push notification was tapped
+    // and we should jump right to the content that was updated
+    if (![sender isKindOfClass:[UITableViewCell class]]) {
+        
+        UIViewController<PushNotificationUpdateable> *destinationVC = [[segue.destinationViewController viewControllers]objectAtIndex:0];
+        
+        // Tell the destination view controller that it should update its content
+        [destinationVC reloadWhenShown];
     }
 }
 

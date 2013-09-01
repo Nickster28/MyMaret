@@ -16,10 +16,13 @@
 		010BC6A617CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 010BC6A417CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib */; };
 		0113855017C1D97700F8A965 /* AnnouncementCreationTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0113854F17C1D97700F8A965 /* AnnouncementCreationTitleViewController.m */; };
 		0113855317C1DA2500F8A965 /* AnnouncementCreationBodyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0113855217C1DA2500F8A965 /* AnnouncementCreationBodyViewController.m */; };
+		0124412617D056260091C01E /* WelcomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0124412517D056260091C01E /* WelcomeView.xib */; };
 		0125F75C17BB1C750042EB6F /* AnnouncementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125F75B17BB1C750042EB6F /* AnnouncementCell.m */; };
 		01271A1217C9CB2E003C487C /* MainMenuBackgroundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01271A1117C9CB2E003C487C /* MainMenuBackgroundView.xib */; };
 		013BB66E17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 013BB66D17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m */; };
 		016780DB17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */; };
+		0169749417D2D38900973B1B /* MyMaretFrontViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169749317D2D38900973B1B /* MyMaretFrontViewController.m */; };
+		0169749717D2D49800973B1B /* MyMaretFrontCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169749617D2D49800973B1B /* MyMaretFrontCollectionViewController.m */; };
 		016F9D7C17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F9D7B17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m */; };
 		0171AEC317A6244700F3284C /* AnnouncementsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */; };
 		0177454917A60AC3001625BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454817A60AC3001625BF /* Foundation.framework */; };
@@ -90,6 +93,7 @@
 		0113854F17C1D97700F8A965 /* AnnouncementCreationTitleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementCreationTitleViewController.m; sourceTree = "<group>"; };
 		0113855117C1DA2500F8A965 /* AnnouncementCreationBodyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementCreationBodyViewController.h; sourceTree = "<group>"; };
 		0113855217C1DA2500F8A965 /* AnnouncementCreationBodyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementCreationBodyViewController.m; sourceTree = "<group>"; };
+		0124412517D056260091C01E /* WelcomeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WelcomeView.xib; path = MyMaret/WelcomeView.xib; sourceTree = SOURCE_ROOT; };
 		0125F75A17BB1C750042EB6F /* AnnouncementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementCell.h; sourceTree = "<group>"; };
 		0125F75B17BB1C750042EB6F /* AnnouncementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementCell.m; sourceTree = "<group>"; };
 		01271A1117C9CB2E003C487C /* MainMenuBackgroundView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenuBackgroundView.xib; sourceTree = "<group>"; };
@@ -97,6 +101,11 @@
 		013BB66D17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+HasNetworkConnection.m"; sourceTree = "<group>"; };
 		016780D917A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+iOSVersionChecker.h"; sourceTree = "<group>"; };
 		016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+iOSVersionChecker.m"; sourceTree = "<group>"; };
+		0169749217D2D38900973B1B /* MyMaretFrontViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMaretFrontViewController.h; sourceTree = "<group>"; };
+		0169749317D2D38900973B1B /* MyMaretFrontViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMaretFrontViewController.m; sourceTree = "<group>"; };
+		0169749517D2D49800973B1B /* MyMaretFrontCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyMaretFrontCollectionViewController.h; path = MyMaret/MyMaretFrontCollectionViewController.h; sourceTree = SOURCE_ROOT; };
+		0169749617D2D49800973B1B /* MyMaretFrontCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyMaretFrontCollectionViewController.m; path = MyMaret/MyMaretFrontCollectionViewController.m; sourceTree = SOURCE_ROOT; };
+		0169749817D2D70000973B1B /* PushNotificationUpdateable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushNotificationUpdateable.h; sourceTree = "<group>"; };
 		016F9D7A17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TwoWeeksAgo.h"; sourceTree = "<group>"; };
 		016F9D7B17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TwoWeeksAgo.m"; sourceTree = "<group>"; };
 		0171AEC117A6244700F3284C /* AnnouncementsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementsTableViewController.h; sourceTree = "<group>"; };
@@ -281,6 +290,7 @@
 				016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */,
 				013BB66C17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.h */,
 				013BB66D17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m */,
+				0169749817D2D70000973B1B /* PushNotificationUpdateable.h */,
 				0177455017A60AC3001625BF /* MyMaret-Info.plist */,
 				0177455117A60AC3001625BF /* InfoPlist.strings */,
 				0177455417A60AC3001625BF /* main.m */,
@@ -297,12 +307,17 @@
 				01271A1117C9CB2E003C487C /* MainMenuBackgroundView.xib */,
 				01DAA6AE17A7041E00B23BB2 /* MyMaretFrontTableViewController.h */,
 				01DAA6AF17A7041E00B23BB2 /* MyMaretFrontTableViewController.m */,
+				0169749217D2D38900973B1B /* MyMaretFrontViewController.h */,
+				0169749317D2D38900973B1B /* MyMaretFrontViewController.m */,
+				0169749517D2D49800973B1B /* MyMaretFrontCollectionViewController.h */,
+				0169749617D2D49800973B1B /* MyMaretFrontCollectionViewController.m */,
 				0177457E17A60B5E001625BF /* SWRevealViewController.h */,
 				0177457F17A60B5E001625BF /* SWRevealViewController.m */,
 				0107E02117CBE1840099E4E4 /* LoginViewController.h */,
 				0107E02217CBE1840099E4E4 /* LoginViewController.m */,
 				0107E02817CC13D40099E4E4 /* WelcomeViewController.h */,
 				0107E02917CC13D40099E4E4 /* WelcomeViewController.m */,
+				0124412517D056260091C01E /* WelcomeView.xib */,
 			);
 			name = "Core View Controllers";
 			path = SWRevealViewController;
@@ -494,6 +509,7 @@
 				010BC6A617CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib in Resources */,
 				01BD435C17C9BB22005EF174 /* AnnouncementCell.xib in Resources */,
 				0177456117A60AC3001625BF /* Images.xcassets in Resources */,
+				0124412617D056260091C01E /* WelcomeView.xib in Resources */,
 				0177455317A60AC3001625BF /* InfoPlist.strings in Resources */,
 				01271A1217C9CB2E003C487C /* MainMenuBackgroundView.xib in Resources */,
 				0177455C17A60AC3001625BF /* Main.storyboard in Resources */,
@@ -529,6 +545,8 @@
 				01BF13A017A89F7D00731690 /* Announcement.m in Sources */,
 				01DAA6BE17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */,
 				0125F75C17BB1C750042EB6F /* AnnouncementCell.m in Sources */,
+				0169749417D2D38900973B1B /* MyMaretFrontViewController.m in Sources */,
+				0169749717D2D49800973B1B /* MyMaretFrontCollectionViewController.m in Sources */,
 				0197389917C2C21100CB5221 /* AnnouncementDetailViewController.m in Sources */,
 				01DAA6B017A7041E00B23BB2 /* MyMaretFrontTableViewController.m in Sources */,
 				017A96DB17A7EB6C003D8A40 /* CalendarViewController.m in Sources */,

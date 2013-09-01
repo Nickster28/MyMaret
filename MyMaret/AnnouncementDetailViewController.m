@@ -10,6 +10,7 @@
 #import "Announcement.h"
 #import <MessageUI/MessageUI.h>
 #import "SWRevealViewController.h"
+#import "UIApplication+iOSVersionChecker.h"
 
 @interface AnnouncementDetailViewController () <MFMailComposeViewControllerDelegate>
 

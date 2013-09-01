@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MainMenuViewController : UITableViewController
-
+// The currently selected indexpath
+@property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @end

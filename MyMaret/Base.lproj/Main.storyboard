@@ -41,7 +41,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wkB-vB-dD2">
-                                <rect key="frame" x="122" y="328" width="77" height="53"/>
+                                <rect key="frame" x="122" y="328" width="77" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Log In">
@@ -58,52 +58,11 @@
                     <connections>
                         <outlet property="loginButton" destination="wkB-vB-dD2" id="CjJ-8T-bG0"/>
                         <outlet property="mymaretTitle" destination="2NU-3U-Id3" id="cHy-Sg-44d"/>
-                        <segue destination="AZa-e7-umb" kind="push" identifier="showWelcomeScreen" id="Lf9-Gf-1wx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5v-nn-ouh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2538" y="-3657"/>
-        </scene>
-        <!--Welcome View Controller-->
-        <scene sceneID="uOY-0J-cZ9">
-            <objects>
-                <viewController id="AZa-e7-umb" customClass="WelcomeViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="1MF-aE-d5C"/>
-                        <viewControllerLayoutGuide type="bottom" id="3in-Pv-aip"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Uh2-VI-3hM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zbr-dc-Efp">
-                                <rect key="frame" x="121" y="209" width="78" height="61"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N0L-q8-6R2">
-                                <rect key="frame" x="74" y="329" width="173" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Start Using MyMaret">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="dismissWelcomeScreen:" destination="AZa-e7-umb" eventType="touchUpInside" id="dDA-nT-wYt"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="bYe-Iu-9QO"/>
-                    <connections>
-                        <outlet property="doneButton" destination="N0L-q8-6R2" id="z0S-ka-cbN"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="peB-s6-qKu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2922" y="-3657"/>
         </scene>
         <!--Today View Controller - Today-->
         <scene sceneID="yJd-h3-9Qh">
@@ -163,7 +122,7 @@
                         <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="02V-8a-Rap"/>
                         <barButtonItem title="New Announcement" width="280" id="z9v-rH-mO6">
                             <connections>
-                                <segue destination="5SZ-X8-Io7" kind="modal" modalTransitionStyle="crossDissolve" id="pWq-W5-nQ1"/>
+                                <segue destination="5SZ-X8-Io7" kind="modal" id="pWq-W5-nQ1"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="FvY-7n-IaZ"/>
@@ -783,7 +742,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="ZOX-Cu-8ND" kind="custom" customClass="SWRevealViewControllerSegue" id="PV9-YS-t88"/>
+                                            <segue destination="ZOX-Cu-8ND" kind="custom" identifier="announcementsSegue" customClass="SWRevealViewControllerSegue" id="PV9-YS-t88"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="scheduleCell" rowHeight="53" id="7qw-GT-Mwg">
@@ -833,7 +792,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="yaD-ZS-psr" kind="custom" customClass="SWRevealViewControllerSegue" id="Lht-iq-w0a"/>
+                                            <segue destination="yaD-ZS-psr" kind="custom" identifier="newspaperSegue" customClass="SWRevealViewControllerSegue" id="Lht-iq-w0a"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="assignmentBookCell" rowHeight="53" id="1bH-uh-9xR">

@@ -11,15 +11,8 @@
 #import "UIApplication+HasNetworkConnection.h"
 #import "AppDelegate.h"
 
-@interface LoginViewController () <NSURLConnectionDataDelegate>
-
-// The data returned from Google with the user info
-@property (nonatomic, strong) NSMutableData *JSONData;
-
+@interface LoginViewController ()
 @end
-
-// The school domain to compare with logged in user's domains
-NSString * const schoolDomain = @"maret.org";
 
 
 @implementation LoginViewController
@@ -37,29 +30,6 @@ NSString * const schoolDomain = @"maret.org";
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-
-    [self.loginButton.layer setOpacity:0.0];
-    [self.mymaretTitle.layer setOpacity:0.0];
-}
-
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    //Fade in the title and login button
-    CABasicAnimation *fadeAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    
-    [fadeAnimation setDuration:1.0];
-    [fadeAnimation setFromValue:[NSNumber numberWithFloat:0.0]];
-    [fadeAnimation setToValue:[NSNumber numberWithFloat:1.0]];
-    
-    // Set the real opacities
-    [self.loginButton.layer setOpacity:1.0];
-    [self.mymaretTitle.layer setOpacity:1.0];
-    
-    [self.loginButton.layer addAnimation:fadeAnimation forKey:@"fade"];
-    [self.mymaretTitle.layer addAnimation:fadeAnimation forKey:@"fade"];
 }
 
 
@@ -70,25 +40,20 @@ NSString * const schoolDomain = @"maret.org";
 }
 
 
-// Generic method to show an alert view with a given title and message
-- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message
-{
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:title
-                                                 message:message
-                                                delegate:nil
-                                       cancelButtonTitle:@"OK"
-                                       otherButtonTitles:nil];
-    [av show];
-}
-
 
 #pragma mark Google Login and Authentication
 
 - (IBAction)showLoginScreen:(id)sender
 {
     if (![UIApplication hasNetworkConnection]) {
-        [self showAlertWithTitle:@"Heads Up!" message:@"Looks like you're not connected to the Internet.  You'll need an Internet connection to log in.  Make sure your WiFi or Cellular connection is on and try again."];
-        return;
+        NSString *errorMsg = @"Looks like you're not connected to the Internet.  You'll need an Internet connection to log in.  Make sure your WiFi or Cellular connection is on and try again.";
+        
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Whoops!"
+                                                     message:errorMsg
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
     }
     
     NSString *kMyClientID = @"410380053411.apps.googleusercontent.com";     // pre-assigned by service
@@ -104,123 +69,15 @@ NSString * const schoolDomain = @"maret.org";
                                                                 clientID:kMyClientID
                                                             clientSecret:kMyClientSecret
                                                         keychainItemName:nil
-                                                                delegate:self
-                                                        finishedSelector:@selector(viewController:finishedWithAuth:error:)];
+                                                                delegate:nil
+                                                        finishedSelector:nil];
     
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
 
-- (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
-      finishedWithAuth:(GTMOAuth2Authentication *)auth
-                 error:(NSError *)error {
-    
-    // If the user completed login and there is an error
-    if (error != nil && [error code] != -1000) {
-        
-        NSString *errorMessage = [NSString stringWithFormat:@"Hold up!  Looks like Google couldn't verify your login info.  Try logging in again.  Error: %@", [error localizedDescription]];
-        
-        [self showAlertWithTitle:@"Whoops!" message:errorMessage];
-        
-    // If the user didn't complete login
-    } else if (error != nil) {
-        
-        NSString *errorMessage = @"In order to use MyMaret, you need to log in with your Maret username and password.  That way we can identify you and only give you access to Maret information if you are a Maret student or teacher.";
-        
-        [self showAlertWithTitle:@"Please Log In" message:errorMessage];
-        
-    } else {
-        // Authentication succeeded, so get the user's info
-        [self getUserInfoWithAuth:auth];
-    }
-}
 
 
-- (void)getUserInfoWithAuth:(GTMOAuth2Authentication *)auth
-{
-    // Authorize a request to Google to get the logged in user's info
-    NSURL *googleUserInfoURL = [NSURL URLWithString:@"https://www.googleapis.com/oauth2/v3/userinfo"];
-    NSMutableURLRequest *urlReq = [[NSMutableURLRequest alloc] initWithURL:googleUserInfoURL];
-    
-    [auth authorizeRequest:urlReq completionHandler:^(NSError *error) {
-        if (!error) {
-            
-            // Clear our data object
-            self.JSONData = [[NSMutableData alloc] init];
-            
-            // Connect to Google to get the user's info
-            // Thanks to http://stackoverflow.com/questions/10080216/request-with-nsurlrequest
-            // for reminding me to put the NSURLRequest in an NSURLConnection!
-            __unused NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:urlReq
-                                                                             delegate:self
-                                                                     startImmediately:YES];
-            
-        } else {
-            
-            NSString *errorMessage = [NSString stringWithFormat:@"Hold up!  Looks like Google couldn't verify your login info.  Try logging in again.  Error: %@", [error localizedDescription]];
-            
-            [self showAlertWithTitle:@"Whoops!" message:errorMessage];
-        }
-    }];
-}
 
-
-- (void)setUserInfo:(NSDictionary *)userInfoDictionary
-{
-    // JSON KEYS:
-    // email_verified -> boolean
-    // email -> string
-    // sub -> string
-    // hd -> string
-    NSString *domain = [userInfoDictionary objectForKey:@"hd"];
-    if (![domain isEqualToString:schoolDomain]) {
-        
-        // Only allow Maret students and teachers to log in
-        [self showAlertWithTitle:@"Sorry"
-                         message:@"In order to use MyMaret you have to log in with a Maret username and password.  Please try again."];
-    } else {
-        // Store the user's info and mark them as logged in
-        NSString *userEmail = [userInfoDictionary objectForKey:@"email"];
-        [[NSUserDefaults standardUserDefaults] setObject:userEmail
-                                                  forKey:MyMaretUserEmailKey];
-        [[NSUserDefaults standardUserDefaults] setBool:YES
-                                                forKey:MyMaretIsLoggedInKey];
-        
-        // Go to the welcome screen
-        [self performSegueWithIdentifier:@"showWelcomeScreen"
-                                  sender:self];
-    }
-}
-
-
-#pragma mark NSURLConnectionDataDelegate
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    // Add the incoming data to our JSONData object
-    [self.JSONData appendData:data];
-}
-
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    // Convert the JSON data to a dictionary
-    NSDictionary *JSONDict = [NSJSONSerialization JSONObjectWithData:
-                              [self JSONData] options:0 error:nil];
-    
-    [self setUserInfo:JSONDict];
-    
-    // Clear our data object
-    self.JSONData = [[NSMutableData alloc] init];
-    
-}
-
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    [self setJSONData:nil];
-    
-    [self showAlertWithTitle:@"Whoops!" message:@"Looks like we couldn't authenticate with Google.  Try logging in again."];
-}
 
 @end

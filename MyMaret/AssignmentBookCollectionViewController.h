@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Nick. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+#import "MyMaretFrontCollectionViewController.h"
 
-@interface AssignmentBookCollectionViewController : UICollectionViewController
+@interface AssignmentBookCollectionViewController : MyMaretFrontCollectionViewController
 @end

@@ -9,6 +9,7 @@
 #import "AnnouncementCreationBodyViewController.h"
 #import "AnnouncementsStore.h"
 #import "UIColor+SchoolColor.h"
+#import "UIApplication+iOSVersionChecker.h"
 
 @interface AnnouncementCreationBodyViewController ()
 
