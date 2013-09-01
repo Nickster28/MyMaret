@@ -737,7 +737,7 @@ static Class gSignInClass = Nil;
         [self popView];
         
         // Only allow Maret students and teachers to log in
-        [self showAlertWithTitle:@"Sorry"
+        [self showAlertWithTitle:@"Sorry!"
                          message:@"In order to use MyMaret you have to log in with a Maret username and password.  Please try again."];
     } else {
         // Store the user's info and mark them as logged in
@@ -771,7 +771,7 @@ static Class gSignInClass = Nil;
                 
                 
                 // Update the object so the user won't receive email (since they have the app)
-                [object setObject: [NSNumber numberWithBool:NO] forKey:@"shouldReceiveEmail"];
+                [object setObject: [NSNumber numberWithBool:NO] forKey:@"shouldReceiveEmails"];
                 [object saveInBackground];
             }
         }];
