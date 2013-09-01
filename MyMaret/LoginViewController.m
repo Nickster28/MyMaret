@@ -54,6 +54,7 @@
                                            cancelButtonTitle:@"OK"
                                            otherButtonTitles:nil];
         [av show];
+        return;
     }
     
     NSString *kMyClientID = @"410380053411.apps.googleusercontent.com";     // pre-assigned by service
