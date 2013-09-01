@@ -20,7 +20,7 @@
 // Boolean to keep track of whether it should display the newest announcement
 // upon finishing update (we want this to happen when the user launches the app
 // by tapping on a New Announcement push notification)
-@property (nonatomic, strong) NSNumber *shouldDisplayNewestAnnouncement;
+@property (nonatomic) BOOL shouldDisplayNewestAnnouncement;
 
 @end
 
@@ -61,7 +61,7 @@
     
     [self.navigationController setToolbarHidden:NO animated:YES];
     
-    if ([self.shouldDisplayNewestAnnouncement boolValue]) {
+    if ([self shouldDisplayNewestAnnouncement]) {
         [self refreshAnnouncements];
     }
 }
@@ -76,7 +76,7 @@
 
 - (void)reloadWhenShown
 {
-    [self setShouldDisplayNewestAnnouncement:[NSNumber numberWithBool:YES]];
+    [self setShouldDisplayNewestAnnouncement:YES];
 }
 
 
@@ -109,8 +109,8 @@
         
         // If we need to, jump right to the newest announcement added (if the user
         // tapped on a push notification, for example)
-        if ([[self shouldDisplayNewestAnnouncement] boolValue]) {
-            [self setShouldDisplayNewestAnnouncement:[NSNumber numberWithBool:NO]];
+        if ([self shouldDisplayNewestAnnouncement]) {
+            [self setShouldDisplayNewestAnnouncement:NO];
             [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         }
     }];

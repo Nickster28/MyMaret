@@ -89,7 +89,7 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
                                          URL:storeURL
                                      options:nil
                                        error:&error]) {
-            [NSException raise:@"AnnouncementStore: Open failed"
+            [NSException raise:@"AnnouncementsStore: Open failed"
                         format:@"Reason: %@", [error localizedDescription]];
         }
         
@@ -135,7 +135,7 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
                                                  error:&error];
         
         if (!result) {
-            [NSException raise:@"Fetch failed" format:@"Reason: %@", [error localizedDescription]];
+            [NSException raise:@"Announcement fetch failed" format:@"Reason: %@", [error localizedDescription]];
         }
              
         _announcements = [[NSMutableArray alloc] initWithArray:result];

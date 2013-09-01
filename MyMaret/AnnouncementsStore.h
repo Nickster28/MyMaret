@@ -64,7 +64,7 @@ extern NSString * const AnnouncementsStoreFilterStringToday;
 
 // ****** FOR ONLY ACCESSING CERTAIN ANNOUNCEMENTS (FILTERING) ******** //
 // Set the string to filter by
-// MUST SET THIS BEFORE ACCESSING FILTERED ANNOUNCMENTS
+// MUST SET THIS BEFORE ACCESSING FILTERED ANNOUNCEMENTS
 // The marked methods above (announcementAtIndex, markAnnouncementAtIndexAsRead,
 // and numberOfAnnouncements) will return different values
 // depending on whether the filter string is nil or not

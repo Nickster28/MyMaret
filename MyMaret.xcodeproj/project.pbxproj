@@ -23,6 +23,10 @@
 		016780DB17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */; };
 		0169749417D2D38900973B1B /* MyMaretFrontViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169749317D2D38900973B1B /* MyMaretFrontViewController.m */; };
 		0169749717D2D49800973B1B /* MyMaretFrontCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169749617D2D49800973B1B /* MyMaretFrontCollectionViewController.m */; };
+		0169749B17D30F8D00973B1B /* NewspaperStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169749A17D30F8D00973B1B /* NewspaperStore.m */; };
+		0169749C17D30F8D00973B1B /* NewspaperStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169749A17D30F8D00973B1B /* NewspaperStore.m */; };
+		016974A717D3113700973B1B /* NewspaperArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 016974A617D3113700973B1B /* NewspaperArticle.m */; };
+		016974A817D3113700973B1B /* NewspaperArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 016974A617D3113700973B1B /* NewspaperArticle.m */; };
 		016F9D7C17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F9D7B17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m */; };
 		0171AEC317A6244700F3284C /* AnnouncementsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */; };
 		0177454917A60AC3001625BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454817A60AC3001625BF /* Foundation.framework */; };
@@ -106,6 +110,10 @@
 		0169749517D2D49800973B1B /* MyMaretFrontCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyMaretFrontCollectionViewController.h; path = MyMaret/MyMaretFrontCollectionViewController.h; sourceTree = SOURCE_ROOT; };
 		0169749617D2D49800973B1B /* MyMaretFrontCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyMaretFrontCollectionViewController.m; path = MyMaret/MyMaretFrontCollectionViewController.m; sourceTree = SOURCE_ROOT; };
 		0169749817D2D70000973B1B /* PushNotificationUpdateable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushNotificationUpdateable.h; sourceTree = "<group>"; };
+		0169749917D30F8D00973B1B /* NewspaperStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewspaperStore.h; sourceTree = "<group>"; };
+		0169749A17D30F8D00973B1B /* NewspaperStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewspaperStore.m; sourceTree = "<group>"; };
+		016974A517D3113700973B1B /* NewspaperArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewspaperArticle.h; sourceTree = "<group>"; };
+		016974A617D3113700973B1B /* NewspaperArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewspaperArticle.m; sourceTree = "<group>"; };
 		016F9D7A17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TwoWeeksAgo.h"; sourceTree = "<group>"; };
 		016F9D7B17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TwoWeeksAgo.m"; sourceTree = "<group>"; };
 		0171AEC117A6244700F3284C /* AnnouncementsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementsTableViewController.h; sourceTree = "<group>"; };
@@ -388,6 +396,10 @@
 			children = (
 				01DAA6B717A70A1B00B23BB2 /* NewspaperTableViewController.h */,
 				01DAA6B817A70A1B00B23BB2 /* NewspaperTableViewController.m */,
+				0169749917D30F8D00973B1B /* NewspaperStore.h */,
+				0169749A17D30F8D00973B1B /* NewspaperStore.m */,
+				016974A517D3113700973B1B /* NewspaperArticle.h */,
+				016974A617D3113700973B1B /* NewspaperArticle.m */,
 			);
 			name = Newspaper;
 			sourceTree = "<group>";
@@ -544,6 +556,8 @@
 				013BB66E17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m in Sources */,
 				01BF13A017A89F7D00731690 /* Announcement.m in Sources */,
 				01DAA6BE17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */,
+				0169749B17D30F8D00973B1B /* NewspaperStore.m in Sources */,
+				016974A717D3113700973B1B /* NewspaperArticle.m in Sources */,
 				0125F75C17BB1C750042EB6F /* AnnouncementCell.m in Sources */,
 				0169749417D2D38900973B1B /* MyMaretFrontViewController.m in Sources */,
 				0169749717D2D49800973B1B /* MyMaretFrontCollectionViewController.m in Sources */,
@@ -570,6 +584,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				01A4FE2617B97304007FAB5C /* MyMaret_Tests.m in Sources */,
+				016974A817D3113700973B1B /* NewspaperArticle.m in Sources */,
+				0169749C17D30F8D00973B1B /* NewspaperStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
