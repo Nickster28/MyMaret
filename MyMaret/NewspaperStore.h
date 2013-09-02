@@ -12,17 +12,21 @@
 
 @interface NewspaperStore : NSObject
 
+extern NSString * const NewspaperStoreFilterStringPopular;
+
 // Get the singleton instance of NewspaperStore
 + (NewspaperStore *)sharedStore;
 
+
+- (void)saveChanges;
 
 // **** ALL ARTICLE ACCESS IS DONE VIA INDICES **** //
 // This works more easily with tableViews/row indices
 
 // Fetches new articles from Parse and executes the passed-in
-// block by either passing in the number of new articles,
-// or an error.
-- (void)fetchNewspaperWithCompletionBlock:(void (^)(NSUInteger numAdded, NSError *err))completionBlock;
+// block by either passing in nil or an error if there was one,
+// and true/false depending on whether new articles were downloaded.
+- (void)fetchNewspaperWithCompletionBlock:(void (^)(BOOL, NSError *err))completionBlock;
 
 
 // Get the article in a given section at a given index

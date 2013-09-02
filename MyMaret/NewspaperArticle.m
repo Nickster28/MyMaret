@@ -1,5 +1,5 @@
 //
-//  NewspaperArticle.m
+//  Newspaperself.m
 //  MyMaret
 //
 //  Created by Nick Troccoli on 9/1/13.
@@ -9,78 +9,109 @@
 #import "NewspaperArticle.h"
 
 
+NSString * const NewspaperArticleTitleEncodingKey = @"articleTitle";
+NSString * const NewspaperArticleBodyEncodingKey = @"articlBody";
+NSString * const NewspaperArticleAuthorEncodingKey = @"articleAuthor";
+NSString * const NewspaperArticleSectionEncodingKey = @"articleSection";
+NSString * const NewspaperArticleEditionEncodingKey = @"articleEdition";
+NSString * const NewspaperArticleIsPopularEncodingKey = @"isPopularArticle";
+NSString * const NewspaperArticleIsUnreadEncodingKey = @"isUnreadArticle";
+
 @implementation NewspaperArticle
 
-@dynamic title;
-@dynamic author;
-@dynamic body;
-@dynamic isMostPopular;
-@dynamic isUnread;
-@dynamic section;
-@dynamic edition;
-
-
-+ (NewspaperArticle *)articleWithTitle:(NSString *)articleTitle
-                                  body:(NSString *)articleBody
-                                author:(NSString *)articleAuthor
-                               section:(NSString *)articleSection
-                           publishDate:(NSDate *)publishDate
-                inManagedObjectContext:(NSManagedObjectContext *)context
+- (NewspaperArticle *)initWithTitle:(NSString *)articleTitle
+                               body:(NSString *)articleBody
+                             author:(NSString *)articleAuthor
+                            section:(NSString *)articleSection
+                        publishDate:(NSDate *)articlePublishDate
+                          isPopular:(BOOL)isPopular
 {
-    NewspaperArticle *article = [NSEntityDescription insertNewObjectForEntityForName:@"NewspaperArticle"
-                                                              inManagedObjectContext:context];
+    self = [super init];
+    if (self) {
+        
+        [self setArticleTitle:articleTitle];
+        [self setArticleBody:articleBody];
+        [self setArticleAuthor:articleAuthor];
+        [self setArticleSection:articleSection];
+        [self setIsPopularArticle:isPopular];
+        [self setIsUnreadArticle:YES];
     
-    article.title = articleTitle;
-    article.body = articleBody;
-    article.author = articleAuthor;
-    article.section = articleSection;
-    article.isMostPopular = FALSE;
-    article.isUnread = TRUE;
+        // Get the month the self was uploaded
+        NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:NSMonthCalendarUnit fromDate:articlePublishDate];
     
-    // Get the month the article was uploaded
-    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:NSMonthCalendarUnit fromDate:publishDate];
-    
-    switch ([dateComps month]) {
-        case 1:
-            article.edition = @"January";
-            break;
-        case 2:
-            article.edition = @"February";
-            break;
-        case 3:
-            article.edition = @"March";
-            break;
-        case 4:
-            article.edition = @"April";
-            break;
-        case 5:
-            article.edition = @"May";
-            break;
-        case 6:
-            article.edition = @"June";
-            break;
-        case 7:
-            article.edition = @"July";
-            break;
-        case 8:
-            article.edition = @"August";
-            break;
-        case 9:
-            article.edition = @"September";
-            break;
-        case 10:
-            article.edition = @"October";
-            break;
-        case 11:
-            article.edition = @"November";
-            break;
-        case 12:
-            article.edition = @"December";
-            break;
-        default: ;
+        switch ([dateComps month]) {
+            case 1:
+                [self setArticleEdition: @"January"];
+                break;
+            case 2:
+                [self setArticleEdition: @"February"];
+                break;
+            case 3:
+                [self setArticleEdition: @"March"];
+                break;
+            case 4:
+                [self setArticleEdition: @"April"];
+                break;
+            case 5:
+                [self setArticleEdition: @"May"];
+                break;
+            case 6:
+                [self setArticleEdition: @"June"];
+                break;
+            case 7:
+                [self setArticleEdition: @"July"];
+                break;
+            case 8:
+                [self setArticleEdition: @"August"];
+                break;
+            case 9:
+                [self setArticleEdition: @"September"];
+                break;
+            case 10:
+                [self setArticleEdition: @"October"];
+                break;
+            case 11:
+                [self setArticleEdition: @"November"];
+                break;
+            case 12:
+                [self setArticleEdition: @"December"];
+                break;
+            default: ;
+        }
     }
     
-    return article;
+    return self;
+}
+
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:[self articleTitle] forKey:NewspaperArticleTitleEncodingKey];
+    [aCoder encodeObject:[self articleBody] forKey:NewspaperArticleBodyEncodingKey];
+    [aCoder encodeObject:[self articleAuthor] forKey:NewspaperArticleAuthorEncodingKey];
+    [aCoder encodeObject:[self articleSection] forKey:NewspaperArticleSectionEncodingKey];
+    [aCoder encodeObject:[self articleEdition] forKey:NewspaperArticleEditionEncodingKey];
+    
+    [aCoder encodeBool:[self isPopularArticle] forKey:NewspaperArticleIsPopularEncodingKey];
+    [aCoder encodeBool:[self isUnreadArticle] forKey:NewspaperArticleIsUnreadEncodingKey];
+}
+
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    if (self) {
+        [self setArticleTitle:[aDecoder decodeObjectForKey:NewspaperArticleTitleEncodingKey]];
+        [self setArticleBody:[aDecoder decodeObjectForKey:NewspaperArticleBodyEncodingKey]];
+        [self setArticleAuthor:[aDecoder decodeObjectForKey:NewspaperArticleAuthorEncodingKey]];
+        [self setArticleSection:[aDecoder decodeObjectForKey:NewspaperArticleSectionEncodingKey]];
+        [self setArticleEdition:[aDecoder decodeObjectForKey:NewspaperArticleEditionEncodingKey]];
+        
+        [self setIsPopularArticle:[aDecoder decodeBoolForKey:NewspaperArticleIsPopularEncodingKey]];
+        [self setIsUnreadArticle:[aDecoder decodeBoolForKey:NewspaperArticleIsUnreadEncodingKey]];
+    }
+    
+    return self;
 }
 
 @end

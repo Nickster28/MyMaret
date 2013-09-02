@@ -9,21 +9,22 @@
 #import <Foundation/Foundation.h>
 
 
-@interface NewspaperArticle : NSObject
+@interface NewspaperArticle : NSObject <NSCoding>
 
-@property (nonatomic, strong) NSString * title;
-@property (nonatomic, strong) NSString * author;
-@property (nonatomic, strong) NSString * body;
-@property (nonatomic, strong) NSNumber *isMostPopular;
-@property (nonatomic, strong) NSNumber *isUnread;
-@property (nonatomic, strong) NSString * section;
-@property (nonatomic, strong) NSString * edition;
+@property (nonatomic, strong) NSString *articleTitle;
+@property (nonatomic, strong) NSString *articleAuthor;
+@property (nonatomic, strong) NSString *articleBody;
+@property (nonatomic) BOOL isPopularArticle;
+@property (nonatomic) BOOL isUnreadArticle;
+@property (nonatomic, strong) NSString * articleSection;
+@property (nonatomic, strong) NSString * articleEdition;
 
 
-+ (NewspaperArticle *)initWithTitle:(NSString *)articleTitle
+- (NewspaperArticle *)initWithTitle:(NSString *)articleTitle
                                body:(NSString *)articleBody
                              author:(NSString *)articleAuthor
                             section:(NSString *)articleSection
-                        publishDate:(NSDate *)publishDate;
+                        publishDate:(NSDate *)publishDate
+                          isPopular:(BOOL) isPopular;
 
 @end

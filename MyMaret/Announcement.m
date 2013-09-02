@@ -12,26 +12,26 @@
 #define SECONDS_IN_WEEK 604800
 @implementation Announcement
 
-@dynamic title;
-@dynamic body;
-@dynamic author;
-@dynamic postDate;
-@dynamic isUnread;
-@dynamic orderingValue;
+@dynamic announcementTitle;
+@dynamic announcementBody;
+@dynamic announcementAuthor;
+@dynamic announcementPostDate;
+@dynamic isUnreadAnnouncement;
+@dynamic announcementOrderingValue;
 
-+ (Announcement *)announcementWithTitle:(NSString *)announcementTitle
-                                   body:(NSString *)announcementBody
-                                 author:(NSString *)announcementAuthor
++ (Announcement *)announcementWithTitle:(NSString *)aTitle
+                                   body:(NSString *)aBody
+                                 author:(NSString *)author
                                postDate:(NSDate *)datePosted
                  inManagedObjectContext:(NSManagedObjectContext *)context
 {
     Announcement *announcement = [NSEntityDescription insertNewObjectForEntityForName:@"Announcement"
                                                                inManagedObjectContext:context];
-    announcement.title = announcementTitle;
-    announcement.body = announcementBody;
-    announcement.author = announcementAuthor;
-    announcement.postDate = [datePosted timeIntervalSinceReferenceDate];
-    announcement.isUnread = TRUE;
+    [announcement setAnnouncementTitle:aTitle];
+    [announcement setAnnouncementBody:aBody];
+    [announcement setAnnouncementAuthor:author];
+    [announcement setAnnouncementPostDate:[datePosted timeIntervalSinceReferenceDate]];
+    [announcement setIsUnreadAnnouncement:YES];
     
     return announcement;
 }
@@ -39,7 +39,7 @@
 
 - (NSString *)postDateAsString
 {
-    NSDate *postedDate = [NSDate dateWithTimeIntervalSinceReferenceDate:self.postDate];
+    NSDate *postedDate = [NSDate dateWithTimeIntervalSinceReferenceDate:[self announcementPostDate]];
     
     NSDateComponents *postedDateComponents = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit) fromDate:postedDate];
     
@@ -94,7 +94,7 @@
 
 - (NSString *)description
 {
-    NSString *fullAnnouncement = [NSString stringWithFormat:@"%@\n\nPosted %@ by %@", self.body, self.postDateAsString, self.author];
+    NSString *fullAnnouncement = [NSString stringWithFormat:@"%@\n\nPosted %@ by %@", [self announcementBody], [self postDateAsString], [self announcementAuthor]];
     
     return fullAnnouncement;
 }

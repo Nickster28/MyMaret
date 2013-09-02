@@ -199,9 +199,11 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
                                                                 postDate:object.createdAt
                                                   inManagedObjectContext:context];
         
-        // Set the ordering value
-        if ([self numberOfAnnouncements] == 0) announcement.orderingValue = 1.0;
-        else announcement.orderingValue = [[self announcementAtIndex:0] orderingValue] / 2.0;
+        // Set the ordering value by setting it to be 1 if there are no other announcements
+        // or to the lowest ordering value divided by 2
+        if ([self numberOfAnnouncements] == 0) [announcement setAnnouncementOrderingValue:1.0];
+        else [announcement setAnnouncementOrderingValue:
+              [[self announcementAtIndex:0] announcementOrderingValue] / 2.0];
         
         // Insert the new announcement into the announcements array
         [[self announcements] insertObject:announcement atIndex:0];
@@ -217,12 +219,7 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
     NSError *err = nil;
     BOOL successful = [context save:&err];
     if (!successful) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Saving Announcements"
-                                                            message:[err localizedDescription]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-        [alertView show];
+        NSLog(@"Could not save the announcements.");
     }
 }
 
@@ -349,8 +346,8 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
     }
     
     // Change to read if the announcement is unread
-    if ([[self.announcements objectAtIndex:readIndex] isUnread]) {
-        [[[self announcements] objectAtIndex:readIndex] setIsUnread:FALSE];
+    if ([[self.announcements objectAtIndex:readIndex] isUnreadAnnouncement]) {
+        [[[self announcements] objectAtIndex:readIndex] setIsUnreadAnnouncement:FALSE];
         [self saveChanges];
         
         // Update the number of unread announcements
@@ -370,23 +367,23 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
     
     // Is there an object before it in the array?
     if (toIndex > 0) {
-        lowerBound = [[self announcementAtIndex:toIndex - 1] orderingValue];
+        lowerBound = [[self announcementAtIndex:toIndex - 1] announcementOrderingValue];
     } else {
-        lowerBound = [[self announcementAtIndex:1] orderingValue] - 2.0;
+        lowerBound = [[self announcementAtIndex:1] announcementOrderingValue] - 2.0;
     }
     
     double upperBound = 0.0;
     
     // Is there an object after it in the array?
     if (toIndex < [self numberOfAnnouncements] - 1) {
-        upperBound = [[self announcementAtIndex:toIndex + 1] orderingValue];
+        upperBound = [[self announcementAtIndex:toIndex + 1] announcementOrderingValue];
     } else {
-        upperBound = [[self announcementAtIndex:toIndex - 1] orderingValue] + 2.0;
+        upperBound = [[self announcementAtIndex:toIndex - 1] announcementOrderingValue] + 2.0;
     }
     
     double newOrderValue = (lowerBound + upperBound) / 2.0;
     
-    [self announcementAtIndex:toIndex].orderingValue = newOrderValue;
+    [[self announcementAtIndex:toIndex] setAnnouncementOrderingValue:newOrderValue];
     
     [self saveChanges];
 }
@@ -397,7 +394,7 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
     Announcement *announcementToDelete = [self announcementAtIndex:deleteIndex];
     
     // Update the number of unread announcements if needed
-    if ([announcementToDelete isUnread]) {
+    if ([announcementToDelete isUnreadAnnouncement]) {
         [self setNumUnreadAnnouncements:[self numUnreadAnnouncements] - 1];
     }
     

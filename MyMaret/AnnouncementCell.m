@@ -38,9 +38,9 @@
 // Set the cell to display all of the given announcement's info
 - (void)bindAnnouncementToCell:(Announcement *)announcement
 {
-    [self.titleLabel setText:announcement.title];
+    [self.titleLabel setText:[announcement announcementTitle]];
     
-    if (announcement.isUnread) {
+    if ([announcement isUnreadAnnouncement]) {
         [self.titleLabel setFont:[UIFont boldSystemFontOfSize:19.0]];
         [self.titleLabel setTextColor:[UIColor schoolLightColor]];
         [self.bodyLabel setTextColor:[UIColor blackColor]];
@@ -52,7 +52,7 @@
         [self.unreadImageView setImage:nil];
     }
     
-    [self.bodyLabel setText:announcement.body];
+    [self.bodyLabel setText:[announcement announcementBody]];
     [self.dateLabel setText:[announcement postDateAsString]];
 
 }

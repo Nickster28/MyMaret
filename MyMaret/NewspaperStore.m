@@ -14,15 +14,16 @@
 #import "UIApplication+HasNetworkConnection.h"
 #import "AppDelegate.h"
 
-@interface NewspaperStore() {
-    // Core Data
-    NSManagedObjectModel *model;
-    NSManagedObjectContext *context;
-}
+#define NUM_POPULAR_ARTICLES 5
 
-@property (nonatomic, strong) NSDictionary *articleDictionary;
+@interface NewspaperStore()
+@property (nonatomic, strong) NSDictionary *articlesDictionary;
+@property (nonatomic, strong) NSMutableArray *popularArticles;
 @property (nonatomic, strong) NSDate *lastNewspaperUpdate;
 
+// For newspaper search
+@property (nonatomic, strong) NSString *searchString;
+@property (nonatomic, strong) NSString *filteredArticles;
 
 // Saves all Core Data changes
 - (void)saveChanges;
@@ -31,6 +32,9 @@
 
 // NSUserDefaults key
 NSString * const MyMaretLastNewspaperUpdateKey = @"MyMaretLastNewspaperUpdateKey";
+
+// filter string for getting only popular articles
+NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStringPopular";
 
 
 @implementation NewspaperStore
@@ -64,75 +68,54 @@ NSString * const MyMaretLastNewspaperUpdateKey = @"MyMaretLastNewspaperUpdateKey
     self = [super init];
     
     if (self) {
-        // Read in AnnouncementsCDModel.xcdatamodeld
-        model = [NSManagedObjectModel mergedModelFromBundles:nil];
+        // Unarchive the articles
+        NSString *newspaperArchivePath = [self articlesArchivePath];
+        NSString *popularArticlesArchivePath = [self popularArticlesArchivePath];
         
-        NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+        [self setArticlesDictionary:[NSKeyedUnarchiver unarchiveObjectWithFile:newspaperArchivePath]];
+        [self setPopularArticles:[NSKeyedUnarchiver unarchiveObjectWithFile:popularArticlesArchivePath]];
         
-        // Where does the SQLite file go?
-        NSString *path = [self newspaperArchivePath];
-        NSURL *storeURL = [NSURL fileURLWithPath:path];
-        
-        NSError *error;
-        
-        if (![psc addPersistentStoreWithType:NSSQLiteStoreType
-                               configuration:nil
-                                         URL:storeURL
-                                     options:nil
-                                       error:&error]) {
-            [NSException raise:@"NewspaperStore: Open failed"
-                        format:@"Reason: %@", [error localizedDescription]];
+        // If there aren't any archived, set up a new dictionary
+        // (The key is the name of the section, the value is an array of articles)
+        if (![self articlesDictionary]) {
+            [self makeNewArticlesDictionary];
         }
         
-        // Create the managed object context
-        context = [[NSManagedObjectContext alloc] init];
-        context.persistentStoreCoordinator = psc;
-        
-        // The managed object context can manage undo, but we don't need it
-        context.undoManager = nil;
+        // If there are no popular articles, make an empty array
+        if (![self popularArticles]) {
+            [self setPopularArticles:[[NSMutableArray alloc] init]];
+        }
     }
-    
     return self;
 }
 
 
-- (NSString *)newspaperArchivePath
+- (void)makeNewArticlesDictionary
 {
-    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    NSString *directory = [documentDirectories objectAtIndex:0];
-    
-    return [directory stringByAppendingPathComponent:@"newspaperstore.data"];
+    [self setArticlesDictionary:[NSDictionary dictionaryWithObjects:@[@[], @[], @[], @[], @[], @[]]
+                                                            forKeys:@[@"News", @"Opinion", @"Features", @"Center Spread", @"Style", @"Sports"]]];
 }
 
 
-
-- (NSDictionary *)articleDictionary
+- (NSString *)articlesArchivePath
 {
-    // If needed, read in announcements from Core Data
-    if (!_articleDictionary) {
-        NSFetchRequest *request = [[NSFetchRequest alloc] init];
-        
-        // Get all announcements, sorted by orderingValue
-        NSEntityDescription *description = [[model entitiesByName] objectForKey:@"NewspaperArticle"];
-        [request setEntity:description];
-        
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"section"
-                                                                         ascending:YES];
-        [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-        
-        NSError *error;
-        NSArray *result = [context executeFetchRequest:request
-                                                 error:&error];
-        
-        if (!result) {
-            [NSException raise:@"Article fetch failed" format:@"Reason: %@", [error localizedDescription]];
-        }
-        
-        _announcements = [[NSMutableArray alloc] initWithArray:result];
-    }
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     
-    return _announcements;
+    // Get only entry from the list
+    NSString *directory = [documentDirectories objectAtIndex:0];
+    
+    return [directory stringByAppendingPathComponent:@"newspaper.archive"];
+}
+
+
+- (NSString *)popularArticlesArchivePath
+{
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    // Get only entry from the list
+    NSString *directory = [documentDirectories objectAtIndex:0];
+    
+    return [directory stringByAppendingPathComponent:@"newspaperpopular.archive"];
 }
 
 
@@ -157,46 +140,117 @@ NSString * const MyMaretLastNewspaperUpdateKey = @"MyMaretLastNewspaperUpdateKey
 }
 
 
-- (void)addAnnouncements:(NSArray *)announcementsToAdd
+// Takes in an array of the newspaper articles sorted by popularity,
+// and sorts them into their proper article "buckets" based on their section
+- (void)addArticlesToDictionary:(NSArray *)articlesToAdd
 {
-    for (PFObject *object in announcementsToAdd) {
-        Announcement *announcement = [Announcement announcementWithTitle:[object objectForKey:@"title"]
-                                                                    body:[object objectForKey:@"body"]
-                                                                  author:[object objectForKey:@"author"]
-                                                                postDate:object.createdAt
-                                                  inManagedObjectContext:context];
+    // Remove the old edition of the newspaper
+    [self makeNewArticlesDictionary];
+    
+    // Loop through the new articles, adding each one to the appropriate key/value array
+    for (int i = 0; i < articlesToAdd.count; i++) {
+        PFObject *object = [articlesToAdd objectAtIndex:i];
         
-        // Set the ordering value
-        if ([self numberOfAnnouncements] == 0) announcement.orderingValue = 1.0;
-        else announcement.orderingValue = [[self announcementAtIndex:0] orderingValue] / 2.0;
+        // The top NUM_POPULAR_ARTICLES are "popular"
+        BOOL isPopular = (i < NUM_POPULAR_ARTICLES) ? true : false;
         
-        // Insert the new announcement into the announcements array
-        [[self announcements] insertObject:announcement atIndex:0];
+        NewspaperArticle *article = [[NewspaperArticle alloc] initWithTitle:[object objectForKey:@"title"]
+                                                                       body:[object objectForKey:@"body"]
+                                                                     author:[object objectForKey:@"author"]
+                                                                    section:[object objectForKey:@"section"]
+                                                                publishDate:[object createdAt]
+                                                                  isPopular:isPopular];
         
-        [self setNumUnreadAnnouncements:[self numUnreadAnnouncements] + 1];
+        // If it's a popular article, insert it at the front of its article array
+        if (isPopular) {
+            [[[self articlesDictionary] objectForKey:[article articleSection]]
+             insertObject:article atIndex:0];
+        
+        // Otherwise add it to the end
+        } else [[[self articlesDictionary] objectForKey:[article articleSection]] addObject:article];
     }
 }
 
 
-// Save Core Data changes
+// Save changes to our articles dictionary
 - (void)saveChanges
 {
-    NSError *err = nil;
-    BOOL successful = [context save:&err];
-    if (!successful) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Saving Announcements"
-                                                            message:[err localizedDescription]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-        [alertView show];
+    // save our articles dictionary
+    BOOL success = [NSKeyedArchiver archiveRootObject:[self articlesDictionary]
+                                               toFile:[self articlesArchivePath]];
+    
+    if (!success) {
+        NSLog(@"Could not save all articles.");
+    }
+    
+    // save our popular articles array
+    success = [NSKeyedArchiver archiveRootObject:[self popularArticles]
+                                          toFile:[self popularArticlesArchivePath]];
+    
+    if (!success) {
+        NSLog(@"Could not save popular articles.");
+    }
+}
+
+
+- (void)clearPopularArticles {
+    
+    // Clear our cache of popular articles
+    [self setPopularArticles:[[NSMutableArray alloc] init]];
+    
+    // Loop through each section and mark all articles as not popular
+    for (NSArray *articles in [self articlesDictionary]) {
+        
+        if ([articles count] == 0) continue;
+        
+        // Since the articles are sorted by popularity (most popular are first)
+        // we can stop as soon as we get to a one that is not marked as popular
+        for (NewspaperArticle *article in articles) {
+            if (![article isPopularArticle]) break;
+            [article setIsPopularArticle:NO];
+        }
+    }
+}
+
+
+// Takes an array of arrays of most popular article info sorted
+// by popularity (most to least) and updates our dictionary with which
+// articles are most popular
+- (void)updateMostPopularArticlesWithRanking:(NSArray *)articleRanking
+{
+    // Clear the existing popular articles
+    [self clearPopularArticles];
+    
+    // Find each popular article, mark it as popular, and add it to our popular articles cache
+    for (NSArray *popularArticleInfo in articleRanking) {
+        
+        // In the info array, the title is at index 0, the section at index 1
+        NSString *popularArticleTitle = [popularArticleInfo objectAtIndex:0];
+        NSString *popularArticleSection = [popularArticleInfo objectAtIndex:1];
+        
+        NSMutableArray *sectionArticles = [[self articlesDictionary] objectForKey:popularArticleSection];
+        
+        // Search the articles in the given section
+        NSUInteger index = [sectionArticles indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+                NewspaperArticle *article = (NewspaperArticle *)obj;
+                if ([[article articleTitle] isEqualToString:popularArticleTitle]) {
+                    return YES;
+                } else return NO;
+        }];
+            
+        // Article should be found - now set it as popular and add it to
+        // our dedicated popular articles array
+        if (index != NSNotFound) {
+            [[sectionArticles objectAtIndex:index] setIsPopularArticle:YES];
+            [[self popularArticles] addObject:[sectionArticles objectAtIndex:index]];
+        }
     }
 }
 
 
 #pragma mark Public API
 
-- (void)fetchNewspaperWithCompletionBlock:(void (^)(NSUInteger, NSError *))completionBlock
+- (void)fetchNewspaperWithCompletionBlock:(void (^)(BOOL, NSError *))completionBlock
 {
     // If we're not connected to the internet, send an error back
     if (![UIApplication hasNetworkConnection]) {
@@ -209,7 +263,7 @@ NSString * const MyMaretLastNewspaperUpdateKey = @"MyMaretLastNewspaperUpdateKey
                                              code:2012
                                          userInfo:dict];
         
-        completionBlock(0, error);
+        completionBlock(false, error);
         return;
     }
 
@@ -219,75 +273,84 @@ NSString * const MyMaretLastNewspaperUpdateKey = @"MyMaretLastNewspaperUpdateKey
     PFQuery *query = [PFQuery queryWithClassName:@"Article"];
     [query whereKey:@"createdAt" greaterThan:[self lastNewspaperUpdate]];
     [query whereKey:@"isPublished" equalTo:[NSNumber numberWithBool:YES]];
+    [query orderByDescending:@"readCount"];
     
-    // Sort the results so we have them by section
-    [query orderByAscending:@"section"];
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
+    [query findObjectsInBackgroundWithBlock:^(NSArray *articles, NSError *error) {
+        
+        // If there was no error and there are new articles
+        if (!error && articles && [articles count] > 0) {
+            
             // Update lastNewspaperUpdate to now
             [self setLastNewspaperUpdate:[NSDate date]];
             
             // Add the new announcements to our current array of announcements
-            [self addAnnouncements:objects];
-            [self saveChanges];
+            [self addArticlesToDictionary:articles];
             
-            completionBlock([objects count], nil);
+            completionBlock(true, nil);
+            
+        // If there was no error but there are no new articles
+        } else if (!error) {
+            completionBlock(false, nil);
+            
+        // If there was an error
         } else {
-            completionBlock(0, error);
+            completionBlock(false, error);
         }
     }];
 }
 
 
--(NSUInteger)numberOfAnnouncementsInSection:(NSString *)section
+-(NSUInteger)numberOfArticlesInSection:(NSString *)section
 {
-    #warning not implemented
-    return 0;
+    return [[[self articlesDictionary] objectForKey:section] count];
 }
 
 
 
-- (Announcement *)announcementAtIndex:(NSUInteger)index
+- (NewspaperArticle *)articleInSection:(NSString *)section atIndex:(NSUInteger)index
 {
-    // Return the corresponding announcement from whichever array
-    // (The search results or all announcements) we want to access
-    if (!self.filteredAnnouncements) {
-        return [[self announcements] objectAtIndex:index];
-    } else {
-        return [[self filteredAnnouncements] objectAtIndex:index];
-    }
+    // Get the array of articles for the given section, and return the article at "index"
+    return [[[self articlesDictionary] objectForKey:section] objectAtIndex:index];
 }
 
 
-- (void)markAnnouncementAtIndexAsRead:(NSUInteger)readIndex
+- (void)markArticleAsReadInSection:(NSString *)section atIndex:(NSUInteger)readIndex
 {
-    // If we're currently working with the filtered announcements,
-    // we need to convert readIndex to be an index in the full announcements
-    // array
+    /* If we're currently working with the filtered announcements,
+    * we need to convert readIndex to be an index in the full announcements
+    * array
     if (self.filteredAnnouncements) {
         Announcement *selectedFilteredAnnouncement = [self.filteredAnnouncements objectAtIndex:readIndex];
         readIndex = [self.announcements indexOfObject:selectedFilteredAnnouncement];
-    }
+    }*/
     
-    // Change to read if the announcement is unread
-    if ([[self.announcements objectAtIndex:readIndex] isUnread]) {
-        [[[self announcements] objectAtIndex:readIndex] setIsUnread:FALSE];
-        [self saveChanges];
+    NewspaperArticle *readArticle = [self articleInSection:section atIndex:readIndex];
+    
+    // Change to read if the article is unread,
+    // and download the new article ranking
+    if ([readArticle isUnreadArticle]) {
+        [readArticle setIsUnreadArticle:NO];
         
-        // Update the number of unread announcements
-        [self setNumUnreadAnnouncements:[self numUnreadAnnouncements] - 1];
+        [PFCloud callFunctionInBackground:@"incrementArticleReadCount"
+                           withParameters: @{@"title": [readArticle articleTitle]}
+                                    block:^(NSArray *topFiveArticleRanking, NSError *error) {
+                                        if (!error) {
+                                            [self updateMostPopularArticlesWithRanking:topFiveArticleRanking];
+                                        } else {
+                                            NSLog(@"Error: %@", [[error userInfo] objectForKey:@"error"]);
+                                        }
+                                    }];
     }
 }
 
 
 
-// The searchString being nil or not determines whether
-// the AnnouncementsStore is in "filter mode" or not
-- (void)setSearchFilterString:(NSString *)searchString
+
+
+/*- (void)setSearchFilterString:(NSString *)searchString
 {
     // If we want only today's announcements, filter out those whose postDateAsString is "Today"
-    if (searchString && [searchString isEqualToString:AnnouncementsStoreFilterStringToday]) {
+    if (searchString && [searchString isEqualToString:NewspaperStoreFilterStringPopular]) {
         NSPredicate *todayPredicate = [NSPredicate predicateWithFormat:@"postDateAsString like \"Today\""];
         
         [self setFilteredAnnouncements:[self.announcements filteredArrayUsingPredicate:todayPredicate]];
@@ -304,7 +367,7 @@ NSString * const MyMaretLastNewspaperUpdateKey = @"MyMaretLastNewspaperUpdateKey
     } else {
         [self setFilteredAnnouncements:nil];
     }
-}
+}*/
 
 
 

@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import "UIApplication+iOSVersionChecker.h"
+#import "NewspaperStore.h"
 
 // NSUserDefaults keys
 NSString * const MyMaretIsLoggedInKey = @"MyMaretIsLoggedInKey";
@@ -55,7 +56,7 @@ NSString * const MyMaretPushNotificationTypeNewspaper = @"newspaper";
     // Change the status bar on iOS 6 to not be tinted
     // Thanks to http://stackoverflow.com/questions/4456474/how-to-change-the-color-of-status-bar
     if ([UIApplication isPrevIOS]) [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-    
+    [NewspaperStore sharedStore];
     return YES;
 }
 

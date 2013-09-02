@@ -12,16 +12,16 @@
 
 @interface Announcement : NSManagedObject
 
-@property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSString * body;
-@property (nonatomic, retain) NSString * author;
-@property (nonatomic) NSTimeInterval postDate;
-@property (nonatomic) BOOL isUnread;
-@property (nonatomic) double orderingValue;
+@property (nonatomic, retain) NSString * announcementTitle;
+@property (nonatomic, retain) NSString * announcementBody;
+@property (nonatomic, retain) NSString * announcementAuthor;
+@property (nonatomic) NSTimeInterval announcementPostDate;
+@property (nonatomic) BOOL isUnreadAnnouncement;
+@property (nonatomic) double announcementOrderingValue;
 
-+ (Announcement *)announcementWithTitle:(NSString *)announcementTitle
-                                   body:(NSString *)announcementBody
-                                 author:(NSString *)announcementAuthor
++ (Announcement *)announcementWithTitle:(NSString *)aTitle
+                                   body:(NSString *)aBody
+                                 author:(NSString *)author
                                postDate:(NSDate *)datePosted
                  inManagedObjectContext:(NSManagedObjectContext *)context;
 

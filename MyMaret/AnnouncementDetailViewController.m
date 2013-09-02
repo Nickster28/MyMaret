@@ -47,8 +47,8 @@
     
     // Set all of the announcement info
     //[self.navigationItem setTitle:self.announcement.postDateAsString];
-    [self.titleLabel setText:self.announcement.title];
-    [self.bodyTextView setText:self.announcement.description];
+    [self.titleLabel setText:[[self announcement] announcementTitle]];
+    [self.bodyTextView setText:[[self announcement] description]];
     
     
     // Configure the layer used to draw the divider line
@@ -86,7 +86,7 @@
     MFMailComposeViewController *mailView = [[MFMailComposeViewController alloc] init];
     mailView.mailComposeDelegate = self;
     
-    [mailView setSubject:self.announcement.title];
+    [mailView setSubject:[[self announcement] announcementTitle]];
     [mailView setMessageBody:self.announcement.description
                       isHTML:NO];
     
