@@ -48,6 +48,7 @@
 		01A4FE2417B97304007FAB5C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01A4FE2217B97304007FAB5C /* InfoPlist.strings */; };
 		01A4FE2617B97304007FAB5C /* MyMaret_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A4FE2517B97304007FAB5C /* MyMaret_Tests.m */; };
 		01A4FE3517B97C08007FAB5C /* UIColor+SchoolColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A4FE3417B97C08007FAB5C /* UIColor+SchoolColor.m */; };
+		01ACC11E17D5020D008893ED /* SectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ACC11D17D5020D008893ED /* SectionHeaderView.xib */; };
 		01B0BB9417ACA6FA0035B3FE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BB9317ACA6FA0035B3FE /* Parse.framework */; };
 		01B0BB9917ACA74C0035B3FE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BB9817ACA74C0035B3FE /* CFNetwork.framework */; };
 		01B0BB9A17ACA7540035B3FE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BB9617ACA7440035B3FE /* AudioToolbox.framework */; };
@@ -147,6 +148,7 @@
 		01A4FE2717B97304007FAB5C /* MyMaret Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyMaret Tests-Prefix.pch"; sourceTree = "<group>"; };
 		01A4FE3317B97C08007FAB5C /* UIColor+SchoolColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+SchoolColor.h"; sourceTree = "<group>"; };
 		01A4FE3417B97C08007FAB5C /* UIColor+SchoolColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SchoolColor.m"; sourceTree = "<group>"; };
+		01ACC11D17D5020D008893ED /* SectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionHeaderView.xib; sourceTree = "<group>"; };
 		01B0BB9317ACA6FA0035B3FE /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		01B0BB9617ACA7440035B3FE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		01B0BB9817ACA74C0035B3FE /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -396,6 +398,7 @@
 			children = (
 				01DAA6B717A70A1B00B23BB2 /* NewspaperTableViewController.h */,
 				01DAA6B817A70A1B00B23BB2 /* NewspaperTableViewController.m */,
+				01ACC11D17D5020D008893ED /* SectionHeaderView.xib */,
 				0169749917D30F8D00973B1B /* NewspaperStore.h */,
 				0169749A17D30F8D00973B1B /* NewspaperStore.m */,
 				016974A517D3113700973B1B /* NewspaperArticle.h */,
@@ -525,6 +528,7 @@
 				0177455317A60AC3001625BF /* InfoPlist.strings in Resources */,
 				01271A1217C9CB2E003C487C /* MainMenuBackgroundView.xib in Resources */,
 				0177455C17A60AC3001625BF /* Main.storyboard in Resources */,
+				01ACC11E17D5020D008893ED /* SectionHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

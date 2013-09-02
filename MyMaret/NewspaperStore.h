@@ -58,7 +58,16 @@ extern NSString * const NewspaperStoreFilterStringPopular;
 // string is nil.  You must set the search string to nil before you can access all
 // articles like normal.
 
--(void)setSearchFilterString:(NSString *)searchString;
+- (void)setSearchFilterString:(NSString *)searchString;
+
+
+- (NSUInteger)numberOfSections;
+
+
+// Get section titles by index so we can keep our list of sections
+// in one place and so the tableviewcontroller can just keep track
+// of a number in NSUserDefaults
+- (NSString *)sectionTitleForIndex:(NSUInteger)index;
 
 
 

@@ -172,27 +172,6 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
 }
 
 
-// Save changes to our articles dictionary
-- (void)saveChanges
-{
-    // save our articles dictionary
-    BOOL success = [NSKeyedArchiver archiveRootObject:[self articlesDictionary]
-                                               toFile:[self articlesArchivePath]];
-    
-    if (!success) {
-        NSLog(@"Could not save all articles.");
-    }
-    
-    // save our popular articles array
-    success = [NSKeyedArchiver archiveRootObject:[self popularArticles]
-                                          toFile:[self popularArticlesArchivePath]];
-    
-    if (!success) {
-        NSLog(@"Could not save popular articles.");
-    }
-}
-
-
 - (void)clearPopularArticles {
     
     // Clear our cache of popular articles
@@ -238,10 +217,15 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
                 } else return NO;
         }];
             
-        // Article should be found - now set it as popular and add it to
-        // our dedicated popular articles array
+        // Article should be found - now set it as popular, move it to the top,
+        // and add it to our dedicated popular articles array
         if (index != NSNotFound) {
-            [[sectionArticles objectAtIndex:index] setIsPopularArticle:YES];
+            NewspaperArticle *article = [sectionArticles objectAtIndex:index];
+            [article setIsPopularArticle:YES];
+            
+            [sectionArticles removeObjectAtIndex:index];
+            [sectionArticles insertObject:article atIndex:0];
+            
             [[self popularArticles] addObject:[sectionArticles objectAtIndex:index]];
         }
     }
@@ -314,6 +298,27 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
 }
 
 
+// Save changes to our articles dictionary
+- (void)saveChanges
+{
+    // save our articles dictionary
+    BOOL success = [NSKeyedArchiver archiveRootObject:[self articlesDictionary]
+                                               toFile:[self articlesArchivePath]];
+    
+    if (!success) {
+        NSLog(@"Could not save all articles.");
+    }
+    
+    // save our popular articles array
+    success = [NSKeyedArchiver archiveRootObject:[self popularArticles]
+                                          toFile:[self popularArticlesArchivePath]];
+    
+    if (!success) {
+        NSLog(@"Could not save popular articles.");
+    }
+}
+
+
 // Returns the count of the array of articles we're currently interested in
 -(NSUInteger)numberOfArticlesInSection:(NSString *)section
 {
@@ -325,6 +330,18 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
 - (NewspaperArticle *)articleInSection:(NSString *)section atIndex:(NSUInteger)index
 {
     return [[self currentRelevantArticlesArrayForSection:section] objectAtIndex:index];
+}
+
+
+- (NSString *)sectionTitleForIndex:(NSUInteger)index
+{
+    return [@[@"News", @"Opinion", @"Features", @"Center Spread", @"Style", @"Sports"] objectAtIndex:index];
+}
+
+
+- (NSUInteger)numberOfSections
+{
+    return [[self articlesDictionary] count];
 }
 
 
