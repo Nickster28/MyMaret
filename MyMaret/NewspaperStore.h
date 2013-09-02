@@ -29,27 +29,36 @@ extern NSString * const NewspaperStoreFilterStringPopular;
 - (void)fetchNewspaperWithCompletionBlock:(void (^)(BOOL, NSError *err))completionBlock;
 
 
-// Get the article in a given section at a given index
+// Get the article in a given section at a given index (filtered and non-filtered)
 - (NewspaperArticle *)articleInSection:(NSString *)section
                                atIndex:(NSUInteger)index;
 
 
 // Mark the article at readIndex in the given section as read,
 // upload that information to Parse, and download the newest article rankings
+// (filtered and non-filtered)
 - (void)markArticleAsReadInSection:(NSString *)section
                            atIndex:(NSUInteger)readIndex;
 
 
-// Returns the total number of articles in a given section
+// Returns the total number of articles in a given section (filtered and non-filtered)
 - (NSUInteger)numberOfArticlesInSection:(NSString *)section;
 
 
 
-// ****** FOR ONLY ACCESSING CERTAIN ANNOUNCEMENTS (FILTERING) ******** //
+// ****** FOR ONLY ACCESSING CERTAIN ARTICLES (FILTERING) ******** //
 // Set the string to filter by
 
+// If this string is set to something other than nil, the
+// articleInSection:atIndex, markArticleAsReadInSection:atIndex:,
+// and the numberOfArticlesInSection: methods will change their output.
+// Ex. if you set the filter string to "Nick", you can call the above 3 methods
+// with section as nil and you'll get data back based only on the articles that
+// match the string "Nick".  The section string is only referenced when the search
+// string is nil.  You must set the search string to nil before you can access all
+// articles like normal.
 
-//-(void)setSearchFilterString:(NSString *)searchString;
+-(void)setSearchFilterString:(NSString *)searchString;
 
 
 

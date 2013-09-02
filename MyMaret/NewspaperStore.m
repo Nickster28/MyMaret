@@ -23,7 +23,7 @@
 
 // For newspaper search
 @property (nonatomic, strong) NSString *searchString;
-@property (nonatomic, strong) NSString *filteredArticles;
+@property (nonatomic, strong) NSArray *filteredArticles;
 
 // Saves all Core Data changes
 - (void)saveChanges;
@@ -248,6 +248,20 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
 }
 
 
+// Returns the array of articles that is currently being accessed
+// (filtered or popular articles or articles for a given section)
+- (NSArray *)currentRelevantArticlesArrayForSection:(NSString *)section
+{
+    if (self.searchString && !self.filteredArticles) {
+        return self.popularArticles;
+    } else if (self.searchString) {
+        return self.filteredArticles;
+    } else {
+        return [[self articlesDictionary] objectForKey:section];
+    }
+}
+
+
 #pragma mark Public API
 
 - (void)fetchNewspaperWithCompletionBlock:(void (^)(BOOL, NSError *))completionBlock
@@ -300,31 +314,26 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
 }
 
 
+// Returns the count of the array of articles we're currently interested in
 -(NSUInteger)numberOfArticlesInSection:(NSString *)section
 {
-    return [[[self articlesDictionary] objectForKey:section] count];
+    return [[self currentRelevantArticlesArrayForSection:section] count];
 }
 
 
-
+// Return the article at the given index in the array of articles we're interested in
 - (NewspaperArticle *)articleInSection:(NSString *)section atIndex:(NSUInteger)index
 {
-    // Get the array of articles for the given section, and return the article at "index"
-    return [[[self articlesDictionary] objectForKey:section] objectAtIndex:index];
+    return [[self currentRelevantArticlesArrayForSection:section] objectAtIndex:index];
 }
 
 
 - (void)markArticleAsReadInSection:(NSString *)section atIndex:(NSUInteger)readIndex
 {
-    /* If we're currently working with the filtered announcements,
-    * we need to convert readIndex to be an index in the full announcements
-    * array
-    if (self.filteredAnnouncements) {
-        Announcement *selectedFilteredAnnouncement = [self.filteredAnnouncements objectAtIndex:readIndex];
-        readIndex = [self.announcements indexOfObject:selectedFilteredAnnouncement];
-    }*/
+    // Get the array of articles we're currently interested in
+    NSArray *articlesArray = [self currentRelevantArticlesArrayForSection:section];
     
-    NewspaperArticle *readArticle = [self articleInSection:section atIndex:readIndex];
+    NewspaperArticle *readArticle = [articlesArray objectAtIndex:readIndex];
     
     // Change to read if the article is unread,
     // and download the new article ranking
@@ -345,29 +354,34 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
 
 
 
-
-
-/*- (void)setSearchFilterString:(NSString *)searchString
+- (void)setSearchFilterString:(NSString *)searchString
 {
-    // If we want only today's announcements, filter out those whose postDateAsString is "Today"
+    [self setSearchString:searchString];
+    
+    // If we want only the most popular articles...
     if (searchString && [searchString isEqualToString:NewspaperStoreFilterStringPopular]) {
-        NSPredicate *todayPredicate = [NSPredicate predicateWithFormat:@"postDateAsString like \"Today\""];
+        [self setFilteredArticles:nil];
         
-        [self setFilteredAnnouncements:[self.announcements filteredArrayUsingPredicate:todayPredicate]];
-        
-        // Otherwise, filter them by whether they contain the given searchString
+    // Otherwise, filter them by whether they contain the given searchString
     } else if (searchString) {
         // Use NSPredicate - http://ygamretuta.me/2011/08/10/ios-implementing-a-basic-search-uisearchdisplaycontroller-and-interface-builder/
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                                  @"(description contains[cd] %@) OR (title contains[cd] %@)", searchString, searchString];
+        NSPredicate *predicate =
+            [NSPredicate predicateWithFormat: @"(articleAuthor contains[cd] %@) OR (articleBody contains[cd] %@) OR (articleTitle contains[cd] %@)", searchString, searchString, searchString];
         
-        [self setFilteredAnnouncements:[self.announcements filteredArrayUsingPredicate:predicate]];
+        // Make an array of all articles so we can search all of them
+        NSArray *allArticles = [[NSArray alloc] init];
         
-        // Otherwise, we want all announcements now
+        for (NSArray *sectionArticles in [self articlesDictionary]) {
+            allArticles = [allArticles arrayByAddingObjectsFromArray:sectionArticles];
+        }
+        
+        [self setFilteredArticles:[allArticles filteredArrayUsingPredicate:predicate]];
+        
+        // Otherwise, we want all articles now
     } else {
-        [self setFilteredAnnouncements:nil];
+        [self setFilteredArticles:nil];
     }
-}*/
+}
 
 
 

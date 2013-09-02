@@ -126,7 +126,7 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
         NSEntityDescription *description = [[model entitiesByName] objectForKey:@"Announcement"];
         [request setEntity:description];
         
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"orderingValue"
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"announcementOrderingValue"
                                                                          ascending:YES];
         [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
         
@@ -224,6 +224,15 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
 }
 
 
+// Returns the array of announcements that is currently
+// being searched (filtered announcements or all announcements)
+- (NSArray *)currentRelevantAnnouncementsArray
+{
+    if (self.filteredAnnouncements) return self.filteredAnnouncements;
+    else return self.announcements;
+}
+
+
 #pragma mark Public API
 
 - (void)fetchAnnouncementsWithCompletionBlock:(void (^)(NSUInteger, NSError *))completionBlock
@@ -309,11 +318,7 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
 {
     // Return whichever array (the search results or all announcements)
     // we want to count
-    if (!self.filteredAnnouncements) {
-        return [[self announcements] count];
-    } else {
-        return [[self filteredAnnouncements] count];
-    }
+    return [[self currentRelevantAnnouncementsArray] count];
 }
 
 
@@ -327,27 +332,17 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
 {
     // Return the corresponding announcement from whichever array
     // (The search results or all announcements) we want to access
-    if (!self.filteredAnnouncements) {
-        return [[self announcements] objectAtIndex:index];
-    } else {
-        return [[self filteredAnnouncements] objectAtIndex:index];
-    }
+    return [[self currentRelevantAnnouncementsArray] objectAtIndex:index];
 }
 
 
 - (void)markAnnouncementAtIndexAsRead:(NSUInteger)readIndex
 {
-    // If we're currently working with the filtered announcements,
-    // we need to convert readIndex to be an index in the full announcements
-    // array
-    if (self.filteredAnnouncements) {
-        Announcement *selectedFilteredAnnouncement = [self.filteredAnnouncements objectAtIndex:readIndex];
-        readIndex = [self.announcements indexOfObject:selectedFilteredAnnouncement];
-    }
+    NSArray *announcementsArray = [self currentRelevantAnnouncementsArray];
     
-    // Change to read if the announcement is unread
-    if ([[self.announcements objectAtIndex:readIndex] isUnreadAnnouncement]) {
-        [[[self announcements] objectAtIndex:readIndex] setIsUnreadAnnouncement:FALSE];
+    // If it's unread, mark it as read
+    if ([[announcementsArray objectAtIndex:readIndex] isUnreadAnnouncement]) {
+        [[announcementsArray objectAtIndex:readIndex] setIsUnreadAnnouncement:NO];
         [self saveChanges];
         
         // Update the number of unread announcements
@@ -444,7 +439,7 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
     } else if (searchString) {
         // Use NSPredicate - http://ygamretuta.me/2011/08/10/ios-implementing-a-basic-search-uisearchdisplaycontroller-and-interface-builder/
         NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                                  @"(description contains[cd] %@) OR (title contains[cd] %@)", searchString, searchString];
+                                  @"(description contains[cd] %@) OR (announcementTitle contains[cd] %@)", searchString, searchString];
         
         [self setFilteredAnnouncements:[self.announcements filteredArrayUsingPredicate:predicate]];
         
