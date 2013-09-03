@@ -92,7 +92,7 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
 
 - (void)makeNewArticlesDictionary
 {
-    [self setArticlesDictionary:[NSDictionary dictionaryWithObjects:@[@[], @[], @[], @[], @[], @[]]
+    [self setArticlesDictionary:[NSDictionary dictionaryWithObjects:@[[NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array]]
                                                             forKeys:@[@"News", @"Opinion", @"Features", @"Center Spread", @"Style", @"Sports"]]];
 }
 

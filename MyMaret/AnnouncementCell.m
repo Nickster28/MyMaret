@@ -36,7 +36,7 @@
 
 
 // Set the cell to display all of the given announcement's info
-- (void)bindAnnouncementToCell:(Announcement *)announcement
+- (void)bindAnnouncement:(Announcement *)announcement
 {
     [self.titleLabel setText:[announcement announcementTitle]];
     

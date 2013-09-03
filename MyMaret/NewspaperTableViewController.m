@@ -8,17 +8,27 @@
 
 #import "NewspaperTableViewController.h"
 #import "NewspaperStore.h"
+#import "NewspaperArticle.h"
+#import "NewspaperCell.h"
+#import "UIColor+SchoolColor.h"
 
 @interface NewspaperTableViewController () <UIScrollViewDelegate>
+
+// The index of the currently selected section
 @property (nonatomic) NSUInteger sectionIndex;
+
+// The header views used to switch between newspaper sections
 @property (nonatomic, weak) IBOutlet UIView *sectionsHeaderView;
 @property (nonatomic, weak) IBOutlet UIScrollView *sectionsHeaderScrollView;
-@property (nonatomic) BOOL isScrollingVertically;
 @property (nonatomic, weak) IBOutlet UIView *headerContentView;
 @property (nonatomic, strong) UIButton *leftArrowButton;
 @property (nonatomic, strong) UIButton *rightArrowButton;
+
+// A way to keep track of if the user scrolled vertically and ignore it
+@property (nonatomic) BOOL isScrollingVertically;
 @end
 
+// NSUserDefaults key for storing the section index
 NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefKey";
 
 @implementation NewspaperTableViewController
@@ -29,6 +39,20 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    // Add the tableView's refresh control
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl setTintColor:[UIColor schoolColor]];
+    [self.refreshControl addTarget:self
+                            action:@selector(refreshNewspaper)
+                  forControlEvents:UIControlEventValueChanged];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
 
 
@@ -45,10 +69,38 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 
 - (void)setSectionIndex:(NSUInteger)sectionIndex
 {
+    if (sectionIndex == _sectionIndex) return;
+    
+    // Fade/Unfade the arrow buttons if necessary
     [self setArrowButtonsForSection:sectionIndex];
     
+    // Figure out if the user navigated left or right
+    BOOL navigatedLeft = (sectionIndex < _sectionIndex) ? YES : NO;
+    
+    // Get the number of articles we're currently displaying
+    NSUInteger numArticlesOnscreen = [self.tableView numberOfRowsInSection:0];
+    
+    // Set the section index
     _sectionIndex = sectionIndex;
     [[NSUserDefaults standardUserDefaults] setInteger:_sectionIndex forKey:MyMaretNewspaperSectionPrefKey];
+    
+    // Get the new article count
+    NSString *newSectionTitle = [[NewspaperStore sharedStore] sectionTitleForIndex:sectionIndex];
+    NSUInteger numArticlesToDisplay = [[NewspaperStore sharedStore] numberOfArticlesInSection:newSectionTitle];
+    
+    // Have the articles fly in from different directions depending on which way the user navigated
+    if (navigatedLeft) {
+        [self changeArticleCountFrom:numArticlesOnscreen
+                                  to:numArticlesToDisplay
+                 withRemoveAnimation:UITableViewRowAnimationRight
+                     insertAnimation:UITableViewRowAnimationLeft];
+    } else {
+        [self changeArticleCountFrom:numArticlesOnscreen
+                                  to:numArticlesToDisplay
+                 withRemoveAnimation:UITableViewRowAnimationLeft
+                     insertAnimation:UITableViewRowAnimationRight];
+    }
+
 }
 
 
@@ -68,6 +120,8 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 }
 
 
+// Animates buttons either in or out by animating the opacity
+// and enabling/disabling the buttons
 - (void)makeButton:(UIButton *)button active:(BOOL)active
 {
     // Return if we don't need to change anything
@@ -108,6 +162,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
         
         // Add the left button
         self.leftArrowButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 3.0, 40.0, 40.0)];
+        [self.leftArrowButton setBackgroundColor:[UIColor whiteColor]];
         [self.leftArrowButton addTarget:self
                                  action:@selector(changeSection:)
                        forControlEvents:UIControlEventTouchUpInside];
@@ -120,6 +175,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
         
         // Add the right button
         self.rightArrowButton = [[UIButton alloc] initWithFrame:CGRectMake(280.0, 3.0, 40.0, 40.0)];
+        [self.rightArrowButton setBackgroundColor:[UIColor whiteColor]];
         [self.rightArrowButton addTarget:self
                                   action:@selector(changeSection:)
                         forControlEvents:UIControlEventTouchUpInside];
@@ -133,6 +189,16 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
         // Enable or disable each arrow button
         [self setArrowButtonsForSection:[self sectionIndex]];
         
+        // Add a divider line under the section picker
+        CALayer *dividerLayer = [[CALayer alloc] init];
+        [dividerLayer setBounds:CGRectMake(0,0,self.sectionsHeaderView.frame.size.width - 40.0, 1.0)];
+        [dividerLayer setPosition:CGPointMake(self.sectionsHeaderView.frame.size.width / 2.0,
+                                              self.sectionsHeaderView.frame.size.height)];
+        
+        [dividerLayer setBackgroundColor:[[UIColor schoolColor] CGColor]];
+        
+        [[self.sectionsHeaderView layer] addSublayer:dividerLayer];
+        
         // Scroll to the right section
         [[self sectionsHeaderScrollView] setContentOffset:CGPointMake([self sectionsHeaderScrollView].frame.size.width * [self sectionIndex], 0.0)];
     }
@@ -141,6 +207,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 }
 
 
+// Triggered by the arrow buttons being pressed
 - (void)changeSection:(UIButton *)sender
 {
     // Increment or decrement the section index
@@ -155,9 +222,85 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 }
 
 
+// Called when the user swaps between sections
+// or a new edition of the newspaper comes in
+- (void)changeArticleCountFrom:(NSUInteger)fromCount
+                            to:(NSUInteger)toCount
+           withRemoveAnimation:(UITableViewRowAnimation)removeAnimation
+               insertAnimation:(UITableViewRowAnimation)insertAnimation
+{
+    // Remove all the old articles onscreen with an animation
+    // Make an array of all the NSIndexPaths to delete
+    NSMutableArray *rowsToDelete = [NSMutableArray array];
+    for (int i = 0; i < fromCount; i++) {
+        NSIndexPath *ip = [NSIndexPath indexPathForRow:i
+                                             inSection:0];
+        [rowsToDelete addObject:ip];
+    }
+    
+    
+    // Insert all of the new articles onscreen with an animation
+    // Make an array of all the indexpaths to insert
+    NSMutableArray *rowsToInsert = [NSMutableArray array];
+    for (int i = 0; i < toCount; i++) {
+        
+        NSIndexPath *ip = [NSIndexPath indexPathForRow:i
+                                             inSection:0];
+        [rowsToInsert addObject:ip];
+    }
+    
+    // Update the table
+    [self.tableView beginUpdates];
+    
+    [self.tableView insertRowsAtIndexPaths:rowsToInsert
+                          withRowAnimation:insertAnimation];
+    [self.tableView deleteRowsAtIndexPaths:rowsToDelete
+                          withRowAnimation:removeAnimation];
+    
+    [self.tableView endUpdates];
+}
+
+
+// Triggered by the UIRefreshControl
+- (void)refreshNewspaper
+{
+    [self.refreshControl beginRefreshing];
+    NSUInteger numArticlesOnScreen = [self.tableView numberOfRowsInSection:0];
+    
+    // Have the store check for a new edition of the newspaper
+    [[NewspaperStore sharedStore] fetchNewspaperWithCompletionBlock:^(BOOL didAddArticles, NSError *err) {
+        
+        if (err) {
+            UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Whoops!"
+                                                         message:[err localizedDescription]
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+            [av show];
+            
+        } else {
+            
+            // There may or may not have been new articles to download
+            if (didAddArticles) {
+                NSString *sectionTitle = [[NewspaperStore sharedStore] sectionTitleForIndex:[self sectionIndex]];
+                NSUInteger numNewArticles = [[NewspaperStore sharedStore] numberOfArticlesInSection:sectionTitle];
+                
+                [self changeArticleCountFrom:numArticlesOnScreen
+                                          to:numNewArticles
+                         withRemoveAnimation:UITableViewRowAnimationBottom
+                             insertAnimation:UITableViewRowAnimationTop];
+            }
+        }
+        
+        [self.refreshControl endRefreshing];
+    }];
+    
+}
+
 
 #pragma mark UIScrollViewDelegate
 
+// Track when the user finishes scrolling and update the articles being displayed
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     if ([self isScrollingVertically]) {
@@ -171,6 +314,8 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 }
 
 
+// Track if the user scrolls vertically so we know
+// NOT to change the section
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if ([self isScrollingVertically]) return;
@@ -185,6 +330,12 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     return [self sectionsHeaderView];
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 120.0;
 }
 
 
@@ -205,12 +356,22 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
     return [[NewspaperStore sharedStore] numberOfArticlesInSection:sectionTitle];
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    // Register the cell's NIB file
+    [tableView registerNib:[UINib nibWithNibName:@"NewspaperCell"
+                                          bundle:nil]
+    forCellReuseIdentifier:@"newspaperCell"];
     
-    // Configure the cell...
+    NewspaperCell *cell = [tableView dequeueReusableCellWithIdentifier:@"newspaperCell"
+                                                          forIndexPath:indexPath];
+    
+    // Get the article at the given index
+    NSString *sectionTitle = [[NewspaperStore sharedStore] sectionTitleForIndex:[self sectionIndex]];
+    NewspaperArticle *article = [[NewspaperStore sharedStore] articleInSection:sectionTitle atIndex:[indexPath row]];
+    
+    [cell bindArticle:article];
     
     return cell;
 }

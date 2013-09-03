@@ -150,7 +150,7 @@
     Announcement *announcement = [[AnnouncementsStore sharedStore] announcementAtIndex:[indexPath row]];
     
     // Configure the cell
-    [cell bindAnnouncementToCell:announcement];
+    [cell bindAnnouncement:announcement];
 
     return cell;
 }

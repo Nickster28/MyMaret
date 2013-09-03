@@ -26,7 +26,7 @@ extern NSString * const NewspaperStoreFilterStringPopular;
 // Fetches new articles from Parse and executes the passed-in
 // block by either passing in nil or an error if there was one,
 // and true/false depending on whether new articles were downloaded.
-- (void)fetchNewspaperWithCompletionBlock:(void (^)(BOOL, NSError *err))completionBlock;
+- (void)fetchNewspaperWithCompletionBlock:(void (^)(BOOL didAddArticles, NSError *err))completionBlock;
 
 
 // Get the article in a given section at a given index (filtered and non-filtered)

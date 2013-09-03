@@ -17,6 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *unreadImageView;
 
 
-- (void)bindAnnouncementToCell:(Announcement *)announcement;
+- (void)bindAnnouncement:(Announcement *)announcement;
 
 @end
