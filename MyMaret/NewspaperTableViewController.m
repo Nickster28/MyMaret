@@ -11,6 +11,9 @@
 #import "NewspaperArticle.h"
 #import "NewspaperCell.h"
 #import "UIColor+SchoolColor.h"
+#import "ArticleDetailViewController.h"
+#import "AppDelegate.h"
+
 
 @interface NewspaperTableViewController () <UIScrollViewDelegate>
 
@@ -26,6 +29,12 @@
 
 // A way to keep track of if the user scrolled vertically and ignore it
 @property (nonatomic) BOOL isScrollingVertically;
+
+// Boolean to keep track of whether it should check for a new newspaper
+// (we want this to happen when the user launches the app
+// by tapping on a New Newspaper push notification)
+@property (nonatomic) BOOL shouldUpdateNewspaper;
+
 @end
 
 // NSUserDefaults key for storing the section index
@@ -33,6 +42,26 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 
 @implementation NewspaperTableViewController
 @synthesize sectionIndex = _sectionIndex;
+
+
+
+- (void)awakeFromNib
+{
+    // Refresh if we get a newspaper notification while the app is running
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshNewspaper)
+                                                 name:MyMaretNewNewspaperNotification
+                                               object:nil];
+}
+
+
+// Part of the PushNotificationUpdateable protocol
+// to get the newspaperstore to refresh immediately upon launch
+- (void)reloadWhenShown
+{
+    [self setShouldUpdateNewspaper:YES];
+}
+
 
 
 - (void)viewDidLoad
@@ -53,6 +82,11 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
+    
+    if ([self shouldUpdateNewspaper]) {
+        [self refreshNewspaper];
+        [self setShouldUpdateNewspaper:NO];
+    }
 }
 
 
@@ -191,7 +225,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
         
         // Add a divider line under the section picker
         CALayer *dividerLayer = [[CALayer alloc] init];
-        [dividerLayer setBounds:CGRectMake(0,0,self.sectionsHeaderView.frame.size.width - 40.0, 1.0)];
+        [dividerLayer setBounds:CGRectMake(0,0,self.sectionsHeaderView.frame.size.width - 20.0, 1.0)];
         [dividerLayer setPosition:CGPointMake(self.sectionsHeaderView.frame.size.width / 2.0,
                                               self.sectionsHeaderView.frame.size.height)];
         
@@ -374,6 +408,30 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
     [cell bindArticle:article];
     
     return cell;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"showArticle"
+                              sender:[self.tableView cellForRowAtIndexPath:indexPath]];
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"showArticle"] && [[segue destinationViewController] isKindOfClass:[ArticleDetailViewController class]]) {
+        
+        ArticleDetailViewController *articleDVC = [segue destinationViewController];
+     
+        // Get the selected article
+        NSIndexPath *selectedIP = [self.tableView indexPathForCell:sender];
+        NSString *sectionTitle = [[NewspaperStore sharedStore] sectionTitleForIndex:[self sectionIndex]];
+        NewspaperArticle *selectedArticle = [[NewspaperStore sharedStore] articleInSection:sectionTitle atIndex:[selectedIP row]];
+        
+        // Give the article to the detail view controller
+        [articleDVC setArticle:selectedArticle];
+    }
 }
 
 @end

@@ -42,10 +42,10 @@
     // If the article is popular, make the title and body darker
     if (article.isUnreadArticle) {
         [[self titleLabel] setFont:[UIFont boldSystemFontOfSize:17.0]];
-        [[self bodyLabel] setTextColor:[UIColor blackColor]];
+        //[[self bodyLabel] setTextColor:[UIColor blackColor]];
     } else {
         [[self titleLabel] setFont:[UIFont systemFontOfSize:17.0]];
-        [[self bodyLabel] setTextColor:[UIColor darkGrayColor]];
+        //[[self bodyLabel] setTextColor:[UIColor darkGrayColor]];
     }
 }
 

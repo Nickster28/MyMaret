@@ -8,7 +8,8 @@
 
 #import "MyMaretFrontTableViewController.h"
 #import <UIKit/UIKit.h>
+#import "PushNotificationUpdateable.h"
 
-@interface NewspaperTableViewController : MyMaretFrontTableViewController
+@interface NewspaperTableViewController : MyMaretFrontTableViewController <PushNotificationUpdateable>
 
 @end

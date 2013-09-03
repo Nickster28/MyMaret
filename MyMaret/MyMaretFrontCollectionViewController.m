@@ -53,9 +53,12 @@
 // Go to newspaper if there is a new newspaper
 - (void)respondToNewspaperNotification:(NSNotification *)notification
 {
-    UINavigationController *newspaperNavController = [self.storyboard instantiateViewControllerWithIdentifier:@"newspaperNavController"];
+    // Set the selected section
+    MainMenuViewController *rearVC = (MainMenuViewController *)[self.revealViewController rearViewController];
+    [rearVC setSelectedIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
     
-    [self.revealViewController setFrontViewController:newspaperNavController animated:YES];
+    // Segue to the announcements screen
+    [rearVC performSegueWithIdentifier:@"newspaperSegue" sender:self];
 }
 
 
