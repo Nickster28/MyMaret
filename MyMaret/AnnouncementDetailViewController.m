@@ -9,7 +9,6 @@
 #import "AnnouncementDetailViewController.h"
 #import "Announcement.h"
 #import <MessageUI/MessageUI.h>
-#import "SWRevealViewController.h"
 #import "UIApplication+iOSVersionChecker.h"
 
 @interface AnnouncementDetailViewController () <MFMailComposeViewControllerDelegate>
@@ -107,7 +106,7 @@
                                    completion:nil];
     
     if (error) {
-        UIAlertView *mailErrorAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+        UIAlertView *mailErrorAlertView = [[UIAlertView alloc] initWithTitle:@"Whoops!"
                                                                      message:[error localizedDescription]
                                                                     delegate:nil
                                                            cancelButtonTitle:@"OK"

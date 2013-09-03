@@ -529,9 +529,16 @@
                             <constraint firstItem="4l3-6S-Iql" firstAttribute="top" secondItem="Wn5-82-ahr" secondAttribute="top" id="xEh-Be-Ju8"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="bdJ-IV-hap"/>
+                    <navigationItem key="navigationItem" id="bdJ-IV-hap">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="3gt-ft-V6E">
+                            <connections>
+                                <action selector="emailArticle:" destination="6zb-0s-SoT" id="a5C-zN-qK1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="articleTextView" destination="4l3-6S-Iql" id="g6t-gs-mfZ"/>
+                        <outlet property="emailButton" destination="3gt-ft-V6E" id="uTY-Dy-wzr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O9K-P0-i7v" userLabel="First Responder" sceneMemberID="firstResponder"/>

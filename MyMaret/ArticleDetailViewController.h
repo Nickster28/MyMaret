@@ -12,5 +12,9 @@
 
 @interface ArticleDetailViewController : UIViewController
 
+// The article to display
 @property (nonatomic, strong) NewspaperArticle *article;
+
+- (IBAction)emailArticle:(id)sender;
+
 @end

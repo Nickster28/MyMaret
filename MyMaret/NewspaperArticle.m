@@ -39,6 +39,7 @@ NSString * const NewspaperArticleIsUnreadEncodingKey = @"isUnreadArticle";
         // Get the month the self was uploaded
         NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:NSMonthCalendarUnit fromDate:articlePublishDate];
     
+        // Figure out which month the edition was published in
         switch ([dateComps month]) {
             case 1:
                 [self setArticleEdition: @"January"];
@@ -84,6 +85,7 @@ NSString * const NewspaperArticleIsUnreadEncodingKey = @"isUnreadArticle";
 }
 
 
+// Encode all of our instance variables
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
     [aCoder encodeObject:[self articleTitle] forKey:NewspaperArticleTitleEncodingKey];
@@ -97,6 +99,7 @@ NSString * const NewspaperArticleIsUnreadEncodingKey = @"isUnreadArticle";
 }
 
 
+// Decode all of our instance variables
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super init];
@@ -112,6 +115,19 @@ NSString * const NewspaperArticleIsUnreadEncodingKey = @"isUnreadArticle";
     }
     
     return self;
+}
+
+
+// Returns "Title
+//          By: Nick Troccoli
+//
+//
+//          Body here
+- (NSString *)description {
+    
+    NSString *description = [NSString stringWithFormat:@"%@\nBy: %@\n\n\n%@",self.articleTitle, self.articleAuthor, self.articleBody];
+    
+    return description;
 }
 
 @end

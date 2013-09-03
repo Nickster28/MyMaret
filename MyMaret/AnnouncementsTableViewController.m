@@ -29,6 +29,16 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+    
+    // We want to override the superclass's notification center
+    // action for announcements since we do something special
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MyMaretNewAnnouncementNotification
+                                                  object:nil];
+    
+    // Sign up for new announcement notifications so we can refresh when
+    // a new announcement comes in
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refreshAnnouncements)
                                                  name:MyMaretNewAnnouncementNotification

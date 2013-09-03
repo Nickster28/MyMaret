@@ -178,7 +178,7 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
     [self setPopularArticles:[[NSMutableArray alloc] init]];
     
     // Loop through each section and mark all articles as not popular
-    for (NSArray *articles in [self articlesDictionary]) {
+    for (NSArray *articles in [[self articlesDictionary] allValues]) {
         
         if ([articles count] == 0) continue;
         
@@ -362,6 +362,7 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
                                     block:^(NSArray *topFiveArticleRanking, NSError *error) {
                                         if (!error) {
                                             [self updateMostPopularArticlesWithRanking:topFiveArticleRanking];
+                                            NSLog(@"Done");
                                         } else {
                                             NSLog(@"Error: %@", [[error userInfo] objectForKey:@"error"]);
                                         }
@@ -388,7 +389,7 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
         // Make an array of all articles so we can search all of them
         NSArray *allArticles = [[NSArray alloc] init];
         
-        for (NSArray *sectionArticles in [self articlesDictionary]) {
+        for (NSArray *sectionArticles in [[self articlesDictionary] allValues]) {
             allArticles = [allArticles arrayByAddingObjectsFromArray:sectionArticles];
         }
         

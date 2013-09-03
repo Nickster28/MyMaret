@@ -47,6 +47,13 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+    
+    // Override the superclass's notification action
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MyMaretNewNewspaperNotification
+                                                  object:nil];
+    
     // Refresh if we get a newspaper notification while the app is running
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refreshNewspaper)
@@ -81,8 +88,10 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.tableView reloadData];
     
+    // If we got a push notification saying a new edition is
+    // available and the user tapped on the notification,
+    // download the new edition!
     if ([self shouldUpdateNewspaper]) {
         [self refreshNewspaper];
         [self setShouldUpdateNewspaper:NO];
@@ -428,6 +437,10 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
         NSIndexPath *selectedIP = [self.tableView indexPathForCell:sender];
         NSString *sectionTitle = [[NewspaperStore sharedStore] sectionTitleForIndex:[self sectionIndex]];
         NewspaperArticle *selectedArticle = [[NewspaperStore sharedStore] articleInSection:sectionTitle atIndex:[selectedIP row]];
+        
+        // Mark the article as read
+        [[NewspaperStore sharedStore] markArticleAsReadInSection:sectionTitle
+                                                         atIndex:[selectedIP row]];
         
         // Give the article to the detail view controller
         [articleDVC setArticle:selectedArticle];
