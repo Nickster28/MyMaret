@@ -15,7 +15,7 @@
 #import "AppDelegate.h"
 
 
-@interface NewspaperTableViewController () <UIScrollViewDelegate>
+@interface NewspaperTableViewController () <UIScrollViewDelegate, UISearchDisplayDelegate>
 
 // The index of the currently selected section
 @property (nonatomic) NSUInteger sectionIndex;
@@ -372,7 +372,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return [self sectionsHeaderView];
+    return (tableView == self.tableView) ? [self sectionsHeaderView] : nil;
 }
 
 
@@ -384,7 +384,8 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return [[self sectionsHeaderView] bounds].size.height;
+    return (tableView == self.tableView) ?
+        self.sectionsHeaderView.bounds.size.height : 0.0;
 }
 
 
@@ -445,6 +446,28 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
         // Give the article to the detail view controller
         [articleDVC setArticle:selectedArticle];
     }
+}
+
+#pragma mark Search Display Controller
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller
+shouldReloadTableForSearchString:(NSString *)searchString
+{
+    // Set the newspaper store search string so it filters out
+    // the articles we want
+    [[NewspaperStore sharedStore] setSearchFilterString:searchString];
+    
+    return YES;
+}
+
+
+- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller
+{
+    // Set the filter string to nil so the newspaper store knows
+    // we're done searching and want normal article info now
+    [[NewspaperStore sharedStore] setSearchFilterString:nil];
+    
+    [self.tableView reloadData];
 }
 
 @end
