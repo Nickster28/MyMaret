@@ -396,6 +396,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    // If this is for search results, the store disregards the section title
     NSString *sectionTitle = [[NewspaperStore sharedStore] sectionTitleForIndex:[self sectionIndex]];
     return [[NewspaperStore sharedStore] numberOfArticlesInSection:sectionTitle];
 }
@@ -411,7 +412,8 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
     NewspaperCell *cell = [tableView dequeueReusableCellWithIdentifier:@"newspaperCell"
                                                           forIndexPath:indexPath];
     
-    // Get the article at the given index
+    // Get the article at the given index (if this is for search results,
+    // the store will disregard the section title).
     NSString *sectionTitle = [[NewspaperStore sharedStore] sectionTitleForIndex:[self sectionIndex]];
     NewspaperArticle *article = [[NewspaperStore sharedStore] articleInSection:sectionTitle atIndex:[indexPath row]];
     
@@ -437,6 +439,9 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
         // Get the selected article
         NSIndexPath *selectedIP = [self.tableView indexPathForCell:sender];
         NSString *sectionTitle = [[NewspaperStore sharedStore] sectionTitleForIndex:[self sectionIndex]];
+        
+        // If the user is searching, the store will disregard the sectiontitle
+        // and will know the index pertains to the search results
         NewspaperArticle *selectedArticle = [[NewspaperStore sharedStore] articleInSection:sectionTitle atIndex:[selectedIP row]];
         
         // Mark the article as read

@@ -21,7 +21,10 @@
 @property (nonatomic, strong) NSMutableArray *popularArticles;
 @property (nonatomic, strong) NSDate *lastNewspaperUpdate;
 
-// For newspaper search
+// For newspaper search - if searchString isn't nil,
+// then the user is looking at a certain selection of articles.
+// That selection will be either filteredArticles or popularArticles.
+// (only one will be non-nil).
 @property (nonatomic, strong) NSString *searchString;
 @property (nonatomic, strong) NSArray *filteredArticles;
 
