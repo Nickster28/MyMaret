@@ -162,7 +162,8 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
                                                                      author:[object objectForKey:@"author"]
                                                                     section:[object objectForKey:@"section"]
                                                                 publishDate:[object createdAt]
-                                                                  isPopular:isPopular];
+                                                                  isPopular:isPopular
+                                                         isDigitalExclusive:[[object objectForKey:@"isDigitalExclusive"] boolValue]];
         
         // If it's a popular article, insert it at the front of its article array
         if (isPopular) {

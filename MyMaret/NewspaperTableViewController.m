@@ -460,6 +460,13 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
         [[NewspaperStore sharedStore] markArticleAsReadInSection:sectionTitle
                                                          atIndex:[selectedIP row]];
         
+        // Reload the cell to reflect that it's been read,
+        // but make sure it's still selected!
+        [self.tableView reloadRowsAtIndexPaths:@[selectedIP]
+                         withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView selectRowAtIndexPath:selectedIP animated:NO
+                         scrollPosition:UITableViewScrollPositionNone];
+        
         // Give the article to the detail view controller
         [articleDVC setArticle:selectedArticle];
     }

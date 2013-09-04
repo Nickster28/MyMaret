@@ -29,7 +29,7 @@
 
 + (UIColor *)schoolComplementaryColor
 {
-    return [UIColor colorWithRed:181.0/255.0
+    return [UIColor colorWithRed:200.0/255.0
                            green:129.0/255.0
                             blue:13.0/255.0
                            alpha:1.0];

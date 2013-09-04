@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSString *articleBody;
 @property (nonatomic) BOOL isPopularArticle;
 @property (nonatomic) BOOL isUnreadArticle;
+@property (nonatomic) BOOL isDigitalExclusive;
 @property (nonatomic, strong) NSString * articleSection;
 @property (nonatomic, strong) NSString * articleEdition;
 
@@ -25,6 +26,7 @@
                              author:(NSString *)articleAuthor
                             section:(NSString *)articleSection
                         publishDate:(NSDate *)publishDate
-                          isPopular:(BOOL) isPopular;
+                          isPopular:(BOOL) isPopular
+                 isDigitalExclusive:(BOOL) isDigitalExclusive;
 
 @end

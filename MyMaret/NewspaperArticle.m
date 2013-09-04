@@ -16,6 +16,7 @@ NSString * const NewspaperArticleSectionEncodingKey = @"articleSection";
 NSString * const NewspaperArticleEditionEncodingKey = @"articleEdition";
 NSString * const NewspaperArticleIsPopularEncodingKey = @"isPopularArticle";
 NSString * const NewspaperArticleIsUnreadEncodingKey = @"isUnreadArticle";
+NSString * const NewspaperArticleIsDigitalExclusiveEncodingKey = @"isDigitalExclusive";
 
 @implementation NewspaperArticle
 
@@ -25,6 +26,7 @@ NSString * const NewspaperArticleIsUnreadEncodingKey = @"isUnreadArticle";
                             section:(NSString *)articleSection
                         publishDate:(NSDate *)articlePublishDate
                           isPopular:(BOOL)isPopular
+                 isDigitalExclusive:(BOOL)isDigitalExclusive
 {
     self = [super init];
     if (self) {
@@ -35,6 +37,7 @@ NSString * const NewspaperArticleIsUnreadEncodingKey = @"isUnreadArticle";
         [self setArticleSection:articleSection];
         [self setIsPopularArticle:isPopular];
         [self setIsUnreadArticle:YES];
+        [self setIsDigitalExclusive:isDigitalExclusive];
     
         // Get the month the self was uploaded
         NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:NSMonthCalendarUnit fromDate:articlePublishDate];
@@ -96,6 +99,7 @@ NSString * const NewspaperArticleIsUnreadEncodingKey = @"isUnreadArticle";
     
     [aCoder encodeBool:[self isPopularArticle] forKey:NewspaperArticleIsPopularEncodingKey];
     [aCoder encodeBool:[self isUnreadArticle] forKey:NewspaperArticleIsUnreadEncodingKey];
+    [aCoder encodeBool:[self isDigitalExclusive] forKey:NewspaperArticleIsDigitalExclusiveEncodingKey];
 }
 
 
@@ -112,6 +116,7 @@ NSString * const NewspaperArticleIsUnreadEncodingKey = @"isUnreadArticle";
         
         [self setIsPopularArticle:[aDecoder decodeBoolForKey:NewspaperArticleIsPopularEncodingKey]];
         [self setIsUnreadArticle:[aDecoder decodeBoolForKey:NewspaperArticleIsUnreadEncodingKey]];
+        [self setIsDigitalExclusive:[aDecoder decodeBoolForKey:NewspaperArticleIsDigitalExclusiveEncodingKey]];
     }
     
     return self;
