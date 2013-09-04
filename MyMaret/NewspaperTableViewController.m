@@ -13,6 +13,7 @@
 #import "UIColor+SchoolColor.h"
 #import "ArticleDetailViewController.h"
 #import "AppDelegate.h"
+#import "SWRevealViewController.h"
 
 
 @interface NewspaperTableViewController () <UIScrollViewDelegate, UISearchDisplayDelegate>
@@ -95,6 +96,17 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
     if ([self shouldUpdateNewspaper]) {
         [self refreshNewspaper];
         [self setShouldUpdateNewspaper:NO];
+    }
+}
+
+
+// Save changes when the user goes to a different section
+- (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position
+{
+    // If the user may switch to another section,
+    // save the newspaper
+    if (position == FrontViewPositionRight) {
+        [[NewspaperStore sharedStore] saveChanges];
     }
 }
 
@@ -210,7 +222,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
                                  action:@selector(changeSection:)
                        forControlEvents:UIControlEventTouchUpInside];
         
-        [self.leftArrowButton setImage:[UIImage imageNamed:@"LeftArrowEnabled"]
+        [self.leftArrowButton setImage:[UIImage imageNamed:@"LeftArrow"]
                               forState:UIControlStateNormal];
         
         [_sectionsHeaderView addSubview:self.leftArrowButton];
@@ -223,7 +235,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
                                   action:@selector(changeSection:)
                         forControlEvents:UIControlEventTouchUpInside];
         
-        [self.rightArrowButton setImage:[UIImage imageNamed:@"RightArrowEnabled"]
+        [self.rightArrowButton setImage:[UIImage imageNamed:@"RightArrow"]
                                forState:UIControlStateNormal];
         
         [_sectionsHeaderView addSubview:self.rightArrowButton];

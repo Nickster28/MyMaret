@@ -280,6 +280,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="tAx-rF-eX5">
+                        <barButtonItem key="backBarButtonItem" title="Announcements" id="Sjx-U1-DPk"/>
                         <barButtonItem key="rightBarButtonItem" title="Item" id="m9w-27-64S">
                             <connections>
                                 <action selector="emailAnnouncement:" destination="wE8-6J-BXm" id="gtf-36-4Yl"/>

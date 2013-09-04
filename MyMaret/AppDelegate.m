@@ -8,8 +8,8 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "AnnouncementsStore.h"
 #import "UIApplication+iOSVersionChecker.h"
-#import "NewspaperStore.h"
 
 // NSUserDefaults keys
 NSString * const MyMaretIsLoggedInKey = @"MyMaretIsLoggedInKey";
@@ -21,7 +21,7 @@ NSString * const MyMaretNewAnnouncementNotification = @"MyMaretNewAnnouncementNo
 NSString * const MyMaretNewNewspaperNotification = @"MyMaretNewNewspaperNotification";
 
 // Push Notification keys
-NSString * const MyMaretPushNotificationTypeKey = @"MyMarettype";
+NSString * const MyMaretPushNotificationTypeKey = @"MyMaretnotificationtype";
 NSString * const MyMaretPushNotificationTypeAnnouncement = @"announcement";
 NSString * const MyMaretPushNotificationTypeNewspaper = @"newspaper";
 
@@ -51,12 +51,16 @@ NSString * const MyMaretPushNotificationTypeNewspaper = @"newspaper";
         
         // Track app usage
         [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+        
+        // Make sure the badge is in line with the number of unread announcements
+        [[PFInstallation currentInstallation] setBadge:[[AnnouncementsStore sharedStore] numberOfUnreadAnnouncements]];
+        [[PFInstallation currentInstallation] saveInBackground];
     }
     
     // Change the status bar on iOS 6 to not be tinted
     // Thanks to http://stackoverflow.com/questions/4456474/how-to-change-the-color-of-status-bar
     if ([UIApplication isPrevIOS]) [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-    [NewspaperStore sharedStore];
+    
     return YES;
 }
 
@@ -85,11 +89,17 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
     NSString *MyMaretNotificationType = [userInfo objectForKey:MyMaretPushNotificationTypeKey];
     
+    
     // Post a new NSNotification so that we can route the user to the
     // correct app section depending on the notification
     if ([MyMaretNotificationType isEqualToString:MyMaretPushNotificationTypeAnnouncement]) {
         
         [[NSNotificationCenter defaultCenter] postNotificationName:MyMaretNewAnnouncementNotification object:nil userInfo:nil];
+        
+        // Decrement the badge count since the user opened the app via the
+        // notification
+        [[PFInstallation currentInstallation] setBadge:[[PFInstallation currentInstallation] badge] - 1];
+        [[PFInstallation currentInstallation] saveInBackground];
         
     } else if ([MyMaretNotificationType isEqualToString:MyMaretPushNotificationTypeNewspaper]) {
         
@@ -109,9 +119,6 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    
-    // Archive our newspaper articles
-    [[NewspaperStore sharedStore] saveChanges];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
