@@ -217,7 +217,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
         
         // Add the left button
         self.leftArrowButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 3.0, 40.0, 40.0)];
-        [self.leftArrowButton setBackgroundColor:[UIColor whiteColor]];
+        [self.leftArrowButton setBackgroundColor:[UIColor colorWithRed:0.91 green:0.91 blue:0.91 alpha:1.0]];
         [self.leftArrowButton addTarget:self
                                  action:@selector(changeSection:)
                        forControlEvents:UIControlEventTouchUpInside];
@@ -230,7 +230,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
         
         // Add the right button
         self.rightArrowButton = [[UIButton alloc] initWithFrame:CGRectMake(280.0, 3.0, 40.0, 40.0)];
-        [self.rightArrowButton setBackgroundColor:[UIColor whiteColor]];
+        [self.rightArrowButton setBackgroundColor:[UIColor colorWithRed:0.91 green:0.91 blue:0.91 alpha:1.0]];
         [self.rightArrowButton addTarget:self
                                   action:@selector(changeSection:)
                         forControlEvents:UIControlEventTouchUpInside];
@@ -246,7 +246,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
         
         // Add a divider line under the section picker
         CALayer *dividerLayer = [[CALayer alloc] init];
-        [dividerLayer setBounds:CGRectMake(0,0,self.sectionsHeaderView.frame.size.width - 20.0, 1.0)];
+        [dividerLayer setBounds:CGRectMake(0,0,self.sectionsHeaderView.frame.size.width, 1.0)];
         [dividerLayer setPosition:CGPointMake(self.sectionsHeaderView.frame.size.width / 2.0,
                                               self.sectionsHeaderView.frame.size.height)];
         

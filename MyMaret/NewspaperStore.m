@@ -138,8 +138,6 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
 - (void)setLastNewspaperUpdate:(NSDate *)lastNewspaperUpdate
 {
     _lastNewspaperUpdate = lastNewspaperUpdate;
-    [[NSUserDefaults standardUserDefaults] setObject:_lastNewspaperUpdate
-                                              forKey:MyMaretLastNewspaperUpdateKey];
 }
 
 
@@ -320,6 +318,10 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
     if (!success) {
         NSLog(@"Could not save popular articles.");
     }
+    
+    // Save the update date as well
+    [[NSUserDefaults standardUserDefaults] setObject:_lastNewspaperUpdate
+                                              forKey:MyMaretLastNewspaperUpdateKey];
 }
 
 

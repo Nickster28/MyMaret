@@ -62,6 +62,8 @@
         [[self titleLabel] setFont:[UIFont systemFontOfSize:17.0]];
     }
     
+    [[self titleLabel] setNumberOfLines:2];
+    
     // If the article is a digital exclusive, set the title to be
     // "Digital Exclusive: TITLE"
     if (article.isDigitalExclusive) {
@@ -84,6 +86,7 @@
     } else {
         [[self popularLabel] setText:@""];
         [[self popularLabel].layer setBorderColor:nil];
+        [[self popularLabel].layer setBorderWidth:0.0];
     }
 }
 
