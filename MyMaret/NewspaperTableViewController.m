@@ -13,7 +13,6 @@
 #import "UIColor+SchoolColor.h"
 #import "ArticleDetailViewController.h"
 #import "AppDelegate.h"
-#import "SWRevealViewController.h"
 
 
 @interface NewspaperTableViewController () <UIScrollViewDelegate, UISearchDisplayDelegate>
@@ -96,17 +95,6 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
     if ([self shouldUpdateNewspaper]) {
         [self refreshNewspaper];
         [self setShouldUpdateNewspaper:NO];
-    }
-}
-
-
-// Save changes when the user goes to a different section
-- (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position
-{
-    // If the user may switch to another section,
-    // save the newspaper
-    if (position == FrontViewPositionRight) {
-        [[NewspaperStore sharedStore] saveChanges];
     }
 }
 
@@ -438,7 +426,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self performSegueWithIdentifier:@"showArticle"
-                              sender:[self.tableView cellForRowAtIndexPath:indexPath]];
+                              sender:[tableView cellForRowAtIndexPath:indexPath]];
 }
 
 
@@ -447,9 +435,13 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
     if ([[segue identifier] isEqualToString:@"showArticle"] && [[segue destinationViewController] isKindOfClass:[ArticleDetailViewController class]]) {
         
         ArticleDetailViewController *articleDVC = [segue destinationViewController];
+        
+        UITableView *currentTableView = (self.searchDisplayController.isActive) ?
+            self.searchDisplayController.searchResultsTableView : self.tableView;
      
-        // Get the selected article
-        NSIndexPath *selectedIP = [self.tableView indexPathForCell:sender];
+        // Get the selected article from the correct tableview
+        NSIndexPath *selectedIP = [currentTableView indexPathForCell:sender];
+        
         NSString *sectionTitle = [[NewspaperStore sharedStore] sectionTitleForIndex:[self sectionIndex]];
         
         // If the user is searching, the store will disregard the sectiontitle
@@ -462,9 +454,9 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
         
         // Reload the cell to reflect that it's been read,
         // but make sure it's still selected!
-        [self.tableView reloadRowsAtIndexPaths:@[selectedIP]
+        [currentTableView reloadRowsAtIndexPaths:@[selectedIP]
                          withRowAnimation:UITableViewRowAnimationNone];
-        [self.tableView selectRowAtIndexPath:selectedIP animated:NO
+        [currentTableView selectRowAtIndexPath:selectedIP animated:NO
                          scrollPosition:UITableViewScrollPositionNone];
         
         // Give the article to the detail view controller
