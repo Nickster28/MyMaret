@@ -374,6 +374,10 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
         NSArray *allArticles = [[NSArray alloc] init];
         
         for (NSArray *sectionArticles in [[self articlesDictionary] allValues]) {
+            
+            // We don't want to double the popular articles
+            if ([[self articlesDictionary] objectForKey:@"Popular"] == sectionArticles) continue;
+            
             allArticles = [allArticles arrayByAddingObjectsFromArray:sectionArticles];
         }
         

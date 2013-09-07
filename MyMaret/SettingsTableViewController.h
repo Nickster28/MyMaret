@@ -9,5 +9,5 @@
 #import "MyMaretFrontTableViewController.h"
 
 @interface SettingsTableViewController : MyMaretFrontTableViewController
-
+- (void)showContactScreen;
 @end

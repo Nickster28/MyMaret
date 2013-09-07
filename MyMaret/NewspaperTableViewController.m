@@ -118,6 +118,10 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 {
     if (sectionIndex == _sectionIndex) return;
     
+    // Hide the search bar
+    // Hide the search bar
+    [self.tableView setContentOffset:CGPointMake(0.0, self.searchDisplayController.searchBar.bounds.size.height) animated:YES];
+    
     // Fade/Unfade the arrow buttons if necessary
     [self setArrowButtonsForSection:sectionIndex];
     
@@ -347,7 +351,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 
 #pragma mark UIScrollViewDelegate
 
-// Track when the user finishes scrolling and update the articles being displayed
+// Track when the user finishes scrolling through sections and update the articles being displayed
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     // Since we're also the TABLEVIEW'S scrollviewdelegate,
@@ -377,7 +381,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 120.0;
+    return 125.0;
 }
 
 

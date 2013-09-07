@@ -42,7 +42,7 @@
     
     if ([announcement isUnreadAnnouncement]) {
         [self.titleLabel setFont:[UIFont boldSystemFontOfSize:19.0]];
-        [self.titleLabel setTextColor:[UIColor schoolLightColor]];
+        [self.titleLabel setTextColor:[UIColor schoolColor]];
         [self.bodyLabel setTextColor:[UIColor blackColor]];
         [self.unreadImageView setImage:[UIImage imageNamed:@"UnreadAnnouncementIcon"]];
     } else {

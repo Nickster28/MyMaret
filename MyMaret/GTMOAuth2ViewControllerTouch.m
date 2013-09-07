@@ -740,9 +740,8 @@ static Class gSignInClass = Nil;
         [self showAlertWithTitle:@"Sorry!"
                          message:@"In order to use MyMaret you have to log in with a Maret username and password.  Please try again."];
     } else {
-        // Store the user's info and mark them as logged in
-        [[NSUserDefaults standardUserDefaults] setObject:emailAddr
-                                                  forKey:MyMaretUserEmailKey];
+        
+        // Mark them as logged in
         [[NSUserDefaults standardUserDefaults] setBool:YES
                                                 forKey:MyMaretIsLoggedInKey];
         
@@ -760,8 +759,13 @@ static Class gSignInClass = Nil;
         
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
             
+            
             // Save their name in NSUserDefaults and update their Person object in Parse
             if (!error) {
+                
+                [[NSUserDefaults standardUserDefaults] setObject:emailAddr
+                                                          forKey:MyMaretUserEmailKey];
+                
                 NSString *userFullName = [NSString stringWithFormat:@"%@ %@",
                                           [object objectForKey:@"firstName"],
                                           [object objectForKey:@"lastName"]];
@@ -773,6 +777,16 @@ static Class gSignInClass = Nil;
                 // Update the object so the user won't receive email (since they have the app)
                 [object setObject: [NSNumber numberWithBool:NO] forKey:@"shouldReceiveEmails"];
                 [object saveInBackground];
+            } else if ([error code] == kPFErrorObjectNotFound) {
+                UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Whoops!"
+                                                             message:@"Sorry, but we weren't able to identify you as a member of the Upper School.  You're still able to use all of the features of MyMaret, but you'll be unable to send announcements from within the app.  If you need to send an announcement, please send it via email.  If you think this is an error, drop us a line by tapping on the \"Contact Us\" button in Settings."
+                                                            delegate:nil
+                                                   cancelButtonTitle:@"Got it!"
+                                                   otherButtonTitles:nil];
+                [av show];
+            } else {
+                [[NSUserDefaults standardUserDefaults] setObject:emailAddr
+                                                          forKey:MyMaretUserEmailKey];
             }
         }];
         
@@ -788,6 +802,7 @@ static Class gSignInClass = Nil;
 
 
 
+#pragma mark Rest of Code
 - (void)moveWebViewFromUnderNavigationBar {
   CGRect dontCare;
   CGRect webFrame = self.view.bounds;
