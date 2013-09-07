@@ -18,7 +18,6 @@
 
 @interface NewspaperStore()
 @property (nonatomic, strong) NSDictionary *articlesDictionary;
-@property (nonatomic, strong) NSMutableArray *popularArticles;
 @property (nonatomic, strong) NSDate *lastNewspaperUpdate;
 
 // For newspaper search - if searchString isn't nil,
@@ -73,20 +72,13 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
     if (self) {
         // Unarchive the articles
         NSString *newspaperArchivePath = [self articlesArchivePath];
-        NSString *popularArticlesArchivePath = [self popularArticlesArchivePath];
         
         [self setArticlesDictionary:[NSKeyedUnarchiver unarchiveObjectWithFile:newspaperArchivePath]];
-        [self setPopularArticles:[NSKeyedUnarchiver unarchiveObjectWithFile:popularArticlesArchivePath]];
         
         // If there aren't any archived, set up a new dictionary
         // (The key is the name of the section, the value is an array of articles)
         if (![self articlesDictionary]) {
             [self makeNewArticlesDictionary];
-        }
-        
-        // If there are no popular articles, make an empty array
-        if (![self popularArticles]) {
-            [self setPopularArticles:[[NSMutableArray alloc] init]];
         }
     }
     return self;
@@ -95,8 +87,8 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
 
 - (void)makeNewArticlesDictionary
 {
-    [self setArticlesDictionary:[NSDictionary dictionaryWithObjects:@[[NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array]]
-                                                            forKeys:@[@"News", @"Opinion", @"Features", @"Center Spread", @"Style", @"Sports"]]];
+    [self setArticlesDictionary:[NSDictionary dictionaryWithObjects:@[[NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array]]
+                                                            forKeys:@[@"Popular", @"News", @"Opinion", @"Features", @"Center Spread", @"Style", @"Sports"]]];
 }
 
 
@@ -108,17 +100,6 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
     NSString *directory = [documentDirectories objectAtIndex:0];
     
     return [directory stringByAppendingPathComponent:@"newspaper.archive"];
-}
-
-
-- (NSString *)popularArticlesArchivePath
-{
-    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    // Get only entry from the list
-    NSString *directory = [documentDirectories objectAtIndex:0];
-    
-    return [directory stringByAppendingPathComponent:@"newspaperpopular.archive"];
 }
 
 
@@ -168,9 +149,12 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
                                                          isDigitalExclusive:[[object objectForKey:@"isDigitalExclusive"] boolValue]];
         
         // If it's a popular article, insert it at the front of its article array
+        // and also add it to the popular articles section
         if (isPopular) {
             [[[self articlesDictionary] objectForKey:[article articleSection]]
              insertObject:article atIndex:0];
+            
+            [[[self articlesDictionary] objectForKey:@"Popular"] addObject:article];
         
         // Otherwise add it to the end
         } else [[[self articlesDictionary] objectForKey:[article articleSection]] addObject:article];
@@ -181,12 +165,13 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
 - (void)clearPopularArticles {
     
     // Clear our cache of popular articles
-    [self setPopularArticles:[[NSMutableArray alloc] init]];
+    [[[self articlesDictionary] objectForKey:@"Popular"] removeAllObjects];
     
     // Loop through each section and mark all articles as not popular
     for (NSArray *articles in [[self articlesDictionary] allValues]) {
         
-        if ([articles count] == 0) continue;
+        // We don't want to loop through the popular articles section!
+        if (articles == [[self articlesDictionary] objectForKey:@"Popular"]) continue;
         
         // Since the articles are sorted by popularity (most popular are first)
         // we can stop as soon as we get to a one that is not marked as popular
@@ -232,7 +217,8 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
             [sectionArticles removeObjectAtIndex:index];
             [sectionArticles insertObject:article atIndex:0];
             
-            [[self popularArticles] addObject:[sectionArticles objectAtIndex:index]];
+            [[[self articlesDictionary] objectForKey:@"Popular"]
+             addObject:[sectionArticles objectAtIndex:index]];
         }
     }
 }
@@ -243,7 +229,7 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
 - (NSArray *)currentRelevantArticlesArrayForSection:(NSString *)section
 {
     if (self.searchString && !self.filteredArticles) {
-        return self.popularArticles;
+        return [[self articlesDictionary] objectForKey:@"Popular"];
     } else if (self.searchString) {
         return self.filteredArticles;
     } else {
@@ -317,14 +303,6 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
     if (!success) {
         NSLog(@"Could not save all articles.");
     }
-    
-    // save our popular articles array
-    success = [NSKeyedArchiver archiveRootObject:[self popularArticles]
-                                          toFile:[self popularArticlesArchivePath]];
-    
-    if (!success) {
-        NSLog(@"Could not save popular articles.");
-    }
 }
 
 
@@ -344,7 +322,7 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
 
 - (NSString *)sectionTitleForIndex:(NSUInteger)index
 {
-    return [@[@"News", @"Opinion", @"Features", @"Center Spread", @"Style", @"Sports"] objectAtIndex:index];
+    return [@[@"Popular", @"News", @"Opinion", @"Features", @"Center Spread", @"Style", @"Sports"] objectAtIndex:index];
 }
 
 

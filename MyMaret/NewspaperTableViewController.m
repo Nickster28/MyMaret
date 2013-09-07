@@ -96,6 +96,16 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
         [self refreshNewspaper];
         [self setShouldUpdateNewspaper:NO];
     }
+    
+    // Thanks to http://stackoverflow.com/questions/1081381/iphone-hide-uitableview-search-bar-by-default
+    // for help auto-hiding the search bar
+    [self.tableView setContentOffset:CGPointMake(0.0, self.searchDisplayController.searchBar.bounds.size.height) animated:YES];
+}
+
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 }
 
 
