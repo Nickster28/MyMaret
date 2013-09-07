@@ -12,11 +12,12 @@
 #import "AppDelegate.h"
 #import "MainMenuViewController.h"
 
-@interface MyMaretFrontViewController ()
-
+@interface MyMaretFrontViewController()
+@property (nonatomic, strong, readonly) UITapGestureRecognizer *tapRecognizer;
 @end
 
 @implementation MyMaretFrontViewController
+@synthesize tapRecognizer = _tapRecognizer;
 
 
 
@@ -36,6 +37,17 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+- (UITapGestureRecognizer *)tapRecognizer
+{
+    if (!_tapRecognizer) {
+        _tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self.revealViewController
+                                                                 action:@selector(revealToggle:)];
+    }
+    
+    return _tapRecognizer;
 }
 
 
@@ -108,10 +120,14 @@
 
 - (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position
 {
+    // If the drawer is open, the only interaction enabled
+    // should be a tap on the front view to close the drawer
     if (position == FrontViewPositionLeft) {
         [self.view setUserInteractionEnabled:YES];
+        [self.navigationController.view removeGestureRecognizer:[self tapRecognizer]];
     } else if (position == FrontViewPositionRight) {
         [self.view setUserInteractionEnabled:NO];
+        [self.navigationController.view addGestureRecognizer:[self tapRecognizer]];
     }
 }
 

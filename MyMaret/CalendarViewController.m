@@ -8,7 +8,6 @@
 
 #import "CalendarViewController.h"
 #import "UIColor+SchoolColor.h"
-#import "SWRevealViewController.h"
 #import "UIApplication+iOSVersionChecker.h"
 #import "AppDelegate.h"
 #import "MainMenuViewController.h"
@@ -155,11 +154,5 @@ NSString * const MyMaretCalendarPrefKey = @"MyMaretCalendarPrefKey";
                                        otherButtonTitles:nil];
     [av show];
 }
-
-
-
-
-
-
 
 @end

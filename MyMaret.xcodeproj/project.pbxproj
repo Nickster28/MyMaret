@@ -16,6 +16,8 @@
 		010BC6A617CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 010BC6A417CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib */; };
 		0113855017C1D97700F8A965 /* AnnouncementCreationTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0113854F17C1D97700F8A965 /* AnnouncementCreationTitleViewController.m */; };
 		0113855317C1DA2500F8A965 /* AnnouncementCreationBodyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0113855217C1DA2500F8A965 /* AnnouncementCreationBodyViewController.m */; };
+		01176FCD17DBE0DB00DFF2EA /* ClassScheduleStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FCC17DBE0DB00DFF2EA /* ClassScheduleStore.m */; };
+		01176FCE17DBE0DB00DFF2EA /* ClassScheduleStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FCC17DBE0DB00DFF2EA /* ClassScheduleStore.m */; };
 		0124412617D056260091C01E /* WelcomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0124412517D056260091C01E /* WelcomeView.xib */; };
 		0125F75C17BB1C750042EB6F /* AnnouncementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125F75B17BB1C750042EB6F /* AnnouncementCell.m */; };
 		01271A1217C9CB2E003C487C /* MainMenuBackgroundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01271A1117C9CB2E003C487C /* MainMenuBackgroundView.xib */; };
@@ -101,6 +103,8 @@
 		0113854F17C1D97700F8A965 /* AnnouncementCreationTitleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementCreationTitleViewController.m; sourceTree = "<group>"; };
 		0113855117C1DA2500F8A965 /* AnnouncementCreationBodyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementCreationBodyViewController.h; sourceTree = "<group>"; };
 		0113855217C1DA2500F8A965 /* AnnouncementCreationBodyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementCreationBodyViewController.m; sourceTree = "<group>"; };
+		01176FCB17DBE0DB00DFF2EA /* ClassScheduleStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassScheduleStore.h; sourceTree = "<group>"; };
+		01176FCC17DBE0DB00DFF2EA /* ClassScheduleStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassScheduleStore.m; sourceTree = "<group>"; };
 		0124412517D056260091C01E /* WelcomeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WelcomeView.xib; path = MyMaret/WelcomeView.xib; sourceTree = SOURCE_ROOT; };
 		0125F75A17BB1C750042EB6F /* AnnouncementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementCell.h; sourceTree = "<group>"; };
 		0125F75B17BB1C750042EB6F /* AnnouncementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementCell.m; sourceTree = "<group>"; };
@@ -425,6 +429,8 @@
 			children = (
 				01DAA6BC17A70A4700B23BB2 /* ClassScheduleTableViewController.h */,
 				01DAA6BD17A70A4700B23BB2 /* ClassScheduleTableViewController.m */,
+				01176FCB17DBE0DB00DFF2EA /* ClassScheduleStore.h */,
+				01176FCC17DBE0DB00DFF2EA /* ClassScheduleStore.m */,
 			);
 			name = "Class Schedule";
 			sourceTree = "<group>";
@@ -572,6 +578,7 @@
 				010BC6A517CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.m in Sources */,
 				0177455F17A60AC3001625BF /* MainMenuViewController.m in Sources */,
 				013BB66E17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m in Sources */,
+				01176FCD17DBE0DB00DFF2EA /* ClassScheduleStore.m in Sources */,
 				01BF13A017A89F7D00731690 /* Announcement.m in Sources */,
 				01DAA6BE17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */,
 				0169749B17D30F8D00973B1B /* NewspaperStore.m in Sources */,
@@ -606,6 +613,7 @@
 				01A4FE2617B97304007FAB5C /* MyMaret_Tests.m in Sources */,
 				016974A817D3113700973B1B /* NewspaperArticle.m in Sources */,
 				0169749C17D30F8D00973B1B /* NewspaperStore.m in Sources */,
+				01176FCE17DBE0DB00DFF2EA /* ClassScheduleStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
