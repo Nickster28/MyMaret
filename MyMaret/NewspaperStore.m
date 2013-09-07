@@ -170,9 +170,6 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
     // Loop through each section and mark all articles as not popular
     for (NSArray *articles in [[self articlesDictionary] allValues]) {
         
-        // We don't want to loop through the popular articles section!
-        if (articles == [[self articlesDictionary] objectForKey:@"Popular"]) continue;
-        
         // Since the articles are sorted by popularity (most popular are first)
         // we can stop as soon as we get to a one that is not marked as popular
         for (NewspaperArticle *article in articles) {
@@ -218,7 +215,7 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
             [sectionArticles insertObject:article atIndex:0];
             
             [[[self articlesDictionary] objectForKey:@"Popular"]
-             addObject:[sectionArticles objectAtIndex:index]];
+             addObject:article];
         }
     }
 }

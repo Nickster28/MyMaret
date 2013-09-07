@@ -103,12 +103,6 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 }
 
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-
 - (NSUInteger)sectionIndex
 {
     if (!_sectionIndex) {
@@ -356,23 +350,18 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 // Track when the user finishes scrolling and update the articles being displayed
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if ([self isScrollingVertically]) {
-        [self setIsScrollingVertically:NO];
+    // Since we're also the TABLEVIEW'S scrollviewdelegate,
+    // we need to make sure we only listen for the headerview's
+    // scrollview
+    if (scrollView == self.tableView) {
+        NSLog(@"That's the tableview!  Not what I want.");
         return;
     }
     
     CGPoint offset = [scrollView contentOffset];
     NSUInteger newSectionIndex = offset.x / self.sectionsHeaderScrollView.frame.size.width;
+    NSLog(@"Setting section to %i", newSectionIndex);
     [self setSectionIndex:newSectionIndex];
-}
-
-
-// Track if the user scrolls vertically so we know
-// NOT to change the section
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if ([self isScrollingVertically]) return;
-    if ([scrollView contentOffset].y != 0.0) [self setIsScrollingVertically:YES];
 }
 
 
