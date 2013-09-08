@@ -32,6 +32,7 @@
 #import "UIApplication+iOSVersionChecker.h"
 #import "WelcomeViewController.h"
 #import <Parse/Parse.h>
+#import "ClassScheduleStore.h"
 
 NSString *const kGTMOAuth2KeychainErrorDomain = @"com.google.GTMOAuthKeychain";
 
@@ -773,6 +774,21 @@ static Class gSignInClass = Nil;
                 [[NSUserDefaults standardUserDefaults] setObject:userFullName
                                                           forKey:MyMaretUserNameKey];
                 
+                [[NSUserDefaults standardUserDefaults] setInteger:[[object objectForKey:@"grade"] integerValue]
+                                                           forKey:MyMaretUserGradeKey];
+                
+                // We don't support downloading faculty class schedules
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:MyMaretUserGradeKey] > 12) {
+                    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Sorry!"
+                                                                 message:@"Unfortunately, MyMaret only supports downloading student class schedules at this time.  If you enter your schedule information, however, you can still take advantage of the schedule section!  Just tap the \"Set Classes\" button in the top right of the Schedule Section, or tap on an individual class in your schedule to change it."
+                                                                delegate:nil
+                                                       cancelButtonTitle:@"OK!"
+                                                       otherButtonTitles:nil];
+                    
+                    [av show];
+                } else {
+                    [[ClassScheduleStore sharedStore] fetchClassScheduleWithCompletionBlock:nil];
+                }
                 
                 // Update the object so the user won't receive email (since they have the app)
                 [object setObject: [NSNumber numberWithBool:NO] forKey:@"shouldReceiveEmails"];

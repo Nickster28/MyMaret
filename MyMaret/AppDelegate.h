@@ -11,6 +11,7 @@
 extern NSString * const MyMaretIsLoggedInKey;
 extern NSString * const MyMaretUserEmailKey;
 extern NSString * const MyMaretUserNameKey;
+extern NSString * const MyMaretUserGradeKey;
 extern NSString * const MyMaretNewAnnouncementNotification;
 extern NSString * const MyMaretNewNewspaperNotification;
 

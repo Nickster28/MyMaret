@@ -21,12 +21,12 @@
 @property (nonatomic, strong) NSString * articleEdition;
 
 
-- (NewspaperArticle *)initWithTitle:(NSString *)articleTitle
-                               body:(NSString *)articleBody
-                             author:(NSString *)articleAuthor
-                            section:(NSString *)articleSection
-                        publishDate:(NSDate *)publishDate
-                          isPopular:(BOOL) isPopular
-                 isDigitalExclusive:(BOOL) isDigitalExclusive;
+- (id)initWithTitle:(NSString *)articleTitle
+               body:(NSString *)articleBody
+             author:(NSString *)articleAuthor
+            section:(NSString *)articleSection
+        publishDate:(NSDate *)publishDate
+          isPopular:(BOOL)isPopular
+ isDigitalExclusive:(BOOL)isDigitalExclusive;
 
 @end

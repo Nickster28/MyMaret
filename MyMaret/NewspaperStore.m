@@ -66,24 +66,6 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
 }
 
 
-- (id)init {
-    self = [super init];
-    
-    if (self) {
-        // Unarchive the articles
-        NSString *newspaperArchivePath = [self articlesArchivePath];
-        
-        [self setArticlesDictionary:[NSKeyedUnarchiver unarchiveObjectWithFile:newspaperArchivePath]];
-        
-        // If there aren't any archived, set up a new dictionary
-        // (The key is the name of the section, the value is an array of articles)
-        if (![self articlesDictionary]) {
-            [self makeNewArticlesDictionary];
-        }
-    }
-    return self;
-}
-
 
 - (void)makeNewArticlesDictionary
 {
@@ -100,6 +82,22 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
     NSString *directory = [documentDirectories objectAtIndex:0];
     
     return [directory stringByAppendingPathComponent:@"newspaper.archive"];
+}
+
+
+- (NSDictionary *)articlesDictionary
+{
+    if (!_articlesDictionary) {
+        
+        // Unarchive our saved one from disk
+        _articlesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self articlesArchivePath]];
+        
+        // If we haven't saved one yet, make a new one
+        if (!_articlesDictionary) [self makeNewArticlesDictionary];
+        [self saveChanges];
+    }
+    
+    return _articlesDictionary;
 }
 
 
@@ -235,6 +233,19 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
 }
 
 
+// Save changes to our articles dictionary
+- (void)saveChanges
+{
+    // save our articles dictionary
+    BOOL success = [NSKeyedArchiver archiveRootObject:[self articlesDictionary]
+                                               toFile:[self articlesArchivePath]];
+    
+    if (!success) {
+        NSLog(@"Could not save all articles.");
+    }
+}
+
+
 #pragma mark Public API
 
 - (void)fetchNewspaperWithCompletionBlock:(void (^)(BOOL, NSError *))completionBlock
@@ -290,18 +301,6 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
 }
 
 
-// Save changes to our articles dictionary
-- (void)saveChanges
-{
-    // save our articles dictionary
-    BOOL success = [NSKeyedArchiver archiveRootObject:[self articlesDictionary]
-                                               toFile:[self articlesArchivePath]];
-    
-    if (!success) {
-        NSLog(@"Could not save all articles.");
-    }
-}
-
 
 // Returns the count of the array of articles we're currently interested in
 -(NSUInteger)numberOfArticlesInSection:(NSString *)section
@@ -346,6 +345,7 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
                                     block:^(NSArray *topFiveArticleRanking, NSError *error) {
                                         if (!error) {
                                             [self updateMostPopularArticlesWithRanking:topFiveArticleRanking];
+                                            [self saveChanges];
                                             NSLog(@"Done");
                                         } else {
                                             NSLog(@"Error: %@", [[error userInfo] objectForKey:@"error"]);

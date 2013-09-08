@@ -19,11 +19,11 @@
 @dynamic isUnreadAnnouncement;
 @dynamic announcementOrderingValue;
 
-+ (Announcement *)announcementWithTitle:(NSString *)aTitle
-                                   body:(NSString *)aBody
-                                 author:(NSString *)author
-                               postDate:(NSDate *)datePosted
-                 inManagedObjectContext:(NSManagedObjectContext *)context
++ (id)announcementWithTitle:(NSString *)aTitle
+                       body:(NSString *)aBody
+                     author:(NSString *)author
+                   postDate:(NSDate *)datePosted
+     inManagedObjectContext:(NSManagedObjectContext *)context
 {
     Announcement *announcement = [NSEntityDescription insertNewObjectForEntityForName:@"Announcement"
                                                                inManagedObjectContext:context];

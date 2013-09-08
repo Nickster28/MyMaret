@@ -9,13 +9,13 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import "AnnouncementsStore.h"
-#import "NewspaperStore.h"
 #import "UIApplication+iOSVersionChecker.h"
 
 // NSUserDefaults keys
 NSString * const MyMaretIsLoggedInKey = @"MyMaretIsLoggedInKey";
 NSString * const MyMaretUserEmailKey = @"MyMaretUserEmailKey";
 NSString * const MyMaretUserNameKey = @"MyMaretUserNameKey";
+NSString * const MyMaretUserGradeKey = @"MyMaretUserGradeKey";
 
 // NSNotificationCenter keys
 NSString * const MyMaretNewAnnouncementNotification = @"MyMaretNewAnnouncementNotification";
@@ -120,9 +120,6 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    
-    // Save the newspaper article changes
-    [[NewspaperStore sharedStore] saveChanges];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

@@ -18,8 +18,6 @@ extern NSString * const NewspaperStoreFilterStringPopular;
 + (NewspaperStore *)sharedStore;
 
 
-- (void)saveChanges;
-
 // **** ALL ARTICLE ACCESS IS DONE VIA INDICES **** //
 // This works more easily with tableViews/row indices
 

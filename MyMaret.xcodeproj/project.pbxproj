@@ -18,6 +18,12 @@
 		0113855317C1DA2500F8A965 /* AnnouncementCreationBodyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0113855217C1DA2500F8A965 /* AnnouncementCreationBodyViewController.m */; };
 		01176FCD17DBE0DB00DFF2EA /* ClassScheduleStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FCC17DBE0DB00DFF2EA /* ClassScheduleStore.m */; };
 		01176FCE17DBE0DB00DFF2EA /* ClassScheduleStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FCC17DBE0DB00DFF2EA /* ClassScheduleStore.m */; };
+		01176FD417DC122F00DFF2EA /* SchoolClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FD317DC122F00DFF2EA /* SchoolClass.m */; };
+		01176FD517DC122F00DFF2EA /* SchoolClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FD317DC122F00DFF2EA /* SchoolClass.m */; };
+		01176FD817DC333600DFF2EA /* SchoolClassCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FD717DC333600DFF2EA /* SchoolClassCell.m */; };
+		01176FD917DC333600DFF2EA /* SchoolClassCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FD717DC333600DFF2EA /* SchoolClassCell.m */; };
+		01176FDC17DC3C3E00DFF2EA /* SchoolClassEditTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FDB17DC3C3E00DFF2EA /* SchoolClassEditTableViewController.m */; };
+		01176FDD17DC3C3E00DFF2EA /* SchoolClassEditTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FDB17DC3C3E00DFF2EA /* SchoolClassEditTableViewController.m */; };
 		0124412617D056260091C01E /* WelcomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0124412517D056260091C01E /* WelcomeView.xib */; };
 		0125F75C17BB1C750042EB6F /* AnnouncementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125F75B17BB1C750042EB6F /* AnnouncementCell.m */; };
 		01271A1217C9CB2E003C487C /* MainMenuBackgroundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01271A1117C9CB2E003C487C /* MainMenuBackgroundView.xib */; };
@@ -105,6 +111,12 @@
 		0113855217C1DA2500F8A965 /* AnnouncementCreationBodyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementCreationBodyViewController.m; sourceTree = "<group>"; };
 		01176FCB17DBE0DB00DFF2EA /* ClassScheduleStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassScheduleStore.h; sourceTree = "<group>"; };
 		01176FCC17DBE0DB00DFF2EA /* ClassScheduleStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassScheduleStore.m; sourceTree = "<group>"; };
+		01176FD217DC122F00DFF2EA /* SchoolClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolClass.h; sourceTree = "<group>"; };
+		01176FD317DC122F00DFF2EA /* SchoolClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolClass.m; sourceTree = "<group>"; };
+		01176FD617DC333600DFF2EA /* SchoolClassCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolClassCell.h; sourceTree = "<group>"; };
+		01176FD717DC333600DFF2EA /* SchoolClassCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolClassCell.m; sourceTree = "<group>"; };
+		01176FDA17DC3C3E00DFF2EA /* SchoolClassEditTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolClassEditTableViewController.h; sourceTree = "<group>"; };
+		01176FDB17DC3C3E00DFF2EA /* SchoolClassEditTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolClassEditTableViewController.m; sourceTree = "<group>"; };
 		0124412517D056260091C01E /* WelcomeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WelcomeView.xib; path = MyMaret/WelcomeView.xib; sourceTree = SOURCE_ROOT; };
 		0125F75A17BB1C750042EB6F /* AnnouncementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementCell.h; sourceTree = "<group>"; };
 		0125F75B17BB1C750042EB6F /* AnnouncementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementCell.m; sourceTree = "<group>"; };
@@ -429,8 +441,14 @@
 			children = (
 				01DAA6BC17A70A4700B23BB2 /* ClassScheduleTableViewController.h */,
 				01DAA6BD17A70A4700B23BB2 /* ClassScheduleTableViewController.m */,
+				01176FD617DC333600DFF2EA /* SchoolClassCell.h */,
+				01176FD717DC333600DFF2EA /* SchoolClassCell.m */,
+				01176FDA17DC3C3E00DFF2EA /* SchoolClassEditTableViewController.h */,
+				01176FDB17DC3C3E00DFF2EA /* SchoolClassEditTableViewController.m */,
 				01176FCB17DBE0DB00DFF2EA /* ClassScheduleStore.h */,
 				01176FCC17DBE0DB00DFF2EA /* ClassScheduleStore.m */,
+				01176FD217DC122F00DFF2EA /* SchoolClass.h */,
+				01176FD317DC122F00DFF2EA /* SchoolClass.m */,
 			);
 			name = "Class Schedule";
 			sourceTree = "<group>";
@@ -579,10 +597,12 @@
 				0177455F17A60AC3001625BF /* MainMenuViewController.m in Sources */,
 				013BB66E17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m in Sources */,
 				01176FCD17DBE0DB00DFF2EA /* ClassScheduleStore.m in Sources */,
+				01176FDC17DC3C3E00DFF2EA /* SchoolClassEditTableViewController.m in Sources */,
 				01BF13A017A89F7D00731690 /* Announcement.m in Sources */,
 				01DAA6BE17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */,
 				0169749B17D30F8D00973B1B /* NewspaperStore.m in Sources */,
 				016974A717D3113700973B1B /* NewspaperArticle.m in Sources */,
+				01176FD817DC333600DFF2EA /* SchoolClassCell.m in Sources */,
 				0125F75C17BB1C750042EB6F /* AnnouncementCell.m in Sources */,
 				017EE13E17D55F6C00AB41A1 /* ArticleDetailViewController.m in Sources */,
 				0169749417D2D38900973B1B /* MyMaretFrontViewController.m in Sources */,
@@ -598,6 +618,7 @@
 				0177455517A60AC3001625BF /* main.m in Sources */,
 				0107E02A17CC13D40099E4E4 /* WelcomeViewController.m in Sources */,
 				01DAA6B917A70A1B00B23BB2 /* NewspaperTableViewController.m in Sources */,
+				01176FD417DC122F00DFF2EA /* SchoolClass.m in Sources */,
 				0107E01917CBC8E60099E4E4 /* GTMOAuth2Authentication.m in Sources */,
 				016780DB17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */,
 				015191FF17D545CA0073AAEC /* NewspaperCell.m in Sources */,
@@ -610,9 +631,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01176FD517DC122F00DFF2EA /* SchoolClass.m in Sources */,
 				01A4FE2617B97304007FAB5C /* MyMaret_Tests.m in Sources */,
 				016974A817D3113700973B1B /* NewspaperArticle.m in Sources */,
 				0169749C17D30F8D00973B1B /* NewspaperStore.m in Sources */,
+				01176FDD17DC3C3E00DFF2EA /* SchoolClassEditTableViewController.m in Sources */,
+				01176FD917DC333600DFF2EA /* SchoolClassCell.m in Sources */,
 				01176FCE17DBE0DB00DFF2EA /* ClassScheduleStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

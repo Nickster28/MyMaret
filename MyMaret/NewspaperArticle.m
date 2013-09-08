@@ -20,13 +20,13 @@ NSString * const NewspaperArticleIsDigitalExclusiveEncodingKey = @"isDigitalExcl
 
 @implementation NewspaperArticle
 
-- (NewspaperArticle *)initWithTitle:(NSString *)articleTitle
-                               body:(NSString *)articleBody
-                             author:(NSString *)articleAuthor
-                            section:(NSString *)articleSection
-                        publishDate:(NSDate *)articlePublishDate
-                          isPopular:(BOOL)isPopular
-                 isDigitalExclusive:(BOOL)isDigitalExclusive
+- (id)initWithTitle:(NSString *)articleTitle
+               body:(NSString *)articleBody
+             author:(NSString *)articleAuthor
+            section:(NSString *)articleSection
+        publishDate:(NSDate *)articlePublishDate
+          isPopular:(BOOL)isPopular
+ isDigitalExclusive:(BOOL)isDigitalExclusive
 {
     self = [super init];
     if (self) {
