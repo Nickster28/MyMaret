@@ -8,10 +8,12 @@
 
 #import "SchoolClassEditTableViewController.h"
 
-@interface SchoolClassEditTableViewController ()
-@property (nonatomic, weak) IBOutlet UITextField *classNameTextField;
-@property (nonatomic, weak) IBOutlet UILabel *startTimeLabel;
-@property (nonatomic, weak) IBOutlet UILabel *endTimeLabel;
+@interface SchoolClassEditTableViewController () <UITextFieldDelegate>
+@property (nonatomic, weak) UITextField *classNameTextField;
+@property (nonatomic, weak) UISegmentedControl *classNamePrefSegControl;
+
+// For handling the time-setting slide-out "drawer"
+@property (nonatomic, strong) NSIndexPath *drawerIndexPath;
 @end
 
 @implementation SchoolClassEditTableViewController
@@ -43,11 +45,141 @@
 }
 
 
-- (IBAction)setTitleChangePreferences:(UISegmentedControl *)sender
+
+// UITextFieldDelegate for dismissing keyboard when user hits
+// "Done"
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return true;
+}
+
+
+- (void)saveScheduleChanges
 {
     
 }
 
+
+#pragma mark UITableView Delegate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return 2;
+            
+        case 1:
+            if (self.drawerIndexPath) return 3;
+            return 2;
+            
+        case 2:
+            return 1;
+            
+        default:
+            return 0;
+    }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 3;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger row = indexPath.row;
+    NSInteger sec = indexPath.section;
+    NSInteger drawerRow = self.drawerIndexPath.row;
+    NSInteger drawerSec = self.drawerIndexPath.section;
+    
+    if (self.drawerIndexPath && drawerRow == row && drawerSec == sec) {
+        return 163.0;
+    }
+    
+    else return 44.0;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.drawerIndexPath && indexPath.row == self.drawerIndexPath.row && indexPath.section == self.drawerIndexPath.section) {
+     
+        return [tableView dequeueReusableCellWithIdentifier:@"timePickerCell"];
+    }
+    
+    // Thanks to http://stackoverflow.com/questions/9322885/combine-static-and-prototype-content-in-a-table-view
+    // for helping me combine storyboard cells and XIB cells
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        return [tableView dequeueReusableCellWithIdentifier:@"nameEditCell"];
+    } else if (indexPath.section == 0 && indexPath.row == 1) {
+        return [tableView dequeueReusableCellWithIdentifier:@"nameSegControlCell"];
+    } else if (indexPath.section == 1 && indexPath.row == 0) {
+        return [tableView dequeueReusableCellWithIdentifier:@"startTimeCell"];
+    } else if (indexPath.section == 1) {
+        return [tableView dequeueReusableCellWithIdentifier:@"endTimeCell"];
+    } else if (indexPath.section == 2 && indexPath.row == 0) {
+        return [tableView dequeueReusableCellWithIdentifier:@"saveChangesCell"];
+    } else return nil;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // If the user tapped the save button...
+    if (indexPath.section == 2) {
+        [self saveScheduleChanges];
+        return;
+    }
+    
+    if (indexPath.section != 1) return;
+    
+    double delayInSeconds = 0.0;
+    BOOL shouldAdjustDrawerRow = YES;
+    BOOL didTapAboveDrawer = (self.drawerIndexPath && indexPath.row + 1 == self.drawerIndexPath.row);
+    
+    // If the drawer is already visible
+    if (self.drawerIndexPath) {
+        
+        // If the drawer is before the tapped row, we SHOULDN'T add 1
+        // to the drawer row # at the end because removing a row will make
+        // the rows below where the drawer was +1 higher than they should be
+        if (self.drawerIndexPath.row <= indexPath.row) shouldAdjustDrawerRow = NO;
+        
+        NSArray *indexesToDelete = @[self.drawerIndexPath];
+        
+        // We want a slight delay between the deletion and insertion
+        delayInSeconds = 0.3;
+        
+        self.drawerIndexPath = nil;
+        
+        // Remove the drawer
+        [tableView deleteRowsAtIndexPaths:indexesToDelete
+                         withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        
+    }
+    
+    if (didTapAboveDrawer) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        return;
+    }
+    
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        
+        // Set the drawer index path accordingly
+        if (shouldAdjustDrawerRow) {
+            self.drawerIndexPath = [NSIndexPath indexPathForRow:indexPath.row + 1
+                                                      inSection:indexPath.section];
+        } else self.drawerIndexPath = indexPath;
+        
+        // Animate in the drawer
+        [tableView insertRowsAtIndexPaths:@[self.drawerIndexPath]
+                         withRowAnimation:UITableViewRowAnimationAutomatic];
+    });
+}
 
 
 /*

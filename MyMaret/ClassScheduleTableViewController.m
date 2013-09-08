@@ -86,6 +86,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    // Thanks to http://stackoverflow.com/questions/1269506/selecting-a-uitableviewcell-in-edit-mode for helping me have the cells
+    // only selectable when in editing mode
     if ([[segue identifier] isEqualToString:@"editSchoolClass"] && [[segue destinationViewController] isKindOfClass:[SchoolClassEditTableViewController class]]) {
         
         // Get the index for the selected cell
