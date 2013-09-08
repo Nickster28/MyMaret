@@ -337,6 +337,28 @@ const NSUInteger todayIndexKey = -1;
     NSString *dayName = [self dayNameForIndex:dayIndex];
     
     [[[self classScheduleDictionary] objectForKey:dayName] removeObjectAtIndex:classIndex];
+    
+    [self saveChanges];
+}
+
+
+- (void)moveClassOnDayIndex:(NSUInteger)dayIndex
+             fromClassIndex:(NSUInteger)fromClassIndex
+               toClassIndex:(NSUInteger)toClassIndex
+{
+    if (fromClassIndex == toClassIndex) return;
+    
+    NSString *dayName = [self dayNameForIndex:dayIndex];
+    
+    // Take the class out of its array
+    SchoolClass *classToMove = [[[self classScheduleDictionary] objectForKey:dayName] objectAtIndex:fromClassIndex];
+    
+    [self deleteClassWithDayIndex:dayIndex classIndex:fromClassIndex];
+    
+    // Reinsert it
+    [[[self classScheduleDictionary] objectForKey:dayName] insertObject:classToMove atIndex:toClassIndex];
+    
+    [self saveChanges];
 }
 
 

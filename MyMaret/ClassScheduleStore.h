@@ -52,4 +52,8 @@ extern const NSUInteger todayIndexKey;
 - (void)deleteClassWithDayIndex:(NSUInteger)dayIndex classIndex:(NSUInteger)classIndex;
 
 
+// Moves the given class from one index to another
+- (void)moveClassOnDayIndex:(NSUInteger)dayIndex fromClassIndex:(NSUInteger)fromClassIndex toClassIndex:(NSUInteger)toClassIndex;
+
+
 @end
