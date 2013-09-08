@@ -8,6 +8,7 @@
 
 #import "SchoolClassTimeEditCell.h"
 
+
 @implementation SchoolClassTimeEditCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -25,5 +26,29 @@
 
     // Configure the view for the selected state
 }
+
+
+
+- (void)setDisplayedClassTime:(NSString *)classTime
+{
+    // The hour is at index 0, the minutes at index 1
+    NSMutableArray *timeInfo = [NSMutableArray arrayWithArray:[classTime componentsSeparatedByString:@":"]];
+    
+    // Make sure afternoon times are marked as PM! (military time)
+    if ([timeInfo[0] integerValue] > 12) {
+        timeInfo[0] = [NSString stringWithFormat:@"%d", [timeInfo[0] integerValue] - 12];
+    }
+    
+    // Make a date with the given hour and minute
+    NSDateComponents *classTimeDateComps = [[NSDateComponents alloc] init];
+    [classTimeDateComps setHour:[timeInfo[0] integerValue]];
+    [classTimeDateComps setMinute:[timeInfo[1] integerValue]];
+    
+    NSDate *displayedDate = [[NSCalendar currentCalendar] dateFromComponents:classTimeDateComps];
+    
+    [[self classTimePicker] setDate:displayedDate animated:YES];
+}
+
+
 
 @end

@@ -6,14 +6,19 @@
 //  Copyright (c) 2013 Nick. All rights reserved.
 //
 
+#import "SchoolClass.h"
 #import "SchoolClassEditTableViewController.h"
+#import "SchoolClassNameEditCell.h"
+#import "SchoolClassNamePrefsCell.h"
+#import "SchoolClassTimeCell.h"
+#import "SchoolClassTimeEditCell.h"
 
-@interface SchoolClassEditTableViewController () <UITextFieldDelegate>
-@property (nonatomic, weak) UITextField *classNameTextField;
-@property (nonatomic, weak) UISegmentedControl *classNamePrefSegControl;
 
-// For handling the time-setting slide-out "drawer"
+@interface SchoolClassEditTableViewController ()
+
+// Keep track of where the drawer is
 @property (nonatomic, strong) NSIndexPath *drawerIndexPath;
+@property (nonatomic, weak) SchoolClassTimeCell *drawerParentCell;
 @end
 
 @implementation SchoolClassEditTableViewController
@@ -45,19 +50,26 @@
 }
 
 
-
-// UITextFieldDelegate for dismissing keyboard when user hits
-// "Done"
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
+- (void)changeParentCellTime:(UIDatePicker *)sender
 {
-    [textField resignFirstResponder];
-    return true;
+    NSDate *displayedDate = [sender date];
+    
+    // We just want the hour and minutes in a string
+    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:displayedDate];
+    
+    // Account for military time
+    if (dateComps.hour > 12) dateComps.hour -= 12;
+    
+    NSString *timeString = [NSString stringWithFormat:@"%d:%d", dateComps.hour, dateComps.minute];
+    
+    // Set the parent cell to display that time
+    [self.drawerParentCell setDisplayedClassTime:timeString];
 }
 
 
 - (void)saveScheduleChanges
 {
-    
+#warning Not Implemented
 }
 
 
@@ -94,6 +106,7 @@
     NSInteger drawerRow = self.drawerIndexPath.row;
     NSInteger drawerSec = self.drawerIndexPath.section;
     
+    // The drawer is 163, the other cells are 44
     if (self.drawerIndexPath && drawerRow == row && drawerSec == sec) {
         return 163.0;
     }
@@ -104,24 +117,63 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.drawerIndexPath && indexPath.row == self.drawerIndexPath.row && indexPath.section == self.drawerIndexPath.section) {
-     
-        return [tableView dequeueReusableCellWithIdentifier:@"timePickerCell"];
-    }
     
     // Thanks to http://stackoverflow.com/questions/9322885/combine-static-and-prototype-content-in-a-table-view
     // for helping me combine storyboard cells and XIB cells
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        return [tableView dequeueReusableCellWithIdentifier:@"nameEditCell"];
+    if (self.drawerIndexPath && indexPath.row == self.drawerIndexPath.row && indexPath.section == self.drawerIndexPath.section) {
+        
+        SchoolClassTimeEditCell *cell = [tableView dequeueReusableCellWithIdentifier:@"timePickerCell"
+                                                                        forIndexPath:indexPath];
+        
+        // Set the picker to display the same time as its parent cell
+        [cell setDisplayedClassTime:[self.drawerParentCell enteredClassTime]];
+        
+        // Set the picker to send us a message each time the user changes the time
+        [[cell classTimePicker] addTarget:self
+                                   action:@selector(changeParentCellTime:)
+                         forControlEvents:UIControlEventValueChanged];
+        
+        return cell;
+        
+    } else if (indexPath.section == 0 && indexPath.row == 0) {
+        
+        SchoolClassNameEditCell *cell = [tableView dequeueReusableCellWithIdentifier:@"nameEditCell"
+                                                                        forIndexPath:indexPath];
+        
+        // Set the cell's text field to initially display the class title
+        [cell setDisplayedClassName:[[self selectedClass] className]];
+        
+        return cell;
+        
     } else if (indexPath.section == 0 && indexPath.row == 1) {
-        return [tableView dequeueReusableCellWithIdentifier:@"nameSegControlCell"];
-    } else if (indexPath.section == 1 && indexPath.row == 0) {
-        return [tableView dequeueReusableCellWithIdentifier:@"startTimeCell"];
+        
+        return [tableView dequeueReusableCellWithIdentifier:@"nameSegControlCell"
+                                               forIndexPath:indexPath];
+        
+        
     } else if (indexPath.section == 1) {
-        return [tableView dequeueReusableCellWithIdentifier:@"endTimeCell"];
+        
+        SchoolClassTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"timeCell"
+                                                                    forIndexPath:indexPath];
+        
+        // Get the class's start/end time
+        NSArray *times = [[[self selectedClass] classTime] componentsSeparatedByString:@"-"];
+        
+        // If this is the class start time cell, set the text to be the start time (which is
+        // at index 0 in the times array)
+        [cell setDisplayedClassTime:times[(indexPath.row == 0) ? 0 : 1]];
+        
+        return cell;
+        
     } else if (indexPath.section == 2 && indexPath.row == 0) {
-        return [tableView dequeueReusableCellWithIdentifier:@"saveChangesCell"];
+        
+        return [tableView dequeueReusableCellWithIdentifier:@"saveChangesCell"
+                                               forIndexPath:indexPath];
+        
+    // Shouldn't reach here!
     } else return nil;
+    
+    
 }
 
 
@@ -153,10 +205,11 @@
         delayInSeconds = 0.3;
         
         self.drawerIndexPath = nil;
+        self.drawerParentCell = nil;
         
         // Remove the drawer
         [tableView deleteRowsAtIndexPaths:indexesToDelete
-                         withRowAnimation:UITableViewRowAnimationAutomatic];
+                         withRowAnimation:UITableViewRowAnimationTop];
         
         
     }
@@ -175,9 +228,12 @@
                                                       inSection:indexPath.section];
         } else self.drawerIndexPath = indexPath;
         
+        // Set the parent cell
+        self.drawerParentCell = (SchoolClassTimeCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:self.drawerIndexPath.row - 1 inSection:self.drawerIndexPath.section]];
+        
         // Animate in the drawer
         [tableView insertRowsAtIndexPaths:@[self.drawerIndexPath]
-                         withRowAnimation:UITableViewRowAnimationAutomatic];
+                         withRowAnimation:UITableViewRowAnimationTop];
     });
 }
 

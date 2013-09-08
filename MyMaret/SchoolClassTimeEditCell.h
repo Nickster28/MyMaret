@@ -10,4 +10,9 @@
 
 @interface SchoolClassTimeEditCell : UITableViewCell
 @property (nonatomic, weak) IBOutlet UIDatePicker *classTimePicker;
+
+// Sets the time to be initially displayed on the picker
+- (void)setDisplayedClassTime:(NSString *)classTime;
+
+
 @end
