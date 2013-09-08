@@ -35,8 +35,8 @@
     NSMutableArray *timeInfo = [NSMutableArray arrayWithArray:[classTime componentsSeparatedByString:@":"]];
     
     // Make sure afternoon times are marked as PM! (military time)
-    if ([timeInfo[0] integerValue] > 12) {
-        timeInfo[0] = [NSString stringWithFormat:@"%d", [timeInfo[0] integerValue] - 12];
+    if ([timeInfo[0] integerValue] < 7) {
+        timeInfo[0] = [NSString stringWithFormat:@"%d", [timeInfo[0] integerValue] + 12];
     }
     
     // Make a date with the given hour and minute
