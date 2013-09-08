@@ -19,6 +19,7 @@
 // Keep track of where the drawer is
 @property (nonatomic, strong) NSIndexPath *drawerIndexPath;
 @property (nonatomic, weak) SchoolClassTimeCell *drawerParentCell;
+
 @end
 
 @implementation SchoolClassEditTableViewController
@@ -60,7 +61,11 @@
     // Account for military time
     if (dateComps.hour > 12) dateComps.hour -= 12;
     
-    NSString *timeString = [NSString stringWithFormat:@"%d:%d", dateComps.hour, dateComps.minute];
+    // Make sure if the minutes are only 1 digit that there is a leading 0
+    NSString *minutesString = (dateComps.minute < 10) ? [NSString stringWithFormat:@"0%d", dateComps.minute] :
+    [NSString stringWithFormat:@"%d", dateComps.minute];
+    
+    NSString *timeString = [NSString stringWithFormat:@"%d:%@", dateComps.hour, minutesString];
     
     // Set the parent cell to display that time
     [self.drawerParentCell setDisplayedClassTime:timeString];
@@ -92,6 +97,22 @@
             return 0;
     }
 }
+
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return @"Class Name";
+        
+        case 1:
+            return @"Class Time";
+        
+        default:
+            return @"";
+    }
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -160,7 +181,9 @@
         NSArray *times = [[[self selectedClass] classTime] componentsSeparatedByString:@"-"];
         
         // If this is the class start time cell, set the text to be the start time (which is
-        // at index 0 in the times array)
+        // at index 0 in the times array).  Otherwise, it's the end time (at index 1 in the
+        // times array)
+        [cell setIsStartTimeCell:indexPath.row == 0];
         [cell setDisplayedClassTime:times[(indexPath.row == 0) ? 0 : 1]];
         
         return cell;

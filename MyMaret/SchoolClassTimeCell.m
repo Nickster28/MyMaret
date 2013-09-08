@@ -44,4 +44,10 @@
 }
 
 
+- (void)setIsStartTimeCell:(BOOL)isStartTime
+{
+    [[self cellTitleLabel] setText:(isStartTime) ? @"Start Time" : @"End Time"];
+}
+
+
 @end

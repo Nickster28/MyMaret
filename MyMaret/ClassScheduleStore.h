@@ -12,6 +12,13 @@
 
 @interface ClassScheduleStore : NSObject
 
+
+// If this is given as the parameter for a day index,
+// then the store will figure out what today is and
+// return appropriate information
+extern const NSUInteger todayIndexKey;
+
+
 // Get the singleton instance of ClassScheduleStore
 + (ClassScheduleStore *)sharedStore;
 
@@ -26,12 +33,12 @@
 // This works more easily with tableViews/row indices
 
 
-// Get the class at the given index on the given day
+// Get the class at the given index on the given day (supports todayIndexKey)
 - (SchoolClass *)classWithDayIndex:(NSUInteger)dayIndex classIndex:(NSUInteger)classIndex;
 
 
-
 // Returns the total number of articles in a given section (filtered and non-filtered)
+// (supports todayIndexKey)
 - (NSUInteger)numberOfPeriodsInDayWithIndex:(NSUInteger)dayIndex;
 
 // Returns the number of days in the schedule
@@ -41,8 +48,8 @@
 - (NSString *)dayNameForIndex:(NSUInteger)dayIndex;
 
 
-// For accessing only today's class information
-- (NSUInteger)numberOfPeriodsToday;
-- (SchoolClass *)classTodayWithIndex:(NSUInteger)classIndex;
+// Removes the given class from the given day
+- (void)deleteClassWithDayIndex:(NSUInteger)dayIndex classIndex:(NSUInteger)classIndex;
+
 
 @end

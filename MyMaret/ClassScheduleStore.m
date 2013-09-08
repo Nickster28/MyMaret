@@ -17,6 +17,10 @@
 @property (nonatomic) NSUInteger todayDayIndex;
 @end
 
+
+const NSUInteger todayIndexKey = -1;
+
+
 @implementation ClassScheduleStore
 
 
@@ -301,6 +305,9 @@
 
 - (SchoolClass *)classWithDayIndex:(NSUInteger)dayIndex classIndex:(NSUInteger)classIndex
 {
+    // If the user wants info about today, change todayIndex to a real day index
+    if (dayIndex == todayIndexKey) dayIndex = [self todayDayIndex];
+    
     // Convert the day index to a string
     NSString *dayName = [self dayNameForIndex:dayIndex];
     
@@ -310,6 +317,9 @@
 
 - (NSUInteger)numberOfPeriodsInDayWithIndex:(NSUInteger)dayIndex
 {
+    // If the user wants info about today, change todayIndex to a real day index
+    if (dayIndex == todayIndexKey) dayIndex = [self todayDayIndex];
+    
     // Convert the day index to a string
     NSString *dayName = [self dayNameForIndex:dayIndex];
     
@@ -323,17 +333,11 @@
 }
 
 
-- (NSUInteger)numberOfPeriodsToday
-{
-    return [self numberOfPeriodsInDayWithIndex:[self todayDayIndex]];
+- (void)deleteClassWithDayIndex:(NSUInteger)dayIndex classIndex:(NSUInteger)classIndex {
+    NSString *dayName = [self dayNameForIndex:dayIndex];
+    
+    [[[self classScheduleDictionary] objectForKey:dayName] removeObjectAtIndex:classIndex];
 }
-
-
-- (SchoolClass *)classTodayWithIndex:(NSUInteger)classIndex
-{
-    return [self classWithDayIndex:[self todayDayIndex] classIndex:classIndex];
-}
-
 
 
 @end

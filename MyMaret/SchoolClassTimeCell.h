@@ -16,4 +16,7 @@
 // Sets the initial class time that appears in the label to the right
 - (void)setDisplayedClassTime:(NSString *)classTime;
 
+// Sets whether the cell title label displays "Start Time" or "End Time"
+- (void)setIsStartTimeCell:(BOOL)isStartTime;
+
 @end
