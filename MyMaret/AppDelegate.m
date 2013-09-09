@@ -10,6 +10,8 @@
 #import <Parse/Parse.h>
 #import "AnnouncementsStore.h"
 #import "UIApplication+iOSVersionChecker.h"
+#import "LoginViewController.h"
+#import "UIColor+SchoolColor.h"
 
 // NSUserDefaults keys
 NSString * const MyMaretIsLoggedInKey = @"MyMaretIsLoggedInKey";
@@ -56,6 +58,24 @@ NSString * const MyMaretPushNotificationTypeNewspaper = @"newspaper";
         // Make sure the badge is in line with the number of unread announcements
         [[PFInstallation currentInstallation] setBadge:[[AnnouncementsStore sharedStore] numberOfUnreadAnnouncements]];
         [[PFInstallation currentInstallation] saveInBackground];
+    } else {
+        
+        // If we haven't logged in yet, show the login screen
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        
+        // Put the login viewcontroller inside a nav controller
+        // (required for the google login controller)
+        // but hide the nav bar initially
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        [navController setNavigationBarHidden:YES];
+        [navController.navigationBar setTintColor:[UIColor schoolColor]];
+        
+        [[self window] setRootViewController:navController];
+        
+        self.window.backgroundColor = [UIColor blackColor];
+        [self.window makeKeyAndVisible];
     }
     
     // Change the status bar on iOS 6 to not be tinted

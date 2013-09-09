@@ -10,6 +10,8 @@
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "UIApplication+HasNetworkConnection.h"
 #import "AppDelegate.h"
+#import "UIApplication+iOSVersionChecker.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface LoginViewController ()
 @end
@@ -30,6 +32,49 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    
+    CGFloat height = [(UIWindow *)[UIApplication sharedApplication].windows[0] bounds].size.height;
+    
+    // Set the images depending on the device and OS
+    if ([UIApplication isPrevIOS] && height > 460.0) {
+        
+        [self.splashBackgroundImageView setImage:[UIImage imageNamed:@"SplashBackground4-6"]];
+        
+        [self.splashLogoImageView setImage:[UIImage imageNamed:@"SplashLogo4-6"]];
+        
+    } else if ([UIApplication isPrevIOS]) {
+        
+        [self.splashBackgroundImageView setImage:[UIImage imageNamed:@"SplashBackground35-6"]];
+        
+        [self.splashLogoImageView setImage:[UIImage imageNamed:@"SplashLogo35-6"]];
+        
+    } else if (height > 480.0) {
+        
+        [self.splashBackgroundImageView setImage:[UIImage imageNamed:@"SplashBackground4-7"]];
+        
+        [self.splashLogoImageView setImage:[UIImage imageNamed:@"SplashLogo4-7"]];
+        
+    } else {
+        
+        [self.splashBackgroundImageView setImage:[UIImage imageNamed:@"SplashBackground35-7"]];
+        
+        [self.splashLogoImageView setImage:[UIImage imageNamed:@"SplashLogo35-7"]];
+    }
+    
+    
+    // Only do this animation if it's after launching
+    // (we can tell because the splash logo will be
+    // visible if the app just launched)
+    if (self.splashLogoImageView.layer.opacity == 1.0) {
+        
+        //Set the title and button's initial position and opacity
+        [self.loginTitleImageView.layer setPosition:CGPointMake(160.0, 50.0)];
+        [self.loginButton.layer setPosition:CGPointMake(160.0, 439)];
+        
+        [self.loginTitleImageView.layer setOpacity:0.0];
+        [self.loginButton.layer setOpacity:0.0];
+    }
 }
 
 
@@ -39,6 +84,94 @@
     
     // Hide the nav bar
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    // Only perform the animation if it's after launching
+    if (self.splashLogoImageView.layer.opacity == 1.0) {
+        [self fadeOutLogo];
+    }
+}
+
+
+- (void)fadeOutLogo
+{
+    // Fade away
+    CABasicAnimation *fader = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    [fader setDuration:0.5];
+    [fader setFromValue:[NSNumber numberWithFloat:1.0]];
+    [fader setToValue:[NSNumber numberWithFloat:0.0]];
+    [fader setDelegate:self];
+    
+    [self.splashLogoImageView.layer setOpacity:0.0];
+    
+    [self.splashLogoImageView.layer addAnimation:fader
+                                          forKey:@"fade"];
+}
+
+
+// Called when the splash logo's fade is done
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    // Now animate in the title and login button
+    
+    // Fade away
+    CABasicAnimation *fader = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    [fader setDuration:1.0];
+    [fader setFromValue:[NSNumber numberWithFloat:0.0]];
+    [fader setToValue:[NSNumber numberWithFloat:1.0]];
+    
+    
+    // Move the title down
+    CABasicAnimation *titleMover = [CABasicAnimation animationWithKeyPath:@"position"];
+    [titleMover setDuration:1.0];
+    [titleMover setFromValue:[NSValue valueWithCGPoint:CGPointMake(160.0, 50.0)]];
+    [titleMover setToValue:[NSValue valueWithCGPoint:CGPointMake(160.0, 100.0)]];
+    [titleMover setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    
+    
+    // Move the login button up
+    CABasicAnimation *loginButtonMover = [CABasicAnimation animationWithKeyPath:@"position"];
+    [loginButtonMover setDuration:1.0];
+    [loginButtonMover setFromValue:[NSValue valueWithCGPoint:CGPointMake(160.0, 439.0)]];
+    [loginButtonMover setToValue:[NSValue valueWithCGPoint:CGPointMake(160.0, 389.0)]];
+    [loginButtonMover setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    
+    
+    // Combine the two animations for the title
+    CAAnimationGroup *titleGroup = [[CAAnimationGroup alloc] init];
+    [titleGroup setAnimations:@[fader, titleMover]];
+    [titleGroup setDuration:1.0];
+    
+    // Combine the two animations for the button
+    CAAnimationGroup *loginButtonGroup = [[CAAnimationGroup alloc] init];
+    [loginButtonGroup setAnimations:@[fader, loginButtonMover]];
+    [loginButtonGroup setDuration:1.0];
+    
+    
+    // Wait 1/2 second after the splash logo is done animating
+    double delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        
+        // Set the model layers' position and opacity
+        [self.loginTitleImageView.layer setPosition:CGPointMake(160.0, 100.0)];
+        [self.loginTitleImageView.layer setOpacity:1.0];
+        
+        [self.loginButton.layer setPosition:CGPointMake(160.0, 389.0)];
+        [self.loginButton.layer setOpacity:1.0];
+        
+        
+        // Perform the animations!
+        [self.loginTitleImageView.layer addAnimation:titleGroup
+                                              forKey:@"titleAnimations"];
+        [self.loginButton.layer addAnimation:loginButtonGroup
+                                      forKey:@"loginButtonAnimations"];
+    });
 }
 
 

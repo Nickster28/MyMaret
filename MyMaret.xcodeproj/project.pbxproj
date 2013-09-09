@@ -55,6 +55,7 @@
 		0177455F17A60AC3001625BF /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177455E17A60AC3001625BF /* MainMenuViewController.m */; };
 		0177456117A60AC3001625BF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0177456017A60AC3001625BF /* Images.xcassets */; };
 		0177458017A60B5E001625BF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177457F17A60B5E001625BF /* SWRevealViewController.m */; };
+		017751D017DE2EB900ED49E5 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017751CF17DE2EB900ED49E5 /* LoginViewController.xib */; };
 		017A96DB17A7EB6C003D8A40 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017A96DA17A7EB6C003D8A40 /* CalendarViewController.m */; };
 		017EE13E17D55F6C00AB41A1 /* ArticleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017EE13D17D55F6C00AB41A1 /* ArticleDetailViewController.m */; };
 		019054B717DD63F200B7982F /* TodayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 019054B617DD63F200B7982F /* TodayTableViewController.m */; };
@@ -174,6 +175,7 @@
 		0177456717A60AC3001625BF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		0177457E17A60B5E001625BF /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		0177457F17A60B5E001625BF /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		017751CF17DE2EB900ED49E5 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = MyMaret/LoginViewController.xib; sourceTree = SOURCE_ROOT; };
 		017A96D917A7EB6C003D8A40 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		017A96DA17A7EB6C003D8A40 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		017EE13C17D55F6C00AB41A1 /* ArticleDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleDetailViewController.h; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 				0177457F17A60B5E001625BF /* SWRevealViewController.m */,
 				0107E02117CBE1840099E4E4 /* LoginViewController.h */,
 				0107E02217CBE1840099E4E4 /* LoginViewController.m */,
+				017751CF17DE2EB900ED49E5 /* LoginViewController.xib */,
 				0107E02817CC13D40099E4E4 /* WelcomeViewController.h */,
 				0107E02917CC13D40099E4E4 /* WelcomeViewController.m */,
 				0124412517D056260091C01E /* WelcomeView.xib */,
@@ -592,6 +595,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				017751D017DE2EB900ED49E5 /* LoginViewController.xib in Resources */,
 				010BC6A617CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib in Resources */,
 				01BD435C17C9BB22005EF174 /* AnnouncementCell.xib in Resources */,
 				0177456117A60AC3001625BF /* Images.xcassets in Resources */,

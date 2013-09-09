@@ -2,13 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "logolessstroke.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "logolessstroke@2x.png"
+      "filename" : "SplashBackground35-7.png"
     }
   ],
   "info" : {
