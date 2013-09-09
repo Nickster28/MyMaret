@@ -10,7 +10,6 @@
 
 @interface LoginViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
-@property (weak, nonatomic) IBOutlet UILabel *mymaretTitle;
 
 - (IBAction)showLoginScreen:(id)sender;
 

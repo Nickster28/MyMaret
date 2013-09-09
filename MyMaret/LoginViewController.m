@@ -33,6 +33,15 @@
 }
 
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // Hide the nav bar
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -74,6 +83,7 @@
                                                         finishedSelector:nil];
     
     [self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 

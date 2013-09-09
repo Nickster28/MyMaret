@@ -6,25 +6,25 @@
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
-        <scene sceneID="q5x-WG-gTk">
+        <scene sceneID="Iyt-LE-Po1">
             <objects>
-                <navigationController definesPresentationContext="YES" id="Z5g-X9-WQE" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gpJ-F3-iO9">
+                <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="ILH-EN-Iw3" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="apA-fL-7o1"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UeG-ye-1Fp">
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="puK-va-Ick" kind="relationship" relationship="rootViewController" id="5P9-Nc-6ch"/>
+                        <segue destination="puK-va-Ick" kind="relationship" relationship="rootViewController" id="5K6-2u-bdo"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="g2T-j9-XfP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A5L-Mu-v7p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2150" y="-3657"/>
+            <point key="canvasLocation" x="2057" y="-3657"/>
         </scene>
-        <!--Login View Controller - Welcome to MyMaret-->
+        <!--Login View Controller - Welcome-->
         <scene sceneID="WqJ-0l-RyP">
             <objects>
-                <viewController id="puK-va-Ick" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController title="Welcome" id="puK-va-Ick" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qRT-Pm-4eR"/>
                         <viewControllerLayoutGuide type="bottom" id="MPU-GZ-8g6"/>
@@ -33,31 +33,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MyMaret" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2NU-3U-Id3">
-                                <rect key="frame" x="29" y="94" width="262" height="95"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginBackground" translatesAutoresizingMaskIntoConstraints="NO" id="SjK-a5-6DA">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="7os-ZN-z8P"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MyMaretLogo" translatesAutoresizingMaskIntoConstraints="NO" id="DfT-fp-xC5">
+                                <rect key="frame" x="0.0" y="56" width="320" height="106"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="64"/>
-                                <color key="textColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wkB-vB-dD2">
-                                <rect key="frame" x="31" y="319" width="259" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="106" id="Xb0-pi-1yE"/>
+                                    <constraint firstAttribute="width" constant="320" id="jp6-K4-7Cr"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ikM-5L-LKo">
+                                <rect key="frame" x="31" y="303" width="259" height="85"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Log In with your Maret Gmail Account">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="85" id="3Tb-oY-8GQ"/>
+                                    <constraint firstAttribute="width" constant="259" id="cdU-6w-2Lk"/>
+                                </constraints>
+                                <state key="normal" image="LogInButton"/>
                                 <connections>
-                                    <action selector="showLoginScreen:" destination="puK-va-Ick" eventType="touchUpInside" id="Xzc-pV-ptX"/>
+                                    <action selector="showLoginScreen:" destination="puK-va-Ick" eventType="touchUpInside" id="Ax7-HF-VK1"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="MPU-GZ-8g6" firstAttribute="top" secondItem="ikM-5L-LKo" secondAttribute="bottom" constant="92" id="0bP-zx-vax"/>
+                            <constraint firstItem="DfT-fp-xC5" firstAttribute="leading" secondItem="eXQ-Gg-Y4d" secondAttribute="leading" id="3su-DG-c8h"/>
+                            <constraint firstAttribute="trailing" secondItem="SjK-a5-6DA" secondAttribute="trailing" id="BWs-2Q-PC2"/>
+                            <constraint firstItem="DfT-fp-xC5" firstAttribute="top" secondItem="qRT-Pm-4eR" secondAttribute="bottom" constant="36" id="GY1-5w-lK8"/>
+                            <constraint firstItem="MPU-GZ-8g6" firstAttribute="top" secondItem="SjK-a5-6DA" secondAttribute="bottom" id="IKS-60-fyG"/>
+                            <constraint firstItem="SjK-a5-6DA" firstAttribute="leading" secondItem="eXQ-Gg-Y4d" secondAttribute="leading" id="KNo-jt-3Bq"/>
+                            <constraint firstAttribute="trailing" secondItem="ikM-5L-LKo" secondAttribute="trailing" constant="30" id="Oqc-iY-mvL"/>
+                            <constraint firstAttribute="trailing" secondItem="DfT-fp-xC5" secondAttribute="trailing" id="c22-yz-idM"/>
+                            <constraint firstItem="SjK-a5-6DA" firstAttribute="top" secondItem="eXQ-Gg-Y4d" secondAttribute="top" id="obu-Z9-OQe"/>
+                            <constraint firstItem="ikM-5L-LKo" firstAttribute="leading" secondItem="eXQ-Gg-Y4d" secondAttribute="leading" constant="31" id="v6f-EK-eZe"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Welcome to MyMaret" id="Syr-Os-Mbq"/>
                     <connections>
-                        <outlet property="loginButton" destination="wkB-vB-dD2" id="CjJ-8T-bG0"/>
-                        <outlet property="mymaretTitle" destination="2NU-3U-Id3" id="cHy-Sg-44d"/>
+                        <outlet property="loginButton" destination="ikM-5L-LKo" id="iZ6-n4-HQM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5v-nn-ouh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -255,12 +275,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="Z5g-X9-WQE" kind="modal" identifier="showLoginScreen" id="qiH-yY-aX7"/>
+                        <segue destination="ILH-EN-Iw3" kind="modal" identifier="showLoginScreen" id="HMB-ID-rsg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xi3-4m-A2E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2150" y="-3003"/>
+            <point key="canvasLocation" x="2110" y="-3003"/>
         </scene>
         <!--Announcements Table View Controller - Announcements-->
         <scene sceneID="7JG-BY-7ex">
@@ -1655,9 +1675,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="AnnouncementsIcon" width="26" height="18"/>
         <image name="AssignmentBookIcon" width="26" height="27"/>
         <image name="CalendarIcon" width="26" height="28"/>
+        <image name="LogInButton" width="320" height="106"/>
+        <image name="LoginBackground" width="320" height="480"/>
+        <image name="MyMaretLogo" width="320" height="106"/>
         <image name="NewspaperIcon" width="26" height="21"/>
         <image name="ScheduleIcon" width="26" height="18"/>
-        <image name="SettingsIcon" width="26" height="26"/>
         <image name="SettingsIcon" width="26" height="26"/>
         <image name="TodayIcon" width="26" height="26"/>
     </resources>
