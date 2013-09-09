@@ -40,6 +40,12 @@
 }
 
 
+- (void)dismissKeyboard
+{
+    [self.classNameTextField resignFirstResponder];
+}
+
+
 - (void)setDisplayedClassName:(NSString *)className
 {
     [[self classNameTextField] setText:className];

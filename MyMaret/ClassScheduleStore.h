@@ -56,4 +56,12 @@ extern const NSUInteger todayIndexKey;
 - (void)moveClassOnDayIndex:(NSUInteger)dayIndex fromClassIndex:(NSUInteger)fromClassIndex toClassIndex:(NSUInteger)toClassIndex;
 
 
+// Change the information for a given class
+- (void)setClassName:(NSString *)className classTime:(NSString *)classTime forClassWithDayIndex:(NSUInteger)dayIndex classIndex:(NSUInteger)classIndex;
+
+
+// Adds a new class period with the given info to the end of the given day
+- (void)addClassWithName:(NSString *)className time:(NSString *)classTime toEndOfDayWithIndex:(NSUInteger)dayIndex;
+
+
 @end

@@ -20,7 +20,7 @@ NSString * const SchoolClassClassTimeEncodingKey = @"classTime";
     self = [super init];
     if (self) {
         [self setClassName:name];
-        [self setClassName:timeSlot];
+        [self setClassTime:timeSlot];
     }
     
     return self;

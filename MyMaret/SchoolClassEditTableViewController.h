@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ClassScheduleTableViewController.h"
 
 @class SchoolClass;
 
 @interface SchoolClassEditTableViewController : UITableViewController
-@property (nonatomic, strong) SchoolClass *selectedClass;
+@property (nonatomic, strong) NSIndexPath *selectedIndexPath;
+@property (nonatomic, weak) UIViewController <ClassEditDismisserDelegate> *delegate;
 @end

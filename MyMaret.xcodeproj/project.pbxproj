@@ -28,8 +28,6 @@
 		01176FE117DC465900DFF2EA /* SchoolClassTimeEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FDF17DC465900DFF2EA /* SchoolClassTimeEditCell.m */; };
 		01176FE717DC621D00DFF2EA /* SchoolClassNameEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FE617DC621D00DFF2EA /* SchoolClassNameEditCell.m */; };
 		01176FE817DC621D00DFF2EA /* SchoolClassNameEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FE617DC621D00DFF2EA /* SchoolClassNameEditCell.m */; };
-		01176FEB17DC641E00DFF2EA /* SchoolClassNamePrefsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FEA17DC641E00DFF2EA /* SchoolClassNamePrefsCell.m */; };
-		01176FEC17DC641E00DFF2EA /* SchoolClassNamePrefsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FEA17DC641E00DFF2EA /* SchoolClassNamePrefsCell.m */; };
 		01176FEF17DC64F100DFF2EA /* SchoolClassTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FEE17DC64F100DFF2EA /* SchoolClassTimeCell.m */; };
 		01176FF017DC64F100DFF2EA /* SchoolClassTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FEE17DC64F100DFF2EA /* SchoolClassTimeCell.m */; };
 		0124412617D056260091C01E /* WelcomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0124412517D056260091C01E /* WelcomeView.xib */; };
@@ -129,8 +127,6 @@
 		01176FDF17DC465900DFF2EA /* SchoolClassTimeEditCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolClassTimeEditCell.m; sourceTree = "<group>"; };
 		01176FE517DC621D00DFF2EA /* SchoolClassNameEditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolClassNameEditCell.h; sourceTree = "<group>"; };
 		01176FE617DC621D00DFF2EA /* SchoolClassNameEditCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolClassNameEditCell.m; sourceTree = "<group>"; };
-		01176FE917DC641E00DFF2EA /* SchoolClassNamePrefsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolClassNamePrefsCell.h; sourceTree = "<group>"; };
-		01176FEA17DC641E00DFF2EA /* SchoolClassNamePrefsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolClassNamePrefsCell.m; sourceTree = "<group>"; };
 		01176FED17DC64F100DFF2EA /* SchoolClassTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolClassTimeCell.h; sourceTree = "<group>"; };
 		01176FEE17DC64F100DFF2EA /* SchoolClassTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolClassTimeCell.m; sourceTree = "<group>"; };
 		0124412517D056260091C01E /* WelcomeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WelcomeView.xib; path = MyMaret/WelcomeView.xib; sourceTree = SOURCE_ROOT; };
@@ -463,8 +459,6 @@
 				01176FDB17DC3C3E00DFF2EA /* SchoolClassEditTableViewController.m */,
 				01176FE517DC621D00DFF2EA /* SchoolClassNameEditCell.h */,
 				01176FE617DC621D00DFF2EA /* SchoolClassNameEditCell.m */,
-				01176FE917DC641E00DFF2EA /* SchoolClassNamePrefsCell.h */,
-				01176FEA17DC641E00DFF2EA /* SchoolClassNamePrefsCell.m */,
 				01176FED17DC64F100DFF2EA /* SchoolClassTimeCell.h */,
 				01176FEE17DC64F100DFF2EA /* SchoolClassTimeCell.m */,
 				01176FDE17DC465900DFF2EA /* SchoolClassTimeEditCell.h */,
@@ -647,7 +641,6 @@
 				01176FD417DC122F00DFF2EA /* SchoolClass.m in Sources */,
 				0107E01917CBC8E60099E4E4 /* GTMOAuth2Authentication.m in Sources */,
 				016780DB17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */,
-				01176FEB17DC641E00DFF2EA /* SchoolClassNamePrefsCell.m in Sources */,
 				015191FF17D545CA0073AAEC /* NewspaperCell.m in Sources */,
 				0107E01C17CBC9430099E4E4 /* GTMHTTPFetcher.m in Sources */,
 				01176FEF17DC64F100DFF2EA /* SchoolClassTimeCell.m in Sources */,
@@ -668,7 +661,6 @@
 				01176FD917DC333600DFF2EA /* SchoolClassCell.m in Sources */,
 				01176FCE17DBE0DB00DFF2EA /* ClassScheduleStore.m in Sources */,
 				01176FE117DC465900DFF2EA /* SchoolClassTimeEditCell.m in Sources */,
-				01176FEC17DC641E00DFF2EA /* SchoolClassNamePrefsCell.m in Sources */,
 				01176FE817DC621D00DFF2EA /* SchoolClassNameEditCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

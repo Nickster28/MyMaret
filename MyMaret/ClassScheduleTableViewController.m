@@ -12,7 +12,7 @@
 #import "SchoolClassCell.h"
 #import "SchoolClassEditTableViewController.h"
 
-@interface ClassScheduleTableViewController ()
+@interface ClassScheduleTableViewController () <ClassEditDismisserDelegate>
 @end
 
 @implementation ClassScheduleTableViewController
@@ -33,7 +33,10 @@
     
     // Put an edit button in the top right
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [self.tableView reloadData];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -71,8 +74,13 @@
             [reloadIPs addObject:[self.tableView indexPathForCell:cell]];
         }
         
-        [self.tableView reloadRowsAtIndexPaths:reloadIPs
-                              withRowAnimation:UITableViewRowAnimationFade];
+        //[self.tableView reloadRowsAtIndexPaths:reloadIPs
+          //                    withRowAnimation:UITableViewRowAnimationFade];
+        double delayInSeconds = 0.2;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self.tableView reloadData];
+        });
         
     } else {
         [self.tableView deleteRowsAtIndexPaths:indexPaths
@@ -194,6 +202,21 @@
 
 
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // If the user wants to delete a cell, tell the store
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [[ClassScheduleStore sharedStore] deleteClassWithDayIndex:indexPath.section
+                                                       classIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+    // If the user tapped on the "+" next to the "Add Period" cell,
+    // pretend like they tapped on the cell itself
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        [self performSegueWithIdentifier:@"createSchoolClass" sender:[tableView cellForRowAtIndexPath:indexPath]];
+    }
+}
 
 
 
@@ -201,16 +224,69 @@
 {
     // Thanks to http://stackoverflow.com/questions/1269506/selecting-a-uitableviewcell-in-edit-mode for helping me have the cells
     // only selectable when in editing mode
-    if ([[segue identifier] isEqualToString:@"editSchoolClass"] && [[segue destinationViewController] isKindOfClass:[SchoolClassEditTableViewController class]]) {
+    BOOL isEditingClass = [[segue identifier] isEqualToString:@"editSchoolClass"] && [[segue destinationViewController] isKindOfClass:[SchoolClassEditTableViewController class]];
+    
+    BOOL isCreatingClass = [[segue identifier] isEqualToString:@"createSchoolClass"] && [[segue destinationViewController] isKindOfClass:[UINavigationController class]];
+    
+    if (isEditingClass || isCreatingClass) {
         
         // Get the index for the selected cell
         NSIndexPath *selectedIP = [self.tableView indexPathForCell:sender];
         
-        // Pass the class to the editing table view controller
-        SchoolClass *selectedClass = [[ClassScheduleStore sharedStore] classWithDayIndex:[selectedIP section] classIndex:[selectedIP row]];
-        
-        [[segue destinationViewController] setSelectedClass:selectedClass];
+        // Set the editing screen to the selected indexpath, and set us as the delegate
+        if (isEditingClass) {
+            [[segue destinationViewController] setSelectedIndexPath:selectedIP];
+            [(SchoolClassEditTableViewController *)[segue destinationViewController] setDelegate:self];
+        } else {
+            
+            SchoolClassEditTableViewController *editVC = [[(UINavigationController *)[segue destinationViewController] viewControllers] objectAtIndex:0];
+            
+            [editVC setSelectedIndexPath:selectedIP];
+            [editVC setDelegate:self];
+        }
     }
+}
+
+
+
+#pragma mark SchoolClassEditTableViewControllerDelegate
+
+
+- (void)schoolClassEditTableViewControllerDidCancelClassCreation:(SchoolClassEditTableViewController *)editTVC
+{
+    // Dismiss and don't do anything
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (void)schoolClassEditTableViewController:(SchoolClassEditTableViewController *)editTVC didUpdateClassAtIndexPath:(NSIndexPath *)updatedIP
+{
+    // Dismiss and update the given cell
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    [self.tableView reloadRowsAtIndexPaths:@[updatedIP]
+                          withRowAnimation:UITableViewRowAnimationFade];
+    
+    [self.tableView selectRowAtIndexPath:updatedIP
+                                animated:YES
+                          scrollPosition:UITableViewScrollPositionNone];
+    
+    double delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.tableView deselectRowAtIndexPath:updatedIP animated:YES];
+
+    });
+}
+
+
+- (void)schoolClassEditTableViewController:(SchoolClassEditTableViewController *)editTVC didCreateNewClassForSection:(NSUInteger)section
+{
+    // Dismiss an insert a new cell
+    [self dismissViewControllerAnimated:YES
+                             completion:^{
+                                 [self.tableView reloadData];
+                             }];
 }
 
 @end

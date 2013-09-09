@@ -16,4 +16,8 @@
 // Sets the class name to display in the text field
 - (void)setDisplayedClassName:(NSString *)className;
 
+
+// Dismiss the keyboard if it's visible for our text field
+- (void)dismissKeyboard;
+
 @end

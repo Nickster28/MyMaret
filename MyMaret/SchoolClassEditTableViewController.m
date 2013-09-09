@@ -9,9 +9,9 @@
 #import "SchoolClass.h"
 #import "SchoolClassEditTableViewController.h"
 #import "SchoolClassNameEditCell.h"
-#import "SchoolClassNamePrefsCell.h"
 #import "SchoolClassTimeCell.h"
 #import "SchoolClassTimeEditCell.h"
+#import "ClassScheduleStore.h"
 
 
 @interface SchoolClassEditTableViewController ()
@@ -19,6 +19,7 @@
 // Keep track of where the drawer is
 @property (nonatomic, strong) NSIndexPath *drawerIndexPath;
 @property (nonatomic, weak) SchoolClassTimeCell *drawerParentCell;
+@property (nonatomic, weak) SchoolClass *selectedClass;
 
 @end
 
@@ -33,21 +34,88 @@
     return self;
 }
 
+
+- (void)awakeFromNib
+{
+    // We want to close the drawer when the keyboard pops up
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(closeDrawer)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+}
+
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    // Change the navItem title depending on what we're doing
+    if (self.selectedClass) {
+        self.navigationItem.title = @"Edit Class";
+    } else {
+        self.navigationItem.title = @"Create Class";
+        
+        // If we're creating a new class, put a cancel button in the top left
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelClassCreation)];
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)setSelectedIndexPath:(NSIndexPath *)selectedIndexPath
+{
+    _selectedIndexPath = selectedIndexPath;
+    
+    // If we're inside a nav controller,
+    // we're making a new class so we shouldn't fetch one from the ClassScheduleStore
+    if (!self.navigationController) {
+        [self setSelectedClass:[[ClassScheduleStore sharedStore] classWithDayIndex:selectedIndexPath.section classIndex:selectedIndexPath.row]];
+    }
+}
+
+
+- (void)cancelClassCreation
+{
+    // Tell our delegate we didn't create anything
+    [self.delegate schoolClassEditTableViewControllerDidCancelClassCreation:self];
+}
+
+
+
+// Closes the time setter drawer if it is visible
+- (void)closeDrawer
+{
+    if (self.drawerIndexPath) {
+        NSArray *indexesToDelete = @[self.drawerIndexPath];
+        
+        self.drawerIndexPath = nil;
+        
+        // Remove the drawer
+        [self.tableView deleteRowsAtIndexPaths:indexesToDelete
+                              withRowAnimation:UITableViewRowAnimationTop];
+        
+        // Also deselect the parent cell
+        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForCell:self.drawerParentCell]
+                                      animated:YES];
+        
+        self.drawerParentCell = nil;
+    }
 }
 
 
@@ -74,7 +142,45 @@
 
 - (void)saveScheduleChanges
 {
-#warning Not Implemented
+    // Get the entered classname
+    NSString *name = [(SchoolClassNameEditCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] enteredClassName];
+    
+    // Get the start time
+    NSString *startTime = [(SchoolClassTimeCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]] enteredClassTime];
+    
+    // The row number of the end time cell will vary depending on where the
+    // drawer is
+    NSUInteger endTimeCellRowNum = (self.drawerIndexPath && self.drawerIndexPath.row == 1) ? 2 : 1;
+    NSString *endTime = [(SchoolClassTimeCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:endTimeCellRowNum inSection:1]] enteredClassTime];
+    
+    // Combine the start and end times
+    NSString *classTime = [NSString stringWithFormat:@"%@-%@", startTime, endTime];
+    
+    // If we're editing a class, change the info in the store and pop ourselves off the
+    // view controller stack
+    if (self.selectedClass) {
+        
+        // Change the class info
+        [[ClassScheduleStore sharedStore] setClassName:name
+                                             classTime:classTime
+                                  forClassWithDayIndex:self.selectedIndexPath.section
+                                            classIndex:self.selectedIndexPath.row];
+        
+        // Tell our delegate that we changed a class
+        [self.delegate schoolClassEditTableViewController:self
+                                didUpdateClassAtIndexPath:self.selectedIndexPath];
+        
+    } else {
+        
+        // Otherwise, we need to create a new class
+        [[ClassScheduleStore sharedStore] addClassWithName:name
+                                                      time:classTime
+                                       toEndOfDayWithIndex:self.selectedIndexPath.section];
+        
+        // Tell our delegate that we created a new class
+        [self.delegate schoolClassEditTableViewController:self
+                              didCreateNewClassForSection:self.selectedIndexPath.section];
+    }
 }
 
 
@@ -84,7 +190,7 @@
 {
     switch (section) {
         case 0:
-            return 2;
+            return 1;
             
         case 1:
             if (self.drawerIndexPath) return 3;
@@ -156,21 +262,18 @@
         
         return cell;
         
-    } else if (indexPath.section == 0 && indexPath.row == 0) {
+    } else if (indexPath.section == 0) {
         
         SchoolClassNameEditCell *cell = [tableView dequeueReusableCellWithIdentifier:@"nameEditCell"
                                                                         forIndexPath:indexPath];
         
-        // Set the cell's text field to initially display the class title
-        [cell setDisplayedClassName:[[self selectedClass] className]];
+        // If we're editing a class, display its name in the text field
+        if (self.selectedClass) {
+            // Set the cell's text field to initially display the class title
+            [cell setDisplayedClassName:[[self selectedClass] className]];
+        } else [cell setDisplayedClassName:@""];
         
         return cell;
-        
-    } else if (indexPath.section == 0 && indexPath.row == 1) {
-        
-        return [tableView dequeueReusableCellWithIdentifier:@"nameSegControlCell"
-                                               forIndexPath:indexPath];
-        
         
     } else if (indexPath.section == 1) {
         
@@ -178,7 +281,10 @@
                                                                     forIndexPath:indexPath];
         
         // Get the class's start/end time
-        NSArray *times = [[[self selectedClass] classTime] componentsSeparatedByString:@"-"];
+        NSArray *times;
+        if (self.selectedClass)
+            times = [[[self selectedClass] classTime] componentsSeparatedByString:@"-"];
+        else times = @[@"8:10", @"9:00"];
         
         // If this is the class start time cell, set the text to be the start time (which is
         // at index 0 in the times array).  Otherwise, it's the end time (at index 1 in the
@@ -188,27 +294,37 @@
         
         return cell;
         
-    } else if (indexPath.section == 2 && indexPath.row == 0) {
+    } else if (indexPath.section == 2) {
         
-        return [tableView dequeueReusableCellWithIdentifier:@"saveChangesCell"
-                                               forIndexPath:indexPath];
+        UITableViewCell *saveChangesCell = [tableView dequeueReusableCellWithIdentifier:@"saveChangesCell"
+                                                                           forIndexPath:indexPath];
+        
+        if (self.selectedClass) [[saveChangesCell textLabel] setText:@"Save Changes"];
+        else [[saveChangesCell textLabel] setText:@"Create Period"];
+        
+        return saveChangesCell;
         
     // Shouldn't reach here!
     } else return nil;
-    
-    
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // Don't let the user select the first row
+    if (indexPath.section == 0) return;
+    
+    // If the keyboard is visible, dismiss it
+    SchoolClassNameEditCell *nameCell = (SchoolClassNameEditCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    [nameCell dismissKeyboard];
+    
+    
     // If the user tapped the save button...
     if (indexPath.section == 2) {
         [self saveScheduleChanges];
         return;
     }
     
-    if (indexPath.section != 1) return;
     
     double delayInSeconds = 0.0;
     BOOL shouldAdjustDrawerRow = YES;
@@ -222,17 +338,9 @@
         // the rows below where the drawer was +1 higher than they should be
         if (self.drawerIndexPath.row <= indexPath.row) shouldAdjustDrawerRow = NO;
         
-        NSArray *indexesToDelete = @[self.drawerIndexPath];
-        
-        // We want a slight delay between the deletion and insertion
         delayInSeconds = 0.3;
         
-        self.drawerIndexPath = nil;
-        self.drawerParentCell = nil;
-        
-        // Remove the drawer
-        [tableView deleteRowsAtIndexPaths:indexesToDelete
-                         withRowAnimation:UITableViewRowAnimationTop];
+        [self closeDrawer];
         
         
     }
@@ -262,15 +370,6 @@
 
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -284,32 +383,5 @@
 }
 */
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
 
 @end

@@ -626,45 +626,8 @@
                                     <outlet property="classNameTextField" destination="Cc3-Xt-ssA" id="4Ig-sh-IvH"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="nameSegControlCell" rowHeight="44" id="rzy-qW-GKd" customClass="SchoolClassNamePrefsCell">
-                                <rect key="frame" x="0.0" y="163" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rzy-qW-GKd" id="sbN-xY-lJ8">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Kr8-HC-iEU">
-                                            <rect key="frame" x="106" y="8" width="199" height="29"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <segments>
-                                                <segment title="This Period"/>
-                                                <segment title="All Periods"/>
-                                            </segments>
-                                            <color key="tintColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
-                                        </segmentedControl>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set For:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDm-OF-6aS">
-                                            <rect key="frame" x="15" y="11" width="61" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="Kr8-HC-iEU" firstAttribute="leading" secondItem="cDm-OF-6aS" secondAttribute="trailing" constant="30" id="9Hq-bs-sIZ"/>
-                                        <constraint firstItem="Kr8-HC-iEU" firstAttribute="top" secondItem="sbN-xY-lJ8" secondAttribute="top" constant="8" id="YJg-FJ-5WO"/>
-                                        <constraint firstItem="cDm-OF-6aS" firstAttribute="centerY" secondItem="sbN-xY-lJ8" secondAttribute="centerY" id="e30-dJ-AaA"/>
-                                        <constraint firstAttribute="trailing" secondItem="Kr8-HC-iEU" secondAttribute="trailing" constant="15" id="no3-cX-fGI"/>
-                                        <constraint firstItem="cDm-OF-6aS" firstAttribute="leading" secondItem="sbN-xY-lJ8" secondAttribute="leading" constant="15" id="qjc-7d-4Mz"/>
-                                        <constraint firstAttribute="bottom" secondItem="Kr8-HC-iEU" secondAttribute="bottom" constant="7" id="xbi-lw-uu3"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="cellTitleLabel" destination="cDm-OF-6aS" id="rWN-a7-wRy"/>
-                                    <outlet property="classNamePrefSegControl" destination="Kr8-HC-iEU" id="Bv6-Ur-0to"/>
-                                </connections>
-                            </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="timeCell" textLabel="nR9-IW-HNc" detailTextLabel="woF-pF-qkW" rowHeight="44" style="IBUITableViewCellStyleValue1" id="iBC-T8-S8M" customClass="SchoolClassTimeCell">
-                                <rect key="frame" x="0.0" y="207" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="163" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iBC-T8-S8M" id="5Bq-Tj-Ewr">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -692,7 +655,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="timePickerCell" rowHeight="163" id="Szt-5r-zkT" customClass="SchoolClassTimeEditCell">
-                                <rect key="frame" x="0.0" y="251" width="320" height="163"/>
+                                <rect key="frame" x="0.0" y="207" width="320" height="163"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Szt-5r-zkT" id="lKr-hP-ezh">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
@@ -741,7 +704,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="saveChangesCell" textLabel="ooU-5R-l1p" rowHeight="44" style="IBUITableViewCellStyleDefault" id="T8n-gO-osn">
-                                <rect key="frame" x="0.0" y="414" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="370" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T8n-gO-osn" id="MxR-Ia-jkQ">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -768,7 +731,23 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lfr-sX-FUD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2573" y="-466"/>
+            <point key="canvasLocation" x="3049" y="-513"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5el-Iz-boh">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="NLq-5e-lNi" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EiJ-VU-JFa">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="U4C-Mp-lnJ" kind="relationship" relationship="rootViewController" id="wOb-79-Qro"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f1W-VB-tl7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2649" y="-207"/>
         </scene>
         <!--Class Schedule Table View Controller - Class Schedule-->
         <scene sceneID="tLh-Xp-jAj">
@@ -835,6 +814,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="NLq-5e-lNi" kind="modal" identifier="createSchoolClass" id="cGM-Au-tIg"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1353,5 +1335,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="1DK-9B-CEg"/>
+        <segue reference="Khm-O2-awT"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -336,6 +336,7 @@ const NSUInteger todayIndexKey = -1;
 - (void)deleteClassWithDayIndex:(NSUInteger)dayIndex classIndex:(NSUInteger)classIndex {
     NSString *dayName = [self dayNameForIndex:dayIndex];
     
+    // Remove the object from the dictionary
     [[[self classScheduleDictionary] objectForKey:dayName] removeObjectAtIndex:classIndex];
     
     [self saveChanges];
@@ -357,6 +358,34 @@ const NSUInteger todayIndexKey = -1;
     
     // Reinsert it
     [[[self classScheduleDictionary] objectForKey:dayName] insertObject:classToMove atIndex:toClassIndex];
+    
+    [self saveChanges];
+}
+
+
+- (void)setClassName:(NSString *)className classTime:(NSString *)classTime forClassWithDayIndex:(NSUInteger)dayIndex classIndex:(NSUInteger)classIndex
+{
+    SchoolClass *classToEdit = [self classWithDayIndex:dayIndex
+                                            classIndex:classIndex];
+    
+    // Change the class's info
+    [classToEdit setClassName:className];
+    [classToEdit setClassTime:classTime];
+    
+    [self saveChanges];
+}
+
+
+- (void)addClassWithName:(NSString *)className time:(NSString *)classTime toEndOfDayWithIndex:(NSUInteger)dayIndex
+{
+    // Create the new class
+    SchoolClass *newClass = [[SchoolClass alloc] initWithName:className
+                                                    classTime:classTime];
+    
+    NSString *dayName = [self dayNameForIndex:dayIndex];
+    
+    // Add it to the end of the right day in our dictionary
+    [[[self classScheduleDictionary] objectForKey:dayName] addObject:newClass];
     
     [self saveChanges];
 }
