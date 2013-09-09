@@ -8,6 +8,7 @@
 
 #import "SchoolClassCell.h"
 #import "SchoolClass.h"
+#import "UIColor+SchoolColor.h"
 
 @implementation SchoolClassCell
 
@@ -28,10 +29,14 @@
 }
 
 
-- (void)bindSchoolClass:(SchoolClass *)class
+- (void)bindSchoolClass:(SchoolClass *)class isAcademicClass:(BOOL)isClass
 {
     [[self classNameLabel] setText:[class className]];
     [[self classTimeLabel] setText:[class classTime]];
+    
+    if (!isClass) {
+        [[self classNameLabel] setTextColor:[UIColor schoolLightColor]];
+    } else [[self classNameLabel] setTextColor:[UIColor blackColor]];
 }
 
 @end

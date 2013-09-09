@@ -51,6 +51,7 @@ const NSUInteger todayIndexKey = -1;
 
 - (NSUInteger)todayDayIndex
 {
+    return 0;
     if (!_todayDayIndex) {
         
         // Figure out what the name of today is
@@ -388,6 +389,15 @@ const NSUInteger todayIndexKey = -1;
     [[[self classScheduleDictionary] objectForKey:dayName] addObject:newClass];
     
     [self saveChanges];
+}
+
+
+- (BOOL)isClassAcademicWithDayIndex:(NSUInteger)dayIndex classIndex:(NSUInteger)classIndex
+{
+    SchoolClass *class = [self classWithDayIndex:dayIndex
+                                      classIndex:classIndex];
+    
+    return !([[class className] isEqualToString:@"Break"] || [[class className] isEqualToString:@"Lunch"] || [[class className] isEqualToString:@"Assembly"] || [[class className] isEqualToString:@"Convocation"]);
 }
 
 

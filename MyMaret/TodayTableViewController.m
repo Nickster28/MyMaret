@@ -14,6 +14,9 @@
 #import "SchoolClass.h"
 #import "NewspaperArticle.h"
 #import "Announcement.h"
+#import "SchoolClassCell.h"
+#import "TodayAnnouncementCell.h"
+#import "NewspaperCell.h"
 
 
 @interface TodayTableViewController ()
@@ -123,6 +126,27 @@
 }
 
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case 0:
+            return 50.0;
+            
+        case 1:
+            return 44.0;
+            
+        case 2:
+            return 74.0;
+            
+        case 3:
+            return 84.0;
+            
+        default:
+            return 0.0;
+    }
+}
+
+
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
@@ -185,10 +209,11 @@
     SchoolClass *class = [[ClassScheduleStore sharedStore] classWithDayIndex:todayIndexKey
                                                                   classIndex:ip.row];
     
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"classCell"
+    SchoolClassCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"classCell"
                                                                  forIndexPath:ip];
-    [[cell textLabel] setText:class.className];
-    [[cell detailTextLabel] setText:class.classTime];
+    [cell bindSchoolClass:class
+          isAcademicClass:[[ClassScheduleStore sharedStore] isClassAcademicWithDayIndex:todayIndexKey
+                                                                             classIndex:ip.row]];
     
     return cell;
 }
@@ -222,11 +247,10 @@
     // Otherwise, get the corresponding class object and make a cell displaying it
     Announcement *currAnnouncement = [[AnnouncementsStore sharedStore] announcementAtIndex:ip.row];
     
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"announcementCell"
+    TodayAnnouncementCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"announcementCell"
                                                                  forIndexPath:ip];
     
-    [[cell textLabel] setText:currAnnouncement.announcementTitle];
-    [[cell detailTextLabel] setText:currAnnouncement.announcementAuthor];
+    [cell bindAnnouncement:currAnnouncement];
     
     return cell;
 }
@@ -249,11 +273,10 @@
     NewspaperArticle *article = [[NewspaperStore sharedStore] articleInSection:@"Popular"
                                                                        atIndex:ip.row];
     
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"newspaperCell"
+    NewspaperCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"newspaperCell"
                                                                  forIndexPath:ip];
     
-    [[cell textLabel] setText:article.articleTitle];
-    [[cell detailTextLabel] setText:article.articleAuthor];
+    [cell bindArticle:article];
     
     return cell;
 }

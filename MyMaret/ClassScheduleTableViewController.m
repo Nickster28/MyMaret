@@ -93,7 +93,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 64.0;
+    return 50.0;
 }
 
 
@@ -136,8 +136,10 @@
         // Get the class at the given index
         SchoolClass *currentClass = [[ClassScheduleStore sharedStore] classWithDayIndex:[indexPath section] classIndex:[indexPath row]];
         
+        BOOL isAcademicClass = [[ClassScheduleStore sharedStore] isClassAcademicWithDayIndex:[indexPath section] classIndex:[indexPath row]];
+        
         // Configure the cell...
-        [cell bindSchoolClass:currentClass];
+        [cell bindSchoolClass:currentClass isAcademicClass:isAcademicClass];
         
         return cell;
     }

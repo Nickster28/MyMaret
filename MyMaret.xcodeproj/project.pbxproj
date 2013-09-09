@@ -58,6 +58,7 @@
 		017A96DB17A7EB6C003D8A40 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017A96DA17A7EB6C003D8A40 /* CalendarViewController.m */; };
 		017EE13E17D55F6C00AB41A1 /* ArticleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017EE13D17D55F6C00AB41A1 /* ArticleDetailViewController.m */; };
 		019054B717DD63F200B7982F /* TodayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 019054B617DD63F200B7982F /* TodayTableViewController.m */; };
+		019054BD17DD798000B7982F /* TodayAnnouncementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 019054BC17DD798000B7982F /* TodayAnnouncementCell.m */; };
 		0197389917C2C21100CB5221 /* AnnouncementDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0197389817C2C21100CB5221 /* AnnouncementDetailViewController.m */; };
 		0197389B17C31F1800CB5221 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0197389A17C31F1800CB5221 /* MessageUI.framework */; };
 		01A4FE1C17B97304007FAB5C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177456717A60AC3001625BF /* XCTest.framework */; };
@@ -176,6 +177,8 @@
 		017EE13D17D55F6C00AB41A1 /* ArticleDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleDetailViewController.m; sourceTree = "<group>"; };
 		019054B517DD63F200B7982F /* TodayTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayTableViewController.h; sourceTree = "<group>"; };
 		019054B617DD63F200B7982F /* TodayTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayTableViewController.m; sourceTree = "<group>"; };
+		019054BB17DD798000B7982F /* TodayAnnouncementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayAnnouncementCell.h; sourceTree = "<group>"; };
+		019054BC17DD798000B7982F /* TodayAnnouncementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayAnnouncementCell.m; sourceTree = "<group>"; };
 		0197389717C2C21100CB5221 /* AnnouncementDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementDetailViewController.h; sourceTree = "<group>"; };
 		0197389817C2C21100CB5221 /* AnnouncementDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementDetailViewController.m; sourceTree = "<group>"; };
 		0197389A17C31F1800CB5221 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -416,6 +419,8 @@
 			children = (
 				019054B517DD63F200B7982F /* TodayTableViewController.h */,
 				019054B617DD63F200B7982F /* TodayTableViewController.m */,
+				019054BB17DD798000B7982F /* TodayAnnouncementCell.h */,
+				019054BC17DD798000B7982F /* TodayAnnouncementCell.m */,
 			);
 			name = Today;
 			sourceTree = "<group>";
@@ -607,6 +612,7 @@
 				01A4FE3517B97C08007FAB5C /* UIColor+SchoolColor.m in Sources */,
 				0113855317C1DA2500F8A965 /* AnnouncementCreationBodyViewController.m in Sources */,
 				0107E02317CBE1840099E4E4 /* LoginViewController.m in Sources */,
+				019054BD17DD798000B7982F /* TodayAnnouncementCell.m in Sources */,
 				016F9D7C17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m in Sources */,
 				019054B717DD63F200B7982F /* TodayTableViewController.m in Sources */,
 				01DAA6C317A70A6800B23BB2 /* AssignmentBookCollectionViewController.m in Sources */,

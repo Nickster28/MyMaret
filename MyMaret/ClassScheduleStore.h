@@ -64,4 +64,6 @@ extern const NSUInteger todayIndexKey;
 - (void)addClassWithName:(NSString *)className time:(NSString *)classTime toEndOfDayWithIndex:(NSUInteger)dayIndex;
 
 
+- (BOOL)isClassAcademicWithDayIndex:(NSUInteger)dayIndex classIndex:(NSUInteger)classIndex;
+
 @end

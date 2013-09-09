@@ -361,7 +361,6 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
     
     CGPoint offset = [scrollView contentOffset];
     NSUInteger newSectionIndex = offset.x / self.sectionsHeaderScrollView.frame.size.width;
-    NSLog(@"Setting section to %i", newSectionIndex);
     [self setSectionIndex:newSectionIndex];
 }
 
