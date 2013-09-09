@@ -57,6 +57,7 @@
 		0177458017A60B5E001625BF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177457F17A60B5E001625BF /* SWRevealViewController.m */; };
 		017A96DB17A7EB6C003D8A40 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017A96DA17A7EB6C003D8A40 /* CalendarViewController.m */; };
 		017EE13E17D55F6C00AB41A1 /* ArticleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017EE13D17D55F6C00AB41A1 /* ArticleDetailViewController.m */; };
+		019054B717DD63F200B7982F /* TodayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 019054B617DD63F200B7982F /* TodayTableViewController.m */; };
 		0197389917C2C21100CB5221 /* AnnouncementDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0197389817C2C21100CB5221 /* AnnouncementDetailViewController.m */; };
 		0197389B17C31F1800CB5221 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0197389A17C31F1800CB5221 /* MessageUI.framework */; };
 		01A4FE1C17B97304007FAB5C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177456717A60AC3001625BF /* XCTest.framework */; };
@@ -79,7 +80,6 @@
 		01BF139817A89A3B00731690 /* AnnouncementsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139717A89A3B00731690 /* AnnouncementsStore.m */; };
 		01BF139C17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139A17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld */; };
 		01BF13A017A89F7D00731690 /* Announcement.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139F17A89F7D00731690 /* Announcement.m */; };
-		01DAA6AB17A7031200B23BB2 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AA17A7031200B23BB2 /* TodayViewController.m */; };
 		01DAA6B017A7041E00B23BB2 /* MyMaretFrontTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AF17A7041E00B23BB2 /* MyMaretFrontTableViewController.m */; };
 		01DAA6B917A70A1B00B23BB2 /* NewspaperTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6B817A70A1B00B23BB2 /* NewspaperTableViewController.m */; };
 		01DAA6BE17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6BD17A70A4700B23BB2 /* ClassScheduleTableViewController.m */; };
@@ -174,6 +174,8 @@
 		017A96DA17A7EB6C003D8A40 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		017EE13C17D55F6C00AB41A1 /* ArticleDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleDetailViewController.h; sourceTree = "<group>"; };
 		017EE13D17D55F6C00AB41A1 /* ArticleDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleDetailViewController.m; sourceTree = "<group>"; };
+		019054B517DD63F200B7982F /* TodayTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayTableViewController.h; sourceTree = "<group>"; };
+		019054B617DD63F200B7982F /* TodayTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayTableViewController.m; sourceTree = "<group>"; };
 		0197389717C2C21100CB5221 /* AnnouncementDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementDetailViewController.h; sourceTree = "<group>"; };
 		0197389817C2C21100CB5221 /* AnnouncementDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementDetailViewController.m; sourceTree = "<group>"; };
 		0197389A17C31F1800CB5221 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -200,8 +202,6 @@
 		01BF139B17A89B8500731690 /* AnnouncementsCDModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AnnouncementsCDModel.xcdatamodel; sourceTree = "<group>"; };
 		01BF139E17A89F7D00731690 /* Announcement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Announcement.h; sourceTree = "<group>"; };
 		01BF139F17A89F7D00731690 /* Announcement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Announcement.m; sourceTree = "<group>"; };
-		01DAA6A917A7031200B23BB2 /* TodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
-		01DAA6AA17A7031200B23BB2 /* TodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
 		01DAA6AE17A7041E00B23BB2 /* MyMaretFrontTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyMaretFrontTableViewController.h; path = ../MyMaretFrontTableViewController.h; sourceTree = "<group>"; };
 		01DAA6AF17A7041E00B23BB2 /* MyMaretFrontTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyMaretFrontTableViewController.m; path = ../MyMaretFrontTableViewController.m; sourceTree = "<group>"; };
 		01DAA6B717A70A1B00B23BB2 /* NewspaperTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewspaperTableViewController.h; sourceTree = "<group>"; };
@@ -414,8 +414,8 @@
 		01DAA6AD17A7031800B23BB2 /* Today */ = {
 			isa = PBXGroup;
 			children = (
-				01DAA6A917A7031200B23BB2 /* TodayViewController.h */,
-				01DAA6AA17A7031200B23BB2 /* TodayViewController.m */,
+				019054B517DD63F200B7982F /* TodayTableViewController.h */,
+				019054B617DD63F200B7982F /* TodayTableViewController.m */,
 			);
 			name = Today;
 			sourceTree = "<group>";
@@ -603,12 +603,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01DAA6AB17A7031200B23BB2 /* TodayViewController.m in Sources */,
 				0107E02017CBC9940099E4E4 /* GTMOAuth2SignIn.m in Sources */,
 				01A4FE3517B97C08007FAB5C /* UIColor+SchoolColor.m in Sources */,
 				0113855317C1DA2500F8A965 /* AnnouncementCreationBodyViewController.m in Sources */,
 				0107E02317CBE1840099E4E4 /* LoginViewController.m in Sources */,
 				016F9D7C17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m in Sources */,
+				019054B717DD63F200B7982F /* TodayTableViewController.m in Sources */,
 				01DAA6C317A70A6800B23BB2 /* AssignmentBookCollectionViewController.m in Sources */,
 				01BF139817A89A3B00731690 /* AnnouncementsStore.m in Sources */,
 				010BC6A517CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.m in Sources */,

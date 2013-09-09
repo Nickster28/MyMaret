@@ -300,7 +300,7 @@
                                                                            forIndexPath:indexPath];
         
         if (self.selectedClass) [[saveChangesCell textLabel] setText:@"Save Changes"];
-        else [[saveChangesCell textLabel] setText:@"Create Period"];
+        else [[saveChangesCell textLabel] setText:@"Create Class"];
         
         return saveChangesCell;
         

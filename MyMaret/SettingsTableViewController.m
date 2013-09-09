@@ -102,6 +102,7 @@
     // If it's the "Contact Us" button...
     if ([indexPath section] == 1 && [indexPath row] == 1) {
         [self showContactScreen];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
 
