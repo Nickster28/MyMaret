@@ -15,6 +15,7 @@
 #import "AppDelegate.h"
 
 #define NUM_POPULAR_ARTICLES 5
+#define NUM_SECS_NEWSPAPER_IS_NEW 604800
 
 @interface NewspaperStore()
 @property (nonatomic, strong) NSDictionary *articlesDictionary;
@@ -377,6 +378,12 @@ NSString * const MyMaretLastNewspaperUpdateKey = @"MyMaretLastNewspaperUpdateKey
 }
 
 
-
+- (BOOL)isNewEditionOfNewspaper
+{
+    // Find the number of seconds since the newspaper was published
+    NSTimeInterval publishInterval = [[NSDate date] timeIntervalSinceDate:[self lastNewspaperUpdate]];
+    
+    return publishInterval <= NUM_SECS_NEWSPAPER_IS_NEW;
+}
 
 @end

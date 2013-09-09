@@ -111,8 +111,14 @@
             break;
             
         case 3:
-            // Section 0 is Popular Articles
-            numRows = [[NewspaperStore sharedStore] numberOfArticlesInSection:@"Popular"];
+            
+            // We only want articles in "Today" if the newspaper is new
+            if ([[NewspaperStore sharedStore] isNewEditionOfNewspaper]) {
+                
+                // Section 0 is Popular Articles
+                numRows = [[NewspaperStore sharedStore] numberOfArticlesInSection:@"Popular"];
+            }
+            
             break;
             
         default:

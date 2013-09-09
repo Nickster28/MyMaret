@@ -919,43 +919,40 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="tLh-Xp-jAj">
             <objects>
                 <tableViewController id="QuT-mz-cjB" customClass="ClassScheduleTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" allowsSelectionDuringEditing="YES" rowHeight="50" sectionHeaderHeight="10" sectionFooterHeight="10" id="0Z0-K5-onh">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="50" sectionHeaderHeight="10" sectionFooterHeight="10" id="0Z0-K5-onh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" showsReorderControl="YES" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SchoolClassCell" editingAccessoryType="disclosureIndicator" rowHeight="50" id="zFG-m1-FV1" customClass="SchoolClassCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" showsReorderControl="YES" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SchoolClassCell" rowHeight="50" id="zFG-m1-FV1" customClass="SchoolClassCell">
                                 <rect key="frame" x="0.0" y="119" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zFG-m1-FV1" id="lzW-tp-fRp">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="49"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shaping of the Modern World" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="192" translatesAutoresizingMaskIntoConstraints="NO" id="FaZ-L9-nEY">
-                                            <rect key="frame" x="15" y="3" width="192" height="43"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shaping of the Modern World" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="179" translatesAutoresizingMaskIntoConstraints="NO" id="FaZ-L9-nEY">
+                                            <rect key="frame" x="15" y="3" width="179" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00-12:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1k6-ch-Di0">
-                                            <rect key="frame" x="212" y="14" width="93" height="21"/>
+                                            <rect key="frame" x="189" y="14" width="93" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="93" id="U0q-Fl-mum"/>
-                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.7843137255" green="0.50588235290000005" blue="0.050980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="1k6-ch-Di0" firstAttribute="leading" secondItem="FaZ-L9-nEY" secondAttribute="trailing" constant="5" id="FsV-He-GdD"/>
-                                        <constraint firstItem="1k6-ch-Di0" firstAttribute="centerY" secondItem="lzW-tp-fRp" secondAttribute="centerY" id="Q2v-Tc-21D"/>
-                                        <constraint firstItem="1k6-ch-Di0" firstAttribute="centerY" secondItem="FaZ-L9-nEY" secondAttribute="centerY" id="bNb-Gl-uOS"/>
-                                        <constraint firstItem="FaZ-L9-nEY" firstAttribute="leading" secondItem="lzW-tp-fRp" secondAttribute="leading" constant="15" id="d4a-as-YzY"/>
-                                        <constraint firstItem="FaZ-L9-nEY" firstAttribute="top" secondItem="lzW-tp-fRp" secondAttribute="top" constant="3" id="eAd-Io-Scl"/>
-                                        <constraint firstAttribute="trailing" secondItem="1k6-ch-Di0" secondAttribute="trailing" constant="15" id="kmZ-gE-kHy"/>
+                                        <constraint firstItem="1k6-ch-Di0" firstAttribute="centerY" secondItem="FaZ-L9-nEY" secondAttribute="centerY" id="CfF-pm-h5F"/>
+                                        <constraint firstItem="FaZ-L9-nEY" firstAttribute="leading" secondItem="lzW-tp-fRp" secondAttribute="leading" constant="15" id="Dd2-IF-es5"/>
+                                        <constraint firstAttribute="trailing" secondItem="FaZ-L9-nEY" secondAttribute="trailing" constant="93" id="IYJ-qc-oQS"/>
+                                        <constraint firstItem="1k6-ch-Di0" firstAttribute="centerY" secondItem="lzW-tp-fRp" secondAttribute="centerY" id="fN2-66-I22"/>
+                                        <constraint firstAttribute="trailing" secondItem="1k6-ch-Di0" secondAttribute="trailing" constant="5" id="h3a-oP-G5h"/>
+                                        <constraint firstItem="FaZ-L9-nEY" firstAttribute="top" secondItem="lzW-tp-fRp" secondAttribute="top" constant="3" id="nT5-t7-CBB"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -1474,7 +1471,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="CalendarIcon" width="26" height="28"/>
         <image name="NewspaperIcon" width="26" height="21"/>
         <image name="ScheduleIcon" width="26" height="18"/>
-        <image name="SettingsIcon" width="26" height="26"/>
         <image name="SettingsIcon" width="26" height="26"/>
         <image name="TodayIcon" width="26" height="26"/>
     </resources>

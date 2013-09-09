@@ -66,5 +66,10 @@
 - (NSString *)sectionTitleForIndex:(NSUInteger)index;
 
 
+// Returns whether or not the current edition is new
+// (considered to be within 1 week of download date)
+- (BOOL)isNewEditionOfNewspaper;
+
+
 
 @end
