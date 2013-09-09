@@ -30,6 +30,7 @@ NSString * const SchoolGeneralCalendarURLString = @"https://www.maret.org/mobile
 // The URL that we don't want anyone going to
 NSString * const SchoolMobileHomepageURLString = @"https://www.maret.org/mobile/index.aspx";
 
+// Store the user's last selection in NSUserDefaults
 NSString * const MyMaretCalendarPrefKey = @"MyMaretCalendarPrefKey";
 
 

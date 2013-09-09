@@ -111,7 +111,7 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
     
     NSString *directory = [documentDirectories objectAtIndex:0];
     
-    return [directory stringByAppendingPathComponent:@"announcementsstore.data"];
+    return [directory stringByAppendingPathComponent:@"mymaretstore.data"];
 }
 
 

@@ -79,13 +79,16 @@
 		01B0BBA817ACA7980035B3FE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BBA717ACA7980035B3FE /* SystemConfiguration.framework */; };
 		01BD435C17C9BB22005EF174 /* AnnouncementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01BD435B17C9BB22005EF174 /* AnnouncementCell.xib */; };
 		01BF139817A89A3B00731690 /* AnnouncementsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139717A89A3B00731690 /* AnnouncementsStore.m */; };
-		01BF139C17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139A17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld */; };
+		01BF139C17A89B8500731690 /* MyMaretCDModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139A17A89B8500731690 /* MyMaretCDModel.xcdatamodeld */; };
 		01BF13A017A89F7D00731690 /* Announcement.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139F17A89F7D00731690 /* Announcement.m */; };
 		01DAA6B017A7041E00B23BB2 /* MyMaretFrontTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6AF17A7041E00B23BB2 /* MyMaretFrontTableViewController.m */; };
 		01DAA6B917A70A1B00B23BB2 /* NewspaperTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6B817A70A1B00B23BB2 /* NewspaperTableViewController.m */; };
 		01DAA6BE17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6BD17A70A4700B23BB2 /* ClassScheduleTableViewController.m */; };
-		01DAA6C317A70A6800B23BB2 /* AssignmentBookCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6C217A70A6800B23BB2 /* AssignmentBookCollectionViewController.m */; };
 		01DAA6C817A70ABF00B23BB2 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA6C717A70ABF00B23BB2 /* SettingsTableViewController.m */; };
+		01DEFF3617DD912000D355CA /* AssignmentBookTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DEFF3517DD912000D355CA /* AssignmentBookTableViewController.m */; };
+		01DEFF3917DD92F000D355CA /* AssignmentBookStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DEFF3817DD92F000D355CA /* AssignmentBookStore.m */; };
+		01DEFF3F17DD98E300D355CA /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DEFF3E17DD98E300D355CA /* Assignment.m */; };
+		01DEFF4017DD98E300D355CA /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DEFF3E17DD98E300D355CA /* Assignment.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -202,7 +205,7 @@
 		01BD435B17C9BB22005EF174 /* AnnouncementCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnnouncementCell.xib; sourceTree = "<group>"; };
 		01BF139617A89A3B00731690 /* AnnouncementsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementsStore.h; sourceTree = "<group>"; };
 		01BF139717A89A3B00731690 /* AnnouncementsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementsStore.m; sourceTree = "<group>"; };
-		01BF139B17A89B8500731690 /* AnnouncementsCDModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AnnouncementsCDModel.xcdatamodel; sourceTree = "<group>"; };
+		01BF139B17A89B8500731690 /* MyMaretCDModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyMaretCDModel.xcdatamodel; sourceTree = "<group>"; };
 		01BF139E17A89F7D00731690 /* Announcement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Announcement.h; sourceTree = "<group>"; };
 		01BF139F17A89F7D00731690 /* Announcement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Announcement.m; sourceTree = "<group>"; };
 		01DAA6AE17A7041E00B23BB2 /* MyMaretFrontTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyMaretFrontTableViewController.h; path = ../MyMaretFrontTableViewController.h; sourceTree = "<group>"; };
@@ -211,10 +214,14 @@
 		01DAA6B817A70A1B00B23BB2 /* NewspaperTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewspaperTableViewController.m; sourceTree = "<group>"; };
 		01DAA6BC17A70A4700B23BB2 /* ClassScheduleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassScheduleTableViewController.h; sourceTree = "<group>"; };
 		01DAA6BD17A70A4700B23BB2 /* ClassScheduleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassScheduleTableViewController.m; sourceTree = "<group>"; };
-		01DAA6C117A70A6800B23BB2 /* AssignmentBookCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentBookCollectionViewController.h; sourceTree = "<group>"; };
-		01DAA6C217A70A6800B23BB2 /* AssignmentBookCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentBookCollectionViewController.m; sourceTree = "<group>"; };
 		01DAA6C617A70ABF00B23BB2 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		01DAA6C717A70ABF00B23BB2 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
+		01DEFF3417DD912000D355CA /* AssignmentBookTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentBookTableViewController.h; sourceTree = "<group>"; };
+		01DEFF3517DD912000D355CA /* AssignmentBookTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentBookTableViewController.m; sourceTree = "<group>"; };
+		01DEFF3717DD92F000D355CA /* AssignmentBookStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentBookStore.h; sourceTree = "<group>"; };
+		01DEFF3817DD92F000D355CA /* AssignmentBookStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentBookStore.m; sourceTree = "<group>"; };
+		01DEFF3D17DD98E300D355CA /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Assignment.h; sourceTree = "<group>"; };
+		01DEFF3E17DD98E300D355CA /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Assignment.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -405,7 +412,7 @@
 				01BF139717A89A3B00731690 /* AnnouncementsStore.m */,
 				01BF139E17A89F7D00731690 /* Announcement.h */,
 				01BF139F17A89F7D00731690 /* Announcement.m */,
-				01BF139A17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld */,
+				01BF139A17A89B8500731690 /* MyMaretCDModel.xcdatamodeld */,
 				0113854E17C1D97700F8A965 /* AnnouncementCreationTitleViewController.h */,
 				0113854F17C1D97700F8A965 /* AnnouncementCreationTitleViewController.m */,
 				0113855117C1DA2500F8A965 /* AnnouncementCreationBodyViewController.h */,
@@ -479,8 +486,12 @@
 		01DAA6C517A70A6D00B23BB2 /* Assignment Book */ = {
 			isa = PBXGroup;
 			children = (
-				01DAA6C117A70A6800B23BB2 /* AssignmentBookCollectionViewController.h */,
-				01DAA6C217A70A6800B23BB2 /* AssignmentBookCollectionViewController.m */,
+				01DEFF3D17DD98E300D355CA /* Assignment.h */,
+				01DEFF3E17DD98E300D355CA /* Assignment.m */,
+				01DEFF3417DD912000D355CA /* AssignmentBookTableViewController.h */,
+				01DEFF3517DD912000D355CA /* AssignmentBookTableViewController.m */,
+				01DEFF3717DD92F000D355CA /* AssignmentBookStore.h */,
+				01DEFF3817DD92F000D355CA /* AssignmentBookStore.m */,
 			);
 			name = "Assignment Book";
 			sourceTree = "<group>";
@@ -615,13 +626,13 @@
 				019054BD17DD798000B7982F /* TodayAnnouncementCell.m in Sources */,
 				016F9D7C17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m in Sources */,
 				019054B717DD63F200B7982F /* TodayTableViewController.m in Sources */,
-				01DAA6C317A70A6800B23BB2 /* AssignmentBookCollectionViewController.m in Sources */,
 				01BF139817A89A3B00731690 /* AnnouncementsStore.m in Sources */,
 				010BC6A517CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.m in Sources */,
 				0177455F17A60AC3001625BF /* MainMenuViewController.m in Sources */,
 				013BB66E17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m in Sources */,
 				01176FCD17DBE0DB00DFF2EA /* ClassScheduleStore.m in Sources */,
 				01176FDC17DC3C3E00DFF2EA /* SchoolClassEditTableViewController.m in Sources */,
+				01DEFF3F17DD98E300D355CA /* Assignment.m in Sources */,
 				01BF13A017A89F7D00731690 /* Announcement.m in Sources */,
 				01176FE717DC621D00DFF2EA /* SchoolClassNameEditCell.m in Sources */,
 				01DAA6BE17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */,
@@ -630,6 +641,7 @@
 				01176FD817DC333600DFF2EA /* SchoolClassCell.m in Sources */,
 				0125F75C17BB1C750042EB6F /* AnnouncementCell.m in Sources */,
 				017EE13E17D55F6C00AB41A1 /* ArticleDetailViewController.m in Sources */,
+				01DEFF3917DD92F000D355CA /* AssignmentBookStore.m in Sources */,
 				0169749417D2D38900973B1B /* MyMaretFrontViewController.m in Sources */,
 				0169749717D2D49800973B1B /* MyMaretFrontCollectionViewController.m in Sources */,
 				0197389917C2C21100CB5221 /* AnnouncementDetailViewController.m in Sources */,
@@ -638,9 +650,10 @@
 				017A96DB17A7EB6C003D8A40 /* CalendarViewController.m in Sources */,
 				0177455917A60AC3001625BF /* AppDelegate.m in Sources */,
 				0113855017C1D97700F8A965 /* AnnouncementCreationTitleViewController.m in Sources */,
+				01DEFF3617DD912000D355CA /* AssignmentBookTableViewController.m in Sources */,
 				0171AEC317A6244700F3284C /* AnnouncementsTableViewController.m in Sources */,
 				01DAA6C817A70ABF00B23BB2 /* SettingsTableViewController.m in Sources */,
-				01BF139C17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld in Sources */,
+				01BF139C17A89B8500731690 /* MyMaretCDModel.xcdatamodeld in Sources */,
 				0177455517A60AC3001625BF /* main.m in Sources */,
 				0107E02A17CC13D40099E4E4 /* WelcomeViewController.m in Sources */,
 				01DAA6B917A70A1B00B23BB2 /* NewspaperTableViewController.m in Sources */,
@@ -658,6 +671,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01DEFF4017DD98E300D355CA /* Assignment.m in Sources */,
 				01176FF017DC64F100DFF2EA /* SchoolClassTimeCell.m in Sources */,
 				01176FD517DC122F00DFF2EA /* SchoolClass.m in Sources */,
 				01A4FE2617B97304007FAB5C /* MyMaret_Tests.m in Sources */,
@@ -896,13 +910,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		01BF139A17A89B8500731690 /* AnnouncementsCDModel.xcdatamodeld */ = {
+		01BF139A17A89B8500731690 /* MyMaretCDModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				01BF139B17A89B8500731690 /* AnnouncementsCDModel.xcdatamodel */,
+				01BF139B17A89B8500731690 /* MyMaretCDModel.xcdatamodel */,
 			);
-			currentVersion = 01BF139B17A89B8500731690 /* AnnouncementsCDModel.xcdatamodel */;
-			path = AnnouncementsCDModel.xcdatamodeld;
+			currentVersion = 01BF139B17A89B8500731690 /* MyMaretCDModel.xcdatamodel */;
+			path = MyMaretCDModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
