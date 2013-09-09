@@ -316,7 +316,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 - (void)refreshNewspaper
 {
     [self.refreshControl beginRefreshing];
-    NSUInteger numArticlesOnScreen = [self.tableView numberOfRowsInSection:0];
+    NSUInteger numArticlesOnScreen = [self.tableView numberOfRowsInSection:[self sectionIndex]];
     
     // Have the store check for a new edition of the newspaper
     [[NewspaperStore sharedStore] fetchNewspaperWithCompletionBlock:^(BOOL didAddArticles, NSError *err) {
@@ -357,10 +357,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
     // Since we're also the TABLEVIEW'S scrollviewdelegate,
     // we need to make sure we only listen for the headerview's
     // scrollview
-    if (scrollView == self.tableView) {
-        NSLog(@"That's the tableview!  Not what I want.");
-        return;
-    }
+    if (scrollView == self.tableView) return;
     
     CGPoint offset = [scrollView contentOffset];
     NSUInteger newSectionIndex = offset.x / self.sectionsHeaderScrollView.frame.size.width;

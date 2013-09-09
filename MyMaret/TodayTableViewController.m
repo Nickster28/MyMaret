@@ -41,9 +41,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    // Set the filters of all the stores
+    // Set the filter of the announcement store
     [[AnnouncementsStore sharedStore] setSearchFilterString:AnnouncementsStoreFilterStringToday];
-    [[NewspaperStore sharedStore] setSearchFilterString:NewspaperStoreFilterStringPopular];
     
     [self.tableView reloadData];
 }
@@ -69,9 +68,8 @@
 {
     [super viewWillDisappear:animated];
     
-    // Unset the filters on all the stores
+    // Unset the filter on the announcementsstore
     [[AnnouncementsStore sharedStore] setSearchFilterString:nil];
-    [[NewspaperStore sharedStore] setSearchFilterString:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -110,7 +108,8 @@
             break;
             
         case 3:
-            numRows = [[NewspaperStore sharedStore] numberOfArticlesInSection:nil];
+            // Section 0 is Popular Articles
+            numRows = [[NewspaperStore sharedStore] numberOfArticlesInSection:@"Popular"];
             break;
             
         default:
@@ -236,7 +235,7 @@
 - (UITableViewCell *)newspaperCellForIndexPath:(NSIndexPath *)ip
 {
     // If there are no announcements today...
-    if ([[NewspaperStore sharedStore] numberOfArticlesInSection:@""] == 0) {
+    if ([[NewspaperStore sharedStore] numberOfArticlesInSection:@"Popular"] == 0) {
         
         // Return a cell that says that
         UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"noEntriesCell"
@@ -247,7 +246,7 @@
     }
     
     // Otherwise, get the corresponding class object and make a cell displaying it
-    NewspaperArticle *article = [[NewspaperStore sharedStore] articleInSection:@""
+    NewspaperArticle *article = [[NewspaperStore sharedStore] articleInSection:@"Popular"
                                                                        atIndex:ip.row];
     
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"newspaperCell"

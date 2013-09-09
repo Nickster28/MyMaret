@@ -20,11 +20,8 @@
 @property (nonatomic, strong) NSDictionary *articlesDictionary;
 @property (nonatomic, strong) NSDate *lastNewspaperUpdate;
 
-// For newspaper search - if searchString isn't nil,
+// For newspaper search - if filteredArticles isn't nil,
 // then the user is looking at a certain selection of articles.
-// That selection will be either filteredArticles or popularArticles.
-// (only one will be non-nil).
-@property (nonatomic, strong) NSString *searchString;
 @property (nonatomic, strong) NSArray *filteredArticles;
 
 // Saves all Core Data changes
@@ -34,9 +31,6 @@
 
 // NSUserDefaults key
 NSString * const MyMaretLastNewspaperUpdateKey = @"MyMaretLastNewspaperUpdateKey";
-
-// filter string for getting only popular articles
-NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStringPopular";
 
 
 @implementation NewspaperStore
@@ -223,13 +217,12 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
 // (filtered or popular articles or articles for a given section)
 - (NSArray *)currentRelevantArticlesArrayForSection:(NSString *)section
 {
-    if (self.searchString && !self.filteredArticles) {
-        return [[self articlesDictionary] objectForKey:@"Popular"];
-    } else if (self.searchString) {
+    // If there are filtered articles, we want those
+    if (self.filteredArticles) {
         return self.filteredArticles;
-    } else {
-        return [[self articlesDictionary] objectForKey:section];
     }
+    
+    return [[self articlesDictionary] objectForKey:section];
 }
 
 
@@ -358,14 +351,8 @@ NSString * const NewspaperStoreFilterStringPopular = @"NewspaperStoreFilterStrin
 
 - (void)setSearchFilterString:(NSString *)searchString
 {
-    [self setSearchString:searchString];
-    
-    // If we want only the most popular articles...
-    if (searchString && [searchString isEqualToString:NewspaperStoreFilterStringPopular]) {
-        [self setFilteredArticles:nil];
-        
     // Otherwise, filter them by whether they contain the given searchString
-    } else if (searchString) {
+    if (searchString) {
         // Use NSPredicate - http://ygamretuta.me/2011/08/10/ios-implementing-a-basic-search-uisearchdisplaycontroller-and-interface-builder/
         NSPredicate *predicate =
             [NSPredicate predicateWithFormat: @"(articleAuthor contains[cd] %@) OR (articleBody contains[cd] %@) OR (articleTitle contains[cd] %@)", searchString, searchString, searchString];

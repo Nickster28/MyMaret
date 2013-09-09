@@ -12,8 +12,6 @@
 
 @interface NewspaperStore : NSObject
 
-extern NSString * const NewspaperStoreFilterStringPopular;
-
 // Get the singleton instance of NewspaperStore
 + (NewspaperStore *)sharedStore;
 
