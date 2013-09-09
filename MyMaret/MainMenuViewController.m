@@ -94,10 +94,11 @@
         }];
     }
     
-    // If a UITableViewCell didn't trigger the segue, then another
-    // view controller did, telling us that a push notification was tapped
-    // and we should jump right to the content that was updated
-    if (![sender isKindOfClass:[UITableViewCell class]]) {
+    // If a UITableViewCell didn't trigger the segue and the segue isn't to
+    // the today screen, then another view controller did, telling us that a push
+    // notification was tapped and we should jump right to the content that was
+    // updated
+    if (![sender isKindOfClass:[UITableViewCell class]] && ![[segue identifier] isEqualToString:@"todaySegue"]) {
         
         UIViewController<PushNotificationUpdateable> *destinationVC = [[segue.destinationViewController viewControllers]objectAtIndex:0];
         

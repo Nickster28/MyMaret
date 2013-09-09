@@ -9,6 +9,7 @@
 #import "SettingsTableViewController.h"
 #import <MessageUI/MessageUI.h>
 #import "AppDelegate.h"
+#import "MainMenuViewController.h"
 
 @interface SettingsTableViewController () <MFMailComposeViewControllerDelegate>
 
@@ -103,6 +104,25 @@
     if ([indexPath section] == 1 && [indexPath row] == 1) {
         [self showContactScreen];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+    // If it's the "Log Out" button...
+    } else if ([indexPath section] == 0 && [indexPath row] == 1) {
+        [[NSUserDefaults standardUserDefaults] setObject:@""
+                                                  forKey:MyMaretUserEmailKey];
+        [[NSUserDefaults standardUserDefaults] setInteger:0
+                                                   forKey:MyMaretUserGradeKey];
+        [[NSUserDefaults standardUserDefaults] setObject:@""
+                                                  forKey:MyMaretUserNameKey];
+        [[NSUserDefaults standardUserDefaults] setBool:NO
+                                                forKey:MyMaretIsLoggedInKey];
+        
+        // Set the selected section
+        MainMenuViewController *rearVC = (MainMenuViewController *)[self.revealViewController rearViewController];
+        //[rearVC setSelectedIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        [rearVC.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+        
+        // Segue to the announcements screen
+        [rearVC performSegueWithIdentifier:@"todaySegue" sender:self];
     }
 }
 

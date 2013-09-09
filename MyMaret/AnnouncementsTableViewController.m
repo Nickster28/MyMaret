@@ -136,6 +136,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:MyMaretIsLoggedInKey])
+        return 0;
+    
     // Return the count for both the regular announcements tableview and the
     // search results tableview
     return [[AnnouncementsStore sharedStore] numberOfAnnouncements];
