@@ -92,10 +92,7 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
 #pragma mark UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:MyMaretIsLoggedInKey])
-        return 0;
-    
+{    
     return 0;
 }
 

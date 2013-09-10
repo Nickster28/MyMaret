@@ -109,6 +109,8 @@
         
     // If it's the "Log Out" button...
     } else if ([indexPath section] == 0 && [indexPath row] == 1) {
+        
+        // Clear all of our NSUserDefaults keys
         [[NSUserDefaults standardUserDefaults] setObject:@""
                                                   forKey:MyMaretUserEmailKey];
         [[NSUserDefaults standardUserDefaults] setInteger:0
@@ -117,6 +119,9 @@
                                                   forKey:MyMaretUserNameKey];
         [[NSUserDefaults standardUserDefaults] setBool:NO
                                                 forKey:MyMaretIsLoggedInKey];
+        
+        // Opt out of push notifications
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeNone];
         
         // Make a new login screen and present it
         LoginViewController *loginScreen = [[LoginViewController alloc] init];

@@ -51,22 +51,6 @@
 }
 
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    // Show the login screen if the user hasn't logged in yet
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:MyMaretIsLoggedInKey]) {
-        double delayInSeconds = 0.5;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self performSegueWithIdentifier:@"showLoginScreen"
-                                      sender:self];
-        });
-    }
-}
-
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -92,7 +76,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSUInteger numRows = 0;
- 
+    
+    // We have to include this because we load this view controller
+    // programatically (since it's the VC that modally presents the login screen)
     if (![[NSUserDefaults standardUserDefaults] boolForKey:MyMaretIsLoggedInKey])
         return numRows;
     

@@ -395,9 +395,6 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:MyMaretIsLoggedInKey])
-        return 0;
-    
     // If this is for search results, the store disregards the section title
     NSString *sectionTitle = [[NewspaperStore sharedStore] sectionTitleForIndex:[self sectionIndex]];
     return [[NewspaperStore sharedStore] numberOfArticlesInSection:sectionTitle];

@@ -114,10 +114,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Don't display anything if we're not logged in
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:MyMaretIsLoggedInKey])
-        return 0;
-    
     // Account for the extra "add" cell when in editing mode
     if (tableView.isEditing)
         return [[ClassScheduleStore sharedStore] numberOfPeriodsInDayWithIndex:section] + 1;
