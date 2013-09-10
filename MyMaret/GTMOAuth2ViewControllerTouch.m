@@ -33,6 +33,8 @@
 #import "WelcomeViewController.h"
 #import <Parse/Parse.h>
 #import "ClassScheduleStore.h"
+#import "LoginViewController.h"
+
 
 NSString *const kGTMOAuth2KeychainErrorDomain = @"com.google.GTMOAuthKeychain";
 
@@ -686,9 +688,7 @@ static Class gSignInClass = Nil;
     // If the user didn't complete login
     } else if (error != nil) {
         
-        NSString *errorMessage = @"In order to use MyMaret, you need to log in with your Maret username and password.  That way we can identify you and only give you access to Maret information if you are a Maret student or teacher.";
-          
-        [self showAlertWithTitle:@"Please Log In" message:errorMessage];
+        [(LoginViewController *)self.navigationController.viewControllers[0] setLoginStatus:LoginStatusCancel];
           
     } else {
         // Now check to see if the user is a school user

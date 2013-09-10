@@ -41,7 +41,6 @@ NSString * const MyMaretPushNotificationTypeNewspaper = @"newspaper";
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     
-    
     // Only set up Parse if the user is logged in (otherwise we do this after the
     // user logs in)
     if ([[NSUserDefaults standardUserDefaults] boolForKey:MyMaretIsLoggedInKey]) {
@@ -63,19 +62,34 @@ NSString * const MyMaretPushNotificationTypeNewspaper = @"newspaper";
         // If we haven't logged in yet, show the login screen
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         
+        
+        // We want to make the login screen be a modally-presented view controller
+        // from the storyboard's initial view controller
+        UIViewController *initialVC = [[UIStoryboard storyboardWithName:@"Main"
+                                                                 bundle:nil]
+                                       instantiateInitialViewController];
+        
         LoginViewController *loginVC = [[LoginViewController alloc] init];
+        [loginVC setLoginStatus:LoginStatusLaunch];
         
         // Put the login viewcontroller inside a nav controller
         // (required for the google login controller)
         // but hide the nav bar initially
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        UINavigationController *navController = [[UINavigationController alloc]
+                                                 initWithRootViewController:loginVC];
+        
         [navController setNavigationBarHidden:YES];
         [navController.navigationBar setTintColor:[UIColor schoolColor]];
+        [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
         
-        [[self window] setRootViewController:navController];
+        [[self window] setRootViewController:initialVC];
         
         self.window.backgroundColor = [UIColor blackColor];
         [self.window makeKeyAndVisible];
+        
+        [initialVC presentViewController:navController
+                                animated:NO
+                              completion:nil];
     }
     
     // Change the status bar on iOS 6 to not be tinted

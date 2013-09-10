@@ -10,6 +10,8 @@
 #import <MessageUI/MessageUI.h>
 #import "AppDelegate.h"
 #import "MainMenuViewController.h"
+#import "UIColor+SchoolColor.h"
+#import "LoginViewController.h"
 
 @interface SettingsTableViewController () <MFMailComposeViewControllerDelegate>
 
@@ -116,13 +118,20 @@
         [[NSUserDefaults standardUserDefaults] setBool:NO
                                                 forKey:MyMaretIsLoggedInKey];
         
-        // Set the selected section
-        MainMenuViewController *rearVC = (MainMenuViewController *)[self.revealViewController rearViewController];
-        //[rearVC setSelectedIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-        [rearVC.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+        // Make a new login screen and present it
+        LoginViewController *loginScreen = [[LoginViewController alloc] init];
+        [loginScreen setLoginStatus:LoginStatusLogout];
         
-        // Segue to the announcements screen
-        [rearVC performSegueWithIdentifier:@"todaySegue" sender:self];
+        UINavigationController *navController = [[UINavigationController alloc]
+                                                 initWithRootViewController:loginScreen];
+        
+        [navController setNavigationBarHidden:YES];
+        [navController.navigationBar setTintColor:[UIColor schoolColor]];
+        [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+        
+        [self.navigationController presentViewController:navController
+                                                animated:YES
+                                              completion:nil];
     }
 }
 

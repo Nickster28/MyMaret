@@ -47,17 +47,10 @@
 
 - (IBAction)dismissWelcomeScreen:(id)sender
 {
-    // Load in the storyboard
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
-                                                             bundle:nil];
+    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES
+                                                                           completion:nil];
     
-    UIViewController *initialViewController = [mainStoryboard instantiateInitialViewController];
-    
-    [initialViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    
-    [self.navigationController presentViewController:initialViewController
-                                            animated:YES
-                                          completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 @end

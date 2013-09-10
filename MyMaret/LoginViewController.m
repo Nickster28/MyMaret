@@ -13,20 +13,17 @@
 #import "UIApplication+iOSVersionChecker.h"
 #import <QuartzCore/QuartzCore.h>
 
+
 @interface LoginViewController ()
 @end
+
+NSString * const LoginStatusLaunch = @"LoginStatusLaunch";
+NSString * const LoginStatusCancel = @"LoginStatusCancel";
+NSString * const LoginStatusLogout = @"LoginStatusLogout";
 
 
 @implementation LoginViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -37,7 +34,7 @@
     CGFloat height = [(UIWindow *)[UIApplication sharedApplication].windows[0] bounds].size.height;
     
     // Set the images depending on the device and OS
-    if ([UIApplication isPrevIOS] && height > 460.0) {
+    if ([UIApplication isPrevIOS] && height > 480.0) {
         
         [self.splashBackgroundImageView setImage:[UIImage imageNamed:@"SplashBackground4-6"]];
         
@@ -62,20 +59,20 @@
         [self.splashLogoImageView setImage:[UIImage imageNamed:@"SplashLogo35-7"]];
     }
     
+    // We only manipulate the splash logo on launch
+    if ([self.loginStatus isEqualToString:LoginStatusLaunch])
+        self.splashLogoImageView.layer.opacity = 1.0;
+    else self.splashLogoImageView.layer.opacity = 0.0;
     
-    // Only do this animation if it's after launching
-    // (we can tell because the splash logo will be
-    // visible if the app just launched)
-    if (self.splashLogoImageView.layer.opacity == 1.0) {
-        
-        //Set the title and button's initial position and opacity
-        [self.loginTitleImageView.layer setPosition:CGPointMake(160.0, 50.0)];
-        [self.loginButton.layer setPosition:CGPointMake(160.0, 439)];
-        
-        [self.loginTitleImageView.layer setOpacity:0.0];
-        [self.loginButton.layer setOpacity:0.0];
-    }
+    
+    // If they cancelled, don't animate at all - otherwise, prep
+    // for animation of the title and login button
+    if ([self.loginStatus isEqualToString:LoginStatusCancel]) {
+        [self.loginTitleImageView.layer setPosition:CGPointMake(160.0, 100.0)];
+        [self.loginButton.layer setPosition:CGPointMake(160.0, 389)];
+    } else [self setInitialViewSettings];
 }
+
 
 
 - (void)viewWillAppear:(BOOL)animated
@@ -91,18 +88,47 @@
 {
     [super viewDidAppear:animated];
     
-    // Only perform the animation if it's after launching
-    if (self.splashLogoImageView.layer.opacity == 1.0) {
-        [self fadeOutLogo];
+    // For launching, we want to fade the splash logo
+    // and animate in the title and login button
+    if ([self.loginStatus isEqualToString:LoginStatusLaunch]) {
+        [self fadeSplashLogo];
+        
+    // For logging out, we want to only animate in the title
+    // and login button
+    } else if ([self.loginStatus isEqualToString:LoginStatusLogout]) {
+        [self animateInTitleAndLoginButton];
+    } else {
+        
+        // The user cancelled login, so show an alert
+        NSString *errorMessage = @"In order to use MyMaret, you need to log in with your Maret username and password.  That way we can identify you and only give you access to Maret information if you are a Maret student or teacher.";
+        
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Please Log In"
+                                                     message:errorMessage
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
     }
 }
 
 
-- (void)fadeOutLogo
+
+- (void)setInitialViewSettings
+{
+    //Set the title and button's initial position and opacity
+    [self.loginTitleImageView.layer setPosition:CGPointMake(160.0, 50.0)];
+    [self.loginButton.layer setPosition:CGPointMake(160.0, 439)];
+    
+    [self.loginTitleImageView.layer setOpacity:0.0];
+    [self.loginButton.layer setOpacity:0.0];
+}
+
+
+- (void)fadeSplashLogo
 {
     // Fade away
     CABasicAnimation *fader = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    [fader setDuration:0.5];
+    [fader setDuration:1.0];
     [fader setFromValue:[NSNumber numberWithFloat:1.0]];
     [fader setToValue:[NSNumber numberWithFloat:0.0]];
     [fader setDelegate:self];
@@ -118,7 +144,12 @@
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     // Now animate in the title and login button
-    
+    [self animateInTitleAndLoginButton];
+}
+
+
+- (void)animateInTitleAndLoginButton
+{
     // Fade away
     CABasicAnimation *fader = [CABasicAnimation animationWithKeyPath:@"opacity"];
     [fader setDuration:1.0];
@@ -172,6 +203,7 @@
         [self.loginButton.layer addAnimation:loginButtonGroup
                                       forKey:@"loginButtonAnimations"];
     });
+
 }
 
 
