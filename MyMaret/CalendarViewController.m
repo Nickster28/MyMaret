@@ -105,6 +105,7 @@ NSString * const MyMaretCalendarPrefKey = @"MyMaretCalendarPrefKey";
     } else {
         [self loadWebURLString:SchoolAthleticsCalendarURLString];
     }
+    
 }
 
 

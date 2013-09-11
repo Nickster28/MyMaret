@@ -108,7 +108,8 @@
         
         // Remove the drawer
         [self.tableView deleteRowsAtIndexPaths:indexesToDelete
-                              withRowAnimation:UITableViewRowAnimationTop];
+                              withRowAnimation:UITableViewRowAnimationFade];
+
         
         // Also deselect the parent cell
         [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForCell:self.drawerParentCell]
@@ -340,6 +341,8 @@
         
         delayInSeconds = 0.3;
         
+        
+        
         [self closeDrawer];
         
         
@@ -364,24 +367,9 @@
         
         // Animate in the drawer
         [tableView insertRowsAtIndexPaths:@[self.drawerIndexPath]
-                         withRowAnimation:UITableViewRowAnimationTop];
+                         withRowAnimation:UITableViewRowAnimationFade];
     });
 }
-
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
 
 
 @end

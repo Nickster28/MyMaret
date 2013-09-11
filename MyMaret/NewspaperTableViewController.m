@@ -118,9 +118,9 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 {
     if (sectionIndex == _sectionIndex) return;
     
-    // Hide the search bar
-    // Hide the search bar
+    /* Hide the search bar
     [self.tableView setContentOffset:CGPointMake(0.0, self.searchDisplayController.searchBar.bounds.size.height) animated:YES];
+    */
     
     // Fade/Unfade the arrow buttons if necessary
     [self setArrowButtonsForSection:sectionIndex];

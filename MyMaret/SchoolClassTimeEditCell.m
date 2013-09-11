@@ -46,7 +46,7 @@
     
     NSDate *displayedDate = [[NSCalendar currentCalendar] dateFromComponents:classTimeDateComps];
     
-    [[self classTimePicker] setDate:displayedDate animated:YES];
+    [[self classTimePicker] setDate:displayedDate animated:NO];
 }
 
 
