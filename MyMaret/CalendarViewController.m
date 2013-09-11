@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIWebView *calendarWebView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *bottomToolbarButton;
+@property (nonatomic) NSUInteger selectedCalendarIndex;
+
 
 - (void)changeCalendar:(UISegmentedControl *)sender;
 
@@ -35,6 +37,8 @@ NSString * const MyMaretCalendarPrefKey = @"MyMaretCalendarPrefKey";
 
 
 @implementation CalendarViewController
+@synthesize selectedCalendarIndex = _selectedCalendarIndex;
+
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -75,9 +79,35 @@ NSString * const MyMaretCalendarPrefKey = @"MyMaretCalendarPrefKey";
     
     // Set the selected index to be whatever is saved (or 0 if there is no
     // saved preference)
-    [segControl setSelectedSegmentIndex:[[NSUserDefaults standardUserDefaults] integerForKey:MyMaretCalendarPrefKey]];
+    [segControl setSelectedSegmentIndex:[self selectedCalendarIndex]];
     
     [self changeCalendar:segControl];
+}
+
+
+- (NSUInteger)selectedCalendarIndex
+{
+    if (!_selectedCalendarIndex) {
+        _selectedCalendarIndex = [[NSUserDefaults standardUserDefaults] integerForKey:MyMaretCalendarPrefKey];
+    }
+    
+    return _selectedCalendarIndex;
+}
+
+
+// Returns whichever index ISN'T selected
+- (NSUInteger)unselectedCalendarIndex
+{
+    return (self.selectedCalendarIndex == 0) ? 1 : 0;
+}
+
+
+- (void)setSelectedCalendarIndex:(NSUInteger)selectedCalendarIndex
+{
+    _selectedCalendarIndex = selectedCalendarIndex;
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:_selectedCalendarIndex
+                                               forKey:MyMaretCalendarPrefKey];
 }
 
 
@@ -97,14 +127,15 @@ NSString * const MyMaretCalendarPrefKey = @"MyMaretCalendarPrefKey";
 - (void)changeCalendar:(UISegmentedControl *)sender
 {
     // Save the user's choice if the app is closed
-    [[NSUserDefaults standardUserDefaults] setInteger:[sender selectedSegmentIndex]
-                                               forKey:MyMaretCalendarPrefKey];
+    [self setSelectedCalendarIndex:sender.selectedSegmentIndex];
     
     if ([sender selectedSegmentIndex] == 0) {
         [self loadWebURLString:SchoolGeneralCalendarURLString];
     } else {
         [self loadWebURLString:SchoolAthleticsCalendarURLString];
     }
+    
+    [sender setEnabled:NO forSegmentAtIndex:[self unselectedCalendarIndex]];
     
 }
 
@@ -121,6 +152,9 @@ NSString * const MyMaretCalendarPrefKey = @"MyMaretCalendarPrefKey";
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [self.activityIndicator stopAnimating];
+    
+    [(UISegmentedControl *)self.bottomToolbarButton.customView setEnabled:YES
+                                                        forSegmentAtIndex:[self unselectedCalendarIndex]];
 }
 
 
