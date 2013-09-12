@@ -45,9 +45,13 @@
 
 
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
+    [super viewDidDisappear:animated];
+    
+    // If we're being dismissed, if we're updating a class
+    // we should automatically save changes
+    if (self.selectedClass) [self saveScheduleChanges];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -67,7 +71,10 @@
         self.navigationItem.title = @"Create Class";
         
         // If we're creating a new class, put a cancel button in the top left
+        // and a done button in the top right
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelClassCreation)];
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(saveScheduleChanges)];
     }
 }
 
@@ -161,15 +168,19 @@
     // view controller stack
     if (self.selectedClass) {
         
-        // Change the class info
-        [[ClassScheduleStore sharedStore] setClassName:name
-                                             classTime:classTime
-                                  forClassWithDayIndex:self.selectedIndexPath.section
-                                            classIndex:self.selectedIndexPath.row];
-        
-        // Tell our delegate that we changed a class
-        [self.delegate schoolClassEditTableViewController:self
-                                didUpdateClassAtIndexPath:self.selectedIndexPath];
+        // If the user actually changed something...
+        if (![self.selectedClass.className isEqualToString:name] || ![self.selectedClass.classTime isEqualToString:classTime]) {
+            
+            // Change the class info
+            [[ClassScheduleStore sharedStore] setClassName:name
+                                                 classTime:classTime
+                                      forClassWithDayIndex:self.selectedIndexPath.section
+                                                classIndex:self.selectedIndexPath.row];
+            
+            // Tell our delegate that we changed a class
+            [self.delegate schoolClassEditTableViewController:self
+                                    didUpdateClassAtIndexPath:self.selectedIndexPath];
+        }
         
     } else {
         
@@ -197,9 +208,6 @@
             if (self.drawerIndexPath) return 3;
             return 2;
             
-        case 2:
-            return 1;
-            
         default:
             return 0;
     }
@@ -223,7 +231,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 2;
 }
 
 
@@ -295,16 +303,6 @@
         
         return cell;
         
-    } else if (indexPath.section == 2) {
-        
-        UITableViewCell *saveChangesCell = [tableView dequeueReusableCellWithIdentifier:@"saveChangesCell"
-                                                                           forIndexPath:indexPath];
-        
-        if (self.selectedClass) [[saveChangesCell textLabel] setText:@"Save Changes"];
-        else [[saveChangesCell textLabel] setText:@"Create Class"];
-        
-        return saveChangesCell;
-        
     // Shouldn't reach here!
     } else return nil;
 }
@@ -320,13 +318,6 @@
     [nameCell dismissKeyboard];
     
     
-    // If the user tapped the save button...
-    if (indexPath.section == 2) {
-        [self saveScheduleChanges];
-        return;
-    }
-    
-    
     double delayInSeconds = 0.0;
     BOOL shouldAdjustDrawerRow = YES;
     BOOL didTapAboveDrawer = (self.drawerIndexPath && indexPath.row + 1 == self.drawerIndexPath.row);
@@ -340,7 +331,6 @@
         if (self.drawerIndexPath.row <= indexPath.row) shouldAdjustDrawerRow = NO;
         
         delayInSeconds = 0.3;
-        
         
         
         [self closeDrawer];

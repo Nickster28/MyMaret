@@ -265,22 +265,9 @@
 
 - (void)schoolClassEditTableViewController:(SchoolClassEditTableViewController *)editTVC didUpdateClassAtIndexPath:(NSIndexPath *)updatedIP
 {
-    // Dismiss and update the given cell
-    [self.navigationController popViewControllerAnimated:YES];
-    
+    // update the given cell
     [self.tableView reloadRowsAtIndexPaths:@[updatedIP]
                           withRowAnimation:UITableViewRowAnimationFade];
-    
-    [self.tableView selectRowAtIndexPath:updatedIP
-                                animated:YES
-                          scrollPosition:UITableViewScrollPositionNone];
-    
-    double delayInSeconds = 0.5;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self.tableView deselectRowAtIndexPath:updatedIP animated:YES];
-
-    });
 }
 
 

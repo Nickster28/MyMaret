@@ -51,7 +51,6 @@ const NSUInteger todayIndexKey = -1;
 
 - (NSUInteger)todayDayIndex
 {
-    return 0;
     if (!_todayDayIndex) {
         
         // Figure out what the name of today is
@@ -87,7 +86,9 @@ const NSUInteger todayIndexKey = -1;
         if (!_classScheduleDictionary &&
             [[NSUserDefaults standardUserDefaults] integerForKey:MyMaretUserGradeKey] <= 12) {
             
-            [self fetchClassScheduleWithCompletionBlock:nil];
+            [self fetchClassScheduleWithCompletionBlock:^(NSError *error) {
+                
+            }];
         } else if (!_classScheduleDictionary) {
             [self createNewClassScheduleDictionary];
         }

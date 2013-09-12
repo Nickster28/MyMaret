@@ -807,7 +807,7 @@ static Class gSignInClass = Nil;
         }];
         
         // Go to the welcome screen
-        WelcomeViewController *welcomeVC = [[WelcomeViewController alloc] init];
+        WelcomeViewController *welcomeVC = [[[WelcomeViewController alloc] init] autorelease];
         [self.navigationController pushViewController:welcomeVC animated:YES];
     }
 }
