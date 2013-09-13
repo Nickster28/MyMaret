@@ -13,5 +13,5 @@
 
 @interface SchoolClassEditTableViewController : UITableViewController
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
-@property (nonatomic, weak) UIViewController <ClassEditDismisserDelegate> *delegate;
+@property (nonatomic, weak) id <ClassEditDismisserDelegate> delegate;
 @end

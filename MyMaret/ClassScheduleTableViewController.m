@@ -35,8 +35,6 @@
     
     // Put an edit button in the top right
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    [self.tableView reloadData];
 }
 
 
@@ -56,7 +54,9 @@
     for (int i = 0; i < [self.tableView numberOfSections]; i++) {
         NSUInteger numRowsInSec = [self.tableView numberOfRowsInSection:i];
         
-        [indexPaths addObject:[NSIndexPath indexPathForRow:numRowsInSec - 1
+        NSUInteger delta = (editing) ? 0 : -1;
+        
+        [indexPaths addObject:[NSIndexPath indexPathForRow:numRowsInSec + delta
                                                  inSection:i]];
         
     }
@@ -195,9 +195,10 @@
     
     // If we're in the same section but the user's trying to move past the
     // "Add Period" cell, don't let them
-    if (proposedDestinationIndexPath.row + 1 == [tableView numberOfRowsInSection:proposedDestinationIndexPath.section]) {
+    NSUInteger numSectionRows = [tableView numberOfRowsInSection:proposedDestinationIndexPath.section];
+    if (proposedDestinationIndexPath.row + 1 >= numSectionRows) {
         
-        return [NSIndexPath indexPathForRow:proposedDestinationIndexPath.row -1
+        return [NSIndexPath indexPathForRow:numSectionRows - 2
                                   inSection:proposedDestinationIndexPath.section];
     }
     

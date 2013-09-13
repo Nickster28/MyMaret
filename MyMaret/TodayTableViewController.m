@@ -17,9 +17,10 @@
 #import "SchoolClassCell.h"
 #import "TodayAnnouncementCell.h"
 #import "NewspaperCell.h"
+#import "TodaySettingsTableViewController.h"
 
 
-@interface TodayTableViewController ()
+@interface TodayTableViewController () <TodayIndexSetterDelegate>
 
 @end
 
@@ -195,17 +196,22 @@
         [[cell textLabel] setText:@"No Classes Today!"];
         
         return cell;
+    } else if (ip.row == 0) {
+        
+        // Display our "Set today's schedule" cell
+        return [self.tableView dequeueReusableCellWithIdentifier:@"daySettingsCell"
+                                                    forIndexPath:ip];
     }
     
     // Otherwise, get the corresponding class object and make a cell displaying it
     SchoolClass *class = [[ClassScheduleStore sharedStore] classWithDayIndex:todayIndexKey
-                                                                  classIndex:ip.row];
+                                                                  classIndex:ip.row - 1];
     
     SchoolClassCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"classCell"
                                                                  forIndexPath:ip];
     [cell bindSchoolClass:class
           isAcademicClass:[[ClassScheduleStore sharedStore] isClassAcademicWithDayIndex:todayIndexKey
-                                                                             classIndex:ip.row]];
+                                                                             classIndex:ip.row - 1]];
     
     return cell;
 }
@@ -274,7 +280,14 @@
 }
 
 
-/*
+// Only reload the schedule if the day was changed
+- (void)todaySettingsTableViewControllerDidOverrideTodayDayIndex:(TodaySettingsTableViewController *)settingsTVC
+{
+    [self.tableView reloadData];
+}
+
+
+
 #pragma mark - Navigation
 
 // In a story board-based application, you will often want to do a little preparation before navigation
@@ -282,8 +295,12 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"todaySettingsSegue"] && [[segue destinationViewController] isKindOfClass:[TodaySettingsTableViewController class]]) {
+        
+        [(TodaySettingsTableViewController *)[segue destinationViewController] setDelegate:self];
+    }
 }
 
- */
+
 
 @end

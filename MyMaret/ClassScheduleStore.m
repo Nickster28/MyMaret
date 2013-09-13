@@ -15,13 +15,17 @@
 @interface ClassScheduleStore()
 @property (nonatomic, strong) NSDictionary *classScheduleDictionary;
 @property (nonatomic) NSUInteger todayDayIndex;
+@property (nonatomic, strong) NSDate *lastTodayIndexOverride;
 @end
 
 
 const NSUInteger todayIndexKey = -1;
-
+NSString * const ClassScheduleStoreTempTodayIndexPrefKey = @"ClassScheduleStoreTodayIndexPrefKey";
+NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleStoreTodayIndexOverrideDateKey";
 
 @implementation ClassScheduleStore
+@synthesize todayDayIndex = _todayDayIndex;
+@synthesize lastTodayIndexOverride = _lastTodayIndexOverride;
 
 
 // Singleton instance
@@ -49,29 +53,83 @@ const NSUInteger todayIndexKey = -1;
 }
 
 
+- (void)checkLastTodayIndexOverride
+{
+    if (self.lastTodayIndexOverride) {
+        NSDateComponents *todayComps = [[NSCalendar currentCalendar] components:NSDayCalendarUnit
+                                                                       fromDate:[NSDate date]];
+        NSDateComponents *lastOverrideComps = [[NSCalendar currentCalendar] components:NSDayCalendarUnit
+                                                                              fromDate:[self lastTodayIndexOverride]];
+        
+        if (todayComps.day != lastOverrideComps.day) {
+            [self setLastTodayIndexOverride:nil];
+        }
+    }
+}
+
+
 - (NSUInteger)todayDayIndex
 {
-    if (!_todayDayIndex) {
+    // Checks to see if it's still the same day
+    // that the user last overrode the today index
+    // (If the last update is nil, then there is no override)
+    [self checkLastTodayIndexOverride];
+    
+    // If there is a recent override, return it rather than
+    // calculating what day it is
+    if (self.lastTodayIndexOverride) {
+        _todayDayIndex = [[NSUserDefaults standardUserDefaults] integerForKey:ClassScheduleStoreTempTodayIndexPrefKey];
         
-        // Figure out what the name of today is
-        NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
-        
-        // In NSDateComponents, Sunday = 1 ... Saturday = 7
-        // We want Monday = 0 ... Sunday = 6
-        
-        // Sunday = 0 ... Saturday = 6
-        NSUInteger dayIndex = [dateComps weekday] - 1;
-        
-        // Sunday = -1 ... Saturday = 5;
-        dayIndex -= 1;
-        
-        // Monday = 0 ... Sunday = 6
-        if (dayIndex == -1) dayIndex = 6;
-        
-        _todayDayIndex = dayIndex;
+        return _todayDayIndex;
     }
     
+    // If there's no override, we need to figure out what today is
+    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+    
+    // In NSDateComponents, Sunday = 1 ... Saturday = 7
+    // We want Monday = 0 ... Sunday = 6
+    
+    // Sunday = 0 ... Saturday = 6
+    NSUInteger dayIndex = [dateComps weekday] - 1;
+    
+    // Sunday = -1 ... Saturday = 5;
+    dayIndex -= 1;
+    
+    // Monday = 0 ... Sunday = 6
+    if (dayIndex == -1) dayIndex = 6;
+    
+    _todayDayIndex = dayIndex;
+    
     return _todayDayIndex;
+}
+
+
+- (void)setTodayDayIndex:(NSUInteger)todayDayIndex
+{
+    _todayDayIndex = todayDayIndex;
+    [[NSUserDefaults standardUserDefaults] setInteger:todayDayIndex
+                                               forKey:ClassScheduleStoreTempTodayIndexPrefKey];
+    
+    // set the date we last changed the today index so we know when it's out of date
+    [self setLastTodayIndexOverride:[NSDate date]];
+}
+
+
+- (NSDate *)lastTodayIndexOverride
+{
+    if (!_lastTodayIndexOverride) {
+        _lastTodayIndexOverride = [[NSUserDefaults standardUserDefaults] objectForKey:ClassScheduleStoreTodayIndexOverrideDateKey];
+    }
+    
+    return _lastTodayIndexOverride;
+}
+
+
+- (void)setLastTodayIndexOverride:(NSDate *)lastTodayIndexOverride
+{
+    _lastTodayIndexOverride = lastTodayIndexOverride;
+    [[NSUserDefaults standardUserDefaults] setObject:lastTodayIndexOverride
+                                              forKey:ClassScheduleStoreTodayIndexOverrideDateKey];
 }
 
 
@@ -228,6 +286,24 @@ const NSUInteger todayIndexKey = -1;
 }
 
 
+
+// Save changes to our schedule dictionary
+- (void)saveChanges
+{
+    // save our schedule dictionary
+    BOOL success = [NSKeyedArchiver archiveRootObject:[self classScheduleDictionary]
+                                               toFile:[self classScheduleArchivePath]];
+    
+    if (!success) {
+        NSLog(@"Could not save class schedule.");
+    }
+}
+
+
+
+#pragma mark Public APIs
+
+
 - (NSString *)dayNameForIndex:(NSUInteger)dayIndex
 {
     switch (dayIndex) {
@@ -245,22 +321,6 @@ const NSUInteger todayIndexKey = -1;
             return @"Houston, we have a problem."; // should not get here!
     }
 }
-
-
-// Save changes to our schedule dictionary
-- (void)saveChanges
-{
-    // save our schedule dictionary
-    BOOL success = [NSKeyedArchiver archiveRootObject:[self classScheduleDictionary]
-                                               toFile:[self classScheduleArchivePath]];
-    
-    if (!success) {
-        NSLog(@"Could not save class schedule.");
-    }
-}
-
-
-#pragma mark Public APIs
 
 
 // Only called if the user is a student
@@ -399,6 +459,14 @@ const NSUInteger todayIndexKey = -1;
                                       classIndex:classIndex];
     
     return !([[class className] isEqualToString:@"Break"] || [[class className] isEqualToString:@"Lunch"] || [[class className] isEqualToString:@"Assembly"] || [[class className] isEqualToString:@"Convocation"]);
+}
+
+
+// For the rest of the day, will override the today index
+// with the given index
+- (void)overrideTodayIndexWithIndex:(NSUInteger)tempDayIndex
+{
+    [self setTodayDayIndex:tempDayIndex];
 }
 
 

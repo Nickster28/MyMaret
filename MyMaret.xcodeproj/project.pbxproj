@@ -90,6 +90,7 @@
 		01DEFF3917DD92F000D355CA /* AssignmentBookStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DEFF3817DD92F000D355CA /* AssignmentBookStore.m */; };
 		01DEFF3F17DD98E300D355CA /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DEFF3E17DD98E300D355CA /* Assignment.m */; };
 		01DEFF4017DD98E300D355CA /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DEFF3E17DD98E300D355CA /* Assignment.m */; };
+		01F576F317E2AF370021CEFA /* TodaySettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F576F217E2AF370021CEFA /* TodaySettingsTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -224,6 +225,8 @@
 		01DEFF3817DD92F000D355CA /* AssignmentBookStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentBookStore.m; sourceTree = "<group>"; };
 		01DEFF3D17DD98E300D355CA /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Assignment.h; sourceTree = "<group>"; };
 		01DEFF3E17DD98E300D355CA /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Assignment.m; sourceTree = "<group>"; };
+		01F576F117E2AF370021CEFA /* TodaySettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodaySettingsTableViewController.h; sourceTree = "<group>"; };
+		01F576F217E2AF370021CEFA /* TodaySettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodaySettingsTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -431,6 +434,8 @@
 				019054B617DD63F200B7982F /* TodayTableViewController.m */,
 				019054BB17DD798000B7982F /* TodayAnnouncementCell.h */,
 				019054BC17DD798000B7982F /* TodayAnnouncementCell.m */,
+				01F576F117E2AF370021CEFA /* TodaySettingsTableViewController.h */,
+				01F576F217E2AF370021CEFA /* TodaySettingsTableViewController.m */,
 			);
 			name = Today;
 			sourceTree = "<group>";
@@ -638,6 +643,7 @@
 				01176FDC17DC3C3E00DFF2EA /* SchoolClassEditTableViewController.m in Sources */,
 				01DEFF3F17DD98E300D355CA /* Assignment.m in Sources */,
 				01BF13A017A89F7D00731690 /* Announcement.m in Sources */,
+				01F576F317E2AF370021CEFA /* TodaySettingsTableViewController.m in Sources */,
 				01176FE717DC621D00DFF2EA /* SchoolClassNameEditCell.m in Sources */,
 				01DAA6BE17A70A4700B23BB2 /* ClassScheduleTableViewController.m in Sources */,
 				0169749B17D30F8D00973B1B /* NewspaperStore.m in Sources */,

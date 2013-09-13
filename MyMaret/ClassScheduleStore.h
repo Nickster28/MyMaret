@@ -64,6 +64,16 @@ extern const NSUInteger todayIndexKey;
 - (void)addClassWithName:(NSString *)className time:(NSString *)classTime toEndOfDayWithIndex:(NSUInteger)dayIndex;
 
 
+// Returns whether or not the class at the given indices is an academic class
+// (meaning not break, assembly, convocation, or lunch)
 - (BOOL)isClassAcademicWithDayIndex:(NSUInteger)dayIndex classIndex:(NSUInteger)classIndex;
+
+
+// Overrides today's index for 1 day (used if it's a wednesday schedule
+// on a friday, for example)
+- (void)overrideTodayIndexWithIndex:(NSUInteger)tempDayIndex;
+
+// Returns the day index associated with today
+- (NSUInteger)todayDayIndex;
 
 @end

@@ -9,6 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "MyMaretFrontTableViewController.h"
 
+@class TodaySettingsTableViewController;
+
 @interface TodayTableViewController : MyMaretFrontTableViewController
+
+@end
+
+
+@protocol TodayIndexSetterDelegate
+
+- (void)todaySettingsTableViewControllerDidOverrideTodayDayIndex:(TodaySettingsTableViewController *)settingsTVC;
 
 @end

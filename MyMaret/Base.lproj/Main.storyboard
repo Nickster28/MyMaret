@@ -5,6 +5,45 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
+        <!--Today Settings Table View Controller - Today's Schedule-->
+        <scene sceneID="gBd-ku-25D">
+            <objects>
+                <tableViewController id="hKM-p9-zVJ" customClass="TodaySettingsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="gw2-OG-KOb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="dayCell" textLabel="9B3-HX-9IY" style="IBUITableViewCellStyleDefault" id="ect-NF-7my">
+                                <rect key="frame" x="0.0" y="119" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ect-NF-7my" id="p0X-SK-JSo">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Monday Schedule" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9B3-HX-9IY">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="hKM-p9-zVJ" id="mPI-rP-gdh"/>
+                            <outlet property="delegate" destination="hKM-p9-zVJ" id="yUf-bK-V9n"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Today's Schedule" id="SXP-jJ-NPr"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RLh-Vm-I7k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2110" y="-3680"/>
+        </scene>
         <!--Today Table View Controller - Today-->
         <scene sceneID="yJd-h3-9Qh">
             <objects>
@@ -184,17 +223,33 @@
                                     <outlet property="titleLabel" destination="W0N-VQ-WDZ" id="Nqy-ol-Akt"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="daySettingsCell" textLabel="VcJ-1e-AbH" rowHeight="50" style="IBUITableViewCellStyleDefault" id="oBp-FU-Q9J" customClass="NewspaperCell">
+                                <rect key="frame" x="0.0" y="415" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oBp-FU-Q9J" id="E1r-nk-F9y">
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="49"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Change Today's Schedule" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VcJ-1e-AbH">
+                                            <rect key="frame" x="15" y="0.0" width="270" height="49"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="hKM-p9-zVJ" kind="push" identifier="todaySettingsSegue" id="8Bz-FN-JA3"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="UQ2-sH-ZOh" id="pVB-F8-Hgk"/>
                             <outlet property="delegate" destination="UQ2-sH-ZOh" id="BRV-83-gQW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Today" id="e54-ts-4mG">
-                        <barButtonItem key="rightBarButtonItem" image="SettingsIcon" id="lEO-xC-S6s">
-                            <color key="tintColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Today" id="e54-ts-4mG"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xi3-4m-A2E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
