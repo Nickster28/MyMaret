@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "logolessstroke.png"
+      "filename" : "logonoshadow.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "logolessstroke@2x.png"
+      "filename" : "logonoshadow@2x.png"
     }
   ],
   "info" : {

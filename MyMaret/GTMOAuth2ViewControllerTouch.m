@@ -406,8 +406,9 @@ finishedWithAuth:(GTMOAuth2Authentication *)auth
 }
 
 - (void)setUpNavigation {
-  rightBarButtonItem_.customView = navButtonsView_;
-  self.navigationItem.rightBarButtonItem = rightBarButtonItem_;
+    /* NICK COMMENTED THIS OUT */
+    //rightBarButtonItem_.customView = navButtonsView_;
+    //self.navigationItem.rightBarButtonItem = rightBarButtonItem_;
 }
 
 - (void)popView {
