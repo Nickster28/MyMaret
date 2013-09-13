@@ -85,7 +85,7 @@
     
     switch (section) {
         case 0:
-            numRows = [[ClassScheduleStore sharedStore] numberOfPeriodsInDayWithIndex:todayIndexKey];
+            numRows = [[ClassScheduleStore sharedStore] numberOfPeriodsInDayWithIndex:todayIndexKey] + 1;
             break;
             
         case 1:

@@ -12,6 +12,7 @@
 #import "MainMenuViewController.h"
 #import "UIColor+SchoolColor.h"
 #import "LoginViewController.h"
+#import <Parse/Parse.h>
 
 @interface SettingsTableViewController () <MFMailComposeViewControllerDelegate>
 
@@ -119,6 +120,10 @@
                                                   forKey:MyMaretUserNameKey];
         [[NSUserDefaults standardUserDefaults] setBool:NO
                                                 forKey:MyMaretIsLoggedInKey];
+        
+        // Set the badge to 0
+        [[PFInstallation currentInstallation] setBadge:0];
+        [[PFInstallation currentInstallation] saveInBackground];
         
         // Opt out of push notifications
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeNone];
