@@ -695,8 +695,8 @@ static Class gSignInClass = Nil;
         [(LoginViewController *)self.navigationController.viewControllers[0] setLoginStatus:LoginStatusCancel];
           
     } else {
-        // Now check to see if the user is a school user
-        // if so, store the user's info
+        // Now black out the view and set the user's info
+        self.view.hidden = TRUE;
         [self setUserInfo:auth.userEmail];
     }
       
