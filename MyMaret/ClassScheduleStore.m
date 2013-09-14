@@ -195,21 +195,26 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 // of class times (taking into account the user's grade)
 - (NSDictionary *)schoolClassTimes
 {
-    NSArray *mondayArray, *tuesdayArray, *wednesdayArray, *thursdayArray, *fridayArray;
+    // Get the user's grade
+    NSUInteger grade = [[NSUserDefaults standardUserDefaults] integerForKey:MyMaretUserGradeKey];
     
-    if ([[NSUserDefaults standardUserDefaults] integerForKey:MyMaretUserGradeKey] == 9) {
+    NSArray *mondayArray = @[], *tuesdayArray = @[], *wednesdayArray = @[], *thursdayArray = @[], *fridayArray = @[];
+    
+    if (grade == 9) {
         mondayArray = @[@"8:10-9:00", @"9:05-10:15", @"10:15-10:40", @"10:45-11:35", @"11:40-12:20", @"12:25-1:15", @"1:20-2:10", @"2:15-3:05"];
         tuesdayArray = @[@"8:10-9:00", @"9:05-9:55", @"9:55-10:10", @"10:15-11:25", @"11:30-12:05", @"12:10-1:00", @"1:05-1:55", @"2:00-3:10"];
         thursdayArray = @[@"8:10-9:20", @"9:25-10:15", @"10:15-10:35", @"10:40-11:30", @"11:35-12:10", @"12:15-1:05", @"1:10-2:00", @"2:05-3:15"];
         fridayArray = @[@"8:10-9:00", @"9:05-9:55", @"10:00-10:45", @"10:50-11:40", @"11:45-12:25", @"12:30-1:20", @"1:25-2:15", @"2:20-3:10"];
-    } else {
+    } else if (grade >= 10 && grade <= 12) {
         mondayArray = @[@"8:10-9:00", @"9:05-10:15", @"10:20-10:40", @"10:45-11:35", @"11:40-12:30", @"12:35-1:15", @"1:20-2:10", @"2:15-3:05"];
         tuesdayArray = @[@"8:10-9:00", @"9:05-9:55", @"10:00-10:10", @"10:15-11:25", @"11:30-12:20", @"12:25-1:00", @"1:05-1:55", @"2:00-3:10"];
         thursdayArray = @[@"8:10-9:20", @"9:25-10:15", @"10:20-10:35", @"10:40-11:30", @"11:35-12:25", @"12:30-1:05", @"1:10-2:00", @"2:05-3:15"];
         fridayArray = @[@"8:10-9:00", @"9:05-9:55", @"10:00-10:45", @"10:50-11:40", @"11:45-12:35", @"12:40-1:20", @"1:25-2:15", @"2:20-3:10"];
     }
     
-    wednesdayArray = @[@"8:10-9:00", @"9:05-10:15", @"10:20-10:55", @"11:00-12:10", @"12:15-12:50", @"12:55-1:45"];
+    if (grade >= 9 && grade <= 12) {
+        wednesdayArray = @[@"8:10-9:00", @"9:05-10:15", @"10:20-10:55", @"11:00-12:10", @"12:15-12:50", @"12:55-1:45"];
+    }
     
     return [NSDictionary dictionaryWithObjects:@[mondayArray, tuesdayArray, wednesdayArray, thursdayArray, fridayArray]
                                        forKeys:@[@"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday"]];
@@ -272,14 +277,14 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
             
         } else if ([day isEqualToString:@"Friday"]) {
             
-            [classSchedule[0] setClassName:classes[1]];
-            [classSchedule[1] setClassName:classes[2]];
+            [classSchedule[0] setClassName:classes[5]];
+            [classSchedule[1] setClassName:classes[6]];
             [classSchedule[2] setClassName:@"Assembly"];
             [classSchedule[3] setClassName:classes[3]];
             [classSchedule[4] setClassName:(isFreshman) ? @"Lunch" : classes[4]];
             [classSchedule[5] setClassName:(isFreshman) ? classes[4] : @"Lunch"];
-            [classSchedule[6] setClassName:classes[5]];
-            [classSchedule[7] setClassName:classes[6]];
+            [classSchedule[6] setClassName:classes[1]];
+            [classSchedule[7] setClassName:classes[2]];
             
         }
     }
@@ -288,7 +293,7 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 
 
 // Save changes to our schedule dictionary
-- (void)saveChanges
+- (BOOL)saveChanges
 {
     // save our schedule dictionary
     BOOL success = [NSKeyedArchiver archiveRootObject:[self classScheduleDictionary]
@@ -297,6 +302,8 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
     if (!success) {
         NSLog(@"Could not save class schedule.");
     }
+    
+    return success;
 }
 
 
@@ -353,10 +360,16 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
                                  [object objectForKey:@"fourthPeriod"],
                                  [object objectForKey:@"fifthPeriod"],
                                  [object objectForKey:@"sixthPeriod"],
-                                 [object objectForKey:@"seventhPeriod"],
-                                 [object objectForKey:@"eighthPeriod"]];
+                                 [object objectForKey:@"seventhPeriod"]];
             
-            [self configureScheduleWithClasses:classes];
+            // If there are any NSNulls in classes, replace them with empty strings
+            NSMutableArray *filteredClasses = [NSMutableArray array];
+            for (NSObject *object in classes) {
+                if ([object isKindOfClass:[NSString class]]) [filteredClasses addObject:object];
+                else [filteredClasses addObject:@"Free"];
+            }
+            
+            [self configureScheduleWithClasses:filteredClasses];
             [self saveChanges];
         }
         
@@ -467,6 +480,13 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 - (void)overrideTodayIndexWithIndex:(NSUInteger)tempDayIndex
 {
     [self setTodayDayIndex:tempDayIndex];
+}
+
+
+// Deletes all store data
+- (BOOL)clearStore {
+    [self createNewClassScheduleDictionary];
+    return [self saveChanges];
 }
 
 

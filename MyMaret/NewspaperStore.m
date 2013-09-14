@@ -26,7 +26,7 @@
 @property (nonatomic, strong) NSArray *filteredArticles;
 
 // Saves all Core Data changes
-- (void)saveChanges;
+- (BOOL)saveChanges;
 
 @end
 
@@ -228,7 +228,7 @@ NSString * const MyMaretLastNewspaperUpdateKey = @"MyMaretLastNewspaperUpdateKey
 
 
 // Save changes to our articles dictionary
-- (void)saveChanges
+- (BOOL)saveChanges
 {
     // save our articles dictionary
     BOOL success = [NSKeyedArchiver archiveRootObject:[self articlesDictionary]
@@ -237,6 +237,8 @@ NSString * const MyMaretLastNewspaperUpdateKey = @"MyMaretLastNewspaperUpdateKey
     if (!success) {
         NSLog(@"Could not save all articles.");
     }
+    
+    return success;
 }
 
 
@@ -384,6 +386,14 @@ NSString * const MyMaretLastNewspaperUpdateKey = @"MyMaretLastNewspaperUpdateKey
     NSTimeInterval publishInterval = [[NSDate date] timeIntervalSinceDate:[self lastNewspaperUpdate]];
     
     return publishInterval <= NUM_SECS_NEWSPAPER_IS_NEW;
+}
+
+
+// Deletes all store data
+- (BOOL)clearStore {
+    
+    [self makeNewArticlesDictionary];
+    return [self saveChanges];
 }
 
 @end

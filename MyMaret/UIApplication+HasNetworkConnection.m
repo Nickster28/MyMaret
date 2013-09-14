@@ -20,8 +20,12 @@
     SCNetworkReachabilityFlags flags;
     if (!SCNetworkReachabilityGetFlags(reachabilityRef, &flags)) return false;
     
+    CFRelease(reachabilityRef);
+    
     // Make sure the flags indicate we have a working connection
     return (flags & kSCNetworkReachabilityFlagsReachable);
+    
+    
 }
 
 @end

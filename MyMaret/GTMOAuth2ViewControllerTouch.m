@@ -33,6 +33,9 @@
 #import "WelcomeViewController.h"
 #import <Parse/Parse.h>
 #import "ClassScheduleStore.h"
+#import "AnnouncementsStore.h"
+#import "NewspaperStore.h"
+#import "AssignmentBookStore.h"
 #import "LoginViewController.h"
 
 
@@ -747,6 +750,21 @@ static Class gSignInClass = Nil;
         [[NSUserDefaults standardUserDefaults] setBool:YES
                                                 forKey:MyMaretIsLoggedInKey];
         
+        // If someone new is logging in, clear out all the old data
+        NSString *oldEmailAddr = [[NSUserDefaults standardUserDefaults] stringForKey:MyMaretUserEmailKey];
+        if (![oldEmailAddr isEqualToString:@""] && ![oldEmailAddr isEqualToString:emailAddr]) {
+            
+            [[NSUserDefaults standardUserDefaults] setInteger:0
+                                                       forKey:MyMaretUserGradeKey];
+            [[NSUserDefaults standardUserDefaults] setObject:@""
+                                                      forKey:MyMaretUserNameKey];
+            [[NSUserDefaults standardUserDefaults] setObject:@""
+                                                      forKey:MyMaretUserEmailKey];
+            
+            // Clear all the stores
+            [self clearAllStores];
+        }
+        
         // Set up Parse
         [Parse setApplicationId:@"9HFg8b0VNdu68bNj0XGW4zhQS2JJuJyeV8DlCFge"
                       clientKey:@"LsKBiPVVNUD8QxTWTr4QI4OJvIy92mWaknqYlsns"];
@@ -755,62 +773,99 @@ static Class gSignInClass = Nil;
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
         
         
-        // Query for the "Person" object for this user
-        PFQuery *query = [PFQuery queryWithClassName:@"Person"];
-        [query whereKey:@"emailAddress" equalTo:emailAddr];
-        
-        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        // Only query for the person object if the user is new
+        if (![oldEmailAddr isEqualToString:emailAddr]) {
             
+            // Query for the "Person" object for this user
+            PFQuery *query = [PFQuery queryWithClassName:@"Person"];
+            [query whereKey:@"emailAddress" equalTo:emailAddr];
             
-            // Save their name in NSUserDefaults and update their Person object in Parse
-            if (!error) {
+            [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
                 
-                [[NSUserDefaults standardUserDefaults] setObject:emailAddr
-                                                          forKey:MyMaretUserEmailKey];
                 
-                NSString *userFullName = [NSString stringWithFormat:@"%@ %@",
-                                          [object objectForKey:@"firstName"],
-                                          [object objectForKey:@"lastName"]];
-                
-                [[NSUserDefaults standardUserDefaults] setObject:userFullName
-                                                          forKey:MyMaretUserNameKey];
-                
-                [[NSUserDefaults standardUserDefaults] setInteger:[[object objectForKey:@"grade"] integerValue]
-                                                           forKey:MyMaretUserGradeKey];
-                
-                // We don't support downloading faculty class schedules
-                if ([[NSUserDefaults standardUserDefaults] integerForKey:MyMaretUserGradeKey] > 12) {
-                    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Sorry!"
-                                                                 message:@"Unfortunately, MyMaret only supports downloading student class schedules at this time.  If you enter your schedule information, however, you can still take advantage of the schedule section!  Just tap the \"Set Classes\" button in the top right of the Schedule Section, or tap on an individual class in your schedule to change it."
-                                                                delegate:nil
-                                                       cancelButtonTitle:@"OK!"
-                                                       otherButtonTitles:nil];
+                // Save their name in NSUserDefaults and update their Person object in Parse
+                if (!error) {
                     
+                    [[NSUserDefaults standardUserDefaults] setObject:emailAddr
+                                                              forKey:MyMaretUserEmailKey];
+                    
+                    NSString *userFullName = [NSString stringWithFormat:@"%@ %@",
+                                              [object objectForKey:@"firstName"],
+                                              [object objectForKey:@"lastName"]];
+                    
+                    [[NSUserDefaults standardUserDefaults] setObject:userFullName
+                                                              forKey:MyMaretUserNameKey];
+                    
+                    [[NSUserDefaults standardUserDefaults] setInteger:[[object objectForKey:@"grade"] integerValue]
+                                                               forKey:MyMaretUserGradeKey];
+                    
+                    // We don't support downloading faculty class schedules
+                    if ([[object objectForKey:@"grade"] integerValue] > 12) {
+                        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Sorry!"
+                                                                     message:@"Unfortunately, MyMaret only supports downloading student class schedules at this time.  If you enter your schedule information, however, you can still take advantage of the schedule section.  Just tap the Edit button in the top right of the Schedule Section, or tap on an individual class in your schedule to change it."
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"OK!"
+                                                           otherButtonTitles:nil];
+                        
+                        [av show];
+                    } else {
+                        [[ClassScheduleStore sharedStore] fetchClassScheduleWithCompletionBlock:nil];
+                    }
+                    
+                    // Update the object so the user won't receive email (since they have the app)
+                    [object setObject:[NSNumber numberWithBool:NO] forKey:@"shouldReceiveEmails"];
+                    [object saveInBackground];
+                } else if ([error code] == kPFErrorObjectNotFound) {
+                    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Whoops!"
+                                                                 message:@"Sorry, but we weren't able to identify you as a member of the Upper School.  You're still able to use all of the features of MyMaret, but you'll be unable to send announcements from within the app.  If you need to send an announcement, please send it via email.  If you think this is an error, drop us a line by tapping on the \"Contact Us\" button in Settings."
+                                                                delegate:nil
+                                                       cancelButtonTitle:@"Got it!"
+                                                       otherButtonTitles:nil];
                     [av show];
                 } else {
-                    [[ClassScheduleStore sharedStore] fetchClassScheduleWithCompletionBlock:nil];
+                    [[NSUserDefaults standardUserDefaults] setObject:emailAddr
+                                                              forKey:MyMaretUserEmailKey];
                 }
-                
-                // Update the object so the user won't receive email (since they have the app)
-                [object setObject: [NSNumber numberWithBool:NO] forKey:@"shouldReceiveEmails"];
-                [object saveInBackground];
-            } else if ([error code] == kPFErrorObjectNotFound) {
-                UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Whoops!"
-                                                             message:@"Sorry, but we weren't able to identify you as a member of the Upper School.  You're still able to use all of the features of MyMaret, but you'll be unable to send announcements from within the app.  If you need to send an announcement, please send it via email.  If you think this is an error, drop us a line by tapping on the \"Contact Us\" button in Settings."
-                                                            delegate:nil
-                                                   cancelButtonTitle:@"Got it!"
-                                                   otherButtonTitles:nil];
-                [av show];
-            } else {
-                [[NSUserDefaults standardUserDefaults] setObject:emailAddr
-                                                          forKey:MyMaretUserEmailKey];
-            }
-        }];
+            }];
+        } else {
+            // Query for the "Person" object for this user
+            PFQuery *query = [PFQuery queryWithClassName:@"Person"];
+            [query whereKey:@"emailAddress" equalTo:emailAddr];
+            
+            [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                if (!error) {
+                    
+                    // Update the object so the user won't receive email (since they have the app)
+                    [object setObject:[NSNumber numberWithBool:NO] forKey:@"shouldReceiveEmails"];
+                    [object saveInBackground];
+                }
+            }];
+             
+        }
         
         // Go to the welcome screen
         WelcomeViewController *welcomeVC = [[[WelcomeViewController alloc] init] autorelease];
         [self.navigationController pushViewController:welcomeVC animated:YES];
     }
+}
+
+
+- (BOOL)clearAllStores
+{
+    BOOL success = [[AnnouncementsStore sharedStore] clearStore];
+    
+    // Clear each store, only changing success if it's true
+    // and there was an error
+    BOOL result = [[NewspaperStore sharedStore] clearStore];
+    if (success && !result) success = result;
+    
+    result = [[ClassScheduleStore sharedStore] clearStore];
+    if (success && !result) success = result;
+    
+    result = [[AssignmentBookStore sharedStore] clearStore];
+    if (success && !result) success = result;
+    
+    return success;
 }
 
 

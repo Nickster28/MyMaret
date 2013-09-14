@@ -120,5 +120,11 @@
 }
 
 
+- (BOOL)clearStore
+{
+    return true;
+}
+
+
 
 @end

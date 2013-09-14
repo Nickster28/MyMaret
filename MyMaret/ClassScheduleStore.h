@@ -76,4 +76,8 @@ extern const NSUInteger todayIndexKey;
 // Returns the day index associated with today
 - (NSUInteger)todayDayIndex;
 
+
+// Deletes all store data
+- (BOOL)clearStore;
+
 @end

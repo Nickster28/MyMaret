@@ -71,5 +71,9 @@
 - (BOOL)isNewEditionOfNewspaper;
 
 
+// Deletes all store data
+- (BOOL)clearStore;
+
+
 
 @end

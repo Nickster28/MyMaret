@@ -14,6 +14,8 @@
 		0107E02A17CC13D40099E4E4 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0107E02917CC13D40099E4E4 /* WelcomeViewController.m */; };
 		010BC6A517CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 010BC6A317CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		010BC6A617CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 010BC6A417CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib */; };
+		0112712517E426BC0007626C /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0112712417E426BC0007626C /* SWRevealViewController.m */; };
+		0112712717E426CB0007626C /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0112712617E426CB0007626C /* LICENSE.txt */; };
 		0113855017C1D97700F8A965 /* AnnouncementCreationTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0113854F17C1D97700F8A965 /* AnnouncementCreationTitleViewController.m */; };
 		0113855317C1DA2500F8A965 /* AnnouncementCreationBodyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0113855217C1DA2500F8A965 /* AnnouncementCreationBodyViewController.m */; };
 		01176FCD17DBE0DB00DFF2EA /* ClassScheduleStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FCC17DBE0DB00DFF2EA /* ClassScheduleStore.m */; };
@@ -54,7 +56,6 @@
 		0177455C17A60AC3001625BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0177455A17A60AC3001625BF /* Main.storyboard */; };
 		0177455F17A60AC3001625BF /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177455E17A60AC3001625BF /* MainMenuViewController.m */; };
 		0177456117A60AC3001625BF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0177456017A60AC3001625BF /* Images.xcassets */; };
-		0177458017A60B5E001625BF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177457F17A60B5E001625BF /* SWRevealViewController.m */; };
 		017751D017DE2EB900ED49E5 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017751CF17DE2EB900ED49E5 /* LoginViewController.xib */; };
 		017A96DB17A7EB6C003D8A40 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017A96DA17A7EB6C003D8A40 /* CalendarViewController.m */; };
 		017EE13E17D55F6C00AB41A1 /* ArticleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017EE13D17D55F6C00AB41A1 /* ArticleDetailViewController.m */; };
@@ -117,6 +118,9 @@
 		010BC6A217CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2ViewControllerTouch.h; sourceTree = "<group>"; };
 		010BC6A317CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2ViewControllerTouch.m; sourceTree = "<group>"; };
 		010BC6A417CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
+		0112712317E426BC0007626C /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		0112712417E426BC0007626C /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		0112712617E426CB0007626C /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		0113854E17C1D97700F8A965 /* AnnouncementCreationTitleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementCreationTitleViewController.h; sourceTree = "<group>"; };
 		0113854F17C1D97700F8A965 /* AnnouncementCreationTitleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementCreationTitleViewController.m; sourceTree = "<group>"; };
 		0113855117C1DA2500F8A965 /* AnnouncementCreationBodyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementCreationBodyViewController.h; sourceTree = "<group>"; };
@@ -174,8 +178,6 @@
 		0177455E17A60AC3001625BF /* MainMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MainMenuViewController.m; path = ../MainMenuViewController.m; sourceTree = "<group>"; };
 		0177456017A60AC3001625BF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0177456717A60AC3001625BF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		0177457E17A60B5E001625BF /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		0177457F17A60B5E001625BF /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		017751CF17DE2EB900ED49E5 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = MyMaret/LoginViewController.xib; sourceTree = SOURCE_ROOT; };
 		017A96D917A7EB6C003D8A40 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		017A96DA17A7EB6C003D8A40 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
@@ -372,8 +374,9 @@
 				0169749317D2D38900973B1B /* MyMaretFrontViewController.m */,
 				0169749517D2D49800973B1B /* MyMaretFrontCollectionViewController.h */,
 				0169749617D2D49800973B1B /* MyMaretFrontCollectionViewController.m */,
-				0177457E17A60B5E001625BF /* SWRevealViewController.h */,
-				0177457F17A60B5E001625BF /* SWRevealViewController.m */,
+				0112712317E426BC0007626C /* SWRevealViewController.h */,
+				0112712417E426BC0007626C /* SWRevealViewController.m */,
+				0112712617E426CB0007626C /* LICENSE.txt */,
 				0107E02117CBE1840099E4E4 /* LoginViewController.h */,
 				0107E02217CBE1840099E4E4 /* LoginViewController.m */,
 				017751CF17DE2EB900ED49E5 /* LoginViewController.xib */,
@@ -600,6 +603,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0112712717E426CB0007626C /* LICENSE.txt in Resources */,
 				017751D017DE2EB900ED49E5 /* LoginViewController.xib in Resources */,
 				010BC6A617CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib in Resources */,
 				01BD435C17C9BB22005EF174 /* AnnouncementCell.xib in Resources */,
@@ -631,6 +635,7 @@
 				0107E02017CBC9940099E4E4 /* GTMOAuth2SignIn.m in Sources */,
 				01A4FE3517B97C08007FAB5C /* UIColor+SchoolColor.m in Sources */,
 				0113855317C1DA2500F8A965 /* AnnouncementCreationBodyViewController.m in Sources */,
+				0112712517E426BC0007626C /* SWRevealViewController.m in Sources */,
 				0107E02317CBE1840099E4E4 /* LoginViewController.m in Sources */,
 				019054BD17DD798000B7982F /* TodayAnnouncementCell.m in Sources */,
 				016F9D7C17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m in Sources */,
@@ -673,7 +678,6 @@
 				015191FF17D545CA0073AAEC /* NewspaperCell.m in Sources */,
 				0107E01C17CBC9430099E4E4 /* GTMHTTPFetcher.m in Sources */,
 				01176FEF17DC64F100DFF2EA /* SchoolClassTimeCell.m in Sources */,
-				0177458017A60B5E001625BF /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

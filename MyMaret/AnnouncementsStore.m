@@ -32,7 +32,7 @@
 
 
 // Saves all Core Data changes
-- (void)saveChanges;
+- (BOOL)saveChanges;
 
 @end
 
@@ -214,13 +214,15 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
 
 
 // Save Core Data changes
-- (void)saveChanges
+- (BOOL)saveChanges
 {
     NSError *err = nil;
     BOOL successful = [context save:&err];
     if (!successful) {
         NSLog(@"Could not save the announcements.");
     }
+    
+    return successful;
 }
 
 
@@ -476,6 +478,19 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
     } else {
         [self setFilteredAnnouncements:nil];
     }
+}
+
+
+- (BOOL)clearStore
+{
+    // Remove the announcements from Core Data
+    for (Announcement *announcement in self.announcements) {
+        [context deleteObject:announcement];
+    }
+    
+    self.announcements = [[NSMutableArray alloc] init];
+    
+    return [self saveChanges];
 }
 
 

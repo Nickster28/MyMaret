@@ -71,4 +71,8 @@ extern NSString * const AnnouncementsStoreFilterStringToday;
 - (void)setSearchFilterString:(NSString *)searchString;
 
 
+// Deletes all store data, returning whether or not the clear was successful
+- (BOOL)clearStore;
+
+
 @end

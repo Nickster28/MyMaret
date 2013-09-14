@@ -14,4 +14,7 @@
 // Get the singleton instance of AssignmentBookStore
 + (AssignmentBookStore *)sharedStore;
 
+// Clears all store data
+- (BOOL)clearStore;
+
 @end

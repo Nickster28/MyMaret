@@ -111,15 +111,27 @@
     // If it's the "Log Out" button...
     } else if ([indexPath section] == 0 && [indexPath row] == 1) {
         
-        // Clear all of our NSUserDefaults keys
-        [[NSUserDefaults standardUserDefaults] setObject:@""
-                                                  forKey:MyMaretUserEmailKey];
-        [[NSUserDefaults standardUserDefaults] setInteger:0
-                                                   forKey:MyMaretUserGradeKey];
-        [[NSUserDefaults standardUserDefaults] setObject:@""
-                                                  forKey:MyMaretUserNameKey];
         [[NSUserDefaults standardUserDefaults] setBool:NO
                                                 forKey:MyMaretIsLoggedInKey];
+        
+        // Set the user to receive emails, if they are a registered user
+        NSString *email = [[NSUserDefaults standardUserDefaults] stringForKey:MyMaretUserEmailKey];
+        
+        if (![email isEqualToString:@""]) {
+            
+            PFQuery *query = [PFQuery queryWithClassName:@"Person"];
+            [query whereKey:@"emailAddress" equalTo:[[NSUserDefaults standardUserDefaults] stringForKey:MyMaretUserEmailKey]];
+            
+            [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                if (!error) {
+                    
+                    // Set shouldReceiveEmails to "YES"
+                    [object setObject:[NSNumber numberWithBool:YES] forKey:@"shouldReceiveEmails"];
+                    [object saveInBackground];
+                }
+            }];
+        }
+
         
         // Set the badge to 0
         [[PFInstallation currentInstallation] setBadge:0];

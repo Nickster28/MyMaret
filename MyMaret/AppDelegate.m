@@ -37,7 +37,9 @@ NSString * const MyMaretPushNotificationTypeNewspaper = @"newspaper";
     // Set the initial values for the user info keys
     NSDictionary *defaults = @{MyMaretIsLoggedInKey: [NSNumber numberWithBool:NO],
                                MyMaretUserEmailKey: @"",
-                               MyMaretUserNameKey: @""};
+                               MyMaretUserNameKey: @"",
+                               MyMaretUserGradeKey: [NSNumber numberWithInt:0]
+                               };
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     
