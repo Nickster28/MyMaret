@@ -772,6 +772,13 @@ static Class gSignInClass = Nil;
         // Register for push notifications
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
         
+        // Track app usage
+        [PFAnalytics trackAppOpenedWithLaunchOptions:nil];
+        
+        // Make sure the badge is in line with the number of unread announcements
+        [[PFInstallation currentInstallation] setBadge:[[AnnouncementsStore sharedStore] numberOfUnreadAnnouncements]];
+        [[PFInstallation currentInstallation] saveInBackground];
+        
         
         // Only query for the person object if the user is new
         if (![oldEmailAddr isEqualToString:emailAddr]) {
