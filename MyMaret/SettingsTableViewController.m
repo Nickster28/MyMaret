@@ -14,7 +14,7 @@
 #import "LoginViewController.h"
 #import <Parse/Parse.h>
 
-@interface SettingsTableViewController () <MFMailComposeViewControllerDelegate>
+@interface SettingsTableViewController () <MFMailComposeViewControllerDelegate, UIAlertViewDelegate>
 
 @end
 
@@ -111,50 +111,70 @@
     // If it's the "Log Out" button...
     } else if ([indexPath section] == 0 && [indexPath row] == 1) {
         
-        [[NSUserDefaults standardUserDefaults] setBool:NO
-                                                forKey:MyMaretIsLoggedInKey];
+        // Warn the user that their data may be erased if they log in as a different user
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Warning"
+                                                     message:@"If you log out and log back in as the same user, your data will be saved.  However, if you log out and log in as a different user, the data for the previous user will be erased.  Are you sure you want to log out?"
+                                                    delegate:self
+                                           cancelButtonTitle:@"Cancel"
+                                           otherButtonTitles:@"Log Out", nil];
         
-        // Set the user to receive emails, if they are a registered user
-        NSString *email = [[NSUserDefaults standardUserDefaults] stringForKey:MyMaretUserEmailKey];
-        
-        if (![email isEqualToString:@""]) {
-            
-            PFQuery *query = [PFQuery queryWithClassName:@"Person"];
-            [query whereKey:@"emailAddress" equalTo:[[NSUserDefaults standardUserDefaults] stringForKey:MyMaretUserEmailKey]];
-            
-            [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-                if (!error) {
-                    
-                    // Set shouldReceiveEmails to "YES"
-                    [object setObject:[NSNumber numberWithBool:YES] forKey:@"shouldReceiveEmails"];
-                    [object saveInBackground];
-                }
-            }];
-        }
-
-        
-        // Set the badge to 0
-        [[PFInstallation currentInstallation] setBadge:0];
-        [[PFInstallation currentInstallation] saveInBackground];
-        
-        // Opt out of push notifications
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeNone];
-        
-        // Make a new login screen and present it
-        LoginViewController *loginScreen = [[LoginViewController alloc] init];
-        [loginScreen setLoginStatus:LoginStatusLogout];
-        
-        UINavigationController *navController = [[UINavigationController alloc]
-                                                 initWithRootViewController:loginScreen];
-        
-        [navController setNavigationBarHidden:YES];
-        [navController.navigationBar setTintColor:[UIColor schoolColor]];
-        [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-        
-        [self.navigationController presentViewController:navController
-                                                animated:YES
-                                              completion:nil];
+        [av show];
     }
+}
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) [self logOff];
+    else [self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES];
+}
+
+
+- (void)logOff
+{
+    [[NSUserDefaults standardUserDefaults] setBool:NO
+                                            forKey:MyMaretIsLoggedInKey];
+    
+    // Set the user to receive emails, if they are a registered user
+    NSString *email = [[NSUserDefaults standardUserDefaults] stringForKey:MyMaretUserEmailKey];
+    
+    if (![email isEqualToString:@""]) {
+        
+        PFQuery *query = [PFQuery queryWithClassName:@"Person"];
+        [query whereKey:@"emailAddress" equalTo:[[NSUserDefaults standardUserDefaults] stringForKey:MyMaretUserEmailKey]];
+        
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (!error) {
+                
+                // Set shouldReceiveEmails to "YES"
+                [object setObject:[NSNumber numberWithBool:YES] forKey:@"shouldReceiveEmails"];
+                [object saveInBackground];
+            }
+        }];
+    }
+    
+    
+    // Set the badge to 0
+    [[PFInstallation currentInstallation] setBadge:0];
+    [[PFInstallation currentInstallation] saveInBackground];
+    
+    // Opt out of push notifications
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeNone];
+    
+    // Make a new login screen and present it
+    LoginViewController *loginScreen = [[LoginViewController alloc] init];
+    [loginScreen setLoginStatus:LoginStatusLogout];
+    
+    UINavigationController *navController = [[UINavigationController alloc]
+                                             initWithRootViewController:loginScreen];
+    
+    [navController setNavigationBarHidden:YES];
+    [navController.navigationBar setTintColor:[UIColor schoolColor]];
+    [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    
+    [self.navigationController presentViewController:navController
+                                            animated:YES
+                                          completion:nil];
 }
 
 

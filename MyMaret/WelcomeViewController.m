@@ -7,6 +7,8 @@
 //
 
 #import "WelcomeViewController.h"
+#import "SWRevealViewController.h"
+#import "TodayTableViewController.h"
 
 @interface WelcomeViewController ()
 
@@ -50,6 +52,17 @@
     [self.navigationController.presentingViewController dismissViewControllerAnimated:YES
                                                                            completion:nil];
     
+    SWRevealViewController *revealController = (SWRevealViewController *)self.navigationController.presentingViewController;
+    
+    // Make sure the screen we're about to go to is refreshed
+    UIViewController *nextScreen = [[(UINavigationController *)revealController.frontViewController viewControllers] objectAtIndex:0];
+    
+    if ([nextScreen isKindOfClass:[TodayTableViewController class]]) {
+        
+        [[(TodayTableViewController *)nextScreen tableView] reloadData];
+    }
+    
+    // Go back to the start in case the user logs off
     [self.navigationController popToRootViewControllerAnimated:NO];
 }
 

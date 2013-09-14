@@ -325,7 +325,7 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
         case 4:
             return @"Friday";
         default:
-            return @"Houston, we have a problem."; // should not get here!
+            return @"Weekend!";
     }
 }
 

@@ -71,6 +71,7 @@ NSString * const MyMaretPushNotificationTypeNewspaper = @"newspaper";
                                                                  bundle:nil]
                                        instantiateInitialViewController];
         
+        
         LoginViewController *loginVC = [[LoginViewController alloc] init];
         [loginVC setLoginStatus:LoginStatusLaunch];
         
