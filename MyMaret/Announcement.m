@@ -8,13 +8,13 @@
 
 #import "Announcement.h"
 
-#define SECONDS_IN_DAY 86400
 #define SECONDS_IN_WEEK 604800
 @implementation Announcement
 
 @dynamic announcementTitle;
 @dynamic announcementBody;
 @dynamic announcementAuthor;
+@dynamic announcementPostDateComps;
 @dynamic announcementPostDate;
 @dynamic isUnreadAnnouncement;
 @dynamic announcementOrderingValue;
@@ -33,29 +33,29 @@
     [announcement setAnnouncementPostDate:[datePosted timeIntervalSinceReferenceDate]];
     [announcement setIsUnreadAnnouncement:YES];
     
+    
+    // Make the date components also so we have quick access to the day, month, year, and weekday
+    announcement.announcementPostDateComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit) fromDate:datePosted];
+    
     return announcement;
 }
 
 
 - (NSString *)postDateAsString
 {
-    NSDate *postedDate = [NSDate dateWithTimeIntervalSinceReferenceDate:[self announcementPostDate]];
-    
-    NSDateComponents *postedDateComponents = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit) fromDate:postedDate];
-    
     NSDateComponents *todayDateComponents = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit) fromDate:[NSDate date]];
     
     // See if the announcement was posted today
-    if (postedDateComponents.day == todayDateComponents.day &&
-        postedDateComponents.month == todayDateComponents.month &&
-        postedDateComponents.year == todayDateComponents.year) {
+    if (self.announcementPostDateComps.day == todayDateComponents.day &&
+        self.announcementPostDateComps.month == todayDateComponents.month &&
+        self.announcementPostDateComps.year == todayDateComponents.year) {
         
         return @"Today";
         
     // See if the announcement was posted some time in the last week
-    } else if ([[NSDate date] timeIntervalSinceDate:postedDate] < SECONDS_IN_WEEK) {
+    } else if ([[NSDate date] timeIntervalSinceDate:[NSDate dateWithTimeIntervalSinceReferenceDate:self.announcementPostDate]] < SECONDS_IN_WEEK) {
         
-        switch ([[NSCalendar currentCalendar] components:NSWeekdayCalendarUnit fromDate:postedDate].weekday) {
+        switch (self.announcementPostDateComps.weekday) {
             case 1:
                 return @"Sun.";
                 
@@ -81,8 +81,8 @@
     } else {
     
         // Otherwise just return the month/day in string form
-        NSNumber *day = [NSNumber numberWithInteger:postedDateComponents.day];
-        NSNumber *month = [NSNumber numberWithInteger:postedDateComponents.month];
+        NSNumber *day = [NSNumber numberWithInteger:self.announcementPostDateComps.day];
+        NSNumber *month = [NSNumber numberWithInteger:self.announcementPostDateComps.month];
     
         return [NSString stringWithFormat:@"%@/%@", month, day];
     }

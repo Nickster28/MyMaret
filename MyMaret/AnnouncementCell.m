@@ -10,7 +10,22 @@
 #import "Announcement.h"
 #import "UIColor+SchoolColor.h"
 
+static UIFont *boldTitleFont;
+static UIFont *normalTitleFont;
+static UIImage *unreadIcon;
+
 @implementation AnnouncementCell
+
+
++ (void)initialize
+{
+    // Make the fonts and unread icon once here
+    // so we don't have to do it every time in the bind method
+    boldTitleFont = [UIFont boldSystemFontOfSize:19.0];
+    normalTitleFont = [UIFont systemFontOfSize:17.0];
+    unreadIcon = [UIImage imageNamed:@"UnreadAnnouncementIcon"];
+}
+
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -41,12 +56,12 @@
     [self.titleLabel setText:[announcement announcementTitle]];
     
     if ([announcement isUnreadAnnouncement]) {
-        [self.titleLabel setFont:[UIFont boldSystemFontOfSize:19.0]];
+        [self.titleLabel setFont:boldTitleFont];
         [self.titleLabel setTextColor:[UIColor schoolColor]];
         [self.bodyLabel setTextColor:[UIColor blackColor]];
-        [self.unreadImageView setImage:[UIImage imageNamed:@"UnreadAnnouncementIcon"]];
+        [self.unreadImageView setImage:unreadIcon];
     } else {
-        [self.titleLabel setFont:[UIFont systemFontOfSize:17.0]];
+        [self.titleLabel setFont:normalTitleFont];
         [self.titleLabel setTextColor:[UIColor blackColor]];
         [self.bodyLabel setTextColor:[UIColor darkGrayColor]];
         [self.unreadImageView setImage:nil];

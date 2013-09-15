@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSString * announcementBody;
 @property (nonatomic, retain) NSString * announcementAuthor;
 @property (nonatomic) NSTimeInterval announcementPostDate;
+@property (nonatomic, retain) NSDateComponents * announcementPostDateComps;
 @property (nonatomic) BOOL isUnreadAnnouncement;
 @property (nonatomic) double announcementOrderingValue;
 
