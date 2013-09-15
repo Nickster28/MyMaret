@@ -9,13 +9,7 @@
         <attribute name="announcementTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isUnreadAnnouncement" optional="YES" attributeType="Boolean" syncable="YES"/>
     </entity>
-    <entity name="Assignment" representedClassName="Assignment" syncable="YES">
-        <attribute name="assignmentTitle" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="dueDate" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="schoolClassName" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
     <elements>
-        <element name="Announcement" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Assignment" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Announcement" positionX="0" positionY="0" width="128" height="150"/>
     </elements>
 </model>

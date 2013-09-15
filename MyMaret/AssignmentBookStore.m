@@ -7,17 +7,14 @@
 //
 
 #import "AssignmentBookStore.h"
-#import <CoreData/CoreData.h>
+#import "ClassScheduleStore.h"
 
-@interface AssignmentBookStore() {
-    // Core Data
-    NSManagedObjectModel *model;
-    NSManagedObjectContext *context;
-}
+@interface AssignmentBookStore()
 
-// 2 Dictionaries to manage filtering by date and by class
-@property (nonatomic, strong) NSMutableDictionary *assignmentsDateDictionary;
-@property (nonatomic, strong) NSDictionary *assignmentsClassDictionary;
+// 3 Dictionaries to manage filtering by date and by class
+@property (nonatomic, strong) NSDictionary *assignmentsByDateDictionary;
+@property (nonatomic, strong) NSDictionary *assignmentsByClassDictionary;
+@property (nonatomic, strong) NSDictionary *todayDictionary;
 
 @end
 
@@ -39,85 +36,119 @@
 }
 
 
-- (id)init {
-    self = [super init];
-    
-    if (self) {
-        // Read in AssignmentBookCDModel.xcdatamodeld
-        model = [NSManagedObjectModel mergedModelFromBundles:nil];
-        
-        NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
-        
-        // Where does the SQLite file go?
-        NSString *path = [self assignmentBookArchivePath];
-        NSURL *storeURL = [NSURL fileURLWithPath:path];
-        
-        NSError *error;
-        
-        if (![psc addPersistentStoreWithType:NSSQLiteStoreType
-                               configuration:nil
-                                         URL:storeURL
-                                     options:nil
-                                       error:&error]) {
-            [NSException raise:@"AssignmentBookStore: Open failed"
-                        format:@"Reason: %@", [error localizedDescription]];
-        }
-        
-        // Create the managed object context
-        context = [[NSManagedObjectContext alloc] init];
-        context.persistentStoreCoordinator = psc;
-        
-        // The managed object context can manage undo, but we don't need it
-        context.undoManager = nil;
-    }
-    
-    return self;
-}
-
-
-- (NSString *)assignmentBookArchivePath
+- (NSString *)assignmentsByDateDictionaryArchivePath
 {
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     
+    // Get only entry from the list
     NSString *directory = [documentDirectories objectAtIndex:0];
     
-    return [directory stringByAppendingPathComponent:@"mymaretstore.data"];
+    return [directory stringByAppendingPathComponent:@"assignmentsByDate.archive"];
+}
+
+
+- (NSString *)assignmentsByClassDictionaryArchivePath
+{
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    // Get only entry from the list
+    NSString *directory = [documentDirectories objectAtIndex:0];
+    
+    return [directory stringByAppendingPathComponent:@"assignmentsByClass.archive"];
 }
 
 
 
-- (NSMutableDictionary *)assignmentsDateDictionary
+- (NSDictionary *)assignmentsByDateDictionary
 {
-    // If needed, read in assignments from Core Data
-    if (!_assignmentsDateDictionary) {
+    if (!_assignmentsByDateDictionary) {
+        _assignmentsByDateDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self assignmentsByDateDictionaryArchivePath]];
         
-        NSFetchRequest *request = [[NSFetchRequest alloc] init];
-        
-        // Get all assignments, sorted by due date
-        NSEntityDescription *description = [[model entitiesByName] objectForKey:@"Assignment"];
-        [request setEntity:description];
-        
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dueDate"
-                                                                         ascending:YES];
-        [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-        
-        NSError *error;
-        NSArray *result = [context executeFetchRequest:request
-                                                 error:&error];
-        
-        if (!result) {
-            [NSException raise:@"Assignment fetch failed" format:@"Reason: %@", [error localizedDescription]];
+        // If we haven't saved one yet, make a new one
+        if (!_assignmentsByDateDictionary) {
+            _assignmentsByDateDictionary = [NSDictionary dictionary];
+            
+            [self saveChanges];
         }
-        
-        
-        // Divide assignments into different keys depending on due date
-        _assignmentsDateDictionary = [[NSMutableDictionary alloc] init];
-        
-        
     }
     
-    return _assignmentsDateDictionary;
+    return _assignmentsByDateDictionary;
 }
+
+
+- (NSDictionary *)assignmentsByClassDictionary
+{
+    if (!_assignmentsByClassDictionary) {
+        _assignmentsByClassDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self assignmentsByClassDictionaryArchivePath]];
+        
+        // If we haven't saved one yet, make a new one
+        if (!_assignmentsByClassDictionary) {
+            
+            // Get the user's classes (an array of classnames as strings)
+            NSArray *classList = [[ClassScheduleStore sharedStore] allClasses];
+            
+            // Make an array for each class's assignments
+            NSMutableArray *keys;
+            NSUInteger numClasses = [classList count];
+            
+            for (int i = 0; i < numClasses; i++) {
+                [keys addObject:[NSMutableArray array]];
+            }
+            
+            _assignmentsByClassDictionary = [NSDictionary dictionaryWithObjects:classList
+                                                                      forKeys:keys];
+            
+            [self saveChanges];
+        }
+    }
+    
+    return _assignmentsByClassDictionary;
+}
+
+
+- (void)saveChanges
+{
+    // save our schedule dictionary
+    BOOL dateDictionarySuccess = [NSKeyedArchiver archiveRootObject:[self assignmentsByDateDictionary]
+                                                            toFile:[self assignmentsByDateDictionaryArchivePath]];
+    
+    
+    // save our array of all classes
+    BOOL classDictionarySuccess = [NSKeyedArchiver archiveRootObject:[self assignmentsByClassDictionary]
+                                                        toFile:[self assignmentsByClassDictionaryArchivePath]];
+    
+    if (!dateDictionarySuccess) {
+        NSLog(@"Could not save by-date assignment dictionary.");
+    }
+    
+    if (!classDictionarySuccess) {
+        NSLog(@"Could not save by-class assignment dictionary.");
+    }
+    
+    //return dateDictionarySuccess && classDictionarySuccess;
+}
+
+
+
+#pragma mark Public APIs
+
+- (NSString *)nameForClassAtIndex:(NSUInteger)index
+{
+    return [[[self assignmentsByClassDictionary] allKeys] objectAtIndex:index];
+}
+
+
+- (NSUInteger)numberOfAssignmentsForClass:(NSString *)className
+{
+    return [[[self assignmentsByClassDictionary] objectForKey:className] count];
+}
+
+
+- (NSUInteger)numberOfAssignmentsForDateWithDay:(NSUInteger)dayNum Month:(NSUInteger)monthNum
+{
+    return 0;
+}
+
 
 
 - (BOOL)clearStore

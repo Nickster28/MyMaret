@@ -77,6 +77,10 @@ extern const NSUInteger todayIndexKey;
 - (NSUInteger)todayDayIndex;
 
 
+// Get an array of all of the user's classes
+- (NSArray *)allClasses;
+
+
 // Deletes all store data
 - (BOOL)clearStore;
 

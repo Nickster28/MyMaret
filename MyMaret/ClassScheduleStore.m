@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSDictionary *classScheduleDictionary;
 @property (nonatomic) NSUInteger todayDayIndex;
 @property (nonatomic, strong) NSDate *lastTodayIndexOverride;
+@property (nonatomic, strong) NSMutableArray *classList;
 @end
 
 
@@ -50,6 +51,17 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
     NSString *directory = [documentDirectories objectAtIndex:0];
     
     return [directory stringByAppendingPathComponent:@"classSchedule.archive"];
+}
+
+
+- (NSString *)classListArchivePath
+{
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    // Get only entry from the list
+    NSString *directory = [documentDirectories objectAtIndex:0];
+    
+    return [directory stringByAppendingPathComponent:@"classList.archive"];
 }
 
 
@@ -153,6 +165,61 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
     }
     
     return _classScheduleDictionary;
+}
+
+
+- (NSMutableArray *)classList
+{
+    if (!_classList) {
+        
+        // Unarchive it from disk
+        _classList = [NSKeyedUnarchiver unarchiveObjectWithFile:[self classListArchivePath]];
+        
+        // If we don't have one saved, make a new one
+        _classList = [NSMutableArray array];
+    }
+    
+    return _classList;
+}
+
+
+// If this class is gone from the schedule, remove it from our class list
+// CALL AFTER REMOVING A CLASS FROM THE SCHEDULE
+- (void)removeClassFromClassListIfNoneLeft:(NSString *)className
+{
+    // Filter through all the class periods and see how many instances
+    // there are of the given class name
+    NSArray *allPeriods = [[self classScheduleDictionary] allValues];
+    NSUInteger numOthers = [[allPeriods indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        
+        return [[(SchoolClass *)obj className] isEqualToString:className];
+    
+    }] count];
+    
+    // If there are none left, remove the class
+    if (numOthers == 0) {
+        [self.classList removeObject:className];
+    }
+}
+
+
+// If this class is new to our schedule (ie there are no other instances), add it to our class list
+// CALL BEFORE ADDING A CLASS TO THE SCHEDULE
+- (void)addClassToClassListIfNew:(NSString *)className
+{
+    // Filter through all the class periods and see how many instances
+    // there are of the given class name
+    NSArray *allPeriods = [[self classScheduleDictionary] allValues];
+    NSUInteger numOthers = [[allPeriods indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        
+        return [[(SchoolClass *)obj className] isEqualToString:className];
+        
+    }] count];
+    
+    // If there are none, add the class
+    if (numOthers == 0) {
+        [self.classList addObject:className];
+    }
 }
 
 
@@ -296,19 +363,34 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 - (BOOL)saveChanges
 {
     // save our schedule dictionary
-    BOOL success = [NSKeyedArchiver archiveRootObject:[self classScheduleDictionary]
+    BOOL classScheduleSuccess = [NSKeyedArchiver archiveRootObject:[self classScheduleDictionary]
                                                toFile:[self classScheduleArchivePath]];
     
-    if (!success) {
+    
+    // save our array of all classes
+    BOOL classListSuccess = [NSKeyedArchiver archiveRootObject:[self classList]
+                                                        toFile:[self classListArchivePath]];
+    
+    if (!classScheduleSuccess) {
         NSLog(@"Could not save class schedule.");
     }
     
-    return success;
+    if (!classListSuccess) {
+        NSLog(@"Could not save class list.");
+    }
+    
+    return classListSuccess && classScheduleSuccess;
 }
 
 
 
 #pragma mark Public APIs
+
+
+- (NSArray *)allClasses
+{
+    return self.classList;
+}
 
 
 - (NSString *)dayNameForIndex:(NSUInteger)dayIndex
@@ -328,6 +410,7 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
             return @"Weekend!";
     }
 }
+
 
 
 // Only called if the user is a student
@@ -365,8 +448,12 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
             // If there are any NSNulls in classes, replace them with empty strings
             NSMutableArray *filteredClasses = [NSMutableArray array];
             for (NSObject *object in classes) {
-                if ([object isKindOfClass:[NSString class]]) [filteredClasses addObject:object];
-                else [filteredClasses addObject:@"Free"];
+                
+                // Filter out NSNulls and build our class list
+                if ([object isKindOfClass:[NSString class]]) {
+                    [filteredClasses addObject:object];
+                    [self.classList addObject:object];
+                } else [filteredClasses addObject:@"Free"];
             }
             
             [self configureScheduleWithClasses:filteredClasses];
@@ -411,8 +498,12 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 - (void)deleteClassWithDayIndex:(NSUInteger)dayIndex classIndex:(NSUInteger)classIndex {
     NSString *dayName = [self dayNameForIndex:dayIndex];
     
+    NSString *classNameToDelete = [[self classWithDayIndex:dayIndex classIndex:classIndex] className];
+    
     // Remove the object from the dictionary
     [[[self classScheduleDictionary] objectForKey:dayName] removeObjectAtIndex:classIndex];
+    
+    [self removeClassFromClassListIfNoneLeft:classNameToDelete];
     
     [self saveChanges];
 }
@@ -443,9 +534,17 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
     SchoolClass *classToEdit = [self classWithDayIndex:dayIndex
                                             classIndex:classIndex];
     
+    NSString *oldClassName = classToEdit.className;
+    
+    // Possibly add this new class to our class list
+    [self addClassToClassListIfNew:className];
+    
     // Change the class's info
     [classToEdit setClassName:className];
     [classToEdit setClassTime:classTime];
+    
+    // Possibly remove the old class from our class list
+    [self removeClassFromClassListIfNoneLeft:oldClassName];
     
     [self saveChanges];
 }
@@ -456,6 +555,9 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
     // Create the new class
     SchoolClass *newClass = [[SchoolClass alloc] initWithName:className
                                                     classTime:classTime];
+    
+    // Possibly add it to our classlist
+    [self addClassToClassListIfNew:className];
     
     NSString *dayName = [self dayNameForIndex:dayIndex];
     
@@ -486,6 +588,7 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 // Deletes all store data
 - (BOOL)clearStore {
     [self createNewClassScheduleDictionary];
+    [self setClassList:nil];
     return [self saveChanges];
 }
 

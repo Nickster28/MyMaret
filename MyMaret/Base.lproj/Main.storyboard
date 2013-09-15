@@ -927,12 +927,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="1k6-ch-Di0" secondAttribute="trailing" constant="5" id="01u-h8-GGG"/>
-                                        <constraint firstItem="FaZ-L9-nEY" firstAttribute="top" secondItem="lzW-tp-fRp" secondAttribute="top" constant="3" id="6dp-zx-2i8"/>
-                                        <constraint firstAttribute="trailing" secondItem="FaZ-L9-nEY" secondAttribute="trailing" constant="93" id="PM3-HI-xrC"/>
-                                        <constraint firstItem="1k6-ch-Di0" firstAttribute="centerY" secondItem="lzW-tp-fRp" secondAttribute="centerY" id="Yma-Yd-2yr"/>
-                                        <constraint firstItem="FaZ-L9-nEY" firstAttribute="leading" secondItem="lzW-tp-fRp" secondAttribute="leading" constant="15" id="eaO-1z-cn7"/>
-                                        <constraint firstItem="FaZ-L9-nEY" firstAttribute="centerY" secondItem="1k6-ch-Di0" secondAttribute="centerY" id="uUB-VP-t4H"/>
+                                        <constraint firstItem="FaZ-L9-nEY" firstAttribute="leading" secondItem="lzW-tp-fRp" secondAttribute="leading" constant="15" id="D69-tv-EkY"/>
+                                        <constraint firstAttribute="trailing" secondItem="FaZ-L9-nEY" secondAttribute="trailing" constant="93" id="Qg8-gU-BYs"/>
+                                        <constraint firstAttribute="trailing" secondItem="1k6-ch-Di0" secondAttribute="trailing" constant="5" id="fTu-7X-S3L"/>
+                                        <constraint firstItem="FaZ-L9-nEY" firstAttribute="top" secondItem="lzW-tp-fRp" secondAttribute="top" constant="3" id="kLh-6A-8eE"/>
+                                        <constraint firstItem="FaZ-L9-nEY" firstAttribute="centerY" secondItem="1k6-ch-Di0" secondAttribute="centerY" id="w2e-qj-bhE"/>
+                                        <constraint firstItem="1k6-ch-Di0" firstAttribute="centerY" secondItem="lzW-tp-fRp" secondAttribute="centerY" id="z6i-Q4-7HB"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
