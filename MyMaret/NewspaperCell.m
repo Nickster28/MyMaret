@@ -13,7 +13,7 @@
 
 static UIFont *boldTitleFont;
 static UIFont *normalTitleFont;
-
+static UIColor *blackColor;
 
 @implementation NewspaperCell
 
@@ -22,6 +22,7 @@ static UIFont *normalTitleFont;
 {
     boldTitleFont = [UIFont boldSystemFontOfSize:17.0];
     normalTitleFont = [UIFont systemFontOfSize:17.0];
+    blackColor = [UIColor blackColor];
 }
 
 
@@ -44,7 +45,7 @@ static UIFont *normalTitleFont;
         [self.popularLabel.layer setBorderColor:[[UIColor whiteColor] CGColor]];
         [self.titleLabel setTextColor:self.titleLabel.highlightedTextColor];
     } else {
-        [self.titleLabel setTextColor:[UIColor blackColor]];
+        [self.titleLabel setTextColor:blackColor];
         [self.popularLabel.layer setBorderColor:[[UIColor schoolComplementaryColor] CGColor]];
         if (self.titleAttrString) [self.titleLabel setAttributedText:[self titleAttrString]];
     }
@@ -60,7 +61,7 @@ static UIFont *normalTitleFont;
         [self.popularLabel.layer setBorderColor:[[UIColor whiteColor] CGColor]];
         [self.titleLabel setTextColor:self.titleLabel.highlightedTextColor];
     } else {
-        [self.titleLabel setTextColor:[UIColor blackColor]];
+        [self.titleLabel setTextColor:blackColor];
         [self.popularLabel.layer setBorderColor:[[UIColor schoolComplementaryColor] CGColor]];
         if (self.titleAttrString) [self.titleLabel setAttributedText:[self titleAttrString]];
     }
@@ -89,7 +90,7 @@ static UIFont *normalTitleFont;
         
         // Just make it basic black text
         [[self titleLabel] setText:[article articleTitle]];
-        [[self titleLabel] setTextColor:[UIColor blackColor]];
+        [[self titleLabel] setTextColor:blackColor];
         [self setTitleAttrString:nil];
     }
     
