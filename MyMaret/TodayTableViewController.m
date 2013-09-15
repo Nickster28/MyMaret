@@ -22,6 +22,9 @@
 
 @interface TodayTableViewController () <TodayIndexSetterDelegate>
 
+// Dictionary of section indices to BOOLs to keep track of whether the
+// section is empty
+@property (nonatomic, strong) NSMutableDictionary *emptySectionsDictionary;
 @end
 
 @implementation TodayTableViewController
@@ -64,6 +67,36 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    self.emptySectionsDictionary = nil;
+}
+
+
+- (NSMutableDictionary *)emptySectionsDictionary
+{
+    if (!_emptySectionsDictionary) {
+        _emptySectionsDictionary = [NSMutableDictionary dictionary];
+        
+        NSUInteger numKeys = [self.tableView numberOfSections];
+        for (int i = 0; i < numKeys; i++) {
+            [_emptySectionsDictionary setObject:[NSNumber numberWithBool:FALSE]
+                                   forKey:[NSNumber numberWithInt:i]];
+        }
+    }
+    
+    return _emptySectionsDictionary;
+}
+
+
+- (void)setSection:(NSUInteger)sectionIndex isEmpty:(BOOL)isEmpty
+{
+    [[self emptySectionsDictionary] setObject:[NSNumber numberWithBool:isEmpty]
+                                 forKey:[NSNumber numberWithInt:sectionIndex]];
+}
+
+
+- (BOOL)sectionIsEmpty:(NSUInteger)sectionIndex
+{
+    return [[[self emptySectionsDictionary] objectForKey:[NSNumber numberWithInt:sectionIndex]] boolValue];
 }
 
 #pragma mark - Table view data source
@@ -113,6 +146,14 @@
             break;
     }
     
+    // Record whether or not the section is empty
+    if (numRows == 0 || (section == 0 && numRows == 1)) [self setSection:section isEmpty:YES];
+    else [self setSection:section isEmpty:NO];
+    
+    // If it is empty, then we want to put 1 cell there saying it's empty
+    // This does NOT apply to the schedule section because we add 1 extra
+    // row above for the "Set schedule day" button.  So if there is no schedule
+    // today, THAT extra cell ends up acting as the "No content" cell.
     if (numRows == 0) numRows++;
     
     return numRows;
@@ -121,6 +162,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ([self sectionIsEmpty:indexPath.section]) return 44.0;
+    
     switch (indexPath.section) {
         case 0:
             return 50.0;

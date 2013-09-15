@@ -46,6 +46,7 @@
 }
 
 
+// Show the email compose window
 - (void)showContactScreen
 {
     // Can we send email?
@@ -69,13 +70,17 @@
 }
 
 
-// Show the email compose window
 - (void)mailComposeController:(MFMailComposeViewController *)controller
           didFinishWithResult:(MFMailComposeResult)result
                         error:(NSError *)error
 {
     [controller dismissViewControllerAnimated:YES
                                    completion:nil];
+    
+    // Deselect the "Contact Us" cell
+    [self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:0
+                                                              inSection:0]
+                                  animated:YES];
     
     if (error) {
         UIAlertView *mailErrorAlertView = [[UIAlertView alloc] initWithTitle:@"Whoops!"
@@ -103,13 +108,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // If it's the "Contact Us" button...
-    if ([indexPath section] == 1 && [indexPath row] == 1) {
-        [self showContactScreen];
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        
-    // If it's the "Log Out" button...
-    } else if ([indexPath section] == 0 && [indexPath row] == 1) {
+    // If it's the Logout button...
+    if ([indexPath section] == 0 && [indexPath row] == 1) {
         
         // Warn the user that their data may be erased if they log in as a different user
         UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Warning"
@@ -119,14 +119,19 @@
                                            otherButtonTitles:@"Log Out", nil];
         
         [av show];
+        
+    // If it's the "Contact Us" button...
+    } else if ([indexPath section] == 2) {
+            [self showContactScreen];
     }
 }
 
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    [self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES];
+    
     if (buttonIndex == 1) [self logOff];
-    else [self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES];
 }
 
 

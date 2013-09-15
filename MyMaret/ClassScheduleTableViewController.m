@@ -178,30 +178,17 @@
 
 - (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
 {
-    // If the user's trying to jump sections, keep them within their own section
-    if (proposedDestinationIndexPath.section != sourceIndexPath.section) {
+    NSUInteger numSectionRows = [tableView numberOfRowsInSection:sourceIndexPath.section];
+    
+    // If the user's trying to jump sections, or if they're trying to put the
+    // cell after the "Add period" button, don't let them
+    if (proposedDestinationIndexPath.section != sourceIndexPath.section || (proposedDestinationIndexPath.section == sourceIndexPath.section && proposedDestinationIndexPath.row + 1 >= numSectionRows)) {
         
-        // If we're in the same section but the user's trying to move past the
-        // "Add Period" cell, don't let them
-        if (proposedDestinationIndexPath.row + 1 == [tableView numberOfRowsInSection:proposedDestinationIndexPath.section]) {
-            
-            return [NSIndexPath indexPathForRow:proposedDestinationIndexPath.row -1
-                                      inSection:sourceIndexPath.section];
-        }
-        
-        return [NSIndexPath indexPathForRow:proposedDestinationIndexPath.row
+        return [NSIndexPath indexPathForRow:numSectionRows - 2
                                   inSection:sourceIndexPath.section];
     }
     
-    // If we're in the same section but the user's trying to move past the
-    // "Add Period" cell, don't let them
-    NSUInteger numSectionRows = [tableView numberOfRowsInSection:proposedDestinationIndexPath.section];
-    if (proposedDestinationIndexPath.row + 1 >= numSectionRows) {
-        
-        return [NSIndexPath indexPathForRow:numSectionRows - 2
-                                  inSection:proposedDestinationIndexPath.section];
-    }
-    
+    // Otherwise, their move is fine
     return proposedDestinationIndexPath;
 }
 

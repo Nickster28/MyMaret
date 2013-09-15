@@ -68,12 +68,7 @@
 // Thanks to Max for suggesting this method for altering the height of a single row
 // http://stackoverflow.com/questions/9823921/set-height-programmatically-for-a-single-uitableviewcell
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == 0) {
-        if ([UIApplication isPrevIOS]) return 0.0;
-        else return 20.0;
-    }
-    
+{    
     return 53.0;
 }
 
