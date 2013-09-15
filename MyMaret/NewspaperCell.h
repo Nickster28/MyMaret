@@ -15,6 +15,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *bodyLabel;
 @property (nonatomic, weak) IBOutlet UILabel *authorLabel;
 @property (nonatomic, weak) IBOutlet UILabel *popularLabel;
+@property (nonatomic, strong) NSAttributedString *titleAttrString;
 
 - (void)bindArticle:(NewspaperArticle *)article;
 

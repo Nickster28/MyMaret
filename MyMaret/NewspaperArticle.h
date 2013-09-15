@@ -19,6 +19,7 @@
 @property (nonatomic) BOOL isDigitalExclusive;
 @property (nonatomic, strong) NSString * articleSection;
 @property (nonatomic, strong) NSString * articleEdition;
+@property (nonatomic, strong) NSMutableAttributedString *titleAttrString;
 
 
 - (id)initWithTitle:(NSString *)articleTitle

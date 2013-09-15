@@ -10,7 +10,21 @@
 #import "NewspaperArticle.h"
 #import "UIColor+SchoolColor.h"
 
+
+static UIFont *boldTitleFont;
+static UIFont *normalTitleFont;
+
+
 @implementation NewspaperCell
+
+
++ (void)initialize
+{
+    boldTitleFont = [UIFont boldSystemFontOfSize:17.0];
+    normalTitleFont = [UIFont systemFontOfSize:17.0];
+}
+
+
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -28,7 +42,12 @@
     // If it's selected, change the border to white
     if (selected) {
         [self.popularLabel.layer setBorderColor:[[UIColor whiteColor] CGColor]];
-    } else [self.popularLabel.layer setBorderColor:[[UIColor schoolComplementaryColor] CGColor]];
+        [self.titleLabel setTextColor:self.titleLabel.highlightedTextColor];
+    } else {
+        [self.titleLabel setTextColor:[UIColor blackColor]];
+        [self.popularLabel.layer setBorderColor:[[UIColor schoolComplementaryColor] CGColor]];
+        if (self.titleAttrString) [self.titleLabel setAttributedText:[self titleAttrString]];
+    }
 }
 
 
@@ -39,7 +58,12 @@
     // If it's highlighted, change the border to white
     if (highlighted) {
         [self.popularLabel.layer setBorderColor:[[UIColor whiteColor] CGColor]];
-    } else [self.popularLabel.layer setBorderColor:[[UIColor schoolComplementaryColor] CGColor]];
+        [self.titleLabel setTextColor:self.titleLabel.highlightedTextColor];
+    } else {
+        [self.titleLabel setTextColor:[UIColor blackColor]];
+        [self.popularLabel.layer setBorderColor:[[UIColor schoolComplementaryColor] CGColor]];
+        if (self.titleAttrString) [self.titleLabel setAttributedText:[self titleAttrString]];
+    }
 }
 
 
@@ -52,31 +76,21 @@
     
     // Bold the title if the article is unread
     if (article.isUnreadArticle) {
-        [[self titleLabel] setFont:[UIFont boldSystemFontOfSize:17.0]];
-    } else [[self titleLabel] setFont:[UIFont systemFontOfSize:17.0]];
+        [[self titleLabel] setFont:boldTitleFont];
+    } else [[self titleLabel] setFont:normalTitleFont];
     
     
     // If the article is a digital exclusive, set the title to be
-    // "Digital Exclusive: TITLE"
+    // "Digital Exclusive: TITLE" (an attributed string)
     if (article.isDigitalExclusive) {
-        
-        // Make the attributed string
-        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Digital Exclusive: %@", [article articleTitle]]];
-        
-        [attrString addAttribute:NSForegroundColorAttributeName
-                           value:[UIColor schoolComplementaryColor]
-                           range:NSMakeRange(0, 19)];
-        
-        [attrString addAttribute:NSForegroundColorAttributeName
-                           value:[UIColor blackColor]
-                           range:NSMakeRange(19, attrString.length - 19)];
-        
-        [[self titleLabel] setAttributedText:attrString];
+        [self setTitleAttrString:[article titleAttrString]];
+        [[self titleLabel] setAttributedText:[self titleAttrString]];
     } else {
         
         // Just make it basic black text
         [[self titleLabel] setText:[article articleTitle]];
         [[self titleLabel] setTextColor:[UIColor blackColor]];
+        [self setTitleAttrString:nil];
     }
     
     // If the article is popular, add the popular label with a border

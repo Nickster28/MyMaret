@@ -7,6 +7,7 @@
 //
 
 #import "NewspaperArticle.h"
+#import "UIColor+SchoolColor.h"
 
 
 NSString * const NewspaperArticleTitleEncodingKey = @"articleTitle";
@@ -17,6 +18,9 @@ NSString * const NewspaperArticleEditionEncodingKey = @"articleEdition";
 NSString * const NewspaperArticleIsPopularEncodingKey = @"isPopularArticle";
 NSString * const NewspaperArticleIsUnreadEncodingKey = @"isUnreadArticle";
 NSString * const NewspaperArticleIsDigitalExclusiveEncodingKey = @"isDigitalExclusive";
+NSString * const NewspaperArticleTitleAttrStringEncodingKey = @"titleAttrString";
+
+
 
 @implementation NewspaperArticle
 
@@ -82,6 +86,20 @@ NSString * const NewspaperArticleIsDigitalExclusiveEncodingKey = @"isDigitalExcl
                 break;
             default: ;
         }
+        
+        
+        if (isDigitalExclusive) {
+            // Make the attributed string
+            self.titleAttrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Digital Exclusive: %@", self.articleTitle]];
+            
+            [self.titleAttrString addAttribute:NSForegroundColorAttributeName
+                               value:[UIColor schoolComplementaryColor]
+                               range:NSMakeRange(0, 19)];
+            
+            [self.titleAttrString addAttribute:NSForegroundColorAttributeName
+                               value:[UIColor blackColor]
+                               range:NSMakeRange(19, self.titleAttrString.length - 19)];
+        }
     }
     
     return self;
@@ -100,6 +118,7 @@ NSString * const NewspaperArticleIsDigitalExclusiveEncodingKey = @"isDigitalExcl
     [aCoder encodeBool:[self isPopularArticle] forKey:NewspaperArticleIsPopularEncodingKey];
     [aCoder encodeBool:[self isUnreadArticle] forKey:NewspaperArticleIsUnreadEncodingKey];
     [aCoder encodeBool:[self isDigitalExclusive] forKey:NewspaperArticleIsDigitalExclusiveEncodingKey];
+    [aCoder encodeObject:[self titleAttrString] forKey:NewspaperArticleTitleAttrStringEncodingKey];
 }
 
 
@@ -117,6 +136,7 @@ NSString * const NewspaperArticleIsDigitalExclusiveEncodingKey = @"isDigitalExcl
         [self setIsPopularArticle:[aDecoder decodeBoolForKey:NewspaperArticleIsPopularEncodingKey]];
         [self setIsUnreadArticle:[aDecoder decodeBoolForKey:NewspaperArticleIsUnreadEncodingKey]];
         [self setIsDigitalExclusive:[aDecoder decodeBoolForKey:NewspaperArticleIsDigitalExclusiveEncodingKey]];
+        [self setTitleAttrString:[aDecoder decodeObjectForKey:NewspaperArticleTitleAttrStringEncodingKey]];
     }
     
     return self;

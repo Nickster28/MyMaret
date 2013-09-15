@@ -15,7 +15,7 @@
 #import "NewspaperArticle.h"
 #import "Announcement.h"
 #import "SchoolClassCell.h"
-#import "TodayAnnouncementCell.h"
+#import "AnnouncementCell.h"
 #import "NewspaperCell.h"
 #import "TodaySettingsTableViewController.h"
 
@@ -245,7 +245,7 @@
     // Otherwise, get the corresponding class object and make a cell displaying it
     Announcement *currAnnouncement = [[AnnouncementsStore sharedStore] announcementAtIndex:ip.row];
     
-    TodayAnnouncementCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"announcementCell"
+    AnnouncementCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"announcementCell"
                                                                  forIndexPath:ip];
     
     [cell bindAnnouncement:currAnnouncement];
