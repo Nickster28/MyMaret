@@ -1,19 +1,19 @@
 //
-//  SchoolClassNameEditCell.m
+//  TextEditCell.m
 //  MyMaret
 //
 //  Created by Nick Troccoli on 9/8/13.
 //  Copyright (c) 2013 Nick. All rights reserved.
 //
 
-#import "SchoolClassNameEditCell.h"
+#import "TextEditCell.h"
 
-@interface SchoolClassNameEditCell() <UITextFieldDelegate>
-@property (nonatomic, weak) IBOutlet UILabel *cellTitleLabel;
-@property (nonatomic, weak) IBOutlet UITextField *classNameTextField;
+@interface TextEditCell() <UITextFieldDelegate>
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property (nonatomic, weak) IBOutlet UITextField *textField;
 @end
 
-@implementation SchoolClassNameEditCell
+@implementation TextEditCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -42,19 +42,19 @@
 
 - (void)dismissKeyboard
 {
-    [self.classNameTextField resignFirstResponder];
+    [self.textField resignFirstResponder];
 }
 
 
-- (void)setDisplayedClassName:(NSString *)className
+- (void)setDisplayedText:(NSString *)text
 {
-    [[self classNameTextField] setText:className];
+    [[self textField] setText:text];
 }
 
 
-- (NSString *)enteredClassName
+- (NSString *)enteredText
 {
-    return [[self classNameTextField] text];
+    return [[self textField] text];
 }
 
 @end

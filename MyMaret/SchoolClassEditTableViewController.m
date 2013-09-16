@@ -8,9 +8,9 @@
 
 #import "SchoolClass.h"
 #import "SchoolClassEditTableViewController.h"
-#import "SchoolClassNameEditCell.h"
-#import "SchoolClassTimeCell.h"
-#import "SchoolClassTimeEditCell.h"
+#import "TextEditCell.h"
+#import "DateTimeDisplayCell.h"
+#import "DateTimePickerCell.h"
 #import "ClassScheduleStore.h"
 
 
@@ -18,7 +18,7 @@
 
 // Keep track of where the drawer is
 @property (nonatomic, strong) NSIndexPath *drawerIndexPath;
-@property (nonatomic, weak) SchoolClassTimeCell *drawerParentCell;
+@property (nonatomic, weak) NSIndexPath *drawerParentIndexPath;
 @property (nonatomic, weak) SchoolClass *selectedClass;
 
 @end
@@ -89,8 +89,8 @@
 {
     _selectedIndexPath = selectedIndexPath;
     
-    // If we're inside a nav controller,
-    // we're making a new class so we shouldn't fetch one from the ClassScheduleStore
+    // If we're not inside a nav controller,
+    // we're updating a class so get it from the ClassScheduleStore
     if (!self.navigationController) {
         [self setSelectedClass:[[ClassScheduleStore sharedStore] classWithDayIndex:selectedIndexPath.section classIndex:selectedIndexPath.row]];
     }
@@ -111,55 +111,37 @@
     if (self.drawerIndexPath) {
         NSArray *indexesToDelete = @[self.drawerIndexPath];
         
-        self.drawerIndexPath = nil;
-        
         // Remove the drawer
+        self.drawerIndexPath = nil;
         [self.tableView deleteRowsAtIndexPaths:indexesToDelete
                               withRowAnimation:UITableViewRowAnimationFade];
 
         
         // Also deselect the parent cell
-        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForCell:self.drawerParentCell]
+        [self.tableView deselectRowAtIndexPath:[self drawerParentIndexPath]
                                       animated:YES];
         
-        self.drawerParentCell = nil;
+        self.drawerParentIndexPath = nil;
     }
 }
 
-
-- (void)changeParentCellTime:(UIDatePicker *)sender
-{
-    NSDate *displayedDate = [sender date];
-    
-    // We just want the hour and minutes in a string
-    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:displayedDate];
-    
-    // Account for military time
-    if (dateComps.hour > 12) dateComps.hour -= 12;
-    
-    // Make sure if the minutes are only 1 digit that there is a leading 0
-    NSString *minutesString = (dateComps.minute < 10) ? [NSString stringWithFormat:@"0%d", dateComps.minute] :
-    [NSString stringWithFormat:@"%d", dateComps.minute];
-    
-    NSString *timeString = [NSString stringWithFormat:@"%d:%@", dateComps.hour, minutesString];
-    
-    // Set the parent cell to display that time
-    [self.drawerParentCell setDisplayedClassTime:timeString];
-}
 
 
 - (void)saveScheduleChanges
 {
     // Get the entered classname
-    NSString *name = [(SchoolClassNameEditCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] enteredClassName];
+    NSString *name = [(TextEditCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] enteredText];
     
-    // Get the start time
-    NSString *startTime = [(SchoolClassTimeCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]] enteredClassTime];
+    // Get the start time (remember that timeText returns the time WITH am/pm!)
+    NSString *startTime = [(DateTimeDisplayCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]] timeText];
+    startTime = [startTime substringToIndex:startTime.length - 3];
     
     // The row number of the end time cell will vary depending on where the
     // drawer is
     NSUInteger endTimeCellRowNum = (self.drawerIndexPath && self.drawerIndexPath.row == 1) ? 2 : 1;
-    NSString *endTime = [(SchoolClassTimeCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:endTimeCellRowNum inSection:1]] enteredClassTime];
+    NSString *endTime = [(DateTimeDisplayCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:endTimeCellRowNum inSection:1]] timeText];
+    endTime = [endTime substringToIndex:endTime.length - 3];
+    
     
     // Combine the start and end times
     NSString *classTime = [NSString stringWithFormat:@"%@-%@", startTime, endTime];
@@ -258,48 +240,71 @@
     // for helping me combine storyboard cells and XIB cells
     if (self.drawerIndexPath && indexPath.row == self.drawerIndexPath.row && indexPath.section == self.drawerIndexPath.section) {
         
-        SchoolClassTimeEditCell *cell = [tableView dequeueReusableCellWithIdentifier:@"timePickerCell"
+        DateTimePickerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"timePickerCell"
                                                                         forIndexPath:indexPath];
         
-        // Set the picker to display the same time as its parent cell
-        [cell setDisplayedClassTime:[self.drawerParentCell enteredClassTime]];
+        // Set the drawer's delegate to be its parent so it can communicate what date
+        // or time it's displaying to its parent
+        [cell setDelegate:(DateTimeDisplayCell *)[tableView cellForRowAtIndexPath:self.drawerParentIndexPath]];
         
-        // Set the picker to send us a message each time the user changes the time
-        [[cell classTimePicker] addTarget:self
-                                   action:@selector(changeParentCellTime:)
-                         forControlEvents:UIControlEventValueChanged];
+        // Get the time it should display from its parent
+        NSString *timeToDisplay = [(DateTimeDisplayCell *)[tableView cellForRowAtIndexPath:self.drawerParentIndexPath] timeText];
+        
+        [cell setDisplayedTime:timeToDisplay];
         
         return cell;
         
     } else if (indexPath.section == 0) {
         
-        SchoolClassNameEditCell *cell = [tableView dequeueReusableCellWithIdentifier:@"nameEditCell"
+        TextEditCell *cell = [tableView dequeueReusableCellWithIdentifier:@"nameEditCell"
                                                                         forIndexPath:indexPath];
         
         // If we're editing a class, display its name in the text field
         if (self.selectedClass) {
             // Set the cell's text field to initially display the class title
-            [cell setDisplayedClassName:[[self selectedClass] className]];
-        } else [cell setDisplayedClassName:@""];
+            [cell setDisplayedText:[[self selectedClass] className]];
+        } else [cell setDisplayedText:@""];
         
         return cell;
         
     } else if (indexPath.section == 1) {
         
-        SchoolClassTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"timeCell"
+        DateTimeDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"timeCell"
                                                                     forIndexPath:indexPath];
         
         // Get the class's start/end time
-        NSArray *times;
-        if (self.selectedClass)
-            times = [[[self selectedClass] classTime] componentsSeparatedByString:@"-"];
-        else times = @[@"8:10", @"9:00"];
+        // (Or the generic start/end times if we're creating a new class)
+        NSMutableArray *classTimes = [NSMutableArray array];
+        
+        if (self.selectedClass) {
+            NSArray *times = [[[self selectedClass] classTime] componentsSeparatedByString:@"-"];
+            
+            // We need to add am/pm to each time
+            for (NSString *time in times) {
+                
+                NSArray *timeComponents = [time componentsSeparatedByString:@":"];
+                
+                // If it's in the morning, add "am"
+                if ([timeComponents[0] integerValue] >= 7 && [timeComponents[0] integerValue] < 12) {
+                    [classTimes addObject:[NSString stringWithFormat:@"%@ AM", time]];
+                    
+                // Otherwise, add "pm"
+                } else [classTimes addObject:[NSString stringWithFormat:@"%@ PM", time]];
+            }
+            
+        } else classTimes = [NSMutableArray arrayWithArray:@[@"8:10 AM", @"9:00 AM"]];
+        
         
         // If this is the class start time cell, set the text to be the start time (which is
         // at index 0 in the times array).  Otherwise, it's the end time (at index 1 in the
         // times array)
-        [cell setIsStartTimeCell:indexPath.row == 0];
-        [cell setDisplayedClassTime:times[(indexPath.row == 0) ? 0 : 1]];
+        if (indexPath.row == 0) {
+            [cell setTitleText:@"Start Time"];
+            [cell setTimeText:classTimes[0]];
+        } else {
+            [cell setTitleText:@"End Time"];
+            [cell setTimeText:classTimes[1]];
+        }
         
         return cell;
         
@@ -314,7 +319,7 @@
     if (indexPath.section == 0) return;
     
     // If the keyboard is visible, dismiss it
-    SchoolClassNameEditCell *nameCell = (SchoolClassNameEditCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    TextEditCell *nameCell = (TextEditCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     [nameCell dismissKeyboard];
     
     
@@ -353,7 +358,7 @@
         } else self.drawerIndexPath = indexPath;
         
         // Set the parent cell
-        self.drawerParentCell = (SchoolClassTimeCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:self.drawerIndexPath.row - 1 inSection:self.drawerIndexPath.section]];
+        self.drawerParentIndexPath = [NSIndexPath indexPathForRow:self.drawerIndexPath.row - 1 inSection:self.drawerIndexPath.section];
         
         // Animate in the drawer
         [tableView insertRowsAtIndexPaths:@[self.drawerIndexPath]
