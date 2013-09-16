@@ -488,7 +488,7 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
         [context deleteObject:announcement];
     }
     
-    self.announcements = [[NSMutableArray alloc] init];
+    self.announcements = nil;
     
     return [self saveChanges];
 }

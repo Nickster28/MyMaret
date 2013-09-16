@@ -7,13 +7,20 @@
 //
 
 #import "AssignmentBookTableViewController.h"
+#import "AssignmentBookStore.h"
+#import "Assignment.h"
 #import "UIApplication+iOSVersionChecker.h"
 #import "UIColor+SchoolColor.h"
 #import "AppDelegate.h"
 
+enum kMyMaretAssignmentBookView {
+    kMyMaretAssignmentBookViewClass = 0,
+    kMyMaretAssignmentBookViewDate = 1
+    };
 
 @interface AssignmentBookTableViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *bottomToolbarButton;
+@property (nonatomic) NSUInteger assignmentBookViewIndex;
 
 - (void)changeAssignmentBookView:(UISegmentedControl *)sender;
 @end
@@ -24,6 +31,9 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
 
 
 @implementation AssignmentBookTableViewController
+@synthesize assignmentBookViewIndex = _assignmentBookViewIndex;
+
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -77,15 +87,28 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
 
 - (void)changeAssignmentBookView:(UISegmentedControl *)sender
 {
-    // Save the user's choice if the app is closed
-    [[NSUserDefaults standardUserDefaults] setInteger:[sender selectedSegmentIndex]
+    [self setAssignmentBookViewIndex:[sender selectedSegmentIndex]];
+}
+
+
+
+- (NSUInteger)assignmentBookViewIndex
+{
+    if (!_assignmentBookViewIndex) {
+        _assignmentBookViewIndex = [[NSUserDefaults standardUserDefaults] integerForKey:MyMaretAssignmentBookViewPrefKey];
+    }
+    
+    return _assignmentBookViewIndex;
+}
+
+
+
+- (void)setAssignmentBookViewIndex:(NSUInteger)assignmentBookViewIndex
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:assignmentBookViewIndex
                                                forKey:MyMaretAssignmentBookViewPrefKey];
     
-    if ([sender selectedSegmentIndex] == 0) {
-        
-    } else {
-        
-    }
+    _assignmentBookViewIndex = assignmentBookViewIndex;
 }
 
 
@@ -93,7 +116,71 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {    
-    return 0;
+    if ([self assignmentBookViewIndex] == kMyMaretAssignmentBookViewClass) {
+        return [[AssignmentBookStore sharedStore] numberOfAssignmentsForClassWithIndex:section];
+    } else {
+        return [[AssignmentBookStore sharedStore] numberOfAssignmentsForDayWithIndex:section];
+    }
 }
+
+
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if ([self assignmentBookViewIndex] == kMyMaretAssignmentBookViewClass) {
+        return [[AssignmentBookStore sharedStore] nameOfClassWithIndex:section];
+    } else {
+        return [[AssignmentBookStore sharedStore] nameOfDayWithIndex:section];
+    }
+}
+
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    if ([self assignmentBookViewIndex] == kMyMaretAssignmentBookViewClass) {
+        return [[AssignmentBookStore sharedStore] numberOfClasses];
+    } else {
+        return [[AssignmentBookStore sharedStore] numberOfDaysWithAssignments];
+    }
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    static NSString *CellIdentifier = @"assignmentCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    // Get the assignment at the given index
+    Assignment *currentAssignment;
+    if ([self assignmentBookViewIndex] == kMyMaretAssignmentBookViewClass) {
+        currentAssignment = [[AssignmentBookStore sharedStore] assignmentWithClassIndex:indexPath.section
+                                                                        assignmentIndex:indexPath.row];
+    } else {
+        currentAssignment = [[AssignmentBookStore sharedStore] assignmentWithDayIndex:indexPath.section
+                                                                      assignmentIndex:indexPath.row];
+    }
+    
+    [[cell textLabel] setText:[currentAssignment assignmentName]];
+    
+    if ([self assignmentBookViewIndex] == kMyMaretAssignmentBookViewClass) {
+        [[cell detailTextLabel] setText:[currentAssignment dueDateAsString]];
+    } else {
+        [[cell detailTextLabel] setText:[currentAssignment className]];
+    }
+    
+    return cell;
+    
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+}
+
+
+
 
 @end

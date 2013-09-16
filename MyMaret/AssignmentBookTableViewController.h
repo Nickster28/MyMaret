@@ -9,5 +9,4 @@
 #import "MyMaretFrontTableViewController.h"
 
 @interface AssignmentBookTableViewController : MyMaretFrontTableViewController
-
 @end

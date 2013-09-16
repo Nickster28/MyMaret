@@ -7,14 +7,20 @@
 //
 
 #import "AssignmentBookStore.h"
+#import "Assignment.h"
 #import "ClassScheduleStore.h"
 
 @interface AssignmentBookStore()
 
 // 3 Dictionaries to manage filtering by date and by class
-@property (nonatomic, strong) NSDictionary *assignmentsByDateDictionary;
-@property (nonatomic, strong) NSDictionary *assignmentsByClassDictionary;
+@property (nonatomic, strong) NSMutableDictionary *assignmentsByDateDictionary;
+@property (nonatomic, strong) NSMutableDictionary *assignmentsByClassDictionary;
 @property (nonatomic, strong) NSDictionary *todayDictionary;
+
+// Since the dates won't be sorted inside the dictionary,
+// we need to keep a separate sorted list of dates so we know
+// what order we should read them out by
+@property (nonatomic, strong) NSArray *sortedDueDatesDateComponents;
 
 @end
 
@@ -59,14 +65,14 @@
 
 
 
-- (NSDictionary *)assignmentsByDateDictionary
+- (NSMutableDictionary *)assignmentsByDateDictionary
 {
     if (!_assignmentsByDateDictionary) {
         _assignmentsByDateDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self assignmentsByDateDictionaryArchivePath]];
         
         // If we haven't saved one yet, make a new one
         if (!_assignmentsByDateDictionary) {
-            _assignmentsByDateDictionary = [NSDictionary dictionary];
+            _assignmentsByDateDictionary = [NSMutableDictionary dictionary];
             
             [self saveChanges];
         }
@@ -76,7 +82,7 @@
 }
 
 
-- (NSDictionary *)assignmentsByClassDictionary
+- (NSMutableDictionary *)assignmentsByClassDictionary
 {
     if (!_assignmentsByClassDictionary) {
         _assignmentsByClassDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self assignmentsByClassDictionaryArchivePath]];
@@ -95,8 +101,8 @@
                 [keys addObject:[NSMutableArray array]];
             }
             
-            _assignmentsByClassDictionary = [NSDictionary dictionaryWithObjects:classList
-                                                                      forKeys:keys];
+            _assignmentsByClassDictionary = [NSMutableDictionary dictionaryWithObjects:classList
+                                                                               forKeys:keys];
             
             [self saveChanges];
         }
@@ -106,7 +112,21 @@
 }
 
 
-- (void)saveChanges
+
+- (NSArray *)sortedDueDatesDateComponents
+{
+    if (!_sortedDueDatesDateComponents) {
+        _sortedDueDatesDateComponents = [[[self assignmentsByDateDictionary] allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            
+            return [[(Assignment *)obj1 dueDate] compare:[(Assignment *)obj2 dueDate]];
+        }];
+    }
+    
+    return _sortedDueDatesDateComponents;
+}
+
+
+- (BOOL)saveChanges
 {
     // save our schedule dictionary
     BOOL dateDictionarySuccess = [NSKeyedArchiver archiveRootObject:[self assignmentsByDateDictionary]
@@ -125,37 +145,138 @@
         NSLog(@"Could not save by-class assignment dictionary.");
     }
     
-    //return dateDictionarySuccess && classDictionarySuccess;
+    return dateDictionarySuccess && classDictionarySuccess;
 }
 
+
+// Date components are the keys in the by-date assignments dictionary
+- (NSDateComponents *)dateComponentsForDayWithIndex:(NSUInteger)index
+{
+    return [[self sortedDueDatesDateComponents] objectAtIndex:index];
+}
 
 
 #pragma mark Public APIs
 
-- (NSString *)nameForClassAtIndex:(NSUInteger)index
+
+- (BOOL)clearStore
+{
+    self.assignmentsByClassDictionary = nil;
+    self.assignmentsByDateDictionary = nil;
+    self.todayDictionary = nil;
+    
+    return [self saveChanges];
+}
+
+
+
+- (void)addAssignmentWithName:(NSString *)name dueDate:(NSDate *)dueDate forClassWithName:(NSString *)className
+{
+    Assignment *newAssignment = [[Assignment alloc] initWithAssignmentName:name
+                                                                   dueDate:dueDate
+                                                          forClassWithName:className];
+    
+    // If there are no other entries for this due date,
+    // add a new key/value pair
+    if (![[self assignmentsByDateDictionary] objectForKey:[newAssignment dueDateDateComps]]) {
+        [[self assignmentsByDateDictionary] setObject:[NSMutableArray array]
+                                               forKey:[newAssignment dueDateDateComps]];
+        
+        
+        // Tell the sorted due dates array that it's out of date,
+        // so the next time we access it it'll re-read in all the due dates
+        [self setSortedDueDatesDateComponents:nil];
+    }
+    
+    // Add the assignment to our by-date dictionary
+    NSMutableArray *dateArray = [[self assignmentsByDateDictionary] objectForKey:[newAssignment dueDateDateComps]];
+    [dateArray addObject:newAssignment];
+    
+    // Sort the by-date array so the assignments are in the right order
+    [dateArray sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [[(Assignment *)obj1 dueDate] compare:[(Assignment *)obj2 dueDate]];
+    }];
+    
+    
+    
+    // Add the assignment to our by-class dictionary
+    NSMutableArray *classArray = [[self assignmentsByClassDictionary] objectForKey:className];
+    [classArray addObject:newAssignment];
+    
+    // Sort the by-class array so the assignments are in the right order
+    [classArray sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [[(Assignment *)obj1 dueDate] compare:[(Assignment *)obj2 dueDate]];
+    }];
+    
+    [self saveChanges];
+}
+
+
+
+
+/***************** Assignments by Class *******************/
+
+- (NSUInteger)numberOfClasses
+{
+    return [[self assignmentsByClassDictionary] count];
+}
+
+
+- (NSString *)nameOfClassWithIndex:(NSUInteger)index
 {
     return [[[self assignmentsByClassDictionary] allKeys] objectAtIndex:index];
 }
 
 
-- (NSUInteger)numberOfAssignmentsForClass:(NSString *)className
+- (NSUInteger)numberOfAssignmentsForClassWithIndex:(NSUInteger)classIndex
 {
+    NSString *className = [self nameOfClassWithIndex:classIndex];
     return [[[self assignmentsByClassDictionary] objectForKey:className] count];
 }
 
 
-- (NSUInteger)numberOfAssignmentsForDateWithDay:(NSUInteger)dayNum Month:(NSUInteger)monthNum
+- (Assignment *)assignmentWithClassIndex:(NSUInteger)classIndex assignmentIndex:(NSUInteger)assignmentIndex
 {
-    return 0;
+    // Get the name of the class
+    NSString *className = [self nameOfClassWithIndex:classIndex];
+    
+    // Return the assignment at the given index in the class's array
+    return [[[self assignmentsByClassDictionary] objectForKey:className] objectAtIndex:assignmentIndex];
 }
 
 
 
-- (BOOL)clearStore
+/*************** Assignments by Due Date ****************/
+
+
+- (NSUInteger)numberOfDaysWithAssignments
 {
-    return true;
+    return [[self assignmentsByDateDictionary] count];
 }
 
+
+- (NSString *)nameOfDayWithIndex:(NSUInteger)dayIndex
+{
+    NSDateComponents *dateComps = [self dateComponentsForDayWithIndex:dayIndex];
+    return [(Assignment *)[[[self assignmentsByDateDictionary] objectForKey:dateComps] objectAtIndex:0] dueDateAsString];
+}
+
+
+
+- (NSUInteger)numberOfAssignmentsForDayWithIndex:(NSUInteger)dayIndex
+{
+    NSDateComponents *dateComps = [self dateComponentsForDayWithIndex:dayIndex];
+    return [[[self assignmentsByDateDictionary] objectForKey:dateComps] count];
+}
+
+
+- (Assignment *)assignmentWithDayIndex:(NSUInteger)dayIndex assignmentIndex:(NSUInteger)assignmentIndex
+{
+    
+    // Get the date components for the given day
+    NSDateComponents *dateComps = [self dateComponentsForDayWithIndex:dayIndex];
+    return [[[self assignmentsByDateDictionary] objectForKey:dateComps] objectAtIndex:assignmentIndex];
+}
 
 
 @end

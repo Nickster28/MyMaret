@@ -14,6 +14,7 @@
 		0107E02A17CC13D40099E4E4 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0107E02917CC13D40099E4E4 /* WelcomeViewController.m */; };
 		010BC6A517CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 010BC6A317CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		010BC6A617CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 010BC6A417CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib */; };
+		010E62E217E639E3002F5806 /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 010E62E117E639E3002F5806 /* Assignment.m */; };
 		0112712517E426BC0007626C /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0112712417E426BC0007626C /* SWRevealViewController.m */; };
 		0112712717E426CB0007626C /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0112712617E426CB0007626C /* LICENSE.txt */; };
 		0113855017C1D97700F8A965 /* AnnouncementCreationTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0113854F17C1D97700F8A965 /* AnnouncementCreationTitleViewController.m */; };
@@ -115,6 +116,8 @@
 		010BC6A217CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2ViewControllerTouch.h; sourceTree = "<group>"; };
 		010BC6A317CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2ViewControllerTouch.m; sourceTree = "<group>"; };
 		010BC6A417CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
+		010E62E017E639E3002F5806 /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Assignment.h; sourceTree = "<group>"; };
+		010E62E117E639E3002F5806 /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Assignment.m; sourceTree = "<group>"; };
 		0112712317E426BC0007626C /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		0112712417E426BC0007626C /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		0112712617E426CB0007626C /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
@@ -492,6 +495,8 @@
 				01DEFF3517DD912000D355CA /* AssignmentBookTableViewController.m */,
 				01DEFF3717DD92F000D355CA /* AssignmentBookStore.h */,
 				01DEFF3817DD92F000D355CA /* AssignmentBookStore.m */,
+				010E62E017E639E3002F5806 /* Assignment.h */,
+				010E62E117E639E3002F5806 /* Assignment.m */,
 			);
 			name = "Assignment Book";
 			sourceTree = "<group>";
@@ -634,6 +639,7 @@
 				013BB66E17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m in Sources */,
 				01176FCD17DBE0DB00DFF2EA /* ClassScheduleStore.m in Sources */,
 				01176FDC17DC3C3E00DFF2EA /* SchoolClassEditTableViewController.m in Sources */,
+				010E62E217E639E3002F5806 /* Assignment.m in Sources */,
 				01BF13A017A89F7D00731690 /* Announcement.m in Sources */,
 				01F576F317E2AF370021CEFA /* TodaySettingsTableViewController.m in Sources */,
 				01176FE717DC621D00DFF2EA /* SchoolClassNameEditCell.m in Sources */,
