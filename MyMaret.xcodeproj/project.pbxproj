@@ -16,6 +16,7 @@
 		010BC6A617CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 010BC6A417CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib */; };
 		010E62E217E639E3002F5806 /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 010E62E117E639E3002F5806 /* Assignment.m */; };
 		010E62E517E698A8002F5806 /* AssignmentCreationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 010E62E417E698A8002F5806 /* AssignmentCreationTableViewController.m */; };
+		010E62E817E6D477002F5806 /* AssignmentClassChooserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 010E62E717E6D477002F5806 /* AssignmentClassChooserTableViewController.m */; };
 		0112712517E426BC0007626C /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0112712417E426BC0007626C /* SWRevealViewController.m */; };
 		0112712717E426CB0007626C /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0112712617E426CB0007626C /* LICENSE.txt */; };
 		0113855017C1D97700F8A965 /* AnnouncementCreationTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0113854F17C1D97700F8A965 /* AnnouncementCreationTitleViewController.m */; };
@@ -121,6 +122,8 @@
 		010E62E117E639E3002F5806 /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Assignment.m; sourceTree = "<group>"; };
 		010E62E317E698A8002F5806 /* AssignmentCreationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentCreationTableViewController.h; sourceTree = "<group>"; };
 		010E62E417E698A8002F5806 /* AssignmentCreationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentCreationTableViewController.m; sourceTree = "<group>"; };
+		010E62E617E6D477002F5806 /* AssignmentClassChooserTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentClassChooserTableViewController.h; sourceTree = "<group>"; };
+		010E62E717E6D477002F5806 /* AssignmentClassChooserTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentClassChooserTableViewController.m; sourceTree = "<group>"; };
 		0112712317E426BC0007626C /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		0112712417E426BC0007626C /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		0112712617E426CB0007626C /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
@@ -498,6 +501,8 @@
 				01DEFF3517DD912000D355CA /* AssignmentBookTableViewController.m */,
 				010E62E317E698A8002F5806 /* AssignmentCreationTableViewController.h */,
 				010E62E417E698A8002F5806 /* AssignmentCreationTableViewController.m */,
+				010E62E617E6D477002F5806 /* AssignmentClassChooserTableViewController.h */,
+				010E62E717E6D477002F5806 /* AssignmentClassChooserTableViewController.m */,
 				01DEFF3717DD92F000D355CA /* AssignmentBookStore.h */,
 				01DEFF3817DD92F000D355CA /* AssignmentBookStore.m */,
 				010E62E017E639E3002F5806 /* Assignment.h */,
@@ -640,6 +645,7 @@
 				016F9D7C17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m in Sources */,
 				019054B717DD63F200B7982F /* TodayTableViewController.m in Sources */,
 				01BF139817A89A3B00731690 /* AnnouncementsStore.m in Sources */,
+				010E62E817E6D477002F5806 /* AssignmentClassChooserTableViewController.m in Sources */,
 				010BC6A517CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.m in Sources */,
 				0177455F17A60AC3001625BF /* MainMenuViewController.m in Sources */,
 				013BB66E17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m in Sources */,

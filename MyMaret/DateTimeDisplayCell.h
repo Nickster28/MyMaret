@@ -10,7 +10,18 @@
 //  to display the date or time chosen with its date picker.
 
 #import <UIKit/UIKit.h>
-#import "DateTimePickerCell.h"
+
+
+@protocol DatePickerDisplayDelegate <NSObject>
+
+// Notifies the delegate when our picker was changed
+// to display the given date object, and tells
+// the delegate what kind of info the user set (date/time, time, etc.)
+- (void)datePickerDidDisplayDate:(NSDate *)date
+               forDatePickerMode:(UIDatePickerMode)mode;
+
+@end
+
 
 @interface DateTimeDisplayCell : UITableViewCell <DatePickerDisplayDelegate>
 

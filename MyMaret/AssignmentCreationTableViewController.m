@@ -7,9 +7,16 @@
 //
 
 #import "AssignmentCreationTableViewController.h"
+#import "TextEditCell.h"
+#import "DateTimePickerCell.h"
+#import "DateTimeDisplayCell.h"
+#import "AssignmentClassChooserTableViewController.h"
+
 
 @interface AssignmentCreationTableViewController ()
-@property (nonatomic, weak) UITableViewCell *drawerParentCell;
+@property (nonatomic, strong) NSIndexPath *drawerParentIndexPath;
+@property (nonatomic, strong) NSIndexPath *drawerIndexPath;
+@property (nonatomic, strong) NSString *className;
 @end
 
 @implementation AssignmentCreationTableViewController
@@ -23,15 +30,12 @@
     return self;
 }
 
-- (void)viewDidLoad
+- (void)awakeFromNib
 {
-    [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    // We want to close the drawer when the keyboard pops up
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(closeDrawer)
+                                                 name:UIKeyboardDidShowNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,81 +44,182 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+// Closes the time setter drawer if it is visible
+- (void)closeDrawer
+{
+    if (self.drawerIndexPath) {
+        NSArray *indexesToDelete = @[self.drawerIndexPath];
+        
+        // Remove the drawer
+        self.drawerIndexPath = nil;
+        [self.tableView deleteRowsAtIndexPaths:indexesToDelete
+                              withRowAnimation:UITableViewRowAnimationFade];
+        
+        
+        // Also deselect the parent cell
+        [self.tableView deselectRowAtIndexPath:[self drawerParentIndexPath]
+                                      animated:YES];
+        
+        self.drawerParentIndexPath = nil;
+    }
+}
+
+
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    if (self.drawerIndexPath) return 4;
+    return 3;
 }
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger row = indexPath.row;
+    NSInteger sec = indexPath.section;
+    NSInteger drawerRow = self.drawerIndexPath.row;
+    NSInteger drawerSec = self.drawerIndexPath.section;
+    
+    // The drawer is 163, the other cells are 44
+    if (self.drawerIndexPath && drawerRow == row && drawerSec == sec) {
+        return 163.0;
+    }
+    
+    else return 44.0;
+}
+
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    // If it's the name edit cell...
+    if (indexPath.row == 0) {
+        return [tableView dequeueReusableCellWithIdentifier:@"nameEditCell" forIndexPath:indexPath];
+        
+    // If it's the class selection cell...
+    } else if (indexPath.row == 1) {
+        UITableViewCell *classCell = [tableView dequeueReusableCellWithIdentifier:@"classCell" forIndexPath:indexPath];
+        
+        // Set the cell to show the selected class the assignment is for
+        if (!self.className) {
+            [[classCell detailTextLabel] setText:@"Choose Class"];
+        } else [[classCell detailTextLabel] setText:self.className];
+        
+        return classCell;
+        
+    // If it's the due date cell...
+    } else if (indexPath.row == 2) {
+        DateTimeDisplayCell *dueDateCell = [tableView dequeueReusableCellWithIdentifier:@"dueDateCell" forIndexPath:indexPath];
+        
+        // Set the initial date to be now
+        [dueDateCell setDate:[NSDate date]];
+        
+        return dueDateCell;
+        
+    // If it's the drawer... (We should only get here if the drawer is visible)
+    } else if (indexPath.row == 3) {
+        DateTimePickerCell *drawerCell = [tableView dequeueReusableCellWithIdentifier:@"dueDatePickerCell" forIndexPath:indexPath];
+        
+        DateTimeDisplayCell *parentCell = (DateTimeDisplayCell *)[tableView cellForRowAtIndexPath:self.drawerParentIndexPath];
+        
+        // Set the delegate to be its parent cell
+        [drawerCell setDelegate:parentCell];
+        
+        // Set the date to be what's showing in the parent cell
+        [drawerCell setDisplayedDate:parentCell.date];
+        
+        return drawerCell;
+        
+    // Shouldn't get past this!
+    } else return nil;
+}
+
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // If the user taps the first row, pretend like they tapped on the text field
+    if (indexPath.row == 0) {
+        [(TextEditCell *)[tableView cellForRowAtIndexPath:indexPath] showKeyboard];
+        return;
+    }
     
-    // Configure the cell...
     
-    return cell;
+    if (indexPath.row == 1) return;
+    
+    // If the user taps the drawer itself, ignore it
+    if (self.drawerIndexPath && indexPath.row == self.drawerIndexPath.row) {
+        [tableView selectRowAtIndexPath:self.drawerParentIndexPath
+                               animated:NO
+                         scrollPosition:UITableViewScrollPositionNone];
+        return;
+    }
+    
+    
+    // If the keyboard is visible, dismiss it
+    TextEditCell *nameCell = (TextEditCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    [nameCell dismissKeyboard];
+    
+    
+    // If the drawer is already visible, close it
+    if (self.drawerIndexPath) {
+        [self closeDrawer];
+        return;
+    }
+    
+    // Set the drawer index path accordingly
+    self.drawerIndexPath = [NSIndexPath indexPathForRow:indexPath.row + 1
+                                              inSection:indexPath.section];
+    
+    // Set the parent cell
+    self.drawerParentIndexPath = indexPath;
+    
+    // Animate in the drawer
+    [tableView insertRowsAtIndexPaths:@[self.drawerIndexPath]
+                     withRowAnimation:UITableViewRowAnimationTop];
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"chooseClass"] && [[segue destinationViewController] isKindOfClass:[AssignmentClassChooserTableViewController class]]) {
+        
+        // Get the class the user previously chose (or "Choose Class" if the user hasn't picked one yet)
+        NSString *chosenClassName = [[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1
+                                                                                             inSection:0]] detailTextLabel] text];
+        
+        [[segue destinationViewController] setSelectedClassName:chosenClassName];
+        [(AssignmentClassChooserTableViewController *)[segue destinationViewController] setDelegate:self];
+        
+        
+        if (self.drawerIndexPath) {
+            [self closeDrawer];
+        }
+    }
 }
 
- */
+
+
+- (void)assignmentClassChooserTableViewController:(AssignmentClassChooserTableViewController *)chooserTVC didSelectClassWithName:(NSString *)name
+{
+    // Update our class name
+    [self setClassName:name];
+    
+    NSIndexPath *rowToReload = [NSIndexPath indexPathForRow:1 inSection:0];
+    
+    // Reload the cell displaying the selected class
+    [self.tableView reloadRowsAtIndexPaths:@[rowToReload]
+                          withRowAnimation:UITableViewRowAnimationFade];
+    
+    [self.tableView selectRowAtIndexPath:rowToReload animated:YES
+                          scrollPosition:UITableViewScrollPositionNone];
+    
+    [self.tableView deselectRowAtIndexPath:rowToReload animated:YES];
+}
+
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "DateTimePickerCell.h"
+#import "DateTimeDisplayCell.h"
 
 @interface DateTimePickerCell()
 @property (nonatomic, weak) IBOutlet UIDatePicker *datePicker;
@@ -44,6 +45,9 @@
     NSAssert([self.datePicker datePickerMode] == UIDatePickerModeTime, @"Must be in Time Mode to set only the time on the date picker.");
     
     // Make a date from the given string and set our picker to display it
+    // Thanks to http://unicode.org/reports/tr35/tr35-6.html#Date_Format_Patterns and
+    // http://stackoverflow.com/questions/5638416/datefromstring-always-returns-null-with-dateformatter
+    // for help with converting strings to dates with an NSDateFormatter
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"h:mm a"];
     

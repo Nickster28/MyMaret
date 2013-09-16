@@ -20,4 +20,7 @@
 // Dismiss the keyboard if it's visible for our text field
 - (void)dismissKeyboard;
 
+// Show the keyboard and have the text field become the first responder
+- (void)showKeyboard;
+
 @end

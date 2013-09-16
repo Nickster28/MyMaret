@@ -94,15 +94,15 @@
             NSArray *classList = [[ClassScheduleStore sharedStore] allClasses];
             
             // Make an array for each class's assignments
-            NSMutableArray *keys;
+            NSMutableArray *objects = [NSMutableArray array];
             NSUInteger numClasses = [classList count];
             
             for (int i = 0; i < numClasses; i++) {
-                [keys addObject:[NSMutableArray array]];
+                [objects addObject:[NSMutableArray array]];
             }
             
-            _assignmentsByClassDictionary = [NSMutableDictionary dictionaryWithObjects:classList
-                                                                               forKeys:keys];
+            _assignmentsByClassDictionary = [NSMutableDictionary dictionaryWithObjects:objects
+                                                                               forKeys:classList];
             
             [self saveChanges];
         }

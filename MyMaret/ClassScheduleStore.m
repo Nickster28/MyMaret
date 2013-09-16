@@ -27,6 +27,7 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 @implementation ClassScheduleStore
 @synthesize todayDayIndex = _todayDayIndex;
 @synthesize lastTodayIndexOverride = _lastTodayIndexOverride;
+@synthesize classList = _classList;
 
 
 // Singleton instance
@@ -176,10 +177,18 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
         _classList = [NSKeyedUnarchiver unarchiveObjectWithFile:[self classListArchivePath]];
         
         // If we don't have one saved, make a new one
-        _classList = [NSMutableArray array];
+        if (!_classList) {
+            _classList = [NSMutableArray array];
+        }
     }
     
     return _classList;
+}
+
+
+- (void)setClassList:(NSMutableArray *)classList
+{
+    _classList = classList;
 }
 
 
@@ -390,6 +399,12 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 - (NSArray *)allClasses
 {
     return self.classList;
+}
+
+
+- (NSUInteger)numberOfClasses
+{
+    return self.classList.count;
 }
 
 

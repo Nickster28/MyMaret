@@ -109,6 +109,8 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
                                                forKey:MyMaretAssignmentBookViewPrefKey];
     
     _assignmentBookViewIndex = assignmentBookViewIndex;
+    
+    [self.tableView reloadData];
 }
 
 

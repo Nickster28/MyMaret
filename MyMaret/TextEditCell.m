@@ -46,6 +46,12 @@
 }
 
 
+- (void)showKeyboard
+{
+    [self.textField becomeFirstResponder];
+}
+
+
 - (void)setDisplayedText:(NSString *)text
 {
     [[self textField] setText:text];

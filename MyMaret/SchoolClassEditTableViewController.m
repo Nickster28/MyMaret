@@ -18,8 +18,8 @@
 
 // Keep track of where the drawer is
 @property (nonatomic, strong) NSIndexPath *drawerIndexPath;
-@property (nonatomic, weak) NSIndexPath *drawerParentIndexPath;
-@property (nonatomic, weak) SchoolClass *selectedClass;
+@property (nonatomic, strong) NSIndexPath *drawerParentIndexPath;
+@property (nonatomic, strong) SchoolClass *selectedClass;
 
 @end
 
@@ -238,6 +238,8 @@
     
     // Thanks to http://stackoverflow.com/questions/9322885/combine-static-and-prototype-content-in-a-table-view
     // for helping me combine storyboard cells and XIB cells
+    
+    // If it's the drawer...
     if (self.drawerIndexPath && indexPath.row == self.drawerIndexPath.row && indexPath.section == self.drawerIndexPath.section) {
         
         DateTimePickerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"timePickerCell"
@@ -254,6 +256,7 @@
         
         return cell;
         
+    // If it's the name edit cell...
     } else if (indexPath.section == 0) {
         
         TextEditCell *cell = [tableView dequeueReusableCellWithIdentifier:@"nameEditCell"
@@ -267,6 +270,7 @@
         
         return cell;
         
+    // If it's the time display cells...
     } else if (indexPath.section == 1) {
         
         DateTimeDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"timeCell"
@@ -315,8 +319,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Don't let the user select the first row
-    if (indexPath.section == 0) return;
+    // If the user taps the first row, pretend like they tapped on the text field
+    if (indexPath.section == 0) {
+        [(TextEditCell *)[tableView cellForRowAtIndexPath:indexPath] showKeyboard];
+        return;
+    }
+    
+    
+    // If the user taps the drawer itself, ignore it
+    if (self.drawerIndexPath && indexPath.row == self.drawerIndexPath.row) {
+        [tableView selectRowAtIndexPath:self.drawerParentIndexPath
+                               animated:NO
+                         scrollPosition:UITableViewScrollPositionNone];
+        return;
+    }
     
     // If the keyboard is visible, dismiss it
     TextEditCell *nameCell = (TextEditCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];

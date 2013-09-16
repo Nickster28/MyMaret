@@ -67,8 +67,6 @@
 
 
 
-
-
 - (void)datePickerDidDisplayDate:(NSDate *)date
                forDatePickerMode:(UIDatePickerMode)mode
 {
@@ -86,6 +84,7 @@
     }
     
     [self.dateTimeLabel setText:[dateFormatter stringFromDate:date]];
+    [self setDate:date];
 }
 
 

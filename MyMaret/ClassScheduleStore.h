@@ -81,6 +81,10 @@ extern const NSUInteger todayIndexKey;
 - (NSArray *)allClasses;
 
 
+// Get the number of classes the user is taking
+- (NSUInteger)numberOfClasses;
+
+
 // Deletes all store data
 - (BOOL)clearStore;
 

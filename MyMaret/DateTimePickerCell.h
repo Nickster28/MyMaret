@@ -24,15 +24,3 @@
 - (void)setDisplayedDate:(NSDate *)date;
 
 @end
-
-
-
-@protocol DatePickerDisplayDelegate <NSObject>
-
-// Notifies the delegate when our picker was changed
-// to display the given date object, and tells
-// the delegate what kind of info the user set (date/time, time, etc.)
-- (void)datePickerDidDisplayDate:(NSDate *)date
-               forDatePickerMode:(UIDatePickerMode)mode;
-
-@end
