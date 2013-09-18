@@ -667,14 +667,6 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z2e-sU-xKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="nYz-Rb-39d">
-                    <connections>
-                        <outlet property="delegate" destination="gPX-5l-EUC" id="iKU-5r-923"/>
-                        <outlet property="searchContentsController" destination="gPX-5l-EUC" id="OvO-sF-Bm3"/>
-                        <outlet property="searchResultsDataSource" destination="gPX-5l-EUC" id="3qi-a9-owS"/>
-                        <outlet property="searchResultsDelegate" destination="gPX-5l-EUC" id="fth-iH-ScC"/>
-                    </connections>
-                </searchDisplayController>
                 <searchDisplayController id="lsM-sj-4Nv">
                     <connections>
                         <outlet property="delegate" destination="gPX-5l-EUC" id="0nh-6H-blj"/>
@@ -807,7 +799,7 @@
                                             <rect key="frame" x="271" y="11" width="34" height="21"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                     </subviews>
@@ -1308,7 +1300,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                 <!--2013-09-08 07:00:48 +0000-->
                                             </date>
                                             <timeZone key="timeZone" name="America/Los_Angeles">
-                                                <mutableData key="data">
+                                                <data key="data">
 VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
 y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
 5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
@@ -1326,7 +1318,7 @@ f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</mutableData>
+</data>
                                             </timeZone>
                                             <connections>
                                                 <action selector="datePickerValueDidChange:" destination="OjI-JO-ujC" eventType="valueChanged" id="zD5-2S-LJV"/>

@@ -316,7 +316,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 - (void)refreshNewspaper
 {
     [self.refreshControl beginRefreshing];
-    NSUInteger numArticlesOnScreen = [self.tableView numberOfRowsInSection:[self sectionIndex]];
+    NSUInteger numArticlesOnScreen = [self.tableView numberOfRowsInSection:0];
     
     // Have the store check for a new edition of the newspaper
     [[NewspaperStore sharedStore] fetchNewspaperWithCompletionBlock:^(BOOL didAddArticles, NSError *err) {

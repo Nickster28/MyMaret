@@ -133,8 +133,15 @@ NSString * const MyMaretLastNewspaperUpdateKey = @"MyMaretLastNewspaperUpdateKey
         // The top NUM_POPULAR_ARTICLES are "popular"
         BOOL isPopular = (i < NUM_POPULAR_ARTICLES) ? true : false;
         
+        // Get rid of the newlines from sending the article via email
+        NSString *body = [object objectForKey:@"body"];
+        
+        // http://www.textfixer.com/tutorials/javascript-line-breaks.php
+        body = [body stringByReplacingOccurrencesOfString:@"\r\n\r\n" withString:@"\n\n"];
+        body = [body stringByReplacingOccurrencesOfString:@"\r\n" withString:@" "];
+        
         NewspaperArticle *article = [[NewspaperArticle alloc] initWithTitle:[object objectForKey:@"title"]
-                                                                       body:[object objectForKey:@"body"]
+                                                                       body:body
                                                                      author:[object objectForKey:@"author"]
                                                                     section:[object objectForKey:@"section"]
                                                                 publishDate:[object createdAt]
