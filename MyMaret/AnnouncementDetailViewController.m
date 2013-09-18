@@ -65,7 +65,9 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.navigationController setToolbarHidden:YES animated:YES];
+    
+    if (!self.navigationController.toolbarHidden)
+        [self.navigationController setToolbarHidden:YES animated:YES];
 }
 
 

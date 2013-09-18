@@ -28,7 +28,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    [self setSelectedIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    [self setSelectedIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     
     // Set the background image
     [self.tableView setBackgroundView:[self mainMenuBackgroundView]];

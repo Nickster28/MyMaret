@@ -18,6 +18,9 @@
 #import "AnnouncementCell.h"
 #import "NewspaperCell.h"
 #import "TodaySettingsTableViewController.h"
+#import "AnnouncementDetailViewController.h"
+#import "UIApplication+iOSVersionChecker.h"
+#import "ArticleDetailViewController.h"
 
 
 @interface TodayTableViewController () <TodayIndexSetterDelegate>
@@ -55,6 +58,16 @@
 }
 
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // Set the filter of the announcement store
+    [[AnnouncementsStore sharedStore] setSearchFilterString:AnnouncementsStoreFilterStringToday];
+}
+
+
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -62,6 +75,8 @@
     // Unset the filter on the announcementsstore
     [[AnnouncementsStore sharedStore] setSearchFilterString:nil];
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -330,18 +345,79 @@
 }
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // If the user selected an announcement...
+    if (indexPath.section == 2) {
+        [[AnnouncementsStore sharedStore] markAnnouncementAtIndexAsRead:[indexPath row]];
+        
+        // Reload the cell to reflect that it's been read,
+        // but make sure it's still selected!
+        [tableView reloadRowsAtIndexPaths:@[indexPath]
+                         withRowAnimation:UITableViewRowAnimationNone];
+        [tableView selectRowAtIndexPath:indexPath animated:NO
+                         scrollPosition:UITableViewScrollPositionNone];
+        
+        NSString *segueIdentifier = @"showAnnouncement7";
+        if ([UIApplication isPrevIOS]) {
+            segueIdentifier = @"showAnnouncement6";
+        }
+        
+        // Trigger the detail view controller segue
+        [self performSegueWithIdentifier:segueIdentifier
+                                  sender:[tableView cellForRowAtIndexPath:indexPath]];
+    }
+}
+
+
 
 #pragma mark - Navigation
 
 // In a story board-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    // If the user wants to change what day today is...
     if ([[segue identifier] isEqualToString:@"todaySettingsSegue"] && [[segue destinationViewController] isKindOfClass:[TodaySettingsTableViewController class]]) {
         
         [(TodaySettingsTableViewController *)[segue destinationViewController] setDelegate:self];
+        
+    // If the user tapped on an announcement...
+    } else if (([[segue identifier] isEqualToString:@"showAnnouncement6"] ||
+                [[segue identifier] isEqualToString:@"showAnnouncement7"]) &&
+               [[segue destinationViewController] isKindOfClass:[AnnouncementDetailViewController class]]) {
+        
+        NSIndexPath *selectedIndexPath = [self.tableView indexPathForCell:sender];
+    
+    
+        // Pass the announcement to the detail view controller
+        [[segue destinationViewController] setAnnouncement:[[AnnouncementsStore sharedStore] announcementAtIndex:[selectedIndexPath row]]];
+        
+    
+    // If the user tapped on a newspaper article...
+    } else if ([[segue identifier] isEqualToString:@"showArticle"] && [[segue destinationViewController] isKindOfClass:[ArticleDetailViewController class]]) {
+        
+        ArticleDetailViewController *articleDVC = [segue destinationViewController];
+        
+        // Get the selected article from the correct tableview
+        NSIndexPath *selectedIP = [self.tableView indexPathForCell:sender];
+
+        NewspaperArticle *selectedArticle = [[NewspaperStore sharedStore] articleInSection:@"Popular" atIndex:[selectedIP row]];
+        
+        // Mark the article as read
+        [[NewspaperStore sharedStore] markArticleAsReadInSection:@"Popular"
+                                                         atIndex:[selectedIP row]];
+        
+        // Reload the cell to reflect that it's been read,
+        // but make sure it's still selected!
+        [self.tableView reloadRowsAtIndexPaths:@[selectedIP]
+                                withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView selectRowAtIndexPath:selectedIP animated:NO
+                                scrollPosition:UITableViewScrollPositionNone];
+        
+        // Give the article to the detail view controller
+        [articleDVC setArticle:selectedArticle];
     }
+    
 }
 
 
