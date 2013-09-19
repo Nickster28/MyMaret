@@ -47,7 +47,7 @@
     
     // Change our date/time label to display the new date
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setTimeStyle:NSDateFormatterNoStyle];
     [formatter setDateStyle:NSDateFormatterShortStyle];
     
     [[self dateTimeLabel] setText:[formatter stringFromDate:date]];
@@ -70,21 +70,20 @@
 - (void)datePickerDidDisplayDate:(NSDate *)date
                forDatePickerMode:(UIDatePickerMode)mode
 {
-    NSAssert(mode == UIDatePickerModeDateAndTime || mode == UIDatePickerModeTime, @"Only date/time and time are currently supported for reading into a date time display cell.");
+    NSAssert(mode == UIDatePickerModeDate || mode == UIDatePickerModeTime, @"Only date and time are currently supported for reading into a date time display cell.");
     
-    // Make a date formatter to make a string out of the given date
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-    
-    // If the picker is only displaying time, we only want to display time
+    // Set the appropriate date/time style
     if (mode == UIDatePickerModeTime) {
+        
+        // Make a date formatter to make a string out of the given time
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterNoStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+        [self.dateTimeLabel setText:[dateFormatter stringFromDate:date]];
+        
     } else {
-        [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+        [self setDate:date];
     }
-    
-    [self.dateTimeLabel setText:[dateFormatter stringFromDate:date]];
-    [self setDate:date];
 }
 
 

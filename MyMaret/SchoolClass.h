@@ -12,8 +12,11 @@
 
 @property (nonatomic, strong) NSString *className;
 @property (nonatomic, strong) NSString *classTime;
+@property (nonatomic, strong) NSString *classStartTime;
+@property (nonatomic, strong) NSString *classEndTime;
 
 - (id)initWithName:(NSString *)name
          classTime:(NSString *)timeSlot;
+
 
 @end

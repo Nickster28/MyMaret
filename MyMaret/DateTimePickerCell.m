@@ -59,7 +59,7 @@
 
 - (void)setDisplayedDate:(NSDate *)date
 {
-    NSAssert([self.datePicker datePickerMode] == UIDatePickerModeDateAndTime, @"Must be in date and time mode to set the date and time on the picker.");
+    NSAssert([self.datePicker datePickerMode] == UIDatePickerModeDate, @"Must be in date mode to set the date on the picker.");
     
     [[self datePicker] setDate:date animated:NO];
 }

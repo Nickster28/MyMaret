@@ -85,6 +85,12 @@ extern const NSUInteger todayIndexKey;
 - (NSUInteger)numberOfClasses;
 
 
+// Returns a string containing the start time of the given class
+// (Used in AssignmentStore to create an assignment for a class
+// on a given day)
+- (NSString *)startTimeForClassNamed:(NSString *)className onDayWithIndex:(NSUInteger)weekdayIndex;
+
+
 // Deletes all store data
 - (BOOL)clearStore;
 

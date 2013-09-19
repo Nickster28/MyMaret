@@ -41,7 +41,7 @@
 
 
 
-/********* DISPLAYING A DATE AND TIME ************/
+/********* DISPLAYING A DATE ************/
 
 @property (nonatomic, strong) NSDate *date;
 

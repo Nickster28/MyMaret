@@ -35,7 +35,7 @@
     [[self classTimeLabel] setText:[class classTime]];
     
     if (!isClass) {
-        [[self classNameLabel] setTextColor:[UIColor schoolLightColor]];
+        [[self classNameLabel] setTextColor:[UIColor schoolColor]];
     } else [[self classNameLabel] setTextColor:[UIColor blackColor]];
 }
 

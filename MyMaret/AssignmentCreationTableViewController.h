@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AssignmentBookTableViewController.h"
 
 @class AssignmentClassChooserTableViewController;
 
@@ -21,4 +22,5 @@
 
 
 @interface AssignmentCreationTableViewController : UITableViewController <ClassChooserDelegate>
+@property (nonatomic, weak) id <AssignmentCreationDismisserDelegate> delegate;
 @end

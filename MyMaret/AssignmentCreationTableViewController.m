@@ -11,12 +11,21 @@
 #import "DateTimePickerCell.h"
 #import "DateTimeDisplayCell.h"
 #import "AssignmentClassChooserTableViewController.h"
+#import "AssignmentBookStore.h"
 
 
 @interface AssignmentCreationTableViewController ()
 @property (nonatomic, strong) NSIndexPath *drawerParentIndexPath;
 @property (nonatomic, strong) NSIndexPath *drawerIndexPath;
 @property (nonatomic, strong) NSString *className;
+
+
+// When the cancel button is pressed
+- (IBAction)cancelCreation:(id)sender;
+
+// When the done button is pressed
+- (IBAction)createAnnouncement:(id)sender;
+
 @end
 
 @implementation AssignmentCreationTableViewController
@@ -147,7 +156,7 @@
         return;
     }
     
-    
+    // The "choose class" cell has its own segue
     if (indexPath.row == 1) return;
     
     // If the user taps the drawer itself, ignore it
@@ -199,6 +208,10 @@
         if (self.drawerIndexPath) {
             [self closeDrawer];
         }
+        
+        // If the keyboard is visible, dismiss it
+        TextEditCell *nameCell = (TextEditCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        [nameCell dismissKeyboard];
     }
 }
 
@@ -219,6 +232,45 @@
                           scrollPosition:UITableViewScrollPositionNone];
     
     [self.tableView deselectRowAtIndexPath:rowToReload animated:YES];
+}
+
+
+
+- (IBAction)cancelCreation:(id)sender
+{
+    // Tell our delegate nothing happened
+    [self.delegate assignmentCreationTableViewControllerDidCancelAssignmentCreation:self];
+}
+
+
+- (IBAction)createAnnouncement:(id)sender
+{
+    // Gather all the class info together
+    NSString *assignmentName = [(TextEditCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] enteredText];
+    
+    NSString *className = [self className];
+    
+    NSDate *dueDate = [(DateTimeDisplayCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]] date];
+    
+    
+    if (!className) {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Whoops!"
+                                                     message:@"Looks like you forgot to set the class this assignment is for.  Tap on \"Choose Class\" to pick one."
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+        return;
+    }
+    
+    
+    // Tell the store to add the new assignment
+    [[AssignmentBookStore sharedStore] addAssignmentWithName:assignmentName
+                                                     dueDate:dueDate
+                                            forClassWithName:className];
+    
+    // Tell our delegate that there's a new assignment
+    [self.delegate assignmentCreationTableViewControllerDidCreateAssignment:self];
 }
 
 

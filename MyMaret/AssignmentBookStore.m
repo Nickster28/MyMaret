@@ -118,7 +118,22 @@
     if (!_sortedDueDatesDateComponents) {
         _sortedDueDatesDateComponents = [[[self assignmentsByDateDictionary] allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
             
-            return [[(Assignment *)obj1 dueDate] compare:[(Assignment *)obj2 dueDate]];
+            // Return an order based on the date components' months and days
+            if ([(NSDateComponents *)obj1 month] < [(NSDateComponents *)obj2 month]) {
+                return NSOrderedAscending;
+            
+            } else if ([(NSDateComponents *)obj1 month] > [(NSDateComponents *)obj2 month]) {
+                return NSOrderedDescending;
+            
+            } else {
+                if ([(NSDateComponents *)obj1 day] < [(NSDateComponents *)obj2 day]) {
+                    return NSOrderedAscending;
+                    
+                } else if ([(NSDateComponents *)obj1 day] > [(NSDateComponents *)obj2 day]) {
+                    return NSOrderedDescending;
+                    
+                } else return NSOrderedSame;
+            }
         }];
     }
     
@@ -172,6 +187,38 @@
 
 - (void)addAssignmentWithName:(NSString *)name dueDate:(NSDate *)dueDate forClassWithName:(NSString *)className
 {
+    // Break the date into date components
+    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit) fromDate:dueDate];
+    
+    // In NSDateComponents, Sunday = 1 ... Saturday = 7
+    // We want Monday = 0 ... Sunday = 6
+    
+    // Sunday = 0 ... Saturday = 6
+    NSUInteger dayIndex = [dateComps weekday] - 1;
+    
+    // Sunday = -1 ... Saturday = 5;
+    dayIndex -= 1;
+    
+    // Monday = 0 ... Sunday = 6
+    if (dayIndex == -1) dayIndex = 6;
+    
+    
+    NSString *dueTimeString = [[ClassScheduleStore sharedStore] startTimeForClassNamed:className onDayWithIndex:dayIndex];
+    
+    
+    NSArray *timeNums = [dueTimeString componentsSeparatedByString:@":"];
+    NSUInteger hour = [timeNums[0] integerValue];
+    NSUInteger minute = [timeNums[1] integerValue];
+    
+    // Account for 24 hours
+    if (hour > 11 && hour < 7) hour += 12;
+    
+    [dateComps setHour:hour];
+    [dateComps setMinute:minute];
+    
+    dueDate = [[NSCalendar currentCalendar] dateFromComponents:dateComps];
+    
+    
     Assignment *newAssignment = [[Assignment alloc] initWithAssignmentName:name
                                                                    dueDate:dueDate
                                                           forClassWithName:className];

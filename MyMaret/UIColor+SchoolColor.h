@@ -10,6 +10,7 @@
 
 @interface UIColor (SchoolColor)
 + (UIColor *)schoolColor;
-+ (UIColor *)schoolLightColor;
 + (UIColor *)schoolComplementaryColor;
++ (UIColor *)schoolBarColor;
+
 @end

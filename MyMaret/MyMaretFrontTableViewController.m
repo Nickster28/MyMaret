@@ -82,8 +82,16 @@
     NSAssert(self.navigationController, @"Must have a navigation controller!");
     NSAssert(self.revealViewController, @"Must have a reveal view controller!");
     
-    [self.navigationController.navigationBar setTintColor:[UIColor schoolColor]];
-    
+    // If we're on iOS 7, make the bar translucent green and white
+    // for iOS 6, make the bar green
+    if ([UIApplication isPrevIOS]) {
+        [self.navigationController.navigationBar setTintColor:[UIColor schoolColor]];
+    } else {
+        [self.navigationController.navigationBar setBarTintColor:[UIColor schoolColor]];
+        [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+        
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    }
     
     // Add the button to open the drawer
     UIBarButtonItem *drawerButton = [[UIBarButtonItem alloc] init];

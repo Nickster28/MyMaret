@@ -12,13 +12,14 @@
 #import "UIApplication+iOSVersionChecker.h"
 #import "UIColor+SchoolColor.h"
 #import "AppDelegate.h"
+#import "AssignmentCreationTableViewController.h"
 
 enum kMyMaretAssignmentBookView {
     kMyMaretAssignmentBookViewClass = 0,
     kMyMaretAssignmentBookViewDate = 1
     };
 
-@interface AssignmentBookTableViewController ()
+@interface AssignmentBookTableViewController () <AssignmentCreationDismisserDelegate>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *bottomToolbarButton;
 @property (nonatomic) NSUInteger assignmentBookViewIndex;
 
@@ -128,7 +129,7 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
+{    
     if ([self assignmentBookViewIndex] == kMyMaretAssignmentBookViewClass) {
         return [[AssignmentBookStore sharedStore] nameOfClassWithIndex:section];
     } else {
@@ -179,10 +180,33 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
+    if ([[segue identifier] isEqualToString:@"createAnnouncement"] &&
+        [[segue destinationViewController] isKindOfClass:[UINavigationController class]]) {
+        
+        AssignmentCreationTableViewController *createVC = [[(UINavigationController *)[segue destinationViewController] viewControllers] objectAtIndex:0];
+        
+        // Set ourselves as the delegate
+        [createVC setDelegate:self];
+    }
 }
 
 
+#pragma mark Dismisser Protocol
 
+- (void)assignmentCreationTableViewControllerDidCreateAssignment:(AssignmentCreationTableViewController *)creationTVC
+{
+    // We have to refresh
+    [self dismissViewControllerAnimated:YES
+                             completion:^{
+                                 [self.tableView reloadData];
+                             }];
+}
+
+
+- (void)assignmentCreationTableViewControllerDidCancelAssignmentCreation:(AssignmentCreationTableViewController *)creationTVC
+{
+    [self dismissViewControllerAnimated:YES
+                             completion:nil];
+}
 
 @end

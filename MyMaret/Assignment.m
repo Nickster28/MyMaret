@@ -48,10 +48,10 @@ NSString * const AssignmentDueDateDateCompsEncodingKey = @"dueDateDateComps";
 {
     self = [super init];
     if (self) {
-        [aDecoder decodeObjectForKey:AssignmentAssignmentNameEncodingKey];
-        [aDecoder decodeObjectForKey:AssignmentDueDateEncodingKey];
-        [aDecoder decodeObjectForKey:AssignmentClassNameEncodingKey];
-        [aDecoder decodeObjectForKey:AssignmentDueDateDateCompsEncodingKey];
+        [self setAssignmentName:[aDecoder decodeObjectForKey:AssignmentAssignmentNameEncodingKey]];
+        [self setDueDate:[aDecoder decodeObjectForKey:AssignmentDueDateEncodingKey]];
+        [self setClassName:[aDecoder decodeObjectForKey:AssignmentClassNameEncodingKey]];
+        [self setDueDateDateComps:[aDecoder decodeObjectForKey:AssignmentDueDateDateCompsEncodingKey]];
     }
     
     return self;
