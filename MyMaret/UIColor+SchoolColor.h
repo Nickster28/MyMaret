@@ -12,5 +12,6 @@
 + (UIColor *)schoolColor;
 + (UIColor *)schoolComplementaryColor;
 + (UIColor *)schoolBarColor;
++ (UIColor *)schoolDarkColor;
 
 @end

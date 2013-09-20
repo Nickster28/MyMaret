@@ -7,10 +7,12 @@
 //
 
 #import "MyMaretFrontTableViewController.h"
-#import "UIColor+SchoolColor.h"
-#import "UIApplication+iOSVersionChecker.h"
 #import "AppDelegate.h"
 #import "MainMenuViewController.h"
+#import "UIViewController+NavigationBarColor.h"
+#import "UIApplication+iOSVersionChecker.h"
+
+
 
 @interface MyMaretFrontTableViewController()
 @property (nonatomic, strong, readonly) UITapGestureRecognizer *tapRecognizer;
@@ -82,16 +84,8 @@
     NSAssert(self.navigationController, @"Must have a navigation controller!");
     NSAssert(self.revealViewController, @"Must have a reveal view controller!");
     
-    // If we're on iOS 7, make the bar translucent green and white
-    // for iOS 6, make the bar green
-    if ([UIApplication isPrevIOS]) {
-        [self.navigationController.navigationBar setTintColor:[UIColor schoolColor]];
-    } else {
-        [self.navigationController.navigationBar setBarTintColor:[UIColor schoolColor]];
-        [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-        
-        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    }
+    // Configure the nav bar color (UIViewController category)
+    [self configureNavigationBarColor];
     
     // Add the button to open the drawer
     UIBarButtonItem *drawerButton = [[UIBarButtonItem alloc] init];

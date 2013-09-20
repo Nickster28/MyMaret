@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "UIApplication+iOSVersionChecker.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIViewController+NavigationBarColor.h"
 
 
 @interface LoginViewController ()
@@ -30,6 +31,8 @@ NSString * const LoginStatusLogout = @"LoginStatusLogout";
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    // Configure the nav bar color (UIViewController category)
+    [self configureNavigationBarColor];
     
     CGFloat height = [(UIWindow *)[UIApplication sharedApplication].windows[0] bounds].size.height;
     

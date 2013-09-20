@@ -12,6 +12,7 @@
 #import "DateTimeDisplayCell.h"
 #import "AssignmentClassChooserTableViewController.h"
 #import "AssignmentBookStore.h"
+#import "UIViewController+NavigationBarColor.h"
 
 
 @interface AssignmentCreationTableViewController ()
@@ -45,6 +46,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(closeDrawer)
                                                  name:UIKeyboardDidShowNotification object:nil];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // Configure the nav bar color (UIViewController category)
+    [self configureNavigationBarColor];
 }
 
 - (void)didReceiveMemoryWarning

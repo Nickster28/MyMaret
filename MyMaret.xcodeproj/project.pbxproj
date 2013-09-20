@@ -72,6 +72,7 @@
 		01A4FE2617B97304007FAB5C /* MyMaret_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A4FE2517B97304007FAB5C /* MyMaret_Tests.m */; };
 		01A4FE3517B97C08007FAB5C /* UIColor+SchoolColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A4FE3417B97C08007FAB5C /* UIColor+SchoolColor.m */; };
 		01ACC11E17D5020D008893ED /* SectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ACC11D17D5020D008893ED /* SectionHeaderView.xib */; };
+		01AEAD4517ECD263003D85A2 /* UIViewController+NavigationBarColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 01AEAD4417ECD263003D85A2 /* UIViewController+NavigationBarColor.m */; };
 		01B0BB9417ACA6FA0035B3FE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BB9317ACA6FA0035B3FE /* Parse.framework */; };
 		01B0BB9917ACA74C0035B3FE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BB9817ACA74C0035B3FE /* CFNetwork.framework */; };
 		01B0BB9A17ACA7540035B3FE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BB9617ACA7440035B3FE /* AudioToolbox.framework */; };
@@ -202,6 +203,8 @@
 		01A4FE3317B97C08007FAB5C /* UIColor+SchoolColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+SchoolColor.h"; sourceTree = "<group>"; };
 		01A4FE3417B97C08007FAB5C /* UIColor+SchoolColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SchoolColor.m"; sourceTree = "<group>"; };
 		01ACC11D17D5020D008893ED /* SectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionHeaderView.xib; sourceTree = "<group>"; };
+		01AEAD4317ECD263003D85A2 /* UIViewController+NavigationBarColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NavigationBarColor.h"; sourceTree = "<group>"; };
+		01AEAD4417ECD263003D85A2 /* UIViewController+NavigationBarColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NavigationBarColor.m"; sourceTree = "<group>"; };
 		01B0BB9317ACA6FA0035B3FE /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		01B0BB9617ACA7440035B3FE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		01B0BB9817ACA74C0035B3FE /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -337,6 +340,7 @@
 				01DAA6C017A70A4B00B23BB2 /* Class Schedule */,
 				01DAA6C517A70A6D00B23BB2 /* Assignment Book */,
 				01DAA6CA17A70AC200B23BB2 /* Settings */,
+				01AEAD4217ECC8B6003D85A2 /* Login */,
 				0177457D17A60B5E001625BF /* Core View Controllers */,
 				0177456017A60AC3001625BF /* Images.xcassets */,
 				0177454F17A60AC3001625BF /* Supporting Files */,
@@ -347,7 +351,6 @@
 		0177454F17A60AC3001625BF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0107E01D17CBC9680099E4E4 /* Google Authentication */,
 				016F9D7A17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.h */,
 				016F9D7B17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m */,
 				01A4FE3317B97C08007FAB5C /* UIColor+SchoolColor.h */,
@@ -361,6 +364,8 @@
 				0177455117A60AC3001625BF /* InfoPlist.strings */,
 				0177455417A60AC3001625BF /* main.m */,
 				0177455617A60AC3001625BF /* MyMaret-Prefix.pch */,
+				01AEAD4317ECD263003D85A2 /* UIViewController+NavigationBarColor.h */,
+				01AEAD4417ECD263003D85A2 /* UIViewController+NavigationBarColor.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -380,12 +385,6 @@
 				0112712317E426BC0007626C /* SWRevealViewController.h */,
 				0112712417E426BC0007626C /* SWRevealViewController.m */,
 				0112712617E426CB0007626C /* LICENSE.txt */,
-				0107E02117CBE1840099E4E4 /* LoginViewController.h */,
-				0107E02217CBE1840099E4E4 /* LoginViewController.m */,
-				017751CF17DE2EB900ED49E5 /* LoginViewController.xib */,
-				0107E02817CC13D40099E4E4 /* WelcomeViewController.h */,
-				0107E02917CC13D40099E4E4 /* WelcomeViewController.m */,
-				0124412517D056260091C01E /* WelcomeView.xib */,
 			);
 			name = "Core View Controllers";
 			path = SWRevealViewController;
@@ -408,6 +407,20 @@
 				01A4FE2717B97304007FAB5C /* MyMaret Tests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		01AEAD4217ECC8B6003D85A2 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0107E01D17CBC9680099E4E4 /* Google Authentication */,
+				0107E02117CBE1840099E4E4 /* LoginViewController.h */,
+				0107E02217CBE1840099E4E4 /* LoginViewController.m */,
+				017751CF17DE2EB900ED49E5 /* LoginViewController.xib */,
+				0107E02817CC13D40099E4E4 /* WelcomeViewController.h */,
+				0107E02917CC13D40099E4E4 /* WelcomeViewController.m */,
+				0124412517D056260091C01E /* WelcomeView.xib */,
+			);
+			name = Login;
 			sourceTree = "<group>";
 		};
 		01DAA6A817A7002600B23BB2 /* Announcements */ = {
@@ -680,6 +693,7 @@
 				01176FD417DC122F00DFF2EA /* SchoolClass.m in Sources */,
 				0107E01917CBC8E60099E4E4 /* GTMOAuth2Authentication.m in Sources */,
 				016780DB17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */,
+				01AEAD4517ECD263003D85A2 /* UIViewController+NavigationBarColor.m in Sources */,
 				015191FF17D545CA0073AAEC /* NewspaperCell.m in Sources */,
 				0107E01C17CBC9430099E4E4 /* GTMHTTPFetcher.m in Sources */,
 				01176FEF17DC64F100DFF2EA /* DateTimeDisplayCell.m in Sources */,

@@ -7,10 +7,10 @@
 //
 
 #import "MyMaretFrontCollectionViewController.h"
-#import "UIColor+SchoolColor.h"
-#import "UIApplication+iOSVersionChecker.h"
 #import "AppDelegate.h"
 #import "MainMenuViewController.h"
+#import "UIViewController+NavigationBarColor.h"
+#import "UIApplication+iOSVersionChecker.h"
 
 
 @interface MyMaretFrontCollectionViewController ()
@@ -83,8 +83,8 @@
     NSAssert(self.navigationController, @"Must have a navigation controller!");
     NSAssert(self.revealViewController, @"Must have a reveal view controller!");
     
-    [self.navigationController.navigationBar setTintColor:[UIColor schoolColor]];
-    
+    // Configure the nav bar color (UIViewController category)
+    [self configureNavigationBarColor];
     
     // Add the button to open the drawer
     UIBarButtonItem *drawerButton = [[UIBarButtonItem alloc] init];

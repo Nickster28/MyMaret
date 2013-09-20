@@ -97,6 +97,7 @@ NSString * const MyMaretPushNotificationTypeNewspaper = @"newspaper";
     
     // Change the status bar on iOS 6 to not be tinted
     // Thanks to http://stackoverflow.com/questions/4456474/how-to-change-the-color-of-status-bar
+    // and http://stackoverflow.com/questions/17678881/how-to-change-status-bar-text-color-in-ios-7
     if ([UIApplication isPrevIOS]) [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     
     return YES;

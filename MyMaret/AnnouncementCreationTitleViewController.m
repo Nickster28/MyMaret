@@ -8,6 +8,8 @@
 
 #import "AnnouncementCreationTitleViewController.h"
 #import "AnnouncementCreationBodyViewController.h"
+#import "UIViewController+NavigationBarColor.h"
+
 
 @interface AnnouncementCreationTitleViewController ()
 
@@ -31,6 +33,9 @@
     
     [[self titleTextField] becomeFirstResponder];
     [[self nextButton] setEnabled:NO];
+    
+    // Configure the nav bar color (UIViewController category)
+    [self configureNavigationBarColor];
 }
 
 - (void)didReceiveMemoryWarning

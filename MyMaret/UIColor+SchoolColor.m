@@ -35,4 +35,13 @@
                            alpha:1.0];
 }
 
+
++ (UIColor *) schoolDarkColor
+{
+    return [UIColor colorWithRed:16.0/255.0 // 16
+                           green:120.0/255.0 // 140
+                            blue:58.0/255.0 // 53
+                           alpha:1.0];
+}
+
 @end

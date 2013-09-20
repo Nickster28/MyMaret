@@ -12,6 +12,7 @@
 #import "DateTimeDisplayCell.h"
 #import "DateTimePickerCell.h"
 #import "ClassScheduleStore.h"
+#import "UIViewController+NavigationBarColor.h"
 
 
 @interface SchoolClassEditTableViewController ()
@@ -63,6 +64,11 @@
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
+    
+    
+    // Configure the nav bar color (UIViewController category)
+    [self configureNavigationBarColor];
+    
     
     // Change the navItem title depending on what we're doing
     if (self.selectedClass) {
