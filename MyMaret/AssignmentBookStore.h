@@ -42,6 +42,9 @@
 - (Assignment *)assignmentWithClassIndex:(NSUInteger)classIndex assignmentIndex:(NSUInteger)assignmentIndex;
 
 
+// Removes the given assignment
+- (void)removeAssignmentWithClassIndex:(NSUInteger)classIndex assignmentIndex:(NSUInteger)assignmentIndex;
+
 
 
 /************ ACCESSING ASSIGNMENTS BY DUE DATE *************/
@@ -62,6 +65,10 @@
 
 // Returns the assignment in the given day at the given index
 - (Assignment *)assignmentWithDayIndex:(NSUInteger)dayIndex assignmentIndex:(NSUInteger)assignmentIndex;
+
+
+// Removes the given assignment
+- (void)removeAssignmentWithDayIndex:(NSUInteger)dayIndex assignmentIndex:(NSUInteger)assignmentIndex;
 
 
 

@@ -89,20 +89,7 @@
         
         // If we haven't saved one yet, make a new one
         if (!_assignmentsByClassDictionary) {
-            
-            // Get the user's classes (an array of classnames as strings)
-            NSArray *classList = [[ClassScheduleStore sharedStore] allClasses];
-            
-            // Make an array for each class's assignments
-            NSMutableArray *objects = [NSMutableArray array];
-            NSUInteger numClasses = [classList count];
-            
-            for (int i = 0; i < numClasses; i++) {
-                [objects addObject:[NSMutableArray array]];
-            }
-            
-            _assignmentsByClassDictionary = [NSMutableDictionary dictionaryWithObjects:objects
-                                                                               forKeys:classList];
+            _assignmentsByClassDictionary = [NSMutableDictionary dictionary];
             
             [self saveChanges];
         }
@@ -171,6 +158,19 @@
 }
 
 
+// Convert from date components back to indexes
+- (NSUInteger)indexForDayWithDateComponents:(NSDateComponents *)dateComps
+{
+    return [[self sortedDueDatesDateComponents] indexOfObject:dateComps];
+}
+
+
+- (NSUInteger)indexForClassWithName:(NSString *)className
+{
+    return [[[self assignmentsByClassDictionary] allKeys] indexOfObject:className];
+}
+
+
 #pragma mark Public APIs
 
 
@@ -181,6 +181,23 @@
     self.todayDictionary = nil;
     
     return [self saveChanges];
+}
+
+
+- (void)removeOldAssignments
+{
+    NSDateComponents *todayDateComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSWeekdayCalendarUnit) fromDate:[NSDate date]];
+    
+    // Iterate through all of the days we have assignments due to see if
+    // there are any assignments that have already been due
+    for (NSDateComponents *dateCompsKey in self.sortedDueDatesDateComponents) {
+        
+        // If we're at or past today, break
+        if ((dateCompsKey.month > todayDateComps.month) || (dateCompsKey.month == todayDateComps.month && dateCompsKey.day >= todayDateComps.day)) break;
+        
+        // Otherwise, we need to delete all the assignments on this day
+        
+    }
 }
 
 
@@ -245,6 +262,13 @@
     }];
     
     
+    // If there are no other entries for this class,
+    // add a new key/value pair
+    if (![[self assignmentsByClassDictionary] objectForKey:[newAssignment className]]) {
+        [[self assignmentsByClassDictionary] setObject:[NSMutableArray array]
+                                               forKey:[newAssignment className]];
+    }
+    
     
     // Add the assignment to our by-class dictionary
     NSMutableArray *classArray = [[self assignmentsByClassDictionary] objectForKey:className];
@@ -292,6 +316,38 @@
 }
 
 
+- (void)removeAssignmentWithClassIndex:(NSUInteger)classIndex assignmentIndex:(NSUInteger)assignmentIndex
+{
+    // Get the name of the class
+    NSString *className = [self nameOfClassWithIndex:classIndex];
+    
+    Assignment *assignmentToDelete = [[[self assignmentsByClassDictionary] objectForKey:className] objectAtIndex:assignmentIndex];
+    
+    
+    // Delete the assignment from our by-class dictionary
+    [[[self assignmentsByClassDictionary] objectForKey:className] removeObjectAtIndex:assignmentIndex];
+    
+    // If there are no other assignments for that class,
+    // remove it from our dictionary
+    if ([[[self assignmentsByClassDictionary] objectForKey:className] count] == 0) {
+        [[self assignmentsByClassDictionary] removeObjectForKey:className];
+    }
+    
+    
+    // We need to remove this assignment from BOTH dictionaries,
+    // so find its index in the by-date dictionary
+    NSUInteger assignmentDateIndex = [(NSMutableArray *)[[self assignmentsByDateDictionary] objectForKey:[assignmentToDelete dueDateDateComps]] indexOfObject:assignmentToDelete];
+    
+    
+    // If we haven't already, remove the assignment from
+    // our by-date dictionary
+    if (assignmentDateIndex != NSNotFound) {
+        [self removeAssignmentWithDayIndex:[self indexForDayWithDateComponents:[assignmentToDelete dueDateDateComps]] assignmentIndex:assignmentDateIndex];
+    }
+    
+}
+
+
 
 /*************** Assignments by Due Date ****************/
 
@@ -323,6 +379,37 @@
     // Get the date components for the given day
     NSDateComponents *dateComps = [self dateComponentsForDayWithIndex:dayIndex];
     return [[[self assignmentsByDateDictionary] objectForKey:dateComps] objectAtIndex:assignmentIndex];
+}
+
+
+- (void)removeAssignmentWithDayIndex:(NSUInteger)dayIndex assignmentIndex:(NSUInteger)assignmentIndex
+{
+    // Get the date components for the given day
+    NSDateComponents *dateComps = [self dateComponentsForDayWithIndex:dayIndex];
+
+    Assignment *assignmentToDelete = [[[self assignmentsByDateDictionary] objectForKey:dateComps] objectAtIndex:assignmentIndex];
+    
+    
+    // Delete the assignment from our by-date dictionary
+    [[[self assignmentsByDateDictionary] objectForKey:dateComps] removeObjectAtIndex:assignmentIndex];
+    
+    // If there are no other assignments for that date,
+    // remove it from our dictionary
+    if ([[[self assignmentsByDateDictionary] objectForKey:dateComps] count] == 0) {
+        [[self assignmentsByDateDictionary] removeObjectForKey:dateComps];
+    }
+    
+    
+    // We need to remove this assignment from BOTH dictionaries,
+    // so find its index in the by-class dictionary
+    NSUInteger assignmentClassIndex = [(NSMutableArray *)[[self assignmentsByClassDictionary] objectForKey:[assignmentToDelete className]] indexOfObject:assignmentToDelete];
+    
+    
+    // If we haven't already, remove the assignment from
+    // our by-date dictionary
+    if (assignmentClassIndex != NSNotFound) {
+        [self removeAssignmentWithClassIndex:[self indexForClassWithName:[assignmentToDelete className]] assignmentIndex:assignmentClassIndex];
+    }
 }
 
 

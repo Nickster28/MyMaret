@@ -40,6 +40,12 @@
 }
 
 
+- (void)setMinimumDate:(NSDate *)minDate
+{
+    [self.datePicker setMinimumDate:minDate];
+}
+
+
 - (void)setDisplayedTime:(NSString *)timeString
 {
     NSAssert([self.datePicker datePickerMode] == UIDatePickerModeTime, @"Must be in Time Mode to set only the time on the date picker.");

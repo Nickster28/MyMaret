@@ -146,6 +146,9 @@
         // Set the delegate to be its parent cell
         [drawerCell setDelegate:parentCell];
         
+        // Set the minimum date to be today
+        [drawerCell setMinimumDate:[NSDate date]];
+        
         // Set the date to be what's showing in the parent cell
         [drawerCell setDisplayedDate:parentCell.date];
         

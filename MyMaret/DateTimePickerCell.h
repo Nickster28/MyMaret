@@ -23,4 +23,8 @@
 // Sets the picker to display the given date
 - (void)setDisplayedDate:(NSDate *)date;
 
+
+// Sets the minimum date of the date picker
+- (void)setMinimumDate:(NSDate *)minDate;
+
 @end
