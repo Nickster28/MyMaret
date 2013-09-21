@@ -287,6 +287,8 @@
 
 /***************** Assignments by Class *******************/
 
+
+
 - (NSUInteger)numberOfClasses
 {
     return [[self assignmentsByClassDictionary] count];
@@ -352,6 +354,21 @@
 /*************** Assignments by Due Date ****************/
 
 
+- (BOOL)isClassNamed:(NSString *)className onDayWithIndex:(NSUInteger)index
+{
+    NSArray *classes = [[self assignmentsByDateDictionary] objectForKey:[self dateComponentsForDayWithIndex:index]];
+    for (Assignment *assignment in classes) {
+        
+        if ([[assignment className] isEqualToString:className]) return true;
+    }
+    
+    
+    // If we get here, no class by that name exists in this day
+    return false;
+}
+
+
+
 - (NSUInteger)numberOfDaysWithAssignments
 {
     return [[self assignmentsByDateDictionary] count];
@@ -397,6 +414,9 @@
     // remove it from our dictionary
     if ([[[self assignmentsByDateDictionary] objectForKey:dateComps] count] == 0) {
         [[self assignmentsByDateDictionary] removeObjectForKey:dateComps];
+        
+        // Set our sorted array to update
+        [self setSortedDueDatesDateComponents:nil];
     }
     
     
@@ -410,6 +430,14 @@
     if (assignmentClassIndex != NSNotFound) {
         [self removeAssignmentWithClassIndex:[self indexForClassWithName:[assignmentToDelete className]] assignmentIndex:assignmentClassIndex];
     }
+}
+
+
+- (void)refreshAssignmentsDueToday
+{
+    NSDateComponents *todayDateComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSWeekdayCalendarUnit) fromDate:[NSDate date]];
+    
+    [self setTodayDictionary:<#(NSDictionary *)#>]
 }
 
 

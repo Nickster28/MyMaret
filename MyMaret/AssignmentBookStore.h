@@ -71,9 +71,15 @@
 - (void)removeAssignmentWithDayIndex:(NSUInteger)dayIndex assignmentIndex:(NSUInteger)assignmentIndex;
 
 
+// Returns whether or not a class takes place on a given day
+- (BOOL)isClassNamed:(NSString *)className onDayWithIndex:(NSUInteger)index;
 
 
 /*********** ACCESSING ASSIGNMENTS DUE TODAY ****************/
 
+// Reloads the list of assignments due today
+// Should be called before the screen appears showing
+// today's assignments
+- (void)refreshAssignmentsDueToday;
 
 @end

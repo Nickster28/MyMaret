@@ -1523,7 +1523,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Add" style="done" id="3VY-NT-Z2G">
                             <connections>
-                                <action selector="createAnnouncement:" destination="nEZ-7W-SfB" id="Q6M-ak-hSv"/>
+                                <action selector="createAssignment:" destination="nEZ-7W-SfB" id="cyG-wG-uOn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

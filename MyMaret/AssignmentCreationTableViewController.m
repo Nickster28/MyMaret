@@ -25,7 +25,7 @@
 - (IBAction)cancelCreation:(id)sender;
 
 // When the done button is pressed
-- (IBAction)createAnnouncement:(id)sender;
+- (IBAction)createAssignment:(id)sender;
 
 @end
 
@@ -255,7 +255,7 @@
 }
 
 
-- (IBAction)createAnnouncement:(id)sender
+- (IBAction)createAssignment:(id)sender
 {
     // Gather all the class info together
     NSString *assignmentName = [(TextEditCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] enteredText];
