@@ -82,4 +82,14 @@
 // today's assignments
 - (void)refreshAssignmentsDueToday;
 
+// The number of assignments due today
+- (NSUInteger)numberOfAssignmentsDueToday;
+
+
+// Returns the assignment due today at the given index
+- (Assignment *)assignmentDueTodayWithAssignmentIndex:(NSUInteger)assignmentIndex;
+
+// Removes the given assignment
+- (void)removeAssignmentDueTodayWithAssignmentIndex:(NSUInteger)assignmentIndex;
+
 @end

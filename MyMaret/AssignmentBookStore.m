@@ -15,7 +15,7 @@
 // 3 Dictionaries to manage filtering by date and by class
 @property (nonatomic, strong) NSMutableDictionary *assignmentsByDateDictionary;
 @property (nonatomic, strong) NSMutableDictionary *assignmentsByClassDictionary;
-@property (nonatomic, strong) NSDictionary *todayDictionary;
+@property (nonatomic, strong) NSArray *todaysAssignments;
 
 // Since the dates won't be sorted inside the dictionary,
 // we need to keep a separate sorted list of dates so we know
@@ -178,7 +178,7 @@
 {
     self.assignmentsByClassDictionary = nil;
     self.assignmentsByDateDictionary = nil;
-    self.todayDictionary = nil;
+    self.todaysAssignments = nil;
     
     return [self saveChanges];
 }
@@ -284,7 +284,7 @@
 
 
 
-
+#pragma mark Assignments By Class
 /***************** Assignments by Class *******************/
 
 
@@ -351,6 +351,7 @@
 
 
 
+#pragma mark Assignments By Due Date
 /*************** Assignments by Due Date ****************/
 
 
@@ -433,11 +434,44 @@
 }
 
 
+#pragma mark Today's Assignments
+/**************** Today's Assignments ********************/
+
+
 - (void)refreshAssignmentsDueToday
 {
     NSDateComponents *todayDateComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSWeekdayCalendarUnit) fromDate:[NSDate date]];
     
-    [self setTodayDictionary:<#(NSDictionary *)#>]
+    // If there are assignments due today, todaysAssignments will be an array of
+    // assignments sorted by due date - otherwise, this will be nil
+    [self setTodaysAssignments:[[self assignmentsByDateDictionary] objectForKey:todayDateComps]];
+}
+
+
+// The number of assignments due today
+- (NSUInteger)numberOfAssignmentsDueToday
+{
+    return [[self todaysAssignments] count];
+}
+
+
+// Returns the assignment due today at the given index
+- (Assignment *)assignmentDueTodayWithAssignmentIndex:(NSUInteger)assignmentIndex;
+{
+    return [[self todaysAssignments] objectAtIndex:assignmentIndex];
+}
+
+
+// Removes the given assignment
+- (void)removeAssignmentDueTodayWithAssignmentIndex:(NSUInteger)assignmentIndex
+{
+    Assignment *assignmentToRemove = [self assignmentDueTodayWithAssignmentIndex:assignmentIndex];
+    
+    // Find the day index for the given assignment
+    NSUInteger dayIndex = [self indexForDayWithDateComponents:[assignmentToRemove dueDateDateComps]];
+    
+    // Remove it from both dictionaries
+    [self removeAssignmentWithDayIndex:dayIndex assignmentIndex:assignmentIndex];
 }
 
 

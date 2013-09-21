@@ -15,7 +15,7 @@
 #import "UIViewController+NavigationBarColor.h"
 
 
-@interface AssignmentCreationTableViewController ()
+@interface AssignmentCreationTableViewController () <UIAlertViewDelegate>
 @property (nonatomic, strong) NSIndexPath *drawerParentIndexPath;
 @property (nonatomic, strong) NSIndexPath *drawerIndexPath;
 @property (nonatomic, strong) NSString *className;
@@ -276,14 +276,72 @@
     }
     
     
+    // Figure out the due date's day index
+    
+    // Break the date into date components
+    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit) fromDate:dueDate];
+    
+    // In NSDateComponents, Sunday = 1 ... Saturday = 7
+    // We want Monday = 0 ... Sunday = 6
+    
+    // Sunday = 0 ... Saturday = 6
+    NSUInteger dayIndex = [dateComps weekday] - 1;
+    
+    // Sunday = -1 ... Saturday = 5;
+    dayIndex -= 1;
+    
+    // Monday = 0 ... Sunday = 6
+    if (dayIndex == -1) dayIndex = 6;
+    
+    
+    BOOL isClassOnDueDate = [[AssignmentBookStore sharedStore] isClassNamed:className onDayWithIndex:dayIndex];
+    
+    // This means that class doesn't meet on that day
+    if (!isClassOnDueDate) {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Warning"
+                                                     message:@"It looks like this class doesn't meet on the day you selected.  If that day is an unusual schedule, tap Create.  Otherwise, tap Cancel to change the due date."
+                                                    delegate:self
+                                           cancelButtonTitle:@"Cancel"
+                                           otherButtonTitles:@"Create", nil];
+        
+        [av show];
+        
+        return;
+    }
+    
+    
     // Tell the store to add the new assignment
     [[AssignmentBookStore sharedStore] addAssignmentWithName:assignmentName
                                                      dueDate:dueDate
                                             forClassWithName:className];
     
+    
     // Tell our delegate that there's a new assignment
     [self.delegate assignmentCreationTableViewControllerDidCreateAssignment:self];
 }
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        
+        // Gather all the class info together
+        NSString *assignmentName = [(TextEditCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] enteredText];
+        
+        NSString *className = [self className];
+        
+        NSDate *dueDate = [(DateTimeDisplayCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]] date];
+        
+        // Tell the store to add the new assignment
+        [[AssignmentBookStore sharedStore] addAssignmentWithName:assignmentName
+                                                         dueDate:dueDate
+                                                forClassWithName:className];
+        
+        // Tell our delegate that there's a new assignment
+        [self.delegate assignmentCreationTableViewControllerDidCreateAssignment:self];
+    }
+}
+
 
 
 @end
