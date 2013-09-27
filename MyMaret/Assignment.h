@@ -22,4 +22,7 @@
 // or a name of a weekday if the assignment is due within the next week
 - (NSString *)dueDateAsString;
 
+// Returns a string representation of the due time
+- (NSString *)dueTimeAsString;
+
 @end

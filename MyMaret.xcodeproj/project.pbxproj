@@ -39,6 +39,7 @@
 		0125F75C17BB1C750042EB6F /* AnnouncementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125F75B17BB1C750042EB6F /* AnnouncementCell.m */; };
 		01271A1217C9CB2E003C487C /* MainMenuBackgroundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01271A1117C9CB2E003C487C /* MainMenuBackgroundView.xib */; };
 		013BB66E17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 013BB66D17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m */; };
+		013E845017F5716B00A20F4B /* AssignmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 013E844F17F5716B00A20F4B /* AssignmentCell.m */; };
 		015191FF17D545CA0073AAEC /* NewspaperCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015191FE17D545CA0073AAEC /* NewspaperCell.m */; };
 		0151920117D545D50073AAEC /* NewspaperCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0151920017D545D50073AAEC /* NewspaperCell.xib */; };
 		016780DB17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */; };
@@ -152,6 +153,8 @@
 		01271A1117C9CB2E003C487C /* MainMenuBackgroundView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenuBackgroundView.xib; sourceTree = "<group>"; };
 		013BB66C17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+HasNetworkConnection.h"; sourceTree = "<group>"; };
 		013BB66D17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+HasNetworkConnection.m"; sourceTree = "<group>"; };
+		013E844E17F5716B00A20F4B /* AssignmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentCell.h; sourceTree = "<group>"; };
+		013E844F17F5716B00A20F4B /* AssignmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentCell.m; sourceTree = "<group>"; };
 		015191FD17D545CA0073AAEC /* NewspaperCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewspaperCell.h; sourceTree = "<group>"; };
 		015191FE17D545CA0073AAEC /* NewspaperCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewspaperCell.m; sourceTree = "<group>"; };
 		0151920017D545D50073AAEC /* NewspaperCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewspaperCell.xib; sourceTree = "<group>"; };
@@ -520,6 +523,8 @@
 				01DEFF3817DD92F000D355CA /* AssignmentBookStore.m */,
 				010E62E017E639E3002F5806 /* Assignment.h */,
 				010E62E117E639E3002F5806 /* Assignment.m */,
+				013E844E17F5716B00A20F4B /* AssignmentCell.h */,
+				013E844F17F5716B00A20F4B /* AssignmentCell.m */,
 			);
 			name = "Assignment Book";
 			sourceTree = "<group>";
@@ -649,6 +654,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				013E845017F5716B00A20F4B /* AssignmentCell.m in Sources */,
 				0107E02017CBC9940099E4E4 /* GTMOAuth2SignIn.m in Sources */,
 				01A4FE3517B97C08007FAB5C /* UIColor+SchoolColor.m in Sources */,
 				0113855317C1DA2500F8A965 /* AnnouncementCreationBodyViewController.m in Sources */,

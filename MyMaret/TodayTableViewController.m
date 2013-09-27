@@ -11,19 +11,21 @@
 #import "AnnouncementsStore.h"
 #import "NewspaperStore.h"
 #import "ClassScheduleStore.h"
+#import "AssignmentBookStore.h"
 #import "SchoolClass.h"
 #import "NewspaperArticle.h"
 #import "Announcement.h"
 #import "SchoolClassCell.h"
 #import "AnnouncementCell.h"
 #import "NewspaperCell.h"
+#import "AssignmentCell.h"
 #import "TodaySettingsTableViewController.h"
 #import "AnnouncementDetailViewController.h"
 #import "UIApplication+iOSVersionChecker.h"
 #import "ArticleDetailViewController.h"
 
 
-@interface TodayTableViewController () <TodayIndexSetterDelegate>
+@interface TodayTableViewController () <TodayIndexSetterDelegate, AssignmentCompletionProtocol>
 
 // Dictionary of section indices to BOOLs to keep track of whether the
 // section is empty
@@ -184,7 +186,7 @@
             return 50.0;
             
         case 1:
-            return 44.0;
+            return 74.0;
             
         case 2:
             return 74.0;
@@ -277,11 +279,26 @@
 
 - (UITableViewCell *)assignmentCellForIndexPath:(NSIndexPath *)ip
 {
-#warning incomplete
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"noEntriesCell"
-                                                                 forIndexPath:ip];
+    // If there are no assignments due today...
+    if ([[AssignmentBookStore sharedStore] numberOfAssignmentsDueToday] == 0) {
+        
+        // Return a cell that says that
+        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"noEntriesCell"
+                                                                     forIndexPath:ip];
+        [[cell textLabel] setText:@"None!"];
+        
+        return cell;
+    }
     
-    [[cell textLabel] setText:@"None!"];
+    // Otherwise, get the corresponding assignment and make a cell displaying it
+    Assignment *currAssignment = [[AssignmentBookStore sharedStore] assignmentDueTodayWithAssignmentIndex:ip.row];
+    
+    AssignmentCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"assignmentCell" forIndexPath:ip];
+    
+    [cell bindAssignment:currAssignment shouldDisplayDueTime:YES];
+    
+    // We should be notified if the user marks the assignment as completed
+    [cell setDelegate:self];
     
     return cell;
 }
@@ -420,6 +437,21 @@
     
 }
 
+
+
+// Called when the user marks an assignment as completed
+- (void)assignmentCellwasMarkedAsCompleted:(AssignmentCell *)cell
+{
+    // Find the location of the marked cell
+    NSIndexPath *markedIP = [self.tableView indexPathForCell:cell];
+    
+    // Remove it from the store
+    [[AssignmentBookStore sharedStore] removeAssignmentDueTodayWithAssignmentIndex:markedIP.row];
+    
+    // Remove it from the table
+    [self.tableView deleteRowsAtIndexPaths:@[markedIP]
+                          withRowAnimation:UITableViewRowAnimationRight];
+}
 
 
 @end

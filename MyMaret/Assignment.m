@@ -110,4 +110,10 @@ NSString * const AssignmentDueDateDateCompsEncodingKey = @"dueDateDateComps";
 }
 
 
+- (NSString *)dueTimeAsString
+{
+    return [NSString stringWithFormat:@"%d:%d", self.dueDateDateComps.hour, self.dueDateDateComps.minute];
+}
+
+
 @end

@@ -13,13 +13,14 @@
 #import "UIColor+SchoolColor.h"
 #import "AppDelegate.h"
 #import "AssignmentCreationTableViewController.h"
+#import "AssignmentCell.h"
 
 enum kMyMaretAssignmentBookView {
     kMyMaretAssignmentBookViewClass = 0,
     kMyMaretAssignmentBookViewDate = 1
     };
 
-@interface AssignmentBookTableViewController () <AssignmentCreationDismisserDelegate>
+@interface AssignmentBookTableViewController () <AssignmentCreationDismisserDelegate, AssignmentCompletionProtocol>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *bottomToolbarButton;
 @property (nonatomic) NSUInteger assignmentBookViewIndex;
 
@@ -151,9 +152,12 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+#warning not updated to AssignmentCell - need date vs time
     static NSString *CellIdentifier = @"assignmentCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    AssignmentCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    // We want to know when a user finishes an assignment
+    [cell setDelegate:self];
     
     // Get the assignment at the given index
     Assignment *currentAssignment;
