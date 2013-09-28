@@ -13,6 +13,7 @@
 #import "AssignmentClassChooserTableViewController.h"
 #import "AssignmentBookStore.h"
 #import "UIViewController+NavigationBarColor.h"
+#import "ClassScheduleStore.h"
 
 
 @interface AssignmentCreationTableViewController () <UIAlertViewDelegate>
@@ -294,7 +295,7 @@
     if (dayIndex == -1) dayIndex = 6;
     
     
-    BOOL isClassOnDueDate = [[AssignmentBookStore sharedStore] isClassNamed:className onDayWithIndex:dayIndex];
+    BOOL isClassOnDueDate = [[ClassScheduleStore sharedStore] isClassNamed:className onDayWithIndex:dayIndex];
     
     // This means that class doesn't meet on that day
     if (!isClassOnDueDate) {

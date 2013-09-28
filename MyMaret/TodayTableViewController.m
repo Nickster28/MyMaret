@@ -56,6 +56,9 @@
     // Set the filter of the announcement store
     [[AnnouncementsStore sharedStore] setSearchFilterString:AnnouncementsStoreFilterStringToday];
     
+    // Refresh today's assignments
+    [[AssignmentBookStore sharedStore] refreshAssignmentsDueToday];
+    
     [self.tableView reloadData];
 }
 
@@ -139,8 +142,7 @@
             break;
             
         case 1:
-            #warning Assignments here
-            numRows = 0;
+            numRows = [[AssignmentBookStore sharedStore] numberOfAssignmentsDueToday];
             break;
             
         case 2:
@@ -295,7 +297,7 @@
     
     AssignmentCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"assignmentCell" forIndexPath:ip];
     
-    [cell bindAssignment:currAssignment shouldDisplayDueTime:YES];
+    [cell bindAssignment:currAssignment shouldDisplayDueTime:YES shouldDisplayClass:YES];
     
     // We should be notified if the user marks the assignment as completed
     [cell setDelegate:self];
@@ -448,9 +450,14 @@
     // Remove it from the store
     [[AssignmentBookStore sharedStore] removeAssignmentDueTodayWithAssignmentIndex:markedIP.row];
     
-    // Remove it from the table
-    [self.tableView deleteRowsAtIndexPaths:@[markedIP]
-                          withRowAnimation:UITableViewRowAnimationRight];
+    double delayInSeconds = 0.6;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        
+        // Remove it from the table
+        [self.tableView deleteRowsAtIndexPaths:@[markedIP]
+                              withRowAnimation:UITableViewRowAnimationRight];
+    });
 }
 
 

@@ -196,7 +196,12 @@
         if ((dateCompsKey.month > todayDateComps.month) || (dateCompsKey.month == todayDateComps.month && dateCompsKey.day >= todayDateComps.day)) break;
         
         // Otherwise, we need to delete all the assignments on this day
-        
+        NSUInteger dayIndex = [self indexForDayWithDateComponents:dateCompsKey];
+        for (int i = 0; i < [self numberOfAssignmentsForDayWithIndex:dayIndex]; i++) {
+            
+            // Remove each assignment
+            [self removeAssignmentWithDayIndex:dayIndex assignmentIndex:i];
+        }
     }
 }
 
@@ -228,7 +233,7 @@
     NSUInteger minute = [timeNums[1] integerValue];
     
     // Account for 24 hours
-    if (hour > 11 && hour < 7) hour += 12;
+    if (hour > 11 || hour < 7) hour += 12;
     
     [dateComps setHour:hour];
     [dateComps setMinute:minute];

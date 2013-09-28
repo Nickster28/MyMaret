@@ -409,6 +409,24 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 
 
 
+- (BOOL)isClassNamed:(NSString *)className onDayWithIndex:(NSUInteger)dayIndex
+{
+    NSString *dayName = [self dayNameForIndex:dayIndex];
+    
+    // Get the whole day's schedule
+    NSArray *allPeriods = [[self classScheduleDictionary] objectForKey:dayName];
+    
+    // See if the class appears in the array
+    for (SchoolClass *class in allPeriods) {
+        if ([[class className] isEqualToString:className]) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+
 - (NSString *)startTimeForClassNamed:(NSString *)className onDayWithIndex:(NSUInteger)weekdayIndex
 {
     NSString *dayName = [self dayNameForIndex:weekdayIndex];

@@ -51,6 +51,9 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
     [super viewDidLoad];
     
     [self setUpSegmentedControl];
+    
+    // Delete old assignments
+    [[AssignmentBookStore sharedStore] removeOldAssignments];
 }
 
 
@@ -152,7 +155,6 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-#warning not updated to AssignmentCell - need date vs time
     static NSString *CellIdentifier = @"assignmentCell";
     AssignmentCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
@@ -169,16 +171,41 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
                                                                       assignmentIndex:indexPath.row];
     }
     
-    [[cell textLabel] setText:[currentAssignment assignmentName]];
-    
+    // Display the appropriate info in the cell
+    // (If we're viewing by class, display the due date and assignment only -
+    // If we're viewing by day, display the due time, class, and assignment)
     if ([self assignmentBookViewIndex] == kMyMaretAssignmentBookViewClass) {
-        [[cell detailTextLabel] setText:[currentAssignment dueDateAsString]];
+        [cell bindAssignment:currentAssignment shouldDisplayDueTime:NO shouldDisplayClass:NO];
     } else {
-        [[cell detailTextLabel] setText:[currentAssignment className]];
+        [cell bindAssignment:currentAssignment shouldDisplayDueTime:YES shouldDisplayClass:YES];
     }
     
     return cell;
     
+}
+
+
+- (void)assignmentCellwasMarkedAsCompleted:(AssignmentCell *)cell
+{
+    NSIndexPath *completedIP = [self.tableView indexPathForCell:cell];
+    
+    // Delete the assignment from the store
+    if ([self assignmentBookViewIndex] == kMyMaretAssignmentBookViewClass) {
+        [[AssignmentBookStore sharedStore] removeAssignmentWithClassIndex:completedIP.section
+                                                          assignmentIndex:completedIP.row];
+    } else {
+        [[AssignmentBookStore sharedStore] removeAssignmentWithDayIndex:completedIP.section
+                                                        assignmentIndex:completedIP.row];
+    }
+    
+    // Remove the cell from our table
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        
+        [self.tableView deleteRowsAtIndexPaths:@[completedIP]
+                              withRowAnimation:UITableViewRowAnimationRight];
+    });
 }
 
 

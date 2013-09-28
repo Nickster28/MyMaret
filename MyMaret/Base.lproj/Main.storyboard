@@ -1354,54 +1354,68 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History Paper on Accountability" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="171" translatesAutoresizingMaskIntoConstraints="NO" id="aAy-xk-krO">
-                                            <rect key="frame" x="20" y="7" width="171" height="49"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History Paper on Accountability" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="171" translatesAutoresizingMaskIntoConstraints="NO" id="4YF-5G-2GL">
+                                            <rect key="frame" x="13" y="1" width="171" height="40"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Due: 12:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upX-vZ-6zu">
-                                            <rect key="frame" x="197" y="21" width="84" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Due: 12:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SAv-hf-5Jl">
+                                            <rect key="frame" x="192" y="21" width="84" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="84" id="LH2-Z4-ncN"/>
+                                                <constraint firstAttribute="width" constant="84" id="NWp-dO-KdI"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="drR-eJ-3HI">
-                                            <rect key="frame" x="290" y="21" width="25" height="25"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Acc. US History" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwh-yA-JAl">
+                                            <rect key="frame" x="13" y="41" width="171" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="S4k-UR-boA"/>
+                                                <constraint firstAttribute="height" constant="21" id="WNy-Xc-qbm"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BHB-8E-gCY">
+                                            <rect key="frame" x="283" y="19" width="25" height="25"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="25" id="kO0-YJ-sx0"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <state key="normal" image="assignmentNotCompletedIcon">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="markAssignmentAsCompleted:" destination="CKV-R8-S91" eventType="touchUpInside" id="BBK-fE-YC3"/>
+                                                <action selector="markAssignmentAsCompleted:" destination="K6P-B7-f39" eventType="touchUpInside" id="yhO-9X-Y2G"/>
                                             </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="upX-vZ-6zu" firstAttribute="leading" secondItem="aAy-xk-krO" secondAttribute="trailing" constant="6" id="9LV-gW-W8p"/>
-                                        <constraint firstItem="upX-vZ-6zu" firstAttribute="top" secondItem="drR-eJ-3HI" secondAttribute="top" id="Gam-Jf-9AE"/>
-                                        <constraint firstItem="aAy-xk-krO" firstAttribute="top" secondItem="glj-Js-yzl" secondAttribute="top" constant="7" id="PeF-G7-AoC"/>
-                                        <constraint firstItem="upX-vZ-6zu" firstAttribute="top" secondItem="glj-Js-yzl" secondAttribute="top" constant="21" id="fJe-7H-owe"/>
-                                        <constraint firstItem="drR-eJ-3HI" firstAttribute="leading" secondItem="upX-vZ-6zu" secondAttribute="trailing" constant="9" id="fP4-DP-R1J"/>
-                                        <constraint firstItem="aAy-xk-krO" firstAttribute="centerY" secondItem="glj-Js-yzl" secondAttribute="centerY" id="fgu-51-0aq"/>
-                                        <constraint firstAttribute="trailing" secondItem="drR-eJ-3HI" secondAttribute="trailing" constant="5" id="nLm-JH-uvs"/>
-                                        <constraint firstItem="aAy-xk-krO" firstAttribute="leading" secondItem="glj-Js-yzl" secondAttribute="leading" constant="20" symbolic="YES" id="och-oL-jQl"/>
-                                        <constraint firstItem="upX-vZ-6zu" firstAttribute="centerY" secondItem="aAy-xk-krO" secondAttribute="centerY" id="qD3-yV-OEu"/>
+                                        <constraint firstAttribute="bottom" secondItem="jwh-yA-JAl" secondAttribute="bottom" constant="1" id="3Hk-ZG-lT7"/>
+                                        <constraint firstAttribute="trailing" secondItem="BHB-8E-gCY" secondAttribute="trailing" constant="12" id="L93-Wt-ylH"/>
+                                        <constraint firstItem="SAv-hf-5Jl" firstAttribute="leading" secondItem="4YF-5G-2GL" secondAttribute="trailing" constant="8" symbolic="YES" id="OyE-Nb-IcX"/>
+                                        <constraint firstItem="SAv-hf-5Jl" firstAttribute="top" secondItem="glj-Js-yzl" secondAttribute="top" constant="21" id="Phb-XQ-rTV"/>
+                                        <constraint firstItem="BHB-8E-gCY" firstAttribute="leading" secondItem="SAv-hf-5Jl" secondAttribute="trailing" constant="7" id="YoG-nY-1hD"/>
+                                        <constraint firstItem="jwh-yA-JAl" firstAttribute="top" secondItem="4YF-5G-2GL" secondAttribute="bottom" id="f9f-Jz-j3e"/>
+                                        <constraint firstItem="4YF-5G-2GL" firstAttribute="top" secondItem="glj-Js-yzl" secondAttribute="top" constant="1" id="jb6-eW-h4w"/>
+                                        <constraint firstItem="4YF-5G-2GL" firstAttribute="leading" secondItem="jwh-yA-JAl" secondAttribute="leading" id="kQX-hm-jhX"/>
+                                        <constraint firstItem="SAv-hf-5Jl" firstAttribute="centerY" secondItem="BHB-8E-gCY" secondAttribute="centerY" id="ovA-SD-uPG"/>
+                                        <constraint firstItem="BHB-8E-gCY" firstAttribute="centerY" secondItem="glj-Js-yzl" secondAttribute="centerY" id="qp7-gU-9ha"/>
+                                        <constraint firstItem="SAv-hf-5Jl" firstAttribute="leading" secondItem="jwh-yA-JAl" secondAttribute="trailing" constant="8" symbolic="YES" id="wdu-eT-6rg"/>
+                                        <constraint firstItem="4YF-5G-2GL" firstAttribute="leading" secondItem="glj-Js-yzl" secondAttribute="leading" constant="13" id="xo2-db-UtH"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="assignmentLabel" destination="aAy-xk-krO" id="F7Q-Dy-f5L"/>
-                                    <outlet property="dueLabel" destination="upX-vZ-6zu" id="V3X-sc-ZSV"/>
-                                    <outlet property="markCompletedButton" destination="drR-eJ-3HI" id="5qX-JI-kC3"/>
+                                    <outlet property="assignmentLabel" destination="4YF-5G-2GL" id="M3j-jM-wR0"/>
+                                    <outlet property="dueLabel" destination="SAv-hf-5Jl" id="0qW-Zh-wSL"/>
+                                    <outlet property="markCompletedButton" destination="BHB-8E-gCY" id="cMq-bP-gDh"/>
+                                    <outlet property="subtitleLabel" destination="jwh-yA-JAl" id="3jN-4A-ZkR"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1449,7 +1463,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Shaping of the Modern World" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="wO0-rS-FIY">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Assignment Name" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="wO0-rS-FIY">
                                             <rect key="frame" x="80" y="7" width="225" height="29"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="textColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>

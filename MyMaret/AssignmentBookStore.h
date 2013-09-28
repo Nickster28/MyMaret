@@ -23,6 +23,9 @@
 // Adds an assignment to the store
 - (void)addAssignmentWithName:(NSString *)name dueDate:(NSDate *)dueDate forClassWithName:(NSString *)className;
 
+// Removes old assignments that were due previously
+- (void)removeOldAssignments;
+
 
 /************ ACCESSING ASSIGNMENTS BY CLASS ****************/
 
@@ -70,9 +73,6 @@
 // Removes the given assignment
 - (void)removeAssignmentWithDayIndex:(NSUInteger)dayIndex assignmentIndex:(NSUInteger)assignmentIndex;
 
-
-// Returns whether or not a class takes place on a given day
-- (BOOL)isClassNamed:(NSString *)className onDayWithIndex:(NSUInteger)index;
 
 
 /*********** ACCESSING ASSIGNMENTS DUE TODAY ****************/

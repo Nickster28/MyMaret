@@ -30,18 +30,22 @@
 
 
 - (void)bindAssignment:(Assignment *)assignment
-  shouldDisplayDueTime:(BOOL)shouldDisplayDueTime
+  shouldDisplayDueTime:(BOOL)shouldDisplayDueTime shouldDisplayClass:(BOOL)shouldDisplayClass
 {
     [[self assignmentLabel] setText:[assignment assignmentName]];
-    [[self subtitleLabel] setText:[assignment className]];
+    
+    // Only display the class if we're supposed to
+    if (shouldDisplayClass) {
+        [[self subtitleLabel] setText:[assignment className]];
+    } else [[self subtitleLabel] setText:@""];
     
     // Set the image of the button to not completed
     [[self markCompletedButton] setImage:[UIImage imageNamed:@"assignmentNotCompletedIcon"] forState:UIControlStateNormal];
     
     // Display the appropriate due time/date
     if (shouldDisplayDueTime) {
-        [[self dueLabel] setText:[assignment dueTimeAsString]];
-    } else [[self dueLabel] setText:[assignment dueDateAsString]];
+        [[self dueLabel] setText:[NSString stringWithFormat:@"Due: %@", [assignment dueTimeAsString]]];
+    } else [[self dueLabel] setText:[NSString stringWithFormat:@"Due: %@", [assignment dueDateAsString]]];
 }
 
 

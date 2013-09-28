@@ -91,6 +91,10 @@ extern const NSUInteger todayIndexKey;
 - (NSString *)startTimeForClassNamed:(NSString *)className onDayWithIndex:(NSUInteger)weekdayIndex;
 
 
+// Returns whether or not a class takes place on a given day
+- (BOOL)isClassNamed:(NSString *)className onDayWithIndex:(NSUInteger)dayIndex;
+
+
 // Deletes all store data
 - (BOOL)clearStore;
 
