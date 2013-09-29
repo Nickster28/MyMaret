@@ -261,10 +261,17 @@
     // Gather all the class info together
     NSString *assignmentName = [(TextEditCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] enteredText];
     
+    if ([assignmentName isEqualToString:@""]) {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Whoops!"
+                                                     message:@"Looks like you forgot to set the assignment name.  Tap on the \"Name:\" cell to enter it."
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+        return;
+    }
+    
     NSString *className = [self className];
-    
-    NSDate *dueDate = [(DateTimeDisplayCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]] date];
-    
     
     if (!className) {
         UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Whoops!"
@@ -275,6 +282,11 @@
         [av show];
         return;
     }
+    
+    NSDate *dueDate = [(DateTimeDisplayCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]] date];
+    
+    
+    
     
     
     // Figure out the due date's day index

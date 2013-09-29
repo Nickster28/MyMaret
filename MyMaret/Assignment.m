@@ -65,8 +65,7 @@ NSString * const AssignmentDueDateDateCompsEncodingKey = @"dueDateDateComps";
     
     // See if the announcement was posted today
     if (self.dueDateDateComps.day == todayDateComponents.day &&
-        self.dueDateDateComps.month == todayDateComponents.month &&
-        self.dueDateDateComps.year == todayDateComponents.year) {
+        self.dueDateDateComps.month == todayDateComponents.month) {
         
         return @"Today";
         

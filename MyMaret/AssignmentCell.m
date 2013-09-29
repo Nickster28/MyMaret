@@ -8,6 +8,7 @@
 
 #import "AssignmentCell.h"
 #import "Assignment.h"
+#import "UIColor+SchoolColor.h"
 
 @implementation AssignmentCell
 
@@ -41,7 +42,7 @@
     // Set the image of the button to not completed
     [[self markCompletedButton] setImage:[UIImage imageNamed:@"assignmentNotCompletedIcon"] forState:UIControlStateNormal];
     
-    // Display the appropriate due time/date
+    // Display the appropriate due time/date by making "Due:" in black, and the due date/time in green
     NSMutableAttributedString *attrString;
     if (shouldDisplayDueTime) {
         attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Due: %@", [assignment dueTimeAsString]]];
@@ -50,13 +51,15 @@
     }
     
 
-    self.titleAttrString addAttribute:NSForegroundColorAttributeName
-value:[UIColor schoolComplementaryColor]
-range:NSMakeRange(0, 19)];
+    [attrString addAttribute:NSForegroundColorAttributeName
+                       value:[UIColor blackColor]
+                       range:NSMakeRange(0, 4)];
     
-    [self.titleAttrString addAttribute:NSForegroundColorAttributeName
-                                 value:[UIColor blackColor]
-                                 range:NSMakeRange(19, self.titleAttrString.length - 19)];
+    [attrString addAttribute:NSForegroundColorAttributeName
+                       value:[UIColor schoolBarColor]
+                       range:NSMakeRange(4, attrString.length - 4)];
+    
+    [[self dueLabel] setAttributedText:attrString];
     
 }
 
