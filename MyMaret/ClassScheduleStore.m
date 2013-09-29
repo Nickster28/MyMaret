@@ -68,13 +68,15 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 
 - (void)checkLastTodayIndexOverride
 {
+    // If we're not on the day when the index was overriden,
+    // ignore it
     if (self.lastTodayIndexOverride) {
-        NSDateComponents *todayComps = [[NSCalendar currentCalendar] components:NSDayCalendarUnit
+        NSDateComponents *todayComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit)
                                                                        fromDate:[NSDate date]];
-        NSDateComponents *lastOverrideComps = [[NSCalendar currentCalendar] components:NSDayCalendarUnit
+        NSDateComponents *lastOverrideComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit)
                                                                               fromDate:[self lastTodayIndexOverride]];
         
-        if (todayComps.day != lastOverrideComps.day) {
+        if (todayComps.month != lastOverrideComps.month || todayComps.day != lastOverrideComps.day) {
             [self setLastTodayIndexOverride:nil];
         }
     }

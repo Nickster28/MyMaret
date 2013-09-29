@@ -188,7 +188,7 @@
             return 50.0;
             
         case 1:
-            return 74.0;
+            return 64.0;
             
         case 2:
             return 74.0;
