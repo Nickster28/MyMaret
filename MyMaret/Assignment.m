@@ -116,4 +116,12 @@ NSString * const AssignmentDueDateDateCompsEncodingKey = @"dueDateDateComps";
 }
 
 
+- (BOOL)isEqual:(id)object
+{
+    Assignment *assignmentToCompare = (Assignment *)object;
+    
+    return [assignmentToCompare.assignmentName isEqualToString:self.assignmentName] && [assignmentToCompare.dueDate isEqualToDate:self.dueDate] && [assignmentToCompare.className isEqualToString:self.className];
+}
+
+
 @end

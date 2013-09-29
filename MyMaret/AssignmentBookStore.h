@@ -29,6 +29,7 @@
 
 /************ ACCESSING ASSIGNMENTS BY CLASS ****************/
 
+
 // The number of classes the user is in
 - (NSUInteger)numberOfClasses;
 

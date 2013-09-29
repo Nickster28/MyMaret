@@ -293,7 +293,6 @@
 /***************** Assignments by Class *******************/
 
 
-
 - (NSUInteger)numberOfClasses
 {
     return [[self assignmentsByClassDictionary] count];
@@ -343,7 +342,9 @@
     
     // We need to remove this assignment from BOTH dictionaries,
     // so find its index in the by-date dictionary
-    NSUInteger assignmentDateIndex = [(NSMutableArray *)[[self assignmentsByDateDictionary] objectForKey:[assignmentToDelete dueDateDateComps]] indexOfObject:assignmentToDelete];
+    NSArray *dateAssignmentsArray = [[self assignmentsByDateDictionary] objectForKey:[assignmentToDelete dueDateDateComps]];
+    
+    NSUInteger assignmentDateIndex = (dateAssignmentsArray) ? [dateAssignmentsArray indexOfObject:assignmentToDelete] : NSNotFound;
     
     
     // If we haven't already, remove the assignment from
@@ -428,7 +429,9 @@
     
     // We need to remove this assignment from BOTH dictionaries,
     // so find its index in the by-class dictionary
-    NSUInteger assignmentClassIndex = [(NSMutableArray *)[[self assignmentsByClassDictionary] objectForKey:[assignmentToDelete className]] indexOfObject:assignmentToDelete];
+    NSArray *classAssignmentsArray = [[self assignmentsByClassDictionary] objectForKey:[assignmentToDelete className]];
+    
+    NSUInteger assignmentClassIndex = (classAssignmentsArray) ? [classAssignmentsArray indexOfObject:assignmentToDelete] : NSNotFound;
     
     
     // If we haven't already, remove the assignment from

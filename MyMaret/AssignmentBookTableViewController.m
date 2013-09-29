@@ -189,23 +189,41 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
 {
     NSIndexPath *completedIP = [self.tableView indexPathForCell:cell];
     
+    NSUInteger numAssignmentsInSection;
+    
     // Delete the assignment from the store
     if ([self assignmentBookViewIndex] == kMyMaretAssignmentBookViewClass) {
+        
+        // Get the number of assignments for this class after we delete 1
+        numAssignmentsInSection = [[AssignmentBookStore sharedStore] numberOfAssignmentsForClassWithIndex:completedIP.section] - 1;
+        
         [[AssignmentBookStore sharedStore] removeAssignmentWithClassIndex:completedIP.section
                                                           assignmentIndex:completedIP.row];
     } else {
+        
+        // Get the number of assignments for this day after we delete 1
+        numAssignmentsInSection = [[AssignmentBookStore sharedStore] numberOfAssignmentsForDayWithIndex:completedIP.section] - 1;
+        
         [[AssignmentBookStore sharedStore] removeAssignmentWithDayIndex:completedIP.section
                                                         assignmentIndex:completedIP.row];
     }
     
-    // Remove the cell from our table
-    double delayInSeconds = 2.0;
+    double delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         
-        [self.tableView deleteRowsAtIndexPaths:@[completedIP]
-                              withRowAnimation:UITableViewRowAnimationRight];
+        // Remove the assignment from our table
+        // If this was the only assignment in the section, remove the whole section
+        // Otherwise, just remove the row
+        if (numAssignmentsInSection == 0) {
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:completedIP.section]
+                          withRowAnimation:UITableViewRowAnimationRight];
+        } else {
+            [self.tableView deleteRowsAtIndexPaths:@[completedIP]
+                                  withRowAnimation:UITableViewRowAnimationRight];
+        }
     });
+
 }
 
 
