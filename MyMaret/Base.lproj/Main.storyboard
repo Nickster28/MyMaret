@@ -223,66 +223,60 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History Paper on Accountability" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="171" translatesAutoresizingMaskIntoConstraints="NO" id="IEC-9n-Mj5">
-                                            <rect key="frame" x="20" y="2" width="171" height="40"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Paper on Accountability" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="191" translatesAutoresizingMaskIntoConstraints="NO" id="jNd-LT-iSp">
+                                            <rect key="frame" x="40" y="1" width="191" height="40"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Due: 12:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efi-gY-gFC">
-                                            <rect key="frame" x="199" y="21" width="84" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTq-kv-PCV">
+                                            <rect key="frame" x="227" y="21" width="88" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="84" id="ivk-rA-FMw"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="Due:">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content=" Today">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Acc. US History" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b0w-78-Y7P">
-                                            <rect key="frame" x="20" y="42" width="171" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Acc. US History" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYE-zP-8ax">
+                                            <rect key="frame" x="40" y="41" width="191" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OP3-G0-4ZP">
-                                            <rect key="frame" x="290" y="19" width="25" height="25"/>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Clx-40-ivK">
+                                            <rect key="frame" x="5" y="19" width="25" height="25"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="Zog-mD-H0h"/>
-                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <state key="normal" image="assignmentNotCompletedIcon">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="markAssignmentAsCompleted:" destination="K6P-B7-f39" eventType="touchUpInside" id="awR-N5-aGw"/>
+                                                <action selector="markAssignmentAsCompleted:" destination="K6P-B7-f39" eventType="touchUpInside" id="Caw-dJ-jdu"/>
+                                                <action selector="markAssignmentAsCompleted:" destination="CKV-R8-S91" eventType="touchUpInside" id="D0G-sY-cjd"/>
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstItem="efi-gY-gFC" firstAttribute="top" secondItem="Mdz-jT-PpV" secondAttribute="top" constant="21" id="4Hq-bJ-dkG"/>
-                                        <constraint firstItem="IEC-9n-Mj5" firstAttribute="leading" secondItem="Mdz-jT-PpV" secondAttribute="leading" constant="20" symbolic="YES" id="5nI-Rr-ING"/>
-                                        <constraint firstItem="IEC-9n-Mj5" firstAttribute="trailing" secondItem="b0w-78-Y7P" secondAttribute="trailing" id="CCA-36-i2y"/>
-                                        <constraint firstItem="IEC-9n-Mj5" firstAttribute="bottom" secondItem="efi-gY-gFC" secondAttribute="bottom" id="Gcl-CW-a0a"/>
-                                        <constraint firstItem="efi-gY-gFC" firstAttribute="centerY" secondItem="OP3-G0-4ZP" secondAttribute="centerY" id="JSF-3g-2v3"/>
-                                        <constraint firstItem="b0w-78-Y7P" firstAttribute="leading" secondItem="IEC-9n-Mj5" secondAttribute="leading" id="OP3-f8-0MZ"/>
-                                        <constraint firstItem="efi-gY-gFC" firstAttribute="centerY" secondItem="Mdz-jT-PpV" secondAttribute="centerY" id="PDO-dV-Muw"/>
-                                        <constraint firstItem="b0w-78-Y7P" firstAttribute="top" secondItem="IEC-9n-Mj5" secondAttribute="bottom" id="QaJ-Up-40T"/>
-                                        <constraint firstAttribute="bottom" secondItem="b0w-78-Y7P" secondAttribute="bottom" id="UGf-MR-Qxu"/>
-                                        <constraint firstAttribute="trailing" secondItem="OP3-G0-4ZP" secondAttribute="trailing" constant="5" id="i18-ly-hy6"/>
-                                        <constraint firstItem="efi-gY-gFC" firstAttribute="leading" secondItem="IEC-9n-Mj5" secondAttribute="trailing" constant="8" symbolic="YES" id="ooB-Rk-Mg6"/>
-                                        <constraint firstItem="IEC-9n-Mj5" firstAttribute="top" secondItem="Mdz-jT-PpV" secondAttribute="top" constant="2" id="y0e-Ac-m4d"/>
-                                        <constraint firstItem="OP3-G0-4ZP" firstAttribute="leading" secondItem="efi-gY-gFC" secondAttribute="trailing" constant="7" id="yGM-ik-UX9"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="assignmentLabel" destination="IEC-9n-Mj5" id="nzG-ji-OlF"/>
-                                    <outlet property="dueLabel" destination="efi-gY-gFC" id="rJg-3z-LS5"/>
-                                    <outlet property="markCompletedButton" destination="OP3-G0-4ZP" id="Og3-rg-7Dl"/>
-                                    <outlet property="subtitleLabel" destination="b0w-78-Y7P" id="eDt-cH-uuS"/>
+                                    <outlet property="assignmentLabel" destination="jNd-LT-iSp" id="bLW-iS-tRo"/>
+                                    <outlet property="dueLabel" destination="oTq-kv-PCV" id="rrM-Hg-pGz"/>
+                                    <outlet property="markCompletedButton" destination="Clx-40-ivK" id="JoS-Pq-KsY"/>
+                                    <outlet property="subtitleLabel" destination="rYE-zP-8ax" id="2ly-pw-6Tk"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="announcementCell" rowHeight="74" id="LIQ-6g-LaT" customClass="AnnouncementCell">
@@ -1362,7 +1356,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SAv-hf-5Jl">
-                                            <rect key="frame" x="231" y="21" width="84" height="21"/>
+                                            <rect key="frame" x="227" y="21" width="88" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <attributedString key="attributedText">
                                                 <fragment content="Due:">
@@ -1372,7 +1366,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                         <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                     </attributes>
                                                 </fragment>
-                                                <fragment content=" 12:00">
+                                                <fragment content=" Today">
                                                     <attributes>
                                                         <color key="NSColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                                                         <font key="NSFont" size="17" name="HelveticaNeue"/>
@@ -1398,7 +1392,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             </state>
                                             <connections>
                                                 <action selector="markAssignmentAsCompleted:" destination="CKV-R8-S91" eventType="touchUpInside" id="Rcq-x1-2jy"/>
-                                                <action selector="markAssignmentAsCompleted:" destination="K6P-B7-f39" eventType="touchUpInside" id="yhO-9X-Y2G"/>
                                             </connections>
                                         </button>
                                     </subviews>

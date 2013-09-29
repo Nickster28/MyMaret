@@ -283,7 +283,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
     // Remove all the old articles onscreen with an animation
     // Make an array of all the NSIndexPaths to delete
     NSMutableArray *rowsToDelete = [NSMutableArray array];
-    for (int i = 0; i < fromCount; i++) {
+    for (NSUInteger i = 0; i < fromCount; i++) {
         NSIndexPath *ip = [NSIndexPath indexPathForRow:i
                                              inSection:0];
         [rowsToDelete addObject:ip];
@@ -293,7 +293,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
     // Insert all of the new articles onscreen with an animation
     // Make an array of all the indexpaths to insert
     NSMutableArray *rowsToInsert = [NSMutableArray array];
-    for (int i = 0; i < toCount; i++) {
+    for (NSUInteger i = 0; i < toCount; i++) {
         
         NSIndexPath *ip = [NSIndexPath indexPathForRow:i
                                              inSection:0];

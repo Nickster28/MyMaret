@@ -127,7 +127,7 @@ NSString * const MyMaretLastNewspaperUpdateKey = @"MyMaretLastNewspaperUpdateKey
     [self makeNewArticlesDictionary];
     
     // Loop through the new articles, adding each one to the appropriate key/value array
-    for (int i = 0; i < articlesToAdd.count; i++) {
+    for (NSUInteger i = 0; i < articlesToAdd.count; i++) {
         PFObject *object = [articlesToAdd objectAtIndex:i];
         
         // The top NUM_POPULAR_ARTICLES are "popular"

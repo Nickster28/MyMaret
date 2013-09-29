@@ -97,7 +97,7 @@
         _emptySectionsDictionary = [NSMutableDictionary dictionary];
         
         NSUInteger numKeys = [self.tableView numberOfSections];
-        for (int i = 0; i < numKeys; i++) {
+        for (NSUInteger i = 0; i < numKeys; i++) {
             [_emptySectionsDictionary setObject:[NSNumber numberWithBool:FALSE]
                                    forKey:[NSNumber numberWithInt:i]];
         }
@@ -444,20 +444,36 @@
 // Called when the user marks an assignment as completed
 - (void)assignmentCellwasMarkedAsCompleted:(AssignmentCell *)cell
 {
-    // Find the location of the marked cell
-    NSIndexPath *markedIP = [self.tableView indexPathForCell:cell];
+    NSIndexPath *completedIP = [self.tableView indexPathForCell:cell];
     
-    // Remove it from the store
-    [[AssignmentBookStore sharedStore] removeAssignmentDueTodayWithAssignmentIndex:markedIP.row];
+    // Get the number of assignments for this class after we delete 1
+    NSUInteger numAssignmentsInSection = [[AssignmentBookStore sharedStore] numberOfAssignmentsDueToday] - 1;
     
-    double delayInSeconds = 0.6;
+    // Remove the assignment
+    [[AssignmentBookStore sharedStore] removeAssignmentDueTodayWithAssignmentIndex:completedIP.row];
+
+    
+    double delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         
-        // Remove it from the table
-        [self.tableView deleteRowsAtIndexPaths:@[markedIP]
-                              withRowAnimation:UITableViewRowAnimationRight];
+        // If this is the last assignment, we need to remove its row and THEN ADD ANOTHER row
+        // (The "No assignments" row)
+        if (numAssignmentsInSection == 0) {
+            [self.tableView beginUpdates];
+            [self.tableView deleteRowsAtIndexPaths:@[completedIP]
+                                  withRowAnimation:UITableViewRowAnimationRight];
+            [self.tableView insertRowsAtIndexPaths:@[completedIP]
+                                  withRowAnimation:UITableViewRowAnimationLeft];
+            [self.tableView endUpdates];
+        
+        // Otherwise, just remove the row
+        } else {
+            [self.tableView deleteRowsAtIndexPaths:@[completedIP]
+                                  withRowAnimation:UITableViewRowAnimationRight];
+        }
     });
+    
 }
 
 

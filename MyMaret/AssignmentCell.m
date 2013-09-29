@@ -45,7 +45,7 @@
     // Display the appropriate due time/date by making "Due:" in black, and the due date/time in green
     NSMutableAttributedString *attrString;
     if (shouldDisplayDueTime) {
-        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Due: %@", [assignment dueTimeAsString]]];
+        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Due: %@", [assignment dueTimeString]]];
     } else {
         attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Due: %@", [assignment dueDateAsString]]];
     }

@@ -257,7 +257,7 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
         
         // Loop through them, making a SchoolClass for each one and adding
         // it to the day's array of classes
-        for (int i = 0; i < dayClassTimes.count; i++) {
+        for (NSUInteger i = 0; i < dayClassTimes.count; i++) {
             SchoolClass *class = [[SchoolClass alloc] init];
             [class setClassTime:dayClassTimes[i]];
             

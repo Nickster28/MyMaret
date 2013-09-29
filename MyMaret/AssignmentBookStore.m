@@ -197,7 +197,7 @@
         
         // Otherwise, we need to delete all the assignments on this day
         NSUInteger dayIndex = [self indexForDayWithDateComponents:dateCompsKey];
-        for (int i = 0; i < [self numberOfAssignmentsForDayWithIndex:dayIndex]; i++) {
+        for (NSUInteger i = 0; i < [self numberOfAssignmentsForDayWithIndex:dayIndex]; i++) {
             
             // Remove each assignment
             [self removeAssignmentWithDayIndex:dayIndex assignmentIndex:i];
@@ -247,9 +247,9 @@
     
     // If there are no other entries for this due date,
     // add a new key/value pair
-    if (![[self assignmentsByDateDictionary] objectForKey:[newAssignment dueDateDateComps]]) {
+    if (![[self assignmentsByDateDictionary] objectForKey:[newAssignment dueDateDayDateComps]]) {
         [[self assignmentsByDateDictionary] setObject:[NSMutableArray array]
-                                               forKey:[newAssignment dueDateDateComps]];
+                                               forKey:[newAssignment dueDateDayDateComps]];
         
         
         // Tell the sorted due dates array that it's out of date,
@@ -258,7 +258,7 @@
     }
     
     // Add the assignment to our by-date dictionary
-    NSMutableArray *dateArray = [[self assignmentsByDateDictionary] objectForKey:[newAssignment dueDateDateComps]];
+    NSMutableArray *dateArray = [[self assignmentsByDateDictionary] objectForKey:[newAssignment dueDateDayDateComps]];
     [dateArray addObject:newAssignment];
     
     // Sort the by-date array so the assignments are in the right order
@@ -342,7 +342,7 @@
     
     // We need to remove this assignment from BOTH dictionaries,
     // so find its index in the by-date dictionary
-    NSArray *dateAssignmentsArray = [[self assignmentsByDateDictionary] objectForKey:[assignmentToDelete dueDateDateComps]];
+    NSArray *dateAssignmentsArray = [[self assignmentsByDateDictionary] objectForKey:[assignmentToDelete dueDateDayDateComps]];
     
     NSUInteger assignmentDateIndex = (dateAssignmentsArray) ? [dateAssignmentsArray indexOfObject:assignmentToDelete] : NSNotFound;
     
@@ -350,7 +350,7 @@
     // If we haven't already, remove the assignment from
     // our by-date dictionary
     if (assignmentDateIndex != NSNotFound) {
-        [self removeAssignmentWithDayIndex:[self indexForDayWithDateComponents:[assignmentToDelete dueDateDateComps]] assignmentIndex:assignmentDateIndex];
+        [self removeAssignmentWithDayIndex:[self indexForDayWithDateComponents:[assignmentToDelete dueDateDayDateComps]] assignmentIndex:assignmentDateIndex];
     }
     
 }
@@ -476,7 +476,7 @@
     Assignment *assignmentToRemove = [self assignmentDueTodayWithAssignmentIndex:assignmentIndex];
     
     // Find the day index for the given assignment
-    NSUInteger dayIndex = [self indexForDayWithDateComponents:[assignmentToRemove dueDateDateComps]];
+    NSUInteger dayIndex = [self indexForDayWithDateComponents:[assignmentToRemove dueDateDayDateComps]];
     
     // Remove it from both dictionaries
     [self removeAssignmentWithDayIndex:dayIndex assignmentIndex:assignmentIndex];

@@ -9,9 +9,20 @@
 #import <Foundation/Foundation.h>
 
 @interface Assignment : NSObject <NSCoding>
+
+// The name of the class the assignment is for
 @property (nonatomic, strong) NSString *className;
+
+// The full due date of the assignment
 @property (nonatomic, strong) NSDate *dueDate;
-@property (nonatomic, strong) NSDateComponents *dueDateDateComps;
+
+// The date comps for the day the assignment is due (used for sorting by day due)
+@property (nonatomic, strong) NSDateComponents *dueDateDayDateComps;
+
+// The string containing the time the assignment is due (ex. "2:15")
+@property (nonatomic, strong) NSString *dueTimeString;
+
+// The name of the assignment
 @property (nonatomic, strong) NSString *assignmentName;
 
 
@@ -21,8 +32,5 @@
 // Returns either a string representation of the day,
 // or a name of a weekday if the assignment is due within the next week
 - (NSString *)dueDateAsString;
-
-// Returns a string representation of the due time
-- (NSString *)dueTimeAsString;
 
 @end

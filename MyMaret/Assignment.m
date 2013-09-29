@@ -9,10 +9,12 @@
 #import "Assignment.h"
 
 
+// The keys for archiving an assignment
 NSString * const AssignmentAssignmentNameEncodingKey = @"assignmentName";
 NSString * const AssignmentDueDateEncodingKey = @"dueDate";
 NSString * const AssignmentClassNameEncodingKey = @"className";
-NSString * const AssignmentDueDateDateCompsEncodingKey = @"dueDateDateComps";
+NSString * const AssignmentDueDateDayDateCompsEncodingKey = @"dueDateDayDateComps";
+NSString * const AssignmentDueTimeStringEncodingKey = @"dueTimeString";
 
 #define SECONDS_IN_WEEK 604800
 @implementation Assignment
@@ -27,8 +29,22 @@ NSString * const AssignmentDueDateDateCompsEncodingKey = @"dueDateDateComps";
         [self setDueDate:dueDate];
         [self setClassName:className];
         
-        [self setDueDateDateComps:[[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit)
-                                                                  fromDate:dueDate]];
+        // Pull out the day, month, and weekday to store in our date comps
+        [self setDueDateDayDateComps:[[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSWeekdayCalendarUnit)
+                                                                     fromDate:dueDate]];
+        
+        // Pull out the time the assignment is due to store in our due time string
+        NSDateComponents *dueDateDateComps = [[NSCalendar currentCalendar] components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:dueDate];
+        
+        // Get the hour, adjusting for military time
+        NSUInteger hour = dueDateDateComps.hour;
+        if (hour > 12) hour -= 12;
+        
+        // Get the minutes, adjusting for < 10 (ex. 9:5 vs 9:05)
+        NSUInteger minutes = dueDateDateComps.minute;
+        NSString *minutesString = (minutes < 10) ? [NSString stringWithFormat:@"0%d", minutes] : [NSString stringWithFormat:@"%d", minutes];
+        
+        [self setDueTimeString:[NSString stringWithFormat:@"%d:%@", hour, minutesString]];
     }
     
     return self;
@@ -40,7 +56,8 @@ NSString * const AssignmentDueDateDateCompsEncodingKey = @"dueDateDateComps";
     [aCoder encodeObject:[self assignmentName] forKey:AssignmentAssignmentNameEncodingKey];
     [aCoder encodeObject:[self dueDate] forKey:AssignmentDueDateEncodingKey];
     [aCoder encodeObject:[self className] forKey:AssignmentClassNameEncodingKey];
-    [aCoder encodeObject:[self dueDateDateComps] forKey:AssignmentDueDateDateCompsEncodingKey];
+    [aCoder encodeObject:[self dueDateDayDateComps] forKey:AssignmentDueDateDayDateCompsEncodingKey];
+    [aCoder encodeObject:[self dueTimeString] forKey:AssignmentDueTimeStringEncodingKey];
 }
 
 
@@ -51,7 +68,8 @@ NSString * const AssignmentDueDateDateCompsEncodingKey = @"dueDateDateComps";
         [self setAssignmentName:[aDecoder decodeObjectForKey:AssignmentAssignmentNameEncodingKey]];
         [self setDueDate:[aDecoder decodeObjectForKey:AssignmentDueDateEncodingKey]];
         [self setClassName:[aDecoder decodeObjectForKey:AssignmentClassNameEncodingKey]];
-        [self setDueDateDateComps:[aDecoder decodeObjectForKey:AssignmentDueDateDateCompsEncodingKey]];
+        [self setDueDateDayDateComps:[aDecoder decodeObjectForKey:AssignmentDueDateDayDateCompsEncodingKey]];
+        [self setDueTimeString:[aDecoder decodeObjectForKey:AssignmentDueTimeStringEncodingKey]];
     }
     
     return self;
@@ -64,15 +82,15 @@ NSString * const AssignmentDueDateDateCompsEncodingKey = @"dueDateDateComps";
     NSDateComponents *todayDateComponents = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit) fromDate:[NSDate date]];
     
     // See if the announcement was posted today
-    if (self.dueDateDateComps.day == todayDateComponents.day &&
-        self.dueDateDateComps.month == todayDateComponents.month) {
+    if (self.dueDateDayDateComps.day == todayDateComponents.day &&
+        self.dueDateDayDateComps.month == todayDateComponents.month) {
         
         return @"Today";
         
         // See if the announcement was posted some time in the last week
     } else if ([self.dueDate timeIntervalSinceDate:[NSDate date]] < SECONDS_IN_WEEK) {
         
-        switch (self.dueDateDateComps.weekday) {
+        switch (self.dueDateDayDateComps.weekday) {
             case 1:
                 return @"Sun.";
                 
@@ -98,8 +116,8 @@ NSString * const AssignmentDueDateDateCompsEncodingKey = @"dueDateDateComps";
     } else {
         
         // Otherwise just return the month/day in string form
-        NSNumber *day = [NSNumber numberWithInteger:self.dueDateDateComps.day];
-        NSNumber *month = [NSNumber numberWithInteger:self.dueDateDateComps.month];
+        NSNumber *day = [NSNumber numberWithInteger:self.dueDateDayDateComps.day];
+        NSNumber *month = [NSNumber numberWithInteger:self.dueDateDayDateComps.month];
         
         return [NSString stringWithFormat:@"%@/%@", month, day];
     }
@@ -109,26 +127,11 @@ NSString * const AssignmentDueDateDateCompsEncodingKey = @"dueDateDateComps";
 }
 
 
-- (NSString *)dueTimeAsString
-{
-    NSUInteger hour = self.dueDateDateComps.hour;
-    if (hour > 12) hour -= 12;
-    
-    NSUInteger minute = self.dueDateDateComps.minute;
-    
-    NSString *minuteString;
-    if (minute < 10) minuteString = [NSString stringWithFormat:@"0%d", minute];
-    else minuteString = [NSString stringWithFormat:@"%d", minute];
-    
-    return [NSString stringWithFormat:@"%d:%@", hour, minuteString];
-}
-
-
 - (BOOL)isEqual:(id)object
 {
     Assignment *assignmentToCompare = (Assignment *)object;
     
-    return [assignmentToCompare.assignmentName isEqualToString:self.assignmentName] && [assignmentToCompare.dueDate isEqualToDate:self.dueDate] && [assignmentToCompare.className isEqualToString:self.className];
+    return [assignmentToCompare.assignmentName isEqualToString:self.assignmentName] && [assignmentToCompare.dueDate isEqualToDate:self.dueDate] && [assignmentToCompare.className isEqualToString:self.className] && [assignmentToCompare.dueTimeString isEqualToString:self.dueTimeString];
 }
 
 

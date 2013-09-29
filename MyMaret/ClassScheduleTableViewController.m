@@ -51,7 +51,7 @@
     
     //Make an array of the indexpaths of the last row in each section
     NSMutableArray *indexPaths = [NSMutableArray array];
-    for (int i = 0; i < [self.tableView numberOfSections]; i++) {
+    for (NSUInteger i = 0; i < [self.tableView numberOfSections]; i++) {
         NSUInteger numRowsInSec = [self.tableView numberOfRowsInSection:i];
         
         NSUInteger delta = (editing) ? 0 : -1;

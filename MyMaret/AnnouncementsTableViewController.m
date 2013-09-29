@@ -105,7 +105,7 @@
         } else {
             // Make an array of all the NSIndexPaths to insert
             NSMutableArray *rowsToInsert = [NSMutableArray array];
-            for (int i = 0; i < numAdded; i++) {
+            for (NSUInteger i = 0; i < numAdded; i++) {
                 NSIndexPath *ip = [NSIndexPath indexPathForRow:i
                                                      inSection:0];
                 [rowsToInsert addObject:ip];
