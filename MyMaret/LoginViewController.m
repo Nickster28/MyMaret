@@ -21,6 +21,8 @@
 NSString * const LoginStatusLaunch = @"LoginStatusLaunch";
 NSString * const LoginStatusCancel = @"LoginStatusCancel";
 NSString * const LoginStatusLogout = @"LoginStatusLogout";
+NSString * const LoginStatusInvalidAccount = @"LoginStatusInvalidAccount";
+NSString * const LoginStatusLoginError = @"LoginStatusLoginError";
 
 
 @implementation LoginViewController
@@ -68,12 +70,18 @@ NSString * const LoginStatusLogout = @"LoginStatusLogout";
     else self.splashLogoImageView.layer.opacity = 0.0;
     
     
-    // If they cancelled, don't animate at all - otherwise, prep
-    // for animation of the title and login button
-    if ([self.loginStatus isEqualToString:LoginStatusCancel]) {
+    // If they didn't cancel or run into any errors,
+    // prep for animation of the title and login button
+    // Otherwise, don't animate
+    if ([self.loginStatus isEqualToString:LoginStatusLaunch] ||
+        [self.loginStatus isEqualToString:LoginStatusLogout]) {
+        
+        [self setInitialViewSettings];
+        
+    } else {
         [self.loginTitleImageView.layer setPosition:CGPointMake(160.0, 100.0)];
         [self.loginButton.layer setPosition:CGPointMake(160.0, 389)];
-    } else [self setInitialViewSettings];
+    }
 }
 
 
@@ -100,17 +108,6 @@ NSString * const LoginStatusLogout = @"LoginStatusLogout";
     // and login button
     } else if ([self.loginStatus isEqualToString:LoginStatusLogout]) {
         [self animateInTitleAndLoginButton];
-    } else {
-        
-        // The user cancelled login, so show an alert
-        NSString *errorMessage = @"In order to use MyMaret, you need to log in with your Maret username and password.  That way we can identify you and only give you access to Maret information if you are a Maret student or teacher.";
-        
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Please Log In"
-                                                     message:errorMessage
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil];
-        [av show];
     }
 }
 

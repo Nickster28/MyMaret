@@ -11,6 +11,8 @@
 extern NSString * const LoginStatusLaunch;
 extern NSString * const LoginStatusCancel;
 extern NSString * const LoginStatusLogout;
+extern NSString * const LoginStatusInvalidAccount;
+extern NSString * const LoginStatusLoginError;
 
 @interface LoginViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;

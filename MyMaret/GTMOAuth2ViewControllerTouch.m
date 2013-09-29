@@ -683,6 +683,9 @@ static Class gSignInClass = Nil;
     // If the user completed login and there is an error
     if (error != nil && [error code] != -1000) {
         
+        // Tell the login view controller that the user tried logging in and there was an error
+        [(LoginViewController *)self.navigationController.viewControllers[0] setLoginStatus:LoginStatusLoginError];
+        
         [self popView];
         
         NSString *errorMessage = [NSString stringWithFormat:@"Hold up!  Looks like Google couldn't verify your login info.  Try logging in again.  Error: %@", [error localizedDescription]];
@@ -693,10 +696,14 @@ static Class gSignInClass = Nil;
     } else if (error != nil) {
         
         [(LoginViewController *)self.navigationController.viewControllers[0] setLoginStatus:LoginStatusCancel];
+        
+        NSString *errorMessage = @"In order to use MyMaret, you need to log in with your Maret username and password.  That way we can identify you and only give you access to Maret information if you are a Maret student or teacher.";
+        
+        [self showAlertWithTitle:@"Please Log In"
+                         message:errorMessage];
           
     } else {
-        // Now black out the view and set the user's info
-        self.view.hidden = TRUE;
+        // Now set the user's info
         [self setUserInfo:auth.userEmail];
     }
       
@@ -739,12 +746,17 @@ static Class gSignInClass = Nil;
     NSString *domain = [emailAddr substringFromIndex:domainStart];
     if (![domain isEqualToString:schoolDomain]) {
         
+        // Tell the login view controller that the user tried logging in with an invalid account
+        [(LoginViewController *)self.navigationController.viewControllers[0] setLoginStatus:LoginStatusInvalidAccount];
+        
         [self popView];
         
         // Only allow Maret students and teachers to log in
         [self showAlertWithTitle:@"Sorry!"
                          message:@"In order to use MyMaret you have to log in with a Maret username and password.  Please try again."];
     } else {
+        // Black out the view
+        self.view.hidden = YES;
         
         // Mark them as logged in
         [[NSUserDefaults standardUserDefaults] setBool:YES
