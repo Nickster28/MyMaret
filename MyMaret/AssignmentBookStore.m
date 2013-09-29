@@ -233,7 +233,7 @@
     NSUInteger minute = [timeNums[1] integerValue];
     
     // Account for 24 hours
-    if (hour > 11 || hour < 7) hour += 12;
+    if (hour < 7) hour += 12;
     
     [dateComps setHour:hour];
     [dateComps setMinute:minute];

@@ -27,7 +27,7 @@ NSString * const AssignmentDueDateDateCompsEncodingKey = @"dueDateDateComps";
         [self setDueDate:dueDate];
         [self setClassName:className];
         
-        [self setDueDateDateComps:[[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSWeekdayCalendarUnit)
+        [self setDueDateDateComps:[[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit)
                                                                   fromDate:dueDate]];
     }
     
@@ -71,7 +71,7 @@ NSString * const AssignmentDueDateDateCompsEncodingKey = @"dueDateDateComps";
         return @"Today";
         
         // See if the announcement was posted some time in the last week
-    } else if ([[NSDate date] timeIntervalSinceDate:self.dueDate] < SECONDS_IN_WEEK) {
+    } else if ([self.dueDate timeIntervalSinceDate:[NSDate date]] < SECONDS_IN_WEEK) {
         
         switch (self.dueDateDateComps.weekday) {
             case 1:
@@ -112,7 +112,16 @@ NSString * const AssignmentDueDateDateCompsEncodingKey = @"dueDateDateComps";
 
 - (NSString *)dueTimeAsString
 {
-    return [NSString stringWithFormat:@"%d:%d", self.dueDateDateComps.hour, self.dueDateDateComps.minute];
+    NSUInteger hour = self.dueDateDateComps.hour;
+    if (hour > 12) hour -= 12;
+    
+    NSUInteger minute = self.dueDateDateComps.minute;
+    
+    NSString *minuteString;
+    if (minute < 10) minuteString = [NSString stringWithFormat:@"0%d", minute];
+    else minuteString = [NSString stringWithFormat:@"%d", minute];
+    
+    return [NSString stringWithFormat:@"%d:%@", hour, minuteString];
 }
 
 

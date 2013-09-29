@@ -35,17 +35,29 @@
     [[self assignmentLabel] setText:[assignment assignmentName]];
     
     // Only display the class if we're supposed to
-    if (shouldDisplayClass) {
-        [[self subtitleLabel] setText:[assignment className]];
-    } else [[self subtitleLabel] setText:@""];
+    [[self subtitleLabel] setText:[assignment className]];
+
     
     // Set the image of the button to not completed
     [[self markCompletedButton] setImage:[UIImage imageNamed:@"assignmentNotCompletedIcon"] forState:UIControlStateNormal];
     
     // Display the appropriate due time/date
+    NSMutableAttributedString *attrString;
     if (shouldDisplayDueTime) {
-        [[self dueLabel] setText:[NSString stringWithFormat:@"Due: %@", [assignment dueTimeAsString]]];
-    } else [[self dueLabel] setText:[NSString stringWithFormat:@"Due: %@", [assignment dueDateAsString]]];
+        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Due: %@", [assignment dueTimeAsString]]];
+    } else {
+        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Due: %@", [assignment dueDateAsString]]];
+    }
+    
+
+    self.titleAttrString addAttribute:NSForegroundColorAttributeName
+value:[UIColor schoolComplementaryColor]
+range:NSMakeRange(0, 19)];
+    
+    [self.titleAttrString addAttribute:NSForegroundColorAttributeName
+                                 value:[UIColor blackColor]
+                                 range:NSMakeRange(19, self.titleAttrString.length - 19)];
+    
 }
 
 
