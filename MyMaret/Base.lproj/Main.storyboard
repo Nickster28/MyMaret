@@ -216,7 +216,7 @@
                                     <outlet property="classTimeLabel" destination="AWm-yT-KPW" id="q6b-iJ-e25"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="assignmentCell" rowHeight="64" id="K6P-B7-f39" customClass="AssignmentCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="assignmentCell" rowHeight="64" id="K6P-B7-f39" customClass="AssignmentCell">
                                 <rect key="frame" x="0.0" y="169" width="320" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K6P-B7-f39" id="Mdz-jT-PpV">
@@ -267,7 +267,6 @@
                                             </state>
                                             <connections>
                                                 <action selector="markAssignmentAsCompleted:" destination="K6P-B7-f39" eventType="touchUpInside" id="Caw-dJ-jdu"/>
-                                                <action selector="markAssignmentAsCompleted:" destination="CKV-R8-S91" eventType="touchUpInside" id="D0G-sY-cjd"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -1391,7 +1390,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="markAssignmentAsCompleted:" destination="CKV-R8-S91" eventType="touchUpInside" id="Rcq-x1-2jy"/>
+                                                <action selector="markAssignmentAsCompleted:" destination="CKV-R8-S91" eventType="touchUpInside" id="h4K-ih-lcc"/>
                                             </connections>
                                         </button>
                                     </subviews>

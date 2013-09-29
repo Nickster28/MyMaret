@@ -353,6 +353,7 @@
         [self removeAssignmentWithDayIndex:[self indexForDayWithDateComponents:[assignmentToDelete dueDateDayDateComps]] assignmentIndex:assignmentDateIndex];
     }
     
+    [self saveChanges];
 }
 
 
@@ -439,6 +440,8 @@
     if (assignmentClassIndex != NSNotFound) {
         [self removeAssignmentWithClassIndex:[self indexForClassWithName:[assignmentToDelete className]] assignmentIndex:assignmentClassIndex];
     }
+    
+    [self saveChanges];
 }
 
 
