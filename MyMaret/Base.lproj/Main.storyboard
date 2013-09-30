@@ -56,38 +56,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volleyball Game This Thursday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wxc-Nb-ZOH">
-                                <rect key="frame" x="10" y="74" width="300" height="23"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Girls Varsity Volleyball Game This Saturday" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="o8Y-Nb-h2O">
+                                <rect key="frame" x="10" y="74" width="300" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="23" id="aVu-HZ-MmQ"/>
+                                    <constraint firstAttribute="height" constant="42" id="vBB-i0-bbB"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5l-g7-UXq">
-                                <rect key="frame" x="5" y="97" width="310" height="383"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HQH-Fl-iPl">
+                                <rect key="frame" x="5" y="116" width="310" height="364"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="310" id="XPR-qu-LQc"/>
-                                </constraints>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
-                                    <outlet property="delegate" destination="cnY-5i-tkh" id="dcS-8Z-3Fn"/>
+                                    <outlet property="delegate" destination="wE8-6J-BXm" id="kuv-QC-3BC"/>
                                 </connections>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Wxc-Nb-ZOH" firstAttribute="leading" secondItem="RdN-B4-eVj" secondAttribute="leading" constant="10" id="2ji-oD-2GX"/>
-                            <constraint firstItem="k5l-g7-UXq" firstAttribute="leading" secondItem="RdN-B4-eVj" secondAttribute="leading" constant="5" id="8Gr-8j-DMq"/>
-                            <constraint firstItem="k5l-g7-UXq" firstAttribute="top" secondItem="Wxc-Nb-ZOH" secondAttribute="bottom" id="KcD-Lc-y0S"/>
-                            <constraint firstItem="Wxc-Nb-ZOH" firstAttribute="centerX" secondItem="RdN-B4-eVj" secondAttribute="centerX" id="ZdZ-H8-dKe"/>
-                            <constraint firstItem="Wxc-Nb-ZOH" firstAttribute="top" secondItem="8K7-C8-yDl" secondAttribute="bottom" constant="10" id="czZ-Kg-gF4"/>
-                            <constraint firstAttribute="trailing" secondItem="k5l-g7-UXq" secondAttribute="trailing" constant="5" id="rzq-rq-RrV"/>
-                            <constraint firstItem="o1L-Ab-Gpt" firstAttribute="top" secondItem="k5l-g7-UXq" secondAttribute="bottom" id="ujl-m7-ndk"/>
+                            <constraint firstItem="HQH-Fl-iPl" firstAttribute="centerX" secondItem="o8Y-Nb-h2O" secondAttribute="centerX" id="4b2-gN-HEf"/>
+                            <constraint firstItem="HQH-Fl-iPl" firstAttribute="leading" secondItem="RdN-B4-eVj" secondAttribute="leading" constant="5" id="Rn4-hw-BeM"/>
+                            <constraint firstItem="HQH-Fl-iPl" firstAttribute="top" secondItem="o8Y-Nb-h2O" secondAttribute="bottom" id="idH-gb-ueA"/>
+                            <constraint firstItem="o8Y-Nb-h2O" firstAttribute="leading" secondItem="RdN-B4-eVj" secondAttribute="leading" constant="10" id="j0f-FJ-fxt"/>
+                            <constraint firstItem="o8Y-Nb-h2O" firstAttribute="top" secondItem="8K7-C8-yDl" secondAttribute="bottom" constant="10" id="tfu-9f-zdr"/>
+                            <constraint firstAttribute="bottom" secondItem="HQH-Fl-iPl" secondAttribute="bottom" id="tnB-fj-KtP"/>
+                            <constraint firstItem="o8Y-Nb-h2O" firstAttribute="centerX" secondItem="RdN-B4-eVj" secondAttribute="centerX" id="xLd-gl-61j"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CEV-zQ-YmZ">
@@ -98,9 +96,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="bodyTextView" destination="k5l-g7-UXq" id="2Ep-6D-mAL"/>
                         <outlet property="emailButton" destination="C0D-If-YAf" id="rX8-mP-kLr"/>
-                        <outlet property="titleLabel" destination="Wxc-Nb-ZOH" id="iWR-oZ-LhI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tiH-bR-F5j" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -119,37 +115,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volleyball Game This Thursday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bd-0R-tdf">
-                                <rect key="frame" x="10" y="74" width="300" height="23"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Girls Varsity Volleyball Game This Saturday" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="rOm-qS-SNw">
+                                <rect key="frame" x="10" y="74" width="300" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="23" id="9IE-aN-Gdb"/>
-                                    <constraint firstAttribute="width" constant="300" id="Mxp-Lu-FrU"/>
+                                    <constraint firstAttribute="height" constant="42" id="TIL-jy-tl5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ReE-To-y0d">
-                                <rect key="frame" x="2" y="97" width="316" height="383"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DHK-79-gCh">
+                                <rect key="frame" x="2" y="116" width="316" height="364"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="316" id="Jsl-NW-62R"/>
-                                </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="wE8-6J-BXm" id="pCn-jn-I1r"/>
+                                </connections>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="rD8-Vk-hcO" firstAttribute="top" secondItem="ReE-To-y0d" secondAttribute="bottom" id="Mpi-Fc-Klh"/>
-                            <constraint firstItem="ReE-To-y0d" firstAttribute="top" secondItem="4bd-0R-tdf" secondAttribute="bottom" id="QzS-HM-6Ko"/>
-                            <constraint firstItem="4bd-0R-tdf" firstAttribute="leading" secondItem="Wu4-oS-13h" secondAttribute="leading" constant="10" id="Vfa-qT-De3"/>
-                            <constraint firstItem="ReE-To-y0d" firstAttribute="leading" secondItem="Wu4-oS-13h" secondAttribute="leading" constant="2" id="a2o-CL-hfC"/>
-                            <constraint firstItem="4bd-0R-tdf" firstAttribute="top" secondItem="TO8-pH-Ry3" secondAttribute="bottom" constant="10" id="jWB-JS-sAr"/>
-                            <constraint firstAttribute="trailing" secondItem="ReE-To-y0d" secondAttribute="trailing" constant="2" id="tVh-x2-5x2"/>
-                            <constraint firstAttribute="trailing" secondItem="4bd-0R-tdf" secondAttribute="trailing" constant="10" id="yYn-BN-Fh0"/>
+                            <constraint firstItem="DHK-79-gCh" firstAttribute="leading" secondItem="Wu4-oS-13h" secondAttribute="leading" constant="2" id="1R4-Dj-nCZ"/>
+                            <constraint firstItem="rOm-qS-SNw" firstAttribute="centerX" secondItem="Wu4-oS-13h" secondAttribute="centerX" id="6JT-Z6-NjK"/>
+                            <constraint firstItem="DHK-79-gCh" firstAttribute="centerX" secondItem="rOm-qS-SNw" secondAttribute="centerX" id="HXw-0z-lg9"/>
+                            <constraint firstItem="DHK-79-gCh" firstAttribute="top" secondItem="rOm-qS-SNw" secondAttribute="bottom" id="VQv-ed-1IG"/>
+                            <constraint firstAttribute="bottom" secondItem="DHK-79-gCh" secondAttribute="bottom" id="i7k-gP-94b"/>
+                            <constraint firstItem="rOm-qS-SNw" firstAttribute="top" secondItem="TO8-pH-Ry3" secondAttribute="bottom" constant="10" id="jU9-sh-9Nj"/>
+                            <constraint firstItem="rOm-qS-SNw" firstAttribute="leading" secondItem="Wu4-oS-13h" secondAttribute="leading" constant="10" id="qoE-Rn-Dal"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="V2b-GD-Qf0">
@@ -161,7 +156,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="emailButton" destination="qUK-m2-aKW" id="uzY-rA-CpC"/>
-                        <outlet property="titleLabel" destination="4bd-0R-tdf" id="hKb-hz-WEo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RUB-K1-Kmw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -547,40 +541,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1u-27-DS3">
-                                <rect key="frame" x="5" y="97" width="310" height="383"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="310" id="sxG-NE-lGt"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Rf0-Xu-MXC" id="meB-jO-rNC"/>
-                                </connections>
-                            </textView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volleyball Game This Thursday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKK-zC-FrB">
-                                <rect key="frame" x="10" y="74" width="300" height="23"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Girls Varsity Volleyball Game This Saturday" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="zRx-IH-d4e">
+                                <rect key="frame" x="10" y="74" width="300" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="c0f-xZ-Hzs"/>
-                                    <constraint firstAttribute="height" constant="23" id="nZW-if-0C7"/>
+                                    <constraint firstAttribute="height" constant="42" id="GqQ-HL-QI4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UWI-q0-CXc">
+                                <rect key="frame" x="5" y="116" width="310" height="364"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Rf0-Xu-MXC" id="xLx-uA-YUp"/>
+                                </connections>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="d1u-27-DS3" firstAttribute="top" secondItem="YKK-zC-FrB" secondAttribute="bottom" id="Khz-eF-lbu"/>
-                            <constraint firstAttribute="bottom" secondItem="d1u-27-DS3" secondAttribute="bottom" id="PHz-ns-dd9"/>
-                            <constraint firstItem="d1u-27-DS3" firstAttribute="leading" secondItem="JtP-9g-jJa" secondAttribute="leading" constant="5" id="eOG-Bv-yjS"/>
-                            <constraint firstAttribute="trailing" secondItem="d1u-27-DS3" secondAttribute="trailing" constant="5" id="gp7-H3-G6v"/>
-                            <constraint firstItem="YKK-zC-FrB" firstAttribute="leading" secondItem="JtP-9g-jJa" secondAttribute="leading" constant="10" id="jYU-7s-JgF"/>
-                            <constraint firstItem="YKK-zC-FrB" firstAttribute="top" secondItem="Df1-Ld-TgY" secondAttribute="bottom" constant="10" id="jue-XO-4Vr"/>
-                            <constraint firstAttribute="trailing" secondItem="YKK-zC-FrB" secondAttribute="trailing" constant="10" id="yOe-Dx-6Sc"/>
+                            <constraint firstAttribute="bottom" secondItem="UWI-q0-CXc" secondAttribute="bottom" id="4QS-kQ-ysI"/>
+                            <constraint firstItem="UWI-q0-CXc" firstAttribute="top" secondItem="zRx-IH-d4e" secondAttribute="bottom" id="65k-3e-Eya"/>
+                            <constraint firstItem="zRx-IH-d4e" firstAttribute="leading" secondItem="JtP-9g-jJa" secondAttribute="leading" constant="10" id="6aa-q4-jeE"/>
+                            <constraint firstItem="zRx-IH-d4e" firstAttribute="top" secondItem="Df1-Ld-TgY" secondAttribute="bottom" constant="10" id="QNt-sA-wsQ"/>
+                            <constraint firstItem="UWI-q0-CXc" firstAttribute="centerX" secondItem="JtP-9g-jJa" secondAttribute="centerX" id="SL2-CU-FAd"/>
+                            <constraint firstItem="UWI-q0-CXc" firstAttribute="leading" secondItem="JtP-9g-jJa" secondAttribute="leading" constant="5" id="djm-YP-HBk"/>
+                            <constraint firstItem="UWI-q0-CXc" firstAttribute="centerX" secondItem="zRx-IH-d4e" secondAttribute="centerX" id="eRw-tv-J3T"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -593,9 +583,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="bodyTextView" destination="d1u-27-DS3" id="eYv-w1-N15"/>
+                        <outlet property="bodyTextView" destination="UWI-q0-CXc" id="nQm-TN-yml"/>
                         <outlet property="emailButton" destination="edM-TA-T44" id="cyl-SG-ifu"/>
-                        <outlet property="titleLabel" destination="YKK-zC-FrB" id="CZt-aM-3L5"/>
+                        <outlet property="titleLabel" destination="zRx-IH-d4e" id="oqH-3S-PNH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BEB-PU-MvE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -611,45 +601,42 @@
                         <viewControllerLayoutGuide type="bottom" id="Ihr-Cp-HCn"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Raf-BT-5gr">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volleyball Game This Thursday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0f-yZ-t5N">
-                                <rect key="frame" x="10" y="74" width="300" height="23"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Girls Varsity Volleyball Game This Saturday" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="YYH-L3-qrf">
+                                <rect key="frame" x="10" y="10" width="300" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="23" id="2sa-SN-79H"/>
-                                    <constraint firstAttribute="width" constant="300" id="z3J-HG-gfM"/>
+                                    <constraint firstAttribute="height" constant="42" id="UmK-47-uFd"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ev3-JY-SRE">
-                                <rect key="frame" x="2" y="97" width="316" height="383"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0bU-OB-HWJ">
+                                <rect key="frame" x="2" y="52" width="316" height="364"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="316" id="X6b-Id-eLy"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
                                 <connections>
-                                    <outlet property="delegate" destination="wE8-6J-BXm" id="DHz-R6-350"/>
+                                    <outlet property="delegate" destination="wE8-6J-BXm" id="yyR-wh-MTj"/>
                                 </connections>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="a0f-yZ-t5N" firstAttribute="top" secondItem="QeM-Yo-Pku" secondAttribute="bottom" constant="10" id="Wob-2w-Eqz"/>
-                            <constraint firstItem="ev3-JY-SRE" firstAttribute="leading" secondItem="Raf-BT-5gr" secondAttribute="leading" constant="2" id="ZOi-Sy-s18"/>
-                            <constraint firstItem="ev3-JY-SRE" firstAttribute="top" secondItem="a0f-yZ-t5N" secondAttribute="bottom" id="gSg-3M-GkL"/>
-                            <constraint firstItem="a0f-yZ-t5N" firstAttribute="leading" secondItem="Raf-BT-5gr" secondAttribute="leading" constant="10" id="khE-6Z-dIa"/>
-                            <constraint firstAttribute="trailing" secondItem="ev3-JY-SRE" secondAttribute="trailing" constant="2" id="pad-o9-MCi"/>
-                            <constraint firstAttribute="bottom" secondItem="ev3-JY-SRE" secondAttribute="bottom" id="q3j-yG-EGl"/>
-                            <constraint firstAttribute="trailing" secondItem="a0f-yZ-t5N" secondAttribute="trailing" constant="10" id="xdI-n3-pO4"/>
+                            <constraint firstItem="YYH-L3-qrf" firstAttribute="leading" secondItem="Raf-BT-5gr" secondAttribute="leading" constant="10" id="3Ih-3a-a75"/>
+                            <constraint firstItem="YYH-L3-qrf" firstAttribute="centerX" secondItem="0bU-OB-HWJ" secondAttribute="centerX" id="5PU-3W-kA4"/>
+                            <constraint firstItem="0bU-OB-HWJ" firstAttribute="top" secondItem="YYH-L3-qrf" secondAttribute="bottom" id="L3x-6y-OgM"/>
+                            <constraint firstItem="YYH-L3-qrf" firstAttribute="top" secondItem="QeM-Yo-Pku" secondAttribute="bottom" constant="10" id="LLO-Pp-CA2"/>
+                            <constraint firstItem="0bU-OB-HWJ" firstAttribute="centerX" secondItem="Raf-BT-5gr" secondAttribute="centerX" id="PAo-qg-ZaP"/>
+                            <constraint firstAttribute="bottom" secondItem="0bU-OB-HWJ" secondAttribute="bottom" id="XWn-Gr-30p"/>
+                            <constraint firstItem="0bU-OB-HWJ" firstAttribute="leading" secondItem="Raf-BT-5gr" secondAttribute="leading" constant="2" id="Ykz-Xj-CS4"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="tAx-rF-eX5">
                         <barButtonItem key="backBarButtonItem" title="Announcements" id="Sjx-U1-DPk"/>
                         <barButtonItem key="rightBarButtonItem" title="Item" id="m9w-27-64S">
@@ -659,9 +646,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="bodyTextView" destination="ev3-JY-SRE" id="zcB-J2-ik8"/>
+                        <outlet property="bodyTextView" destination="0bU-OB-HWJ" id="9Ud-lo-tW3"/>
                         <outlet property="emailButton" destination="m9w-27-64S" id="mfb-NN-Cn4"/>
-                        <outlet property="titleLabel" destination="a0f-yZ-t5N" id="Y99-vd-vTQ"/>
+                        <outlet property="titleLabel" destination="YYH-L3-qrf" id="90V-gu-mlb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Np7-VS-B6p" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1957,7 +1944,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="ScheduleIcon" width="26" height="18"/>
         <image name="SettingsIcon" width="26" height="26"/>
         <image name="TodayIcon" width="26" height="26"/>
-        <image name="assignmentNotCompletedIcon" width="25" height="25"/>
         <image name="assignmentNotCompletedIcon" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

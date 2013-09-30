@@ -48,18 +48,8 @@
     //[self.navigationItem setTitle:self.announcement.postDateAsString];
     [self.titleLabel setText:[[self announcement] announcementTitle]];
     [self.bodyTextView setText:[[self announcement] description]];
-    
-    
-    // Configure the layer used to draw the divider line
-    CALayer *dividerLayer = [[CALayer alloc] init];
-    [dividerLayer setBounds:CGRectMake(0,0,self.bodyTextView.bounds.size.width - 20.0, 1.0)];
-    [dividerLayer setPosition:CGPointMake(self.bodyTextView.frame.size.width / 2.0,
-                                       self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height)];
-    
-    [dividerLayer setBackgroundColor:[[UIColor lightGrayColor] CGColor]];
-    
-    [[self.view layer] addSublayer:dividerLayer];
 }
+
 
 
 - (void)viewDidAppear:(BOOL)animated
@@ -68,6 +58,34 @@
     
     if (!self.navigationController.toolbarHidden)
         [self.navigationController setToolbarHidden:YES animated:YES];
+    
+    [super viewWillAppear:animated];
+    
+    // Configure the layer used to draw the divider line
+    CALayer *dividerLayer = [[CALayer alloc] init];
+    [dividerLayer setBounds:CGRectMake(0,0,self.bodyTextView.bounds.size.width - 20.0, 1.0)];
+    [dividerLayer setPosition:CGPointMake(self.bodyTextView.frame.size.width / 2.0,
+                                          self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height)];
+    
+    [dividerLayer setBackgroundColor:[[UIColor lightGrayColor] CGColor]];
+    [dividerLayer setOpacity:0.0];
+    
+    [[self.view layer] addSublayer:dividerLayer];
+    
+    
+    // Now fade in the line
+    CABasicAnimation *fader = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    [fader setDuration:0.2];
+    [fader setFromValue:[NSNumber numberWithFloat:0.0]];
+    [fader setToValue:[NSNumber numberWithFloat:1.0]];
+    [fader setDelegate:self];
+    
+    [dividerLayer setOpacity:1.0];
+    
+    [dividerLayer addAnimation:fader
+                        forKey:@"fade"];
+    
+    
 }
 
 
