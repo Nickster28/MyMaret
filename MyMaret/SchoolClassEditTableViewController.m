@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSIndexPath *drawerIndexPath;
 @property (nonatomic, strong) NSIndexPath *drawerParentIndexPath;
 @property (nonatomic, strong) SchoolClass *selectedClass;
+@property (nonatomic) BOOL canEditClassName;
 
 @end
 
@@ -100,6 +101,14 @@
     if (!self.navigationController) {
         [self setSelectedClass:[[ClassScheduleStore sharedStore] classWithDayIndex:selectedIndexPath.section classIndex:selectedIndexPath.row]];
     }
+    
+    // Set whether the user can change the class name (only for an academic class)
+    if ([[ClassScheduleStore sharedStore] isClassAcademicWithDayIndex:self.selectedIndexPath.section
+                                                           classIndex:self.selectedIndexPath.row]) {
+        
+        [self setCanEditClassName:YES];
+    } else [self setCanEditClassName:NO];
+    
 }
 
 
@@ -273,6 +282,9 @@
             // Set the cell's text field to initially display the class title
             [cell setDisplayedText:[[self selectedClass] className]];
         } else [cell setDisplayedText:@""];
+        
+        // Should we allow editing?
+        [cell setShouldAllowEditing:self.canEditClassName];
         
         return cell;
         

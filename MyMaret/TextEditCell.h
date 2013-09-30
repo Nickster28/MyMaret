@@ -23,4 +23,9 @@
 // Show the keyboard and have the text field become the first responder
 - (void)showKeyboard;
 
+
+// Set whether the user can edit the text field
+- (void)setShouldAllowEditing:(BOOL)editing;
+
+
 @end

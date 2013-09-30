@@ -7,6 +7,8 @@
 //
 
 #import "TextEditCell.h"
+#import "UIColor+SchoolColor.h"
+
 
 @interface TextEditCell() <UITextFieldDelegate>
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
@@ -37,6 +39,19 @@
     // If the user hits "Done", hide the keyboard
     [textField resignFirstResponder];
     return YES;
+}
+
+
+// Set whether the user can edit the text field
+- (void)setShouldAllowEditing:(BOOL)editing
+{
+    if (!editing) {
+        [self.textField setTextColor:[UIColor lightGrayColor]];
+        [self setUserInteractionEnabled:NO];
+    } else {
+        [self.textField setTextColor:[UIColor schoolColor]];
+        [self setUserInteractionEnabled:YES];
+    }
 }
 
 

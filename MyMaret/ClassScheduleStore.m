@@ -200,7 +200,14 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 {
     // Filter through all the class periods and see how many instances
     // there are of the given class name
-    NSArray *allPeriods = [[self classScheduleDictionary] allValues];
+    NSArray *allDays = [[self classScheduleDictionary] allValues];
+    
+    // Now combine all the periods from each day into one array
+    NSMutableArray *allPeriods = [NSMutableArray array];
+    for (NSArray *day in allDays) {
+        [allPeriods addObjectsFromArray:day];
+    }
+    
     NSUInteger numOthers = [[allPeriods indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         
         return [[(SchoolClass *)obj className] isEqualToString:className];
@@ -220,7 +227,14 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 {
     // Filter through all the class periods and see how many instances
     // there are of the given class name
-    NSArray *allPeriods = [[self classScheduleDictionary] allValues];
+    NSArray *allDays = [[self classScheduleDictionary] allValues];
+    
+    // Now combine all the periods from each day into one array
+    NSMutableArray *allPeriods = [NSMutableArray array];
+    for (NSArray *day in allDays) {
+        [allPeriods addObjectsFromArray:day];
+    }
+    
     NSUInteger numOthers = [[allPeriods indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         
         return [[(SchoolClass *)obj className] isEqualToString:className];
@@ -502,6 +516,9 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
             
             // If there are any NSNulls in classes, replace them with empty strings
             NSMutableArray *filteredClasses = [NSMutableArray array];
+            
+            self.classList = [NSMutableArray array];
+            
             for (NSObject *object in classes) {
                 
                 // Filter out NSNulls and build our class list
@@ -591,15 +608,19 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
     
     NSString *oldClassName = classToEdit.className;
     
-    // Possibly add this new class to our class list
-    [self addClassToClassListIfNew:className];
+    // Only change the class name if the class is academic
+    if ([self isClassAcademicWithDayIndex:dayIndex classIndex:classIndex]) {
+        
+        // Possibly add this new class to our class list
+        [self addClassToClassListIfNew:className];
+        
+        [classToEdit setClassName:className];
+        
+        // Possibly remove the old class from our class list
+        [self removeClassFromClassListIfNoneLeft:oldClassName];
+    }
     
-    // Change the class's info
-    [classToEdit setClassName:className];
     [classToEdit setClassTime:classTime];
-    
-    // Possibly remove the old class from our class list
-    [self removeClassFromClassListIfNoneLeft:oldClassName];
     
     [self saveChanges];
 }
@@ -611,13 +632,16 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
     SchoolClass *newClass = [[SchoolClass alloc] initWithName:className
                                                     classTime:classTime];
     
-    // Possibly add it to our classlist
-    [self addClassToClassListIfNew:className];
-    
     NSString *dayName = [self dayNameForIndex:dayIndex];
     
     // Add it to the end of the right day in our dictionary
     [[[self classScheduleDictionary] objectForKey:dayName] addObject:newClass];
+    
+    // Possibly add it to our classlist
+    if ([self isClassAcademicWithDayIndex:dayIndex classIndex:[[[self classScheduleDictionary] objectForKey:dayName] count] - 1]) {
+        
+        [self addClassToClassListIfNew:className];
+    }
     
     [self saveChanges];
 }
