@@ -48,9 +48,11 @@
     if (!editing) {
         [self.textField setTextColor:[UIColor lightGrayColor]];
         [self setUserInteractionEnabled:NO];
+        [self.textField setClearButtonMode:UITextFieldViewModeNever];
     } else {
         [self.textField setTextColor:[UIColor schoolColor]];
         [self setUserInteractionEnabled:YES];
+        [self.textField setClearButtonMode:UITextFieldViewModeAlways];
     }
 }
 

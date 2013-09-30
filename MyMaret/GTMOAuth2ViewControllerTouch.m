@@ -862,6 +862,16 @@ static Class gSignInClass = Nil;
              
         }
         
+        
+        // Download announcements and the newspaper
+        [[AnnouncementsStore sharedStore] fetchAnnouncementsWithCompletionBlock:^(NSUInteger numAdded, NSError *err) {
+            
+        }];
+        
+        [[NewspaperStore sharedStore] fetchNewspaperWithCompletionBlock:^(BOOL didAddArticles, NSError *err) {
+            
+        }];
+        
         // Go to the welcome screen
         WelcomeViewController *welcomeVC = [[[WelcomeViewController alloc] init] autorelease];
         [self.navigationController pushViewController:welcomeVC animated:YES];
