@@ -26,7 +26,7 @@
 @property (nonatomic, strong) NSString *assignmentName;
 
 
-- (id)initWithAssignmentName:(NSString *)assignmentName dueDate:(NSDate *)dueDate forClassWithName:(NSString *)className;
+- (id)initWithAssignmentName:(NSString *)assignmentName dueDate:(NSDate *)dueDate forClassWithName:(NSString *)className isOnNormalDay:(BOOL)isNormalDay;
 
 
 // Returns either a string representation of the day,

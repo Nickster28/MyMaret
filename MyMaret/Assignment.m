@@ -21,7 +21,7 @@ NSString * const AssignmentDueTimeStringEncodingKey = @"dueTimeString";
 
 
 
-- (id)initWithAssignmentName:(NSString *)assignmentName dueDate:(NSDate *)dueDate forClassWithName:(NSString *)className
+- (id)initWithAssignmentName:(NSString *)assignmentName dueDate:(NSDate *)dueDate forClassWithName:(NSString *)className isOnNormalDay:(BOOL)isNormalDay
 {
     self = [super init];
     if (self) {
@@ -33,18 +33,24 @@ NSString * const AssignmentDueTimeStringEncodingKey = @"dueTimeString";
         [self setDueDateDayDateComps:[[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSWeekdayCalendarUnit)
                                                                      fromDate:dueDate]];
         
-        // Pull out the time the assignment is due to store in our due time string
-        NSDateComponents *dueDateDateComps = [[NSCalendar currentCalendar] components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:dueDate];
-        
-        // Get the hour, adjusting for military time
-        NSUInteger hour = dueDateDateComps.hour;
-        if (hour > 12) hour -= 12;
-        
-        // Get the minutes, adjusting for < 10 (ex. 9:5 vs 9:05)
-        NSUInteger minutes = dueDateDateComps.minute;
-        NSString *minutesString = (minutes < 10) ? [NSString stringWithFormat:@"0%d", minutes] : [NSString stringWithFormat:@"%d", minutes];
-        
-        [self setDueTimeString:[NSString stringWithFormat:@"%d:%@", hour, minutesString]];
+        if (isNormalDay) {
+            // Pull out the time the assignment is due to store in our due time string
+            NSDateComponents *dueDateDateComps = [[NSCalendar currentCalendar] components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:dueDate];
+            
+            // Get the hour, adjusting for military time
+            NSUInteger hour = dueDateDateComps.hour;
+            if (hour > 12) hour -= 12;
+            
+            // Get the minutes, adjusting for < 10 (ex. 9:5 vs 9:05)
+            NSUInteger minutes = dueDateDateComps.minute;
+            NSString *minutesString = (minutes < 10) ? [NSString stringWithFormat:@"0%d", minutes] : [NSString stringWithFormat:@"%d", minutes];
+            
+            [self setDueTimeString:[NSString stringWithFormat:@"%d:%@", hour, minutesString]];
+        } else {
+            
+            // Just put the day it's due
+            [self setDueTimeString:[self dueDateAsString]];
+        }
     }
     
     return self;

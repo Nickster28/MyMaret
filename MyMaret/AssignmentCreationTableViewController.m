@@ -326,7 +326,8 @@
     // Tell the store to add the new assignment
     [[AssignmentBookStore sharedStore] addAssignmentWithName:assignmentName
                                                      dueDate:dueDate
-                                            forClassWithName:className];
+                                            forClassWithName:className
+                                                 isNormalDay:YES];
     
     
     // Tell our delegate that there's a new assignment
@@ -348,7 +349,8 @@
         // Tell the store to add the new assignment
         [[AssignmentBookStore sharedStore] addAssignmentWithName:assignmentName
                                                          dueDate:dueDate
-                                                forClassWithName:className];
+                                                forClassWithName:className
+                                                     isNormalDay:NO];
         
         // Tell our delegate that there's a new assignment
         [self.delegate assignmentCreationTableViewControllerDidCreateAssignment:self];

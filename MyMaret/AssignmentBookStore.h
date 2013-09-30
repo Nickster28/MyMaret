@@ -21,7 +21,7 @@
 
 
 // Adds an assignment to the store
-- (void)addAssignmentWithName:(NSString *)name dueDate:(NSDate *)dueDate forClassWithName:(NSString *)className;
+- (void)addAssignmentWithName:(NSString *)name dueDate:(NSDate *)dueDate forClassWithName:(NSString *)className isNormalDay:(BOOL)isNormalDay;
 
 // Removes old assignments that were due previously
 - (void)removeOldAssignments;

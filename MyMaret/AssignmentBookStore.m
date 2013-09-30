@@ -207,7 +207,7 @@
 
 
 
-- (void)addAssignmentWithName:(NSString *)name dueDate:(NSDate *)dueDate forClassWithName:(NSString *)className
+- (void)addAssignmentWithName:(NSString *)name dueDate:(NSDate *)dueDate forClassWithName:(NSString *)className isNormalDay:(BOOL)isNormalDay
 {
     // Break the date into date components
     NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit) fromDate:dueDate];
@@ -243,7 +243,8 @@
     
     Assignment *newAssignment = [[Assignment alloc] initWithAssignmentName:name
                                                                    dueDate:dueDate
-                                                          forClassWithName:className];
+                                                          forClassWithName:className
+                                                             isOnNormalDay:isNormalDay];
     
     // If there are no other entries for this due date,
     // add a new key/value pair
