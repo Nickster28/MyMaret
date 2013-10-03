@@ -231,8 +231,8 @@ NSString * const LoginStatusLoginError = @"LoginStatusLoginError";
         return;
     }
     
-    NSString *kMyClientID = @"361629932492.apps.googleusercontent.com";     // pre-assigned by service
-    NSString *kMyClientSecret = @"qDMUJuaS8n0b7cflUFjw-d5a"; // pre-assigned by service
+    NSString *kMyClientID = @"867926699127.apps.googleusercontent.com";     // pre-assigned by service
+    NSString *kMyClientSecret = @"kCextukbgOcfuNmjYWuluz9g"; // pre-assigned by service
     
     NSString *scope = @"https://www.googleapis.com/auth/userinfo.email"; // scope for Google user info API
     
