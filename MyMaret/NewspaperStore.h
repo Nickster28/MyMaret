@@ -19,25 +19,44 @@
 // **** ALL ARTICLE ACCESS IS DONE VIA INDICES **** //
 // This works more easily with tableViews/row indices
 
-// Fetches new articles from Parse and executes the passed-in
-// block by either passing in nil or an error if there was one,
-// and true/false depending on whether new articles were downloaded.
+/*! Fetches new newspaper articles, if any, and replaces the old
+ * newspaper articles with the new ones.
+ * @param completionBlock a block to be executed after completing downloading articles.
+ * didAddArticles will be either true or false depending on whether there were new articles available.
+ * err will be nil unless an error occurred.
+ */
 - (void)fetchNewspaperWithCompletionBlock:(void (^)(BOOL didAddArticles, NSError *err))completionBlock;
 
 
-// Get the article in a given section at a given index (filtered and non-filtered)
+/*! Returns the newspaper article at the given section index and article index.
+ * If a filter string has been set (via setSearchFilterString:) then the section is ignored and the article returned is at index relative to the results of the given search.
+ * @param section the name of the article's section.
+ * @param index the index of the article within its section.
+ * @return the article in the given section at the given index.
+ */
 - (NewspaperArticle *)articleInSection:(NSString *)section
                                atIndex:(NSUInteger)index;
 
 
-// Mark the article at readIndex in the given section as read,
-// upload that information to Parse, and download the newest article rankings
-// (filtered and non-filtered)
+/*! Marks the article in the given section at the given index as read if it is
+ * still marked as unread.  The store syncs this data with the server so the server has an up-to-date count of how many times each article has been read.  If a filter string has been set (via setSearchFilterString:) then the section is ignored and the article returned is at index relative to the results of the given search.
+ * @param section the name of the article's section.
+ * @param index the index of the article within its section.
+ */
 - (void)markArticleAsReadInSection:(NSString *)section
                            atIndex:(NSUInteger)readIndex;
 
 
-// Returns the total number of articles in a given section (filtered and non-filtered)
+/*! Downloads the most recent ranking of popular articles from the server and
+ * updates the store with the results.
+ */
+- (void)refreshPopularArticles;
+
+
+/*! Returns the number of articles in the specified section.
+ * @param section the name of the section you want the article count for.
+ * @return the number of articles in the given section.
+ */
 - (NSUInteger)numberOfArticlesInSection:(NSString *)section;
 
 

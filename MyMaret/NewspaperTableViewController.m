@@ -82,6 +82,9 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
     [self.refreshControl addTarget:self
                             action:@selector(refreshNewspaper)
                   forControlEvents:UIControlEventValueChanged];
+    
+    // Refresh the popular article list in the store
+    [[NewspaperStore sharedStore] refreshPopularArticles];
 }
 
 

@@ -19,7 +19,9 @@
 
 @interface NewspaperStore()
 @property (nonatomic, strong) NSDictionary *articlesDictionary;
-@property (nonatomic, strong) NSDate *lastNewspaperUpdate;
+@property (nonatomic, strong) NSDate *lastNewspaperUpdateDate;
+
+@property (nonatomic, strong) NSDate *lastPopularArticleUpdateDate;
 
 // For newspaper search - if filteredArticles isn't nil,
 // then the user is looking at a certain selection of articles.
@@ -31,18 +33,20 @@
 @end
 
 // NSUserDefaults key
-NSString * const MyMaretLastNewspaperUpdateKey = @"MyMaretLastNewspaperUpdateKey";
+NSString * const MyMaretLastNewspaperUpdateDateKey = @"MyMaretLastNewspaperUpdateDateKey";
+NSString * const MyMaretLastPopularArticleUpdateDateKey = @"MyMaretLastPopularArticleUpdateDateKey";
 
 
 @implementation NewspaperStore
-@synthesize lastNewspaperUpdate = _lastNewspaperUpdate;
+@synthesize lastNewspaperUpdateDate = _lastNewspaperUpdateDate;
+@synthesize lastPopularArticleUpdateDate = _lastPopularArticleUpdateDate;
 
 
 
 + (void)initialize
 {
     NSDictionary *defaults = [NSDictionary dictionaryWithObject:[NSDate dateTwoWeeksAgo]
-                                                         forKey:MyMaretLastNewspaperUpdateKey];
+                                                         forKey:MyMaretLastNewspaperUpdateDateKey];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }
 
@@ -99,23 +103,45 @@ NSString * const MyMaretLastNewspaperUpdateKey = @"MyMaretLastNewspaperUpdateKey
 
 - (NSDate *)lastNewspaperUpdate
 {
-    // Read from NSUserDefaults if we haven't set lastAnnouncementsUpdate yet
+    // Read from NSUserDefaults if we haven't set lastNewspaperUpdateDate yet
     // (value will default to two weeks ago the very first time)
-    if (!_lastNewspaperUpdate) {
-        _lastNewspaperUpdate = [[NSUserDefaults standardUserDefaults] objectForKey:MyMaretLastNewspaperUpdateKey];
+    if (!_lastNewspaperUpdateDate) {
+        _lastNewspaperUpdateDate = [[NSUserDefaults standardUserDefaults] objectForKey:MyMaretLastNewspaperUpdateDateKey];
     }
     
-    return _lastNewspaperUpdate;
+    return _lastNewspaperUpdateDate;
 }
 
 
-- (void)setLastNewspaperUpdate:(NSDate *)lastNewspaperUpdate
+- (void)setLastNewspaperUpdateDate:(NSDate *)lastNewspaperUpdateDate
 {
-    _lastNewspaperUpdate = lastNewspaperUpdate;
+    _lastNewspaperUpdateDate = lastNewspaperUpdateDate;
     
     // Save the update date as well
-    [[NSUserDefaults standardUserDefaults] setObject:_lastNewspaperUpdate
-                                              forKey:MyMaretLastNewspaperUpdateKey];
+    [[NSUserDefaults standardUserDefaults] setObject:_lastNewspaperUpdateDate
+                                              forKey:MyMaretLastNewspaperUpdateDateKey];
+}
+
+
+- (NSDate *)lastPopularArticleUpdateDate
+{
+    // Read from NSUserDefaults if we haven't set lastPopularArticleUpdateDate yet
+    // (value will default to two weeks ago the very first time)
+    if (!_lastPopularArticleUpdateDate) {
+        _lastPopularArticleUpdateDate = [[NSUserDefaults standardUserDefaults] objectForKey:MyMaretLastPopularArticleUpdateDateKey];
+    }
+    
+    return _lastPopularArticleUpdateDate;
+}
+
+
+- (void)setLastPopularArticleUpdateDate:(NSDate *)lastPopularArticleUpdateDate
+{
+    lastPopularArticleUpdateDate = lastPopularArticleUpdateDate;
+    
+    // Save the update date as well
+    [[NSUserDefaults standardUserDefaults] setObject:_lastPopularArticleUpdateDate
+                                              forKey:MyMaretLastPopularArticleUpdateDateKey];
 }
 
 
@@ -331,6 +357,26 @@ NSString * const MyMaretLastNewspaperUpdateKey = @"MyMaretLastNewspaperUpdateKey
 }
 
 
+- (void)refreshPopularArticles
+{
+    // Call the cloud function that returns an array of the most popular articles' info
+    [PFCloud callFunctionInBackground:@"getMostPopularArticles"
+                       withParameters:@{}
+                                block:^(NSArray *popularArticles, NSError *error) {
+                                    
+                                    if (!error) {
+                                        [self updateMostPopularArticlesWithRanking:popularArticles];
+                                        [self saveChanges];
+                                        
+                                    } else {
+                                        NSLog(@"Error: %@", [[error userInfo] objectForKey:@"error"]);
+                                    }
+                                    
+                                }
+     ];
+}
+
+
 - (void)markArticleAsReadInSection:(NSString *)section atIndex:(NSUInteger)readIndex
 {
     // Get the array of articles we're currently interested in
@@ -345,12 +391,8 @@ NSString * const MyMaretLastNewspaperUpdateKey = @"MyMaretLastNewspaperUpdateKey
         
         [PFCloud callFunctionInBackground:@"incrementArticleReadCount"
                            withParameters: @{@"title": [readArticle articleTitle]}
-                                    block:^(NSArray *topFiveArticleRanking, NSError *error) {
-                                        if (!error) {
-                                            [self updateMostPopularArticlesWithRanking:topFiveArticleRanking];
-                                            [self saveChanges];
-                                            NSLog(@"Done");
-                                        } else {
+                                    block:^(id result, NSError *error) {
+                                        if (error) {
                                             NSLog(@"Error: %@", [[error userInfo] objectForKey:@"error"]);
                                         }
                                     }];
