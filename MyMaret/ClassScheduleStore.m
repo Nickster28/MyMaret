@@ -222,27 +222,16 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 
 
 // If this class is new to our schedule (ie there are no other instances), add it to our class list
-// CALL BEFORE ADDING A CLASS TO THE SCHEDULE
 - (void)addClassToClassListIfNew:(NSString *)className
 {
-    // Filter through all the class periods and see how many instances
-    // there are of the given class name
-    NSArray *allDays = [[self classScheduleDictionary] allValues];
-    
-    // Now combine all the periods from each day into one array
-    NSMutableArray *allPeriods = [NSMutableArray array];
-    for (NSArray *day in allDays) {
-        [allPeriods addObjectsFromArray:day];
-    }
-    
-    NSUInteger numOthers = [[allPeriods indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+    // Search for the class
+    NSUInteger index = [[self classList] indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         
-        return [[(SchoolClass *)obj className] isEqualToString:className];
-        
-    }] count];
+        return [(NSString *)obj isEqualToString:className];
+    }];
     
     // If there are none, add the class
-    if (numOthers == 0) {
+    if (index == NSNotFound) {
         [self.classList addObject:className];
     }
 }

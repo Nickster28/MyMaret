@@ -100,14 +100,17 @@
     // we're updating a class so get it from the ClassScheduleStore
     if (!self.navigationController) {
         [self setSelectedClass:[[ClassScheduleStore sharedStore] classWithDayIndex:selectedIndexPath.section classIndex:selectedIndexPath.row]];
-    }
-    
-    // Set whether the user can change the class name (only for an academic class)
-    if ([[ClassScheduleStore sharedStore] isClassAcademicWithDayIndex:self.selectedIndexPath.section
-                                                           classIndex:self.selectedIndexPath.row]) {
         
-        [self setCanEditClassName:YES];
-    } else [self setCanEditClassName:NO];
+        // Set whether the user can change the class name (only for an academic class)
+        if ([[ClassScheduleStore sharedStore] isClassAcademicWithDayIndex:self.selectedIndexPath.section
+                                                               classIndex:self.selectedIndexPath.row]) {
+            
+            [self setCanEditClassName:YES];
+        } else [self setCanEditClassName:NO];
+        
+    } else [self setCanEditClassName:YES];
+    
+    
     
 }
 
