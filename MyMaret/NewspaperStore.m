@@ -445,7 +445,7 @@ NSString * const MyMaretLastPopularArticleUpdateDateKey = @"MyMaretLastPopularAr
 - (BOOL)isNewEditionOfNewspaper
 {
     // Find the number of seconds since the newspaper was published
-    NSTimeInterval publishInterval = [[NSDate date] timeIntervalSinceDate:[self lastNewspaperUpdate]];
+    NSTimeInterval publishInterval = [[self lastNewspaperUpdateDate] timeIntervalSinceDate:[NSDate date]];
     
     return publishInterval <= NUM_SECS_NEWSPAPER_IS_NEW;
 }

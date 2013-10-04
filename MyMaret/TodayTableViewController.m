@@ -29,32 +29,17 @@
 
 // Dictionary of section indices to BOOLs to keep track of whether the
 // section is empty
+// (we have to do this because we may not know if a section is empty when it has
+// a "No items" cell).
 @property (nonatomic, strong) NSMutableDictionary *emptySectionsDictionary;
 @end
 
 @implementation TodayTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    // Set the filter of the announcement store
-    [[AnnouncementsStore sharedStore] setSearchFilterString:AnnouncementsStoreFilterStringToday];
     
     // Refresh today's assignments
     [[AssignmentBookStore sharedStore] refreshAssignmentsDueToday];
@@ -94,6 +79,7 @@
 - (NSMutableDictionary *)emptySectionsDictionary
 {
     if (!_emptySectionsDictionary) {
+        
         _emptySectionsDictionary = [NSMutableDictionary dictionary];
         
         NSUInteger numKeys = [self.tableView numberOfSections];
@@ -131,7 +117,7 @@
 {
     NSUInteger numRows = 0;
     
-    // We have to include this because we load this view controller
+    // We have to include this because we load this view controller when logging in
     // programatically (since it's the VC that modally presents the login screen)
     if (![[NSUserDefaults standardUserDefaults] boolForKey:MyMaretIsLoggedInKey])
         return numRows;
@@ -161,6 +147,8 @@
             break;
             
         default:
+            
+            // Shouldn't get here
             numRows = -1;
             break;
     }
@@ -219,6 +207,7 @@
             return @"Popular Newspaper Articles";
             
         default:
+            // Shouldn't get here
             return @"Whoops!";
     }
 }
@@ -367,6 +356,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // If the user selected an announcement...
+    // (We need to do this manually because of the 2 different screens for iOS 6 + 7)
     if (indexPath.section == 2) {
         [[AnnouncementsStore sharedStore] markAnnouncementAtIndexAsRead:[indexPath row]];
         

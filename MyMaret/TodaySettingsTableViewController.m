@@ -15,14 +15,6 @@
 
 @implementation TodaySettingsTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 
 - (void)awakeFromNib
@@ -31,13 +23,6 @@
     
     // Figure out what day it is
     [self setSelectedIP:[NSIndexPath indexPathForRow:[[ClassScheduleStore sharedStore] todayDayIndex] inSection:0]];
-}
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
