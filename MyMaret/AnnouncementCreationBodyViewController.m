@@ -17,14 +17,6 @@
 
 @implementation AnnouncementCreationBodyViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -35,16 +27,12 @@
     [self.postButton setEnabled:NO];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
  replacementText:(NSString *)text
 {
+    // Only activate the post button if the body is not empty
     if (range.length == self.bodyTextView.text.length && [text isEqualToString:@""]) {
         [[self postButton] setEnabled:NO];
     } else {
@@ -56,6 +44,7 @@
 
 - (void)textViewDidChange:(UITextView *)textView
 {
+    // Make sure to scroll the text view if the user gets to the bottom
     if (self.bodyTextView.text.length > 0) {
         [textView scrollRangeToVisible:NSMakeRange(self.bodyTextView.text.length - 1, 1)];
     }
@@ -66,6 +55,7 @@
     NSString *announcementTitle = self.announcementTitle;
     NSString *announcementBody = [self.bodyTextView text];
     
+    // We shouldn't get inside this if statement...
     if ([announcementTitle isEqualToString:@""] || [announcementBody isEqualToString:@""]) {
         UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Announcement Error"
                                                      message:@"Please complete all fields before posting an announcement."

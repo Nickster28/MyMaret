@@ -16,10 +16,13 @@
 @interface CalendarViewController () <UIWebViewDelegate, SWRevealViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *calendarWebView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
+// The button to hold the segmented control
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *bottomToolbarButton;
+
 @property (nonatomic) NSUInteger selectedCalendarIndex;
 
-
+// Change the calendar we're viewing
 - (void)changeCalendar:(UISegmentedControl *)sender;
 
 @end
@@ -39,16 +42,6 @@ NSString * const MyMaretCalendarPrefKey = @"MyMaretCalendarPrefKey";
 @implementation CalendarViewController
 @synthesize selectedCalendarIndex = _selectedCalendarIndex;
 
-
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 
 - (void)viewDidLoad
@@ -140,17 +133,12 @@ NSString * const MyMaretCalendarPrefKey = @"MyMaretCalendarPrefKey";
 }
 
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 #pragma mark UIWebViewDelegate
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    // Stop animating the activity indicator and reactivate the
+    // segmented control
     [self.activityIndicator stopAnimating];
     
     [(UISegmentedControl *)self.bottomToolbarButton.customView setEnabled:YES
@@ -158,6 +146,8 @@ NSString * const MyMaretCalendarPrefKey = @"MyMaretCalendarPrefKey";
 }
 
 
+// Only let the user tap on a link if it keeps them within the
+// 2 calendars. (Don't let them go to any other website, for example)
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSURL *urlToLoad = [request URL];

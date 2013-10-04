@@ -77,13 +77,6 @@
 }
 
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 - (void)reloadWhenShown
 {
     [self setShouldDisplayNewestAnnouncement:YES];
@@ -129,10 +122,6 @@
 
 #pragma mark - Tableview Data Source and Delegate
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {    

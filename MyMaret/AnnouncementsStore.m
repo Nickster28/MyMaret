@@ -47,14 +47,6 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
 @synthesize lastAnnouncementsUpdate = _lastAnnouncementsUpdate;
 
 
-+ (void)initialize
-{
-    NSDictionary *defaults = [NSDictionary dictionaryWithObject:[NSDate dateTwoWeeksAgo]
-                                                         forKey:MyMaretLastAnnouncementsUpdateKey];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
-}
-
-
 // Singleton instance
 + (AnnouncementsStore *)sharedStore
 {
@@ -207,9 +199,10 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
         
         // Insert the new announcement into the announcements array
         [[self announcements] insertObject:announcement atIndex:0];
-        
-        [self setNumUnreadAnnouncements:[self numUnreadAnnouncements] + 1];
     }
+    
+    // Update our number of unread announcements
+    [self setNumUnreadAnnouncements:[self numUnreadAnnouncements] + announcementsToAdd.count];
 }
 
 
@@ -289,7 +282,12 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
     
     // Query for announcements posted after we last checked for announcements
     PFQuery *query = [PFQuery queryWithClassName:@"Announcement"];
-    [query whereKey:@"createdAt" greaterThan:[self lastAnnouncementsUpdate]];
+    
+    // If we've updated before, only download announcements
+    // that have been added since we last updated.
+    if ([self lastAnnouncementsUpdate]) {
+        [query whereKey:@"createdAt" greaterThan:[self lastAnnouncementsUpdate]];
+    }
     
     // Sort the results so we have them newest to oldest
     [query orderByAscending:@"createdAt"];
