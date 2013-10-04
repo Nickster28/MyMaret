@@ -9,13 +9,18 @@
 #import "NewspaperStore.h"
 #import <CoreData/CoreData.h>
 #import "NewspaperArticle.h"
-#import "NSDate+TwoWeeksAgo.h"
 #import <Parse/Parse.h>
 #import "UIApplication+HasNetworkConnection.h"
 #import "AppDelegate.h"
 
 #define NUM_POPULAR_ARTICLES 5
 #define NUM_SECS_NEWSPAPER_IS_NEW 604800
+
+// The longest time we go without updating the most popular articles
+// (Article popularity is updated whenever a user reads an article,
+// and also whenever the user goes to the newspaper section if the popularity
+// hasn't been updated in POPULAR_ARTICLE_UPDATE_INTERVAL_SECS seconds).
+#define POPULAR_ARTICLE_UPDATE_INTERVAL_SECS 86400
 
 @interface NewspaperStore()
 @property (nonatomic, strong) NSDictionary *articlesDictionary;
@@ -41,14 +46,6 @@ NSString * const MyMaretLastPopularArticleUpdateDateKey = @"MyMaretLastPopularAr
 @synthesize lastNewspaperUpdateDate = _lastNewspaperUpdateDate;
 @synthesize lastPopularArticleUpdateDate = _lastPopularArticleUpdateDate;
 
-
-
-+ (void)initialize
-{
-    NSDictionary *defaults = [NSDictionary dictionaryWithObject:[NSDate dateTwoWeeksAgo]
-                                                         forKey:MyMaretLastNewspaperUpdateDateKey];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
-}
 
 
 // Singleton instance
@@ -298,7 +295,10 @@ NSString * const MyMaretLastPopularArticleUpdateDateKey = @"MyMaretLastPopularAr
     
     // Query for a new edition of the newspaper
     PFQuery *query = [PFQuery queryWithClassName:@"Article"];
-    [query whereKey:@"createdAt" greaterThan:[self lastNewspaperUpdate]];
+    
+    // If we haven't updated before, don't set a constraint for update date
+    if (self.lastNewspaperUpdateDate) [query whereKey:@"createdAt" greaterThan:[self lastNewspaperUpdate]];
+    
     [query whereKey:@"isPublished" equalTo:[NSNumber numberWithBool:YES]];
     [query orderByDescending:@"readCount"];
     
@@ -308,7 +308,7 @@ NSString * const MyMaretLastPopularArticleUpdateDateKey = @"MyMaretLastPopularAr
         if (!error && articles && [articles count] > 0) {
             
             // Update lastNewspaperUpdate to now
-            [self setLastNewspaperUpdate:[NSDate date]];
+            [self setLastNewspaperUpdateDate:[NSDate date]];
             
             // Add the new announcements to our current array of announcements
             [self addArticlesToDictionary:articles];
@@ -359,6 +359,11 @@ NSString * const MyMaretLastPopularArticleUpdateDateKey = @"MyMaretLastPopularAr
 
 - (void)refreshPopularArticles
 {
+    if ([self lastPopularArticleUpdateDate] && [[self lastPopularArticleUpdateDate] timeIntervalSinceDate:[NSDate date]] < POPULAR_ARTICLE_UPDATE_INTERVAL_SECS) {
+    
+        return;
+    }
+    
     // Call the cloud function that returns an array of the most popular articles' info
     [PFCloud callFunctionInBackground:@"getMostPopularArticles"
                        withParameters:@{}
@@ -366,6 +371,7 @@ NSString * const MyMaretLastPopularArticleUpdateDateKey = @"MyMaretLastPopularAr
                                     
                                     if (!error) {
                                         [self updateMostPopularArticlesWithRanking:popularArticles];
+                                        [self setLastPopularArticleUpdateDate:[NSDate date]];
                                         [self saveChanges];
                                         
                                     } else {
@@ -391,10 +397,17 @@ NSString * const MyMaretLastPopularArticleUpdateDateKey = @"MyMaretLastPopularAr
         
         [PFCloud callFunctionInBackground:@"incrementArticleReadCount"
                            withParameters: @{@"title": [readArticle articleTitle]}
-                                    block:^(id result, NSError *error) {
-                                        if (error) {
+                                    block:^(NSArray *popularArticles, NSError *error) {
+                                        
+                                        if (!error) {
+                                            [self updateMostPopularArticlesWithRanking:popularArticles];
+                                            [self setLastPopularArticleUpdateDate:[NSDate date]];
+                                            [self saveChanges];
+                                            
+                                        } else {
                                             NSLog(@"Error: %@", [[error userInfo] objectForKey:@"error"]);
                                         }
+                                        
                                     }];
     }
 }
