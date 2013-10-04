@@ -9,7 +9,6 @@
 #import "AnnouncementsStore.h"
 #import <CoreData/CoreData.h>
 #import "Announcement.h"
-#import "NSDate+TwoWeeksAgo.h"
 #import <Parse/Parse.h>
 #import "UIApplication+HasNetworkConnection.h"
 #import "AppDelegate.h"

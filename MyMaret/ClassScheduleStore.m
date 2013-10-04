@@ -188,11 +188,6 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 }
 
 
-- (void)setClassList:(NSMutableArray *)classList
-{
-    _classList = classList;
-}
-
 
 // If this class is gone from the schedule, remove it from our class list
 // CALL AFTER REMOVING A CLASS FROM THE SCHEDULE
@@ -210,7 +205,13 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
     
     NSUInteger numOthers = [[allPeriods indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         
-        return [[(SchoolClass *)obj className] isEqualToString:className];
+        if ([[(SchoolClass *)obj className] isEqualToString:className]) {
+
+            // We only need to know that there is another class with this name
+            *stop = true;
+            
+            return true;
+        } return false;
     
     }] count];
     
@@ -416,7 +417,11 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 
 - (BOOL)isClassNamed:(NSString *)className onDayWithIndex:(NSUInteger)dayIndex
 {
+    // If the user wants info about today, change todayIndex to a real day index
+    if (dayIndex == todayIndexKey) dayIndex = [self todayDayIndex];
+    
     NSString *dayName = [self dayNameForIndex:dayIndex];
+    if ([dayName isEqualToString:@"Weekend"]) return NO;
     
     // Get the whole day's schedule
     NSArray *allPeriods = [[self classScheduleDictionary] objectForKey:dayName];
@@ -432,9 +437,15 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 }
 
 
-- (NSString *)startTimeForClassNamed:(NSString *)className onDayWithIndex:(NSUInteger)weekdayIndex
+- (NSString *)startTimeForClassNamed:(NSString *)className onDayWithIndex:(NSUInteger)dayIndex
 {
-    NSString *dayName = [self dayNameForIndex:weekdayIndex];
+    // If the user wants info about today, change todayIndex to a real day index
+    if (dayIndex == todayIndexKey) dayIndex = [self todayDayIndex];
+    
+    NSString *dayName = [self dayNameForIndex:dayIndex];
+    
+    // If we're looking for a class that's on the weekend (aka no class), return 00:00
+    if ([dayName isEqualToString:@"Weekend"]) return @"00:00";
     
     // Get the whole day's schedule
     NSArray *allPeriods = [[self classScheduleDictionary] objectForKey:dayName];
@@ -465,7 +476,7 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
         case 4:
             return @"Friday";
         default:
-            return @"Weekend!";
+            return @"Weekend";
     }
 }
 
@@ -557,7 +568,14 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 
 
 - (void)deleteClassWithDayIndex:(NSUInteger)dayIndex classIndex:(NSUInteger)classIndex {
+    
+    // If the user wants info about today, change todayIndex to a real day index
+    if (dayIndex == todayIndexKey) dayIndex = [self todayDayIndex];
+    
     NSString *dayName = [self dayNameForIndex:dayIndex];
+    
+    // Make sure we're not deleting a class on a weekend
+    if ([dayName isEqualToString:@"Weekend"]) return;
     
     NSString *classNameToDelete = [[self classWithDayIndex:dayIndex classIndex:classIndex] className];
     
@@ -576,12 +594,19 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 {
     if (fromClassIndex == toClassIndex) return;
     
+    // If the user wants info about today, change todayIndex to a real day index
+    if (dayIndex == todayIndexKey) dayIndex = [self todayDayIndex];
+    
     NSString *dayName = [self dayNameForIndex:dayIndex];
+    
+    // Make sure we're not trying to move a class that isn't in the schedule
+    if ([dayName isEqualToString:@"Weekend"]) return;
     
     // Take the class out of its array
     SchoolClass *classToMove = [[[self classScheduleDictionary] objectForKey:dayName] objectAtIndex:fromClassIndex];
     
-    [self deleteClassWithDayIndex:dayIndex classIndex:fromClassIndex];
+    [self deleteClassWithDayIndex:dayIndex
+                       classIndex:fromClassIndex];
     
     // Reinsert it
     [[[self classScheduleDictionary] objectForKey:dayName] insertObject:classToMove atIndex:toClassIndex];
@@ -592,8 +617,14 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 
 - (void)setClassName:(NSString *)className classTime:(NSString *)classTime forClassWithDayIndex:(NSUInteger)dayIndex classIndex:(NSUInteger)classIndex
 {
+    // If the user wants info about today, change todayIndex to a real day index
+    if (dayIndex == todayIndexKey) dayIndex = [self todayDayIndex];
+    
     SchoolClass *classToEdit = [self classWithDayIndex:dayIndex
                                             classIndex:classIndex];
+    
+    // If the caller is trying to set a class "today" when today is a weekend, do nothing
+    if (!classToEdit) return;
     
     NSString *oldClassName = classToEdit.className;
     
@@ -617,11 +648,18 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 
 - (void)addClassWithName:(NSString *)className time:(NSString *)classTime toEndOfDayWithIndex:(NSUInteger)dayIndex
 {
+    // If the user wants info about today, change todayIndex to a real day index
+    if (dayIndex == todayIndexKey) dayIndex = [self todayDayIndex];
+    
+    NSString *dayName = [self dayNameForIndex:dayIndex];
+    
+    // If the user is trying to add a class to "today" when today is a weekend, do nothing
+    if ([dayName isEqualToString:@"Weekend"]) return;
+    
     // Create the new class
     SchoolClass *newClass = [[SchoolClass alloc] initWithName:className
                                                     classTime:classTime];
     
-    NSString *dayName = [self dayNameForIndex:dayIndex];
     
     // Add it to the end of the right day in our dictionary
     [[[self classScheduleDictionary] objectForKey:dayName] addObject:newClass];
@@ -638,8 +676,14 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 
 - (BOOL)isClassAcademicWithDayIndex:(NSUInteger)dayIndex classIndex:(NSUInteger)classIndex
 {
+    // If the user wants info about today, change todayIndex to a real day index
+    if (dayIndex == todayIndexKey) dayIndex = [self todayDayIndex];
+    
     SchoolClass *class = [self classWithDayIndex:dayIndex
                                       classIndex:classIndex];
+    
+    // If the class is nil, then we're trying to access a class "today" when today is a weekend.
+    if (!class) return NO;
     
     return !([[class className] isEqualToString:@"Break"] || [[class className] isEqualToString:@"Lunch"] || [[class className] isEqualToString:@"Assembly"] || [[class className] isEqualToString:@"Convocation"]);
 }

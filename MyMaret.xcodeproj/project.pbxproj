@@ -49,7 +49,6 @@
 		0169749C17D30F8D00973B1B /* NewspaperStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169749A17D30F8D00973B1B /* NewspaperStore.m */; };
 		016974A717D3113700973B1B /* NewspaperArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 016974A617D3113700973B1B /* NewspaperArticle.m */; };
 		016974A817D3113700973B1B /* NewspaperArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 016974A617D3113700973B1B /* NewspaperArticle.m */; };
-		016F9D7C17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F9D7B17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m */; };
 		0171AEC317A6244700F3284C /* AnnouncementsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */; };
 		0177454917A60AC3001625BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454817A60AC3001625BF /* Foundation.framework */; };
 		0177454B17A60AC3001625BF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454A17A60AC3001625BF /* CoreGraphics.framework */; };
@@ -169,8 +168,6 @@
 		0169749A17D30F8D00973B1B /* NewspaperStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewspaperStore.m; sourceTree = "<group>"; };
 		016974A517D3113700973B1B /* NewspaperArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewspaperArticle.h; sourceTree = "<group>"; };
 		016974A617D3113700973B1B /* NewspaperArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewspaperArticle.m; sourceTree = "<group>"; };
-		016F9D7A17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TwoWeeksAgo.h"; sourceTree = "<group>"; };
-		016F9D7B17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TwoWeeksAgo.m"; sourceTree = "<group>"; };
 		0171AEC117A6244700F3284C /* AnnouncementsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementsTableViewController.h; sourceTree = "<group>"; };
 		0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementsTableViewController.m; sourceTree = "<group>"; };
 		0177454517A60AC3001625BF /* MyMaret.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMaret.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -354,8 +351,6 @@
 		0177454F17A60AC3001625BF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				016F9D7A17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.h */,
-				016F9D7B17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m */,
 				01A4FE3317B97C08007FAB5C /* UIColor+SchoolColor.h */,
 				01A4FE3417B97C08007FAB5C /* UIColor+SchoolColor.m */,
 				016780D917A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.h */,
@@ -661,7 +656,6 @@
 				010E62E517E698A8002F5806 /* AssignmentCreationTableViewController.m in Sources */,
 				0112712517E426BC0007626C /* SWRevealViewController.m in Sources */,
 				0107E02317CBE1840099E4E4 /* LoginViewController.m in Sources */,
-				016F9D7C17B94EDB00EC9060 /* NSDate+TwoWeeksAgo.m in Sources */,
 				019054B717DD63F200B7982F /* TodayTableViewController.m in Sources */,
 				01BF139817A89A3B00731690 /* AnnouncementsStore.m in Sources */,
 				010E62E817E6D477002F5806 /* AssignmentClassChooserTableViewController.m in Sources */,
