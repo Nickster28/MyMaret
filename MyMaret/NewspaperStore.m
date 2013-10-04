@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSDictionary *articlesDictionary;
 @property (nonatomic, strong) NSDate *lastNewspaperUpdateDate;
 
+// The last time we refreshed the popular article list
 @property (nonatomic, strong) NSDate *lastPopularArticleUpdateDate;
 
 // For newspaper search - if filteredArticles isn't nil,
@@ -100,8 +101,7 @@ NSString * const MyMaretLastPopularArticleUpdateDateKey = @"MyMaretLastPopularAr
 
 - (NSDate *)lastNewspaperUpdate
 {
-    // Read from NSUserDefaults if we haven't set lastNewspaperUpdateDate yet
-    // (value will default to two weeks ago the very first time)
+    // Read from NSUserDefaults
     if (!_lastNewspaperUpdateDate) {
         _lastNewspaperUpdateDate = [[NSUserDefaults standardUserDefaults] objectForKey:MyMaretLastNewspaperUpdateDateKey];
     }
@@ -123,7 +123,6 @@ NSString * const MyMaretLastPopularArticleUpdateDateKey = @"MyMaretLastPopularAr
 - (NSDate *)lastPopularArticleUpdateDate
 {
     // Read from NSUserDefaults if we haven't set lastPopularArticleUpdateDate yet
-    // (value will default to two weeks ago the very first time)
     if (!_lastPopularArticleUpdateDate) {
         _lastPopularArticleUpdateDate = [[NSUserDefaults standardUserDefaults] objectForKey:MyMaretLastPopularArticleUpdateDateKey];
     }
@@ -296,8 +295,10 @@ NSString * const MyMaretLastPopularArticleUpdateDateKey = @"MyMaretLastPopularAr
     // Query for a new edition of the newspaper
     PFQuery *query = [PFQuery queryWithClassName:@"Article"];
     
-    // If we haven't updated before, don't set a constraint for update date
-    if (self.lastNewspaperUpdateDate) [query whereKey:@"createdAt" greaterThan:[self lastNewspaperUpdate]];
+    // If we have updated before, set a constraint for update date
+    if (self.lastNewspaperUpdateDate) {
+        [query whereKey:@"createdAt" greaterThan:[self lastNewspaperUpdate]];
+    }
     
     [query whereKey:@"isPublished" equalTo:[NSNumber numberWithBool:YES]];
     [query orderByDescending:@"readCount"];
@@ -347,6 +348,8 @@ NSString * const MyMaretLastPopularArticleUpdateDateKey = @"MyMaretLastPopularAr
 
 - (NSString *)sectionTitleForIndex:(NSUInteger)index
 {
+    if (index >= 7) return @"ERROR";
+    
     return [@[@"Popular", @"News", @"Opinion", @"Features", @"Center Spread", @"Style", @"Sports"] objectAtIndex:index];
 }
 

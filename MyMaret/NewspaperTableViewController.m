@@ -84,6 +84,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
                   forControlEvents:UIControlEventValueChanged];
     
     // Refresh the popular article list in the store
+    // if we haven't in a while
     [[NewspaperStore sharedStore] refreshPopularArticles];
 }
 
@@ -391,11 +392,6 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
 }
 
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // If this is for search results, the store disregards the section title
@@ -446,7 +442,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
         
         NSString *sectionTitle = [[NewspaperStore sharedStore] sectionTitleForIndex:[self sectionIndex]];
         
-        // If the user is searching, the store will disregard the sectiontitle
+        // If the user is searching, the store will disregard the section title
         // and will know the index pertains to the search results
         NewspaperArticle *selectedArticle = [[NewspaperStore sharedStore] articleInSection:sectionTitle atIndex:[selectedIP row]];
         

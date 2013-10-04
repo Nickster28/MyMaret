@@ -12,7 +12,9 @@
 
 @interface NewspaperStore : NSObject
 
-// Get the singleton instance of NewspaperStore
+/*! Get the singleton instance of NewspaperStore
+ * @return the singleton instance of NewspaperStore.
+ */
 + (NewspaperStore *)sharedStore;
 
 
@@ -62,35 +64,42 @@
 
 
 // ****** FOR ONLY ACCESSING CERTAIN ARTICLES (FILTERING) ******** //
-// Set the string to filter by
 
-// If this string is set to something other than nil, the
-// articleInSection:atIndex, markArticleAsReadInSection:atIndex:,
-// and the numberOfArticlesInSection: methods will change their output.
-// Ex. if you set the filter string to "Nick", you can call the above 3 methods
-// with section as nil and you'll get data back based only on the articles that
-// match the string "Nick".  The section string is only referenced when the search
-// string is nil.  You must set the search string to nil before you can access all
-// articles like normal.
-
+/*! Sets the store-wide filter string (text you are searching for in an
+ * article).  This is used to access only articles
+ * that fit a given filter string.  If searchString is non-nil,
+ * NewspaperStore will respond differently when calling certain methods
+ * such as numberOfArticlesInSection because these methods
+ * will now return information about just the articles that fit the given
+ * filter string.  To go back to accessing all articles, set the filter
+ * string to nil.
+ * @param searchString the string you are looking for inside an article.
+ */
 - (void)setSearchFilterString:(NSString *)searchString;
 
 
+/*! Returns the number of newspaper sections in the store.
+ * @return the number of sections in the store.
+ */
 - (NSUInteger)numberOfSections;
 
 
-// Get section titles by index so we can keep our list of sections
-// in one place and so the tableviewcontroller can just keep track
-// of a number in NSUserDefaults
+/*! Returns the title of the section at the given index
+ * @param index the index of the newspaper section to return the name of.
+ * @return the name of the newspaper section with the given index.
+ */
 - (NSString *)sectionTitleForIndex:(NSUInteger)index;
 
 
-// Returns whether or not the current edition is new
-// (considered to be within 1 week of download date)
+/*! Returns a boolean indicating whether or not the current
+ * edition of the newspaper in the store is less than a week old.
+ */
 - (BOOL)isNewEditionOfNewspaper;
 
 
-// Deletes all store data
+/*! Deletes ALL articles in the entire store.
+ * @return a boolean indicating whether the clean was successful or not.
+ */
 - (BOOL)clearStore;
 
 

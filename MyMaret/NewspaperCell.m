@@ -14,6 +14,7 @@
 static UIFont *boldTitleFont;
 static UIFont *normalTitleFont;
 static UIColor *blackColor;
+static UIColor *whiteColor;
 
 @implementation NewspaperCell
 
@@ -23,18 +24,9 @@ static UIColor *blackColor;
     boldTitleFont = [UIFont boldSystemFontOfSize:17.0];
     normalTitleFont = [UIFont systemFontOfSize:17.0];
     blackColor = [UIColor blackColor];
+    whiteColor = [UIColor whiteColor];
 }
 
-
-
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
@@ -42,7 +34,7 @@ static UIColor *blackColor;
 
     // If it's selected, change the border to white
     if (selected) {
-        [self.popularLabel.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+        [self.popularLabel.layer setBorderColor:[whiteColor CGColor]];
         [self.titleLabel setTextColor:self.titleLabel.highlightedTextColor];
     } else {
         [self.titleLabel setTextColor:blackColor];
@@ -58,7 +50,7 @@ static UIColor *blackColor;
     
     // If it's highlighted, change the border to white
     if (highlighted) {
-        [self.popularLabel.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+        [self.popularLabel.layer setBorderColor:[whiteColor CGColor]];
         [self.titleLabel setTextColor:self.titleLabel.highlightedTextColor];
     } else {
         [self.titleLabel setTextColor:blackColor];
