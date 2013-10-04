@@ -15,6 +15,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *classTimeLabel;
 
 
-- (void)bindSchoolClass:(SchoolClass *)class isAcademicClass:(BOOL)isClass;
+- (void)bindSchoolClass:(SchoolClass *)class isAcademicClass:(BOOL)isAcademicClass;
 
 @end

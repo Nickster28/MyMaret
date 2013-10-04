@@ -19,14 +19,6 @@
 
 @implementation ClassScheduleTableViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -37,12 +29,6 @@
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
@@ -68,13 +54,13 @@
                               withRowAnimation:UITableViewRowAnimationTop];
         
         
-        // We also want to reload the currently visible cells
+        /* We also want to reload the currently visible cells
         NSMutableArray *reloadIPs = [NSMutableArray array];
         
         NSArray *visibleCells = self.tableView.visibleCells;
         for (UITableViewCell *cell in visibleCells) {
             [reloadIPs addObject:[self.tableView indexPathForCell:cell]];
-        }
+        }*/
         
         //[self.tableView reloadRowsAtIndexPaths:reloadIPs
           //                    withRowAnimation:UITableViewRowAnimationFade];
@@ -161,8 +147,9 @@
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row + 1 < [tableView numberOfRowsInSection:indexPath.section])
+    if (indexPath.row + 1 < [tableView numberOfRowsInSection:indexPath.section]) {
         return true;
+    }
     
     return false;
 }
