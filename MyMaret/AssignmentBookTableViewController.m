@@ -37,14 +37,6 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
 
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -77,17 +69,12 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
     
     // Set the selected index to be whatever is saved (or 0 if there is no
     // saved preference)
-    [segControl setSelectedSegmentIndex:[[NSUserDefaults standardUserDefaults] integerForKey:MyMaretAssignmentBookViewPrefKey]];
+    [segControl setSelectedSegmentIndex:self.assignmentBookViewIndex];
     
     [self changeAssignmentBookView:segControl];
 }
 
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 - (void)changeAssignmentBookView:(UISegmentedControl *)sender
@@ -146,7 +133,7 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if ([self assignmentBookViewIndex] == kMyMaretAssignmentBookViewClass) {
-        return [[AssignmentBookStore sharedStore] numberOfClasses];
+        return [[AssignmentBookStore sharedStore] numberOfClassesWithAssignments];
     } else {
         return [[AssignmentBookStore sharedStore] numberOfDaysWithAssignments];
     }

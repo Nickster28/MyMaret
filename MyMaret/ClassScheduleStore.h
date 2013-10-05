@@ -49,7 +49,8 @@ extern const NSUInteger todayIndexKey;
  * @param classIndex the index of the class in the given day.
  * @return the class at the given dayIndex and classIndex.
  */
-- (SchoolClass *)classWithDayIndex:(NSUInteger)dayIndex classIndex:(NSUInteger)classIndex;
+- (SchoolClass *)classWithDayIndex:(NSUInteger)dayIndex
+                        classIndex:(NSUInteger)classIndex;
 
 
 /*! Returns the number of periods in the schedule on the day with the given
@@ -90,7 +91,8 @@ extern const NSUInteger todayIndexKey;
  * @param classIndex the index of the class within the given day.
  * @return true or false depending on whether or not the class is academic.
  */
-- (BOOL)isClassAcademicWithDayIndex:(NSUInteger)dayIndex classIndex:(NSUInteger)classIndex;
+- (BOOL)isClassAcademicWithDayIndex:(NSUInteger)dayIndex
+                         classIndex:(NSUInteger)classIndex;
 
 
 
@@ -133,7 +135,8 @@ extern const NSUInteger todayIndexKey;
  * @param dayIndex the day on which to look for the class.
  * @return the string representation of the class's start time (@"8:10")
  */
-- (NSString *)startTimeForClassNamed:(NSString *)className onDayWithIndex:(NSUInteger)dayIndex;
+- (NSString *)startTimeForClassNamed:(NSString *)className
+                      onDayWithIndex:(NSUInteger)dayIndex;
 
 
 /*! Returns true or false depending on whether the class with the given name
@@ -145,7 +148,8 @@ extern const NSUInteger todayIndexKey;
  * @return true or false depending on whether or not the specified class
  * meets on the day with the given dayIndex.
  */
-- (BOOL)isClassNamed:(NSString *)className onDayWithIndex:(NSUInteger)dayIndex;
+- (BOOL)isClassNamed:(NSString *)className
+      onDayWithIndex:(NSUInteger)dayIndex;
 
 
 /*! Deletes ALL classes in the entire store.
@@ -165,7 +169,8 @@ extern const NSUInteger todayIndexKey;
  * @param classIndex the index within the given day's schedule of the class
  * to delete.
  */
-- (void)deleteClassWithDayIndex:(NSUInteger)dayIndex classIndex:(NSUInteger)classIndex;
+- (void)deleteClassWithDayIndex:(NSUInteger)dayIndex
+                     classIndex:(NSUInteger)classIndex;
 
 
 
@@ -177,7 +182,9 @@ extern const NSUInteger todayIndexKey;
  * @param toClassIndex the index within the given day where you want to move
  * the class to.
  */
-- (void)moveClassOnDayIndex:(NSUInteger)dayIndex fromClassIndex:(NSUInteger)fromClassIndex toClassIndex:(NSUInteger)toClassIndex;
+- (void)moveClassOnDayIndex:(NSUInteger)dayIndex
+             fromClassIndex:(NSUInteger)fromClassIndex
+               toClassIndex:(NSUInteger)toClassIndex;
 
 
 
@@ -191,7 +198,10 @@ extern const NSUInteger todayIndexKey;
  * @param dayIndex the index of the day on which this class meets.
  * @param classIndex the index within the given day where the class is located.
  */
-- (void)setClassName:(NSString *)className classTime:(NSString *)classTime forClassWithDayIndex:(NSUInteger)dayIndex classIndex:(NSUInteger)classIndex;
+- (void)setClassName:(NSString *)className
+           classTime:(NSString *)classTime
+forClassWithDayIndex:(NSUInteger)dayIndex
+          classIndex:(NSUInteger)classIndex;
 
 
 
@@ -204,7 +214,9 @@ extern const NSUInteger todayIndexKey;
  * @param classTime the string containing the class's time slot (ex. @"8:10-9:00").
  * @param dayIndex the index of the day on which this class should meet.
  */
-- (void)addClassWithName:(NSString *)className time:(NSString *)classTime toEndOfDayWithIndex:(NSUInteger)dayIndex;
+- (void)addClassWithName:(NSString *)className
+                    time:(NSString *)classTime
+     toEndOfDayWithIndex:(NSUInteger)dayIndex;
 
 
 

@@ -53,17 +53,6 @@
 }
 
 
-- (NSString *)assignmentsByClassDictionaryArchivePath
-{
-    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    // Get only entry from the list
-    NSString *directory = [documentDirectories objectAtIndex:0];
-    
-    return [directory stringByAppendingPathComponent:@"assignmentsByClass.archive"];
-}
-
-
 
 - (NSMutableDictionary *)assignmentsByDateDictionary
 {
@@ -79,6 +68,17 @@
     }
     
     return _assignmentsByDateDictionary;
+}
+
+
+- (NSString *)assignmentsByClassDictionaryArchivePath
+{
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    // Get only entry from the list
+    NSString *directory = [documentDirectories objectAtIndex:0];
+    
+    return [directory stringByAppendingPathComponent:@"assignmentsByClass.archive"];
 }
 
 
@@ -103,6 +103,8 @@
 - (NSArray *)sortedDueDatesDateComponents
 {
     if (!_sortedDueDatesDateComponents) {
+        
+        // SortedDueDatesDateComponents is a sorted array of all of the keys in the by-date dictionary
         _sortedDueDatesDateComponents = [[[self assignmentsByDateDictionary] allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
             
             // Return an order based on the date components' months and days
@@ -197,7 +199,9 @@
         
         // Otherwise, we need to delete all the assignments on this day
         NSUInteger dayIndex = [self indexForDayWithDateComponents:dateCompsKey];
-        for (NSUInteger i = 0; i < [self numberOfAssignmentsForDayWithIndex:dayIndex]; i++) {
+        NSUInteger numAssignmentsToDelete = [self numberOfAssignmentsForDayWithIndex:dayIndex];
+        
+        for (NSUInteger i = 0; i < numAssignmentsToDelete; i++) {
             
             // Remove each assignment
             [self removeAssignmentWithDayIndex:dayIndex assignmentIndex:i];
@@ -207,7 +211,10 @@
 
 
 
-- (void)addAssignmentWithName:(NSString *)name dueDate:(NSDate *)dueDate forClassWithName:(NSString *)className isNormalDay:(BOOL)isNormalDay
+- (void)addAssignmentWithName:(NSString *)name
+                      dueDate:(NSDate *)dueDate
+             forClassWithName:(NSString *)className
+                  isNormalDay:(BOOL)isNormalDay
 {
     // Break the date into date components
     NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit) fromDate:dueDate];
@@ -294,7 +301,7 @@
 /***************** Assignments by Class *******************/
 
 
-- (NSUInteger)numberOfClasses
+- (NSUInteger)numberOfClassesWithAssignments
 {
     return [[self assignmentsByClassDictionary] count];
 }
@@ -313,7 +320,8 @@
 }
 
 
-- (Assignment *)assignmentWithClassIndex:(NSUInteger)classIndex assignmentIndex:(NSUInteger)assignmentIndex
+- (Assignment *)assignmentWithClassIndex:(NSUInteger)classIndex
+                         assignmentIndex:(NSUInteger)assignmentIndex
 {
     // Get the name of the class
     NSString *className = [self nameOfClassWithIndex:classIndex];
@@ -323,7 +331,8 @@
 }
 
 
-- (void)removeAssignmentWithClassIndex:(NSUInteger)classIndex assignmentIndex:(NSUInteger)assignmentIndex
+- (void)removeAssignmentWithClassIndex:(NSUInteger)classIndex
+                       assignmentIndex:(NSUInteger)assignmentIndex
 {
     // Get the name of the class
     NSString *className = [self nameOfClassWithIndex:classIndex];
@@ -365,9 +374,12 @@
 
 - (BOOL)isClassNamed:(NSString *)className onDayWithIndex:(NSUInteger)index
 {
-    NSArray *classes = [[self assignmentsByDateDictionary] objectForKey:[self dateComponentsForDayWithIndex:index]];
+    NSArray *classes = [[self assignmentsByDateDictionary]
+                        objectForKey:[self dateComponentsForDayWithIndex:index]];
+    
+    // Loop through all the classes on the given day looking for
+    // one with the given name.
     for (Assignment *assignment in classes) {
-        
         if ([[assignment className] isEqualToString:className]) return true;
     }
     
@@ -399,7 +411,8 @@
 }
 
 
-- (Assignment *)assignmentWithDayIndex:(NSUInteger)dayIndex assignmentIndex:(NSUInteger)assignmentIndex
+- (Assignment *)assignmentWithDayIndex:(NSUInteger)dayIndex
+                       assignmentIndex:(NSUInteger)assignmentIndex
 {
     
     // Get the date components for the given day

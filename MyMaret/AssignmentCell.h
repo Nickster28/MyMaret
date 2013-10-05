@@ -24,8 +24,10 @@
 
 // Binds the given assignment to our cell.  If shouldDisplayDueTime is true,
 // the time the assignment is due is put on the right.  Otherwise, the due date
-// is displayed there.  If shouldDisplayClass is true, the class name is included
-- (void)bindAssignment:(Assignment *)assignment shouldDisplayDueTime:(BOOL)shouldDisplayDueTime shouldDisplayClass:(BOOL)shouldDisplayClass;
+// is displayed there.  If shouldDisplayClass is true, the class name is included.
+- (void)bindAssignment:(Assignment *)assignment
+  shouldDisplayDueTime:(BOOL)shouldDisplayDueTime
+    shouldDisplayClass:(BOOL)shouldDisplayClass;
 
 - (IBAction)markAssignmentAsCompleted:(UIButton *)sender;
 

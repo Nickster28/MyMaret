@@ -67,7 +67,8 @@ extern NSString * const AnnouncementsStoreFilterStringToday;
  * @param fromIndex the first index of the announcement to switch.
  * @param toIndex the second index of the announcement to switch.
  */
-- (void)moveAnnouncementFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
+- (void)moveAnnouncementFromIndex:(NSUInteger)fromIndex
+                          toIndex:(NSUInteger)toIndex;
 
 
 /*! Returns the number of unread announcements.  This method will not change if

@@ -26,7 +26,20 @@
 @property (nonatomic, strong) NSString *assignmentName;
 
 
-- (id)initWithAssignmentName:(NSString *)assignmentName dueDate:(NSDate *)dueDate forClassWithName:(NSString *)className isOnNormalDay:(BOOL)isNormalDay;
+/*! Creates an assignment with the given info.
+ * @param assignmentName the name/description of the assignment.
+ * @param dueDate the date and time the assignment is due.
+ * @param className the name of the class the assignment is for.
+ * @param isNormalDay a boolean indicating whether the schedule is normal
+ * on the given due day or if the schedule is wierd (ex. Friday schedule
+ * on a Wednesday).
+ */
+- (id)initWithAssignmentName:(NSString *)assignmentName
+                     dueDate:(NSDate *)dueDate
+            forClassWithName:(NSString *)className
+               isOnNormalDay:(BOOL)isNormalDay;
+
+
 
 
 // Returns either a string representation of the day,

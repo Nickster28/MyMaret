@@ -17,6 +17,7 @@ NSString * const AssignmentDueDateDayDateCompsEncodingKey = @"dueDateDayDateComp
 NSString * const AssignmentDueTimeStringEncodingKey = @"dueTimeString";
 
 #define SECONDS_IN_WEEK 604800
+
 @implementation Assignment
 
 
