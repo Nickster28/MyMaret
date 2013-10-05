@@ -12,6 +12,8 @@
 @implementation UIApplication (iOSVersionChecker)
 
 + (BOOL)isPrevIOS {
+    
+    // Get the number of the iOS version before the "."
     NSUInteger majorVersion = [[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] objectAtIndex:0] intValue];
     
     return majorVersion < CURRENT_IOS_MAJOR_VERSION;

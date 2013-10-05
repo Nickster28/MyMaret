@@ -247,6 +247,9 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
             
         [[NSUserDefaults standardUserDefaults] setObject:userFullName
                                                   forKey:MyMaretUserNameKey];
+        
+        [[NSUserDefaults standardUserDefaults] setInteger:[[object objectForKey:@"grade"] integerValue]
+                                                   forKey:MyMaretUserGradeKey];
             
             
         // Update the object so the user won't receive email (since they have the app)

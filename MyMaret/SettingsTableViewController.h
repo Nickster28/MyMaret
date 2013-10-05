@@ -9,5 +9,8 @@
 #import "MyMaretFrontTableViewController.h"
 
 @interface SettingsTableViewController : MyMaretFrontTableViewController
+
+// When the user taps on the email button
+// to contact us.
 - (void)showContactScreen;
 @end

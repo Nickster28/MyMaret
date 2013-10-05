@@ -44,7 +44,6 @@
 		0151920117D545D50073AAEC /* NewspaperCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0151920017D545D50073AAEC /* NewspaperCell.xib */; };
 		016780DB17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */; };
 		0169749417D2D38900973B1B /* MyMaretFrontViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169749317D2D38900973B1B /* MyMaretFrontViewController.m */; };
-		0169749717D2D49800973B1B /* MyMaretFrontCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169749617D2D49800973B1B /* MyMaretFrontCollectionViewController.m */; };
 		0169749B17D30F8D00973B1B /* NewspaperStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169749A17D30F8D00973B1B /* NewspaperStore.m */; };
 		0169749C17D30F8D00973B1B /* NewspaperStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169749A17D30F8D00973B1B /* NewspaperStore.m */; };
 		016974A717D3113700973B1B /* NewspaperArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 016974A617D3113700973B1B /* NewspaperArticle.m */; };
@@ -161,8 +160,6 @@
 		016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+iOSVersionChecker.m"; sourceTree = "<group>"; };
 		0169749217D2D38900973B1B /* MyMaretFrontViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMaretFrontViewController.h; sourceTree = "<group>"; };
 		0169749317D2D38900973B1B /* MyMaretFrontViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMaretFrontViewController.m; sourceTree = "<group>"; };
-		0169749517D2D49800973B1B /* MyMaretFrontCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyMaretFrontCollectionViewController.h; path = MyMaret/MyMaretFrontCollectionViewController.h; sourceTree = SOURCE_ROOT; };
-		0169749617D2D49800973B1B /* MyMaretFrontCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyMaretFrontCollectionViewController.m; path = MyMaret/MyMaretFrontCollectionViewController.m; sourceTree = SOURCE_ROOT; };
 		0169749817D2D70000973B1B /* PushNotificationUpdateable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushNotificationUpdateable.h; sourceTree = "<group>"; };
 		0169749917D30F8D00973B1B /* NewspaperStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewspaperStore.h; sourceTree = "<group>"; };
 		0169749A17D30F8D00973B1B /* NewspaperStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewspaperStore.m; sourceTree = "<group>"; };
@@ -357,13 +354,13 @@
 				016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */,
 				013BB66C17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.h */,
 				013BB66D17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m */,
+				01AEAD4317ECD263003D85A2 /* UIViewController+NavigationBarColor.h */,
+				01AEAD4417ECD263003D85A2 /* UIViewController+NavigationBarColor.m */,
 				0169749817D2D70000973B1B /* PushNotificationUpdateable.h */,
 				0177455017A60AC3001625BF /* MyMaret-Info.plist */,
 				0177455117A60AC3001625BF /* InfoPlist.strings */,
 				0177455417A60AC3001625BF /* main.m */,
 				0177455617A60AC3001625BF /* MyMaret-Prefix.pch */,
-				01AEAD4317ECD263003D85A2 /* UIViewController+NavigationBarColor.h */,
-				01AEAD4417ECD263003D85A2 /* UIViewController+NavigationBarColor.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -378,8 +375,6 @@
 				01DAA6AF17A7041E00B23BB2 /* MyMaretFrontTableViewController.m */,
 				0169749217D2D38900973B1B /* MyMaretFrontViewController.h */,
 				0169749317D2D38900973B1B /* MyMaretFrontViewController.m */,
-				0169749517D2D49800973B1B /* MyMaretFrontCollectionViewController.h */,
-				0169749617D2D49800973B1B /* MyMaretFrontCollectionViewController.m */,
 				0112712317E426BC0007626C /* SWRevealViewController.h */,
 				0112712417E426BC0007626C /* SWRevealViewController.m */,
 				0112712617E426CB0007626C /* LICENSE.txt */,
@@ -676,7 +671,6 @@
 				017EE13E17D55F6C00AB41A1 /* ArticleDetailViewController.m in Sources */,
 				01DEFF3917DD92F000D355CA /* AssignmentBookStore.m in Sources */,
 				0169749417D2D38900973B1B /* MyMaretFrontViewController.m in Sources */,
-				0169749717D2D49800973B1B /* MyMaretFrontCollectionViewController.m in Sources */,
 				0197389917C2C21100CB5221 /* AnnouncementDetailViewController.m in Sources */,
 				01176FE017DC465900DFF2EA /* DateTimePickerCell.m in Sources */,
 				01DAA6B017A7041E00B23BB2 /* MyMaretFrontTableViewController.m in Sources */,

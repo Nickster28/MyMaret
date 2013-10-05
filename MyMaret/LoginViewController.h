@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+// Constants to inform the view controller the context
+// in which we're being presented (ex. Logout is when the user
+// presses the logout button in settings, or invalidAccount is when
+// the user logs in with a non-school account.
 extern NSString * const LoginStatusLaunch;
 extern NSString * const LoginStatusCancel;
 extern NSString * const LoginStatusLogout;

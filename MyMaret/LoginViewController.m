@@ -207,13 +207,6 @@ NSString * const LoginStatusLoginError = @"LoginStatusLoginError";
 }
 
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 
 #pragma mark Google Login and Authentication
 

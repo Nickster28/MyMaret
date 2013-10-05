@@ -43,11 +43,6 @@
                           scrollPosition:UITableViewScrollPositionNone];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 - (UIView *)mainMenuBackgroundView
