@@ -481,6 +481,13 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
 }
 
 
+- (BOOL)hasSearchFilterString
+{
+    return (self.filteredAnnouncements) ? YES : NO;
+}
+
+
+
 - (BOOL)clearStore
 {
     // Remove the announcements from Core Data

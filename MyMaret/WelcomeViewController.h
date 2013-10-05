@@ -9,7 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface WelcomeViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIButton *doneButton;
 
-- (IBAction)dismissWelcomeScreen:(id)sender;
 @end

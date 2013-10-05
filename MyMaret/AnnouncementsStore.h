@@ -118,6 +118,13 @@ extern NSString * const AnnouncementsStoreFilterStringToday;
 - (void)setSearchFilterString:(NSString *)searchString;
 
 
+
+/*! Returns whether or not the store currently has a filter set.
+ * @return true or false depending on whether the store has a filter string or not.
+ */
+- (BOOL)hasSearchFilterString;
+
+
 /*! Deletes ALL announcements in the entire store.
  * @return a boolean indicating whether the clean was successful or not.
  */

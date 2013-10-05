@@ -37,6 +37,7 @@
 @implementation TodayTableViewController
 
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -52,8 +53,10 @@
 {
     [super viewWillAppear:animated];
     
-    // Set the filter of the announcement store
-    [[AnnouncementsStore sharedStore] setSearchFilterString:AnnouncementsStoreFilterStringToday];
+    if (![[AnnouncementsStore sharedStore] hasSearchFilterString]) {
+        // Set the filter of the announcement store
+        [[AnnouncementsStore sharedStore] setSearchFilterString:AnnouncementsStoreFilterStringToday];
+    }
 }
 
 
@@ -132,6 +135,11 @@
             break;
             
         case 2:
+            // Make sure we're only looking at today
+            if (![[AnnouncementsStore sharedStore] hasSearchFilterString]) {
+                [[AnnouncementsStore sharedStore] setSearchFilterString:AnnouncementsStoreFilterStringToday];
+            }
+            
             numRows = [[AnnouncementsStore sharedStore] numberOfAnnouncements];
             break;
             
