@@ -210,9 +210,12 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
 {
     NSError *err = nil;
     BOOL successful = [context save:&err];
+    
+#if DEBUG
     if (!successful) {
         NSLog(@"Could not save the announcements.");
     }
+#endif
     
     return successful;
 }

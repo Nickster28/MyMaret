@@ -94,6 +94,31 @@
 }
 
 
+/*- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return the appropriate cell
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"nameCell"
+                                                                forIndexPath:indexPath];
+        
+        // Display the user's name
+        [[cell detailTextLabel] setText:[[NSUserDefaults standardUserDefaults] objectForKey:MyMaretUserNameKey]];
+        
+        return cell;
+        
+    } else if (indexPath.section == 0) {
+        return [tableView dequeueReusableCellWithIdentifier:@"logOutCell"
+                                              forIndexPath:indexPath];
+    } else if (indexPath.section == 1) {
+        return [tableView dequeueReusableCellWithIdentifier:@"versionCell"
+                                               forIndexPath:indexPath];
+    } else if (indexPath.section == 2) {
+        return [tableView dequeueReusableCellWithIdentifier:@"contactUsCell"
+                                               forIndexPath:indexPath];
+    } else return nil;
+}*/
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // If it's the Logout button...

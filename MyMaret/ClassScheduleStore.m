@@ -385,7 +385,8 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
     // save our array of all classes
     BOOL classListSuccess = [NSKeyedArchiver archiveRootObject:[self classList]
                                                         toFile:[self classListArchivePath]];
-    
+
+#if DEBUG
     if (!classScheduleSuccess) {
         NSLog(@"Could not save class schedule.");
     }
@@ -393,6 +394,8 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
     if (!classListSuccess) {
         NSLog(@"Could not save class list.");
     }
+    
+#endif
     
     return classListSuccess && classScheduleSuccess;
 }

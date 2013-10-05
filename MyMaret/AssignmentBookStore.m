@@ -141,6 +141,7 @@
     BOOL classDictionarySuccess = [NSKeyedArchiver archiveRootObject:[self assignmentsByClassDictionary]
                                                         toFile:[self assignmentsByClassDictionaryArchivePath]];
     
+#if DEBUG
     if (!dateDictionarySuccess) {
         NSLog(@"Could not save by-date assignment dictionary.");
     }
@@ -148,6 +149,7 @@
     if (!classDictionarySuccess) {
         NSLog(@"Could not save by-class assignment dictionary.");
     }
+#endif
     
     return dateDictionarySuccess && classDictionarySuccess;
 }

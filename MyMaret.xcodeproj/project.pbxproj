@@ -576,7 +576,7 @@
 				ORGANIZATIONNAME = Nick;
 				TargetAttributes = {
 					0177454417A60AC2001625BF = {
-						DevelopmentTeam = Z8H8DCBR78;
+						DevelopmentTeam = WTC99534P3;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -765,8 +765,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Catherine McKenzie (4LXTA534T8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Catherine McKenzie (4LXTA534T8)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -783,7 +783,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "AF303C56-429B-4158-835E-0453F313F97D";
+				PROVISIONING_PROFILE = "9F028656-0BA9-4ABE-A1EC-AF885F6B9F19";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -804,18 +804,19 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Maret School Inc. (WTC99534P3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maret School Inc. (WTC99534P3)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=0";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PROVISIONING_PROFILE = "AF303C56-429B-4158-835E-0453F313F97D";
+				PROVISIONING_PROFILE = "6C7A391C-157E-437C-ADE3-C2FECA57EADD";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -826,7 +827,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Catherine McKenzie (4LXTA534T8)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Nick/Desktop/MyMaret,
@@ -836,7 +837,7 @@
 				INFOPLIST_FILE = "MyMaret/MyMaret-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "AF303C56-429B-4158-835E-0453F313F97D";
+				PROVISIONING_PROFILE = "9F028656-0BA9-4ABE-A1EC-AF885F6B9F19";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -846,7 +847,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Maret School Inc. (WTC99534P3)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Nick/Desktop/MyMaret,
@@ -856,7 +857,7 @@
 				INFOPLIST_FILE = "MyMaret/MyMaret-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "AF303C56-429B-4158-835E-0453F313F97D";
+				PROVISIONING_PROFILE = "6C7A391C-157E-437C-ADE3-C2FECA57EADD";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
