@@ -40,7 +40,6 @@
     [[self welcomeScrollView] setContentSize:[self contentView].bounds.size];
     
     // Make a border around the imageview
-    self.imageView.layer.borderWidth = 3.0;
     self.imageView.layer.borderColor = [[UIColor schoolComplementaryColor] CGColor];
 }
 
@@ -104,6 +103,10 @@
     if (pageIndex + 1 == self.pageControl.numberOfPages) {
         self.imageView.layer.borderWidth = 0.0;
         [self.startButton setHidden:NO];
+        
+    } else if (pageIndex == 0) {
+        self.imageView.layer.borderWidth = 0.0;
+        
     } else {
         [self.startButton setHidden:YES];
     }
@@ -141,7 +144,7 @@
     
     // If we swiped back from the final screen, re-add the border
     // around the image
-    if (self.startButton.hidden) {
+    if (self.startButton.hidden && self.newPageIndex != 0) {
         self.imageView.layer.borderWidth = 3.0;
     }
 }
