@@ -99,7 +99,7 @@ NSString * const MyMaretLastPopularArticleUpdateDateKey = @"MyMaretLastPopularAr
 
 
 
-- (NSDate *)lastNewspaperUpdate
+- (NSDate *)lastNewspaperUpdateDate
 {
     // Read from NSUserDefaults
     if (!_lastNewspaperUpdateDate) {
@@ -297,7 +297,7 @@ NSString * const MyMaretLastPopularArticleUpdateDateKey = @"MyMaretLastPopularAr
     
     // If we have updated before, set a constraint for update date
     if (self.lastNewspaperUpdateDate) {
-        [query whereKey:@"createdAt" greaterThan:[self lastNewspaperUpdate]];
+        [query whereKey:@"createdAt" greaterThan:[self lastNewspaperUpdateDate]];
     }
     
     [query whereKey:@"isPublished" equalTo:[NSNumber numberWithBool:YES]];
@@ -458,6 +458,8 @@ NSString * const MyMaretLastPopularArticleUpdateDateKey = @"MyMaretLastPopularAr
 - (BOOL)clearStore {
     
     [self makeNewArticlesDictionary];
+    [self setLastNewspaperUpdateDate:nil];
+    [self setLastPopularArticleUpdateDate:nil];
     return [self saveChanges];
 }
 

@@ -21,16 +21,16 @@
 @implementation SettingsTableViewController
 
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    
-    // Set the name of the user
-    UITableViewCell *userNameCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    [[userNameCell detailTextLabel] setText:[[NSUserDefaults standardUserDefaults] stringForKey:MyMaretUserNameKey]];
-}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // This could be the first view that appears after
+    // a user logs back in, so we want to make sure it's
+    // up to date
+    [self.tableView reloadData];
+}
 
 
 // Show the email compose window
@@ -94,29 +94,95 @@
 }
 
 
-/*- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    return 3;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return 2;
+            
+        case 1:
+            return 1;
+            
+        case 2:
+            return 1;
+            
+        default:
+            return 0;
+    }
+}
+
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return @"User Information";
+            
+        case 1:
+            return @"App Information";
+            
+        case 2:
+            return @"Questions? Comments?";
+            
+        default:
+            return @"";
+    }
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell;
+    
     // Return the appropriate cell
     if (indexPath.section == 0 && indexPath.row == 0) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"nameCell"
-                                                                forIndexPath:indexPath];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"detailCell"
+                                               forIndexPath:indexPath];
         
         // Display the user's name
         [[cell detailTextLabel] setText:[[NSUserDefaults standardUserDefaults] objectForKey:MyMaretUserNameKey]];
         
-        return cell;
+        [[cell textLabel] setText:@"Name"];
         
     } else if (indexPath.section == 0) {
-        return [tableView dequeueReusableCellWithIdentifier:@"logOutCell"
-                                              forIndexPath:indexPath];
+        
+        cell = [tableView dequeueReusableCellWithIdentifier:@"basicCell"
+                                               forIndexPath:indexPath];
+        
+        // Set the Log Out cell to be the gold color
+        [[cell textLabel] setTextColor:[UIColor schoolComplementaryColor]];
+        
+        [[cell textLabel] setText:@"Log Out"];
+        
     } else if (indexPath.section == 1) {
-        return [tableView dequeueReusableCellWithIdentifier:@"versionCell"
+        
+        cell = [tableView dequeueReusableCellWithIdentifier:@"detailCell"
                                                forIndexPath:indexPath];
+        
+        // Display the app version
+        [[cell detailTextLabel] setText:@"2.0"];
+        
+        [[cell textLabel] setText:@"MyMaret Version"];
+        
     } else if (indexPath.section == 2) {
-        return [tableView dequeueReusableCellWithIdentifier:@"contactUsCell"
+        
+        cell = [tableView dequeueReusableCellWithIdentifier:@"basicCell"
                                                forIndexPath:indexPath];
-    } else return nil;
-}*/
+        
+        // Set the Contact Us cell to be green
+        [[cell textLabel] setTextColor:[UIColor schoolColor]];
+        
+        [[cell textLabel] setText:@"Contact Us"];
+    }
+    
+    return cell;
+}
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

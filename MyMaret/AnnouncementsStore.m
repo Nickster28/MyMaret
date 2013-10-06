@@ -499,6 +499,8 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
     }
     
     self.announcements = nil;
+    [self setLastAnnouncementsUpdate:nil];
+    
     
     return [self saveChanges];
 }
