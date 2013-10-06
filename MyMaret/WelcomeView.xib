@@ -92,9 +92,6 @@
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to MyMaret!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="196" translatesAutoresizingMaskIntoConstraints="NO" id="Xzd-CE-t6d">
                     <rect key="frame" x="62" y="40" width="196" height="74"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="196" id="qji-7a-pxG"/>
-                    </constraints>
                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="32"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -102,6 +99,9 @@
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="286" translatesAutoresizingMaskIntoConstraints="NO" id="Trr-i8-hea">
                     <rect key="frame" x="657" y="40" width="286" height="188"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="188" id="mXv-Jw-OzW"/>
+                    </constraints>
                     <attributedString key="attributedText">
                         <fragment content="Use">
                             <attributes>
@@ -146,8 +146,8 @@
                     <rect key="frame" x="345" y="40" width="270" height="122"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="270" id="Zuc-Cj-1xS"/>
-                        <constraint firstAttribute="height" constant="122" id="cFX-0J-Qg3"/>
+                        <constraint firstAttribute="width" constant="270" id="17v-u0-l9h"/>
+                        <constraint firstAttribute="height" constant="122" id="WAl-Ww-4I3"/>
                     </constraints>
                     <attributedString key="attributedText">
                         <fragment content="Use ">
@@ -182,13 +182,111 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="270" translatesAutoresizingMaskIntoConstraints="NO" id="FMY-Me-L4m">
-                    <rect key="frame" x="25" y="124" width="270" height="104"/>
+                    <rect key="frame" x="25" y="116" width="270" height="119"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="104" id="6Sl-Gp-08Y"/>
+                        <constraint firstAttribute="height" constant="119" id="qgP-7D-D4U"/>
                     </constraints>
                     <attributedString key="attributedText">
-                        <fragment content="MyMaret lets you keep track of your ">
+                        <fragment content="MyMaret lets you ">
+                            <attributes>
+                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="17" name="GillSans"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="keep track of what you have going on ">
+                            <attributes>
+                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <font key="NSFont" size="17" name="GillSans"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="today">
+                            <attributes>
+                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="17" name="GillSans"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content=",">
+                            <attributes>
+                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="17" name="GillSans"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content=" ">
+                            <attributes>
+                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="17" name="GillSans"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="post and read Upper School ">
+                            <attributes>
+                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <font key="NSFont" size="17" name="GillSans"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="announcements">
+                            <attributes>
+                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="17" name="GillSans"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content=", ">
+                            <attributes>
+                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="17" name="GillSans"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="view the ">
+                            <attributes>
+                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <font key="NSFont" size="17" name="GillSans"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="Maret calendar">
+                            <attributes>
+                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="17" name="GillSans"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content=", ">
+                            <attributes>
+                                <color key="NSColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="17" name="GillSans"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="read the ">
+                            <attributes>
+                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <font key="NSFont" size="17" name="GillSans"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="Woodley Leaves">
+                            <attributes>
+                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="17" name="GillSans"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content=", and ">
+                            <attributes>
+                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <font key="NSFont" size="17" name="GillSans"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="keep track of your ">
                             <attributes>
                                 <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <font key="NSFont" size="17" name="GillSans"/>
@@ -216,48 +314,6 @@
                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                             </attributes>
                         </fragment>
-                        <fragment content=", read the ">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="Woodley Leaves">
-                            <attributes>
-                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=", view the ">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="Maret calendar,">
-                            <attributes>
-                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=" and keep track of what you have going on ">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="today">
-                            <attributes>
-                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
                         <fragment content=".">
                             <attributes>
                                 <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -272,7 +328,7 @@
                     <rect key="frame" x="991" y="40" width="258" height="101"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="101" id="bGE-2B-J8w"/>
+                        <constraint firstAttribute="height" constant="101" id="9ze-IS-IHC"/>
                     </constraints>
                     <attributedString key="attributedText">
                         <fragment content="Use ">
@@ -310,8 +366,8 @@
                     <rect key="frame" x="1301" y="40" width="278" height="142"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="142" id="dNQ-EQ-tKg"/>
-                        <constraint firstAttribute="width" constant="278" id="qaP-ln-XAm"/>
+                        <constraint firstAttribute="height" constant="142" id="IFP-bJ-bYK"/>
+                        <constraint firstAttribute="width" constant="278" id="ryx-A0-pe4"/>
                     </constraints>
                     <attributedString key="attributedText">
                         <fragment content="Use the">
@@ -350,7 +406,7 @@
                     <rect key="frame" x="1632" y="40" width="258" height="188"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="258" id="MQe-qu-u0a"/>
+                        <constraint firstAttribute="width" constant="258" id="hvO-5h-kgf"/>
                     </constraints>
                     <attributedString key="attributedText">
                         <fragment content="Use ">
@@ -432,7 +488,7 @@
                     <rect key="frame" x="2272" y="40" width="256" height="142"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="256" id="5ft-Xh-8aG"/>
+                        <constraint firstAttribute="width" constant="256" id="vxf-32-a42"/>
                     </constraints>
                     <attributedString key="attributedText">
                         <fragment>
@@ -476,34 +532,33 @@
                 </label>
             </subviews>
             <constraints>
-                <constraint firstItem="gtk-8w-1U3" firstAttribute="top" secondItem="f5x-Mq-V7w" secondAttribute="top" id="5Pc-YW-wi8"/>
-                <constraint firstItem="f5x-Mq-V7w" firstAttribute="leading" secondItem="Trr-i8-hea" secondAttribute="trailing" constant="48" id="5s1-8A-gzV"/>
-                <constraint firstItem="axC-sF-cKe" firstAttribute="baseline" secondItem="3jw-cP-rOg" secondAttribute="baseline" id="Cea-x3-C36"/>
-                <constraint firstItem="X57-d7-f9p" firstAttribute="leading" secondItem="axC-sF-cKe" secondAttribute="trailing" constant="61" id="Co1-KK-Atg"/>
-                <constraint firstItem="Trr-i8-hea" firstAttribute="top" secondItem="Qaq-c9-DUl" secondAttribute="top" id="G2S-ik-Lhk"/>
-                <constraint firstItem="Xzd-CE-t6d" firstAttribute="top" secondItem="C38-vG-s1W" secondAttribute="top" constant="40" id="Hh5-SK-5P8"/>
-                <constraint firstItem="FMY-Me-L4m" firstAttribute="top" secondItem="Xzd-CE-t6d" secondAttribute="bottom" constant="10" id="HlR-hf-C2P"/>
-                <constraint firstItem="3jw-cP-rOg" firstAttribute="baseline" secondItem="Trr-i8-hea" secondAttribute="baseline" id="Ico-PI-uA6"/>
-                <constraint firstItem="f5x-Mq-V7w" firstAttribute="top" secondItem="Trr-i8-hea" secondAttribute="top" id="JJb-H0-UQd"/>
-                <constraint firstItem="gtk-8w-1U3" firstAttribute="top" secondItem="3jw-cP-rOg" secondAttribute="top" id="Ji0-do-Hmg"/>
-                <constraint firstItem="FMY-Me-L4m" firstAttribute="centerX" secondItem="Xzd-CE-t6d" secondAttribute="centerX" id="LT7-2b-hQa"/>
-                <constraint firstItem="axC-sF-cKe" firstAttribute="top" secondItem="3jw-cP-rOg" secondAttribute="top" id="LU5-UY-DG9"/>
-                <constraint firstItem="FMY-Me-L4m" firstAttribute="bottom" secondItem="Trr-i8-hea" secondAttribute="bottom" id="PGL-0C-z0z"/>
-                <constraint firstItem="axC-sF-cKe" firstAttribute="leading" secondItem="3jw-cP-rOg" secondAttribute="trailing" constant="63" id="WTy-BV-aRP"/>
-                <constraint firstItem="gtk-8w-1U3" firstAttribute="baseline" secondItem="X57-d7-f9p" secondAttribute="baseline" id="WdQ-9l-xVU"/>
-                <constraint firstItem="Qaq-c9-DUl" firstAttribute="leading" secondItem="FMY-Me-L4m" secondAttribute="trailing" constant="50" id="Wyn-00-opA"/>
-                <constraint firstItem="Qaq-c9-DUl" firstAttribute="leading" secondItem="Xzd-CE-t6d" secondAttribute="trailing" constant="87" id="ZJz-nd-5rR"/>
-                <constraint firstItem="gtk-8w-1U3" firstAttribute="leading" secondItem="f5x-Mq-V7w" secondAttribute="trailing" constant="52" id="aVT-wn-ln0"/>
-                <constraint firstItem="3jw-cP-rOg" firstAttribute="leading" secondItem="gtk-8w-1U3" secondAttribute="trailing" constant="53" id="fuu-vx-wSL"/>
-                <constraint firstItem="axC-sF-cKe" firstAttribute="top" secondItem="X57-d7-f9p" secondAttribute="top" id="gQN-of-Vhx"/>
-                <constraint firstItem="Trr-i8-hea" firstAttribute="leading" secondItem="Qaq-c9-DUl" secondAttribute="trailing" constant="42" id="shj-gP-djf"/>
-                <constraint firstItem="FMY-Me-L4m" firstAttribute="leading" secondItem="C38-vG-s1W" secondAttribute="leading" constant="25" id="wfz-Nm-lPr"/>
-                <constraint firstItem="Xzd-CE-t6d" firstAttribute="top" secondItem="Qaq-c9-DUl" secondAttribute="top" id="zKT-pN-cHk"/>
+                <constraint firstItem="3jw-cP-rOg" firstAttribute="top" secondItem="gtk-8w-1U3" secondAttribute="top" id="1au-7s-p4w"/>
+                <constraint firstItem="axC-sF-cKe" firstAttribute="leading" secondItem="3jw-cP-rOg" secondAttribute="trailing" constant="63" id="7rU-Q4-12k"/>
+                <constraint firstItem="FMY-Me-L4m" firstAttribute="top" secondItem="Xzd-CE-t6d" secondAttribute="bottom" constant="2" id="8V1-Ab-bN4"/>
+                <constraint firstItem="X57-d7-f9p" firstAttribute="leading" secondItem="axC-sF-cKe" secondAttribute="trailing" constant="61" id="9IB-Sg-hGd"/>
+                <constraint firstItem="Trr-i8-hea" firstAttribute="leading" secondItem="Qaq-c9-DUl" secondAttribute="trailing" constant="42" id="Aof-CD-LGZ"/>
+                <constraint firstItem="FMY-Me-L4m" firstAttribute="leading" secondItem="C38-vG-s1W" secondAttribute="leading" constant="25" id="BpV-kn-aUT"/>
+                <constraint firstItem="X57-d7-f9p" firstAttribute="baseline" secondItem="gtk-8w-1U3" secondAttribute="baseline" id="D7x-n9-023"/>
+                <constraint firstItem="3jw-cP-rOg" firstAttribute="baseline" secondItem="axC-sF-cKe" secondAttribute="baseline" id="EMp-7u-AGy"/>
+                <constraint firstItem="f5x-Mq-V7w" firstAttribute="top" secondItem="Trr-i8-hea" secondAttribute="top" id="Fjq-hc-brT"/>
+                <constraint firstItem="gtk-8w-1U3" firstAttribute="leading" secondItem="f5x-Mq-V7w" secondAttribute="trailing" constant="52" id="GKu-MX-CI6"/>
+                <constraint firstItem="3jw-cP-rOg" firstAttribute="top" secondItem="axC-sF-cKe" secondAttribute="top" id="NUY-6g-MbN"/>
+                <constraint firstItem="Qaq-c9-DUl" firstAttribute="top" secondItem="Xzd-CE-t6d" secondAttribute="top" id="QUc-dz-65g"/>
+                <constraint firstItem="Xzd-CE-t6d" firstAttribute="top" secondItem="C38-vG-s1W" secondAttribute="top" constant="40" id="Uff-qN-DAI"/>
+                <constraint firstItem="Qaq-c9-DUl" firstAttribute="top" secondItem="Trr-i8-hea" secondAttribute="top" id="bFa-m6-hFE"/>
+                <constraint firstItem="FMY-Me-L4m" firstAttribute="centerX" secondItem="Xzd-CE-t6d" secondAttribute="centerX" id="bmI-yM-9GM"/>
+                <constraint firstItem="f5x-Mq-V7w" firstAttribute="leading" secondItem="Trr-i8-hea" secondAttribute="trailing" constant="48" id="dKT-2L-wix"/>
+                <constraint firstItem="gtk-8w-1U3" firstAttribute="top" secondItem="f5x-Mq-V7w" secondAttribute="top" id="iGf-z9-ifr"/>
+                <constraint firstItem="X57-d7-f9p" firstAttribute="top" secondItem="axC-sF-cKe" secondAttribute="top" id="o6F-HJ-FV4"/>
+                <constraint firstItem="3jw-cP-rOg" firstAttribute="leading" secondItem="gtk-8w-1U3" secondAttribute="trailing" constant="53" id="s1w-iq-nDz"/>
+                <constraint firstItem="Trr-i8-hea" firstAttribute="baseline" secondItem="3jw-cP-rOg" secondAttribute="baseline" id="sEg-H1-JMA"/>
+                <constraint firstItem="Qaq-c9-DUl" firstAttribute="leading" secondItem="Xzd-CE-t6d" secondAttribute="trailing" constant="87" id="xy8-pL-gVU"/>
+                <constraint firstItem="Qaq-c9-DUl" firstAttribute="leading" secondItem="FMY-Me-L4m" secondAttribute="trailing" constant="50" id="zEs-LJ-vTo"/>
             </constraints>
         </view>
     </objects>
     <resources>
         <image name="SplashBackground4-6" width="320" height="548"/>
-        <image name="WelcomeImage0" width="640" height="808"/>
+        <image name="WelcomeImage0" width="516" height="362"/>
     </resources>
 </document>
