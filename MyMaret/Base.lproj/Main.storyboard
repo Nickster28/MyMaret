@@ -843,7 +843,7 @@
             </objects>
             <point key="canvasLocation" x="2155" y="-1773"/>
         </scene>
-        <!--Newspaper Table View Controller - Newspaper-->
+        <!--Newspaper Table View Controller - The Woodley Leaves-->
         <scene sceneID="uPB-vk-rQV">
             <objects>
                 <tableViewController id="gPX-5l-EUC" customClass="NewspaperTableViewController" sceneMemberID="viewController">
@@ -867,7 +867,7 @@
                             <outlet property="delegate" destination="gPX-5l-EUC" id="Rgn-S4-6qj"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Newspaper" id="Wjo-VD-1UT"/>
+                    <navigationItem key="navigationItem" title="The Woodley Leaves" id="Wjo-VD-1UT"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="lsM-sj-4Nv" id="0D9-tl-ZYO"/>
                         <segue destination="6zb-0s-SoT" kind="push" identifier="showArticle" id="dUa-Xe-p06"/>
@@ -1754,7 +1754,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <rect key="frame" x="15" y="8" width="26" height="35"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Newspaper" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5r1-ML-pIp">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The Woodley Leaves" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5r1-ML-pIp">
                                                     <rect key="frame" x="58" y="6" width="216" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1900,6 +1900,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="ScheduleIcon" width="26" height="18"/>
         <image name="SettingsIcon" width="26" height="26"/>
         <image name="TodayIcon" width="26" height="26"/>
+        <image name="assignmentNotCompletedIcon" width="25" height="25"/>
         <image name="assignmentNotCompletedIcon" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

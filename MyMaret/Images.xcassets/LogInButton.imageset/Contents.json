@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "loginbuttonnoshadow.png"
+      "filename" : "loginbuttonnoshadowapps.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "loginbuttonnoshadow@2x.png"
+      "filename" : "loginbuttonnoshadowapps@2x.png"
     }
   ],
   "info" : {
