@@ -500,6 +500,7 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
     
     self.announcements = nil;
     [self setLastAnnouncementsUpdate:nil];
+    [self setNumUnreadAnnouncements:0];
     
     
     return [self saveChanges];

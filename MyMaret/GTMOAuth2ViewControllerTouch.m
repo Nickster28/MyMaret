@@ -796,6 +796,20 @@ static Class gSignInClass = Nil;
         // Only query for the person object if the user is new
         if (![oldEmailAddr isEqualToString:emailAddr]) {
             
+            // Download announcements and the newspaper
+            [[AnnouncementsStore sharedStore] fetchAnnouncementsWithCompletionBlock:^(NSUInteger numAdded, NSError *err) {
+#if DEBUG
+                NSLog([NSString stringWithFormat:@"%d added", numAdded]);
+#endif
+            }];
+            
+            [[NewspaperStore sharedStore] fetchNewspaperWithCompletionBlock:^(BOOL didAddArticles, NSError *err) {
+#if DEBUG
+                NSLog(@"Added articles?");
+                (didAddArticles) ? NSLog(@"Yes") : NSLog(@"No");
+#endif
+            }];
+            
             // Query for the "Person" object for this user
             PFQuery *query = [PFQuery queryWithClassName:@"Person"];
             [query whereKey:@"emailAddress" equalTo:emailAddr];
@@ -863,15 +877,6 @@ static Class gSignInClass = Nil;
              
         }
         
-        
-        // Download announcements and the newspaper
-        [[AnnouncementsStore sharedStore] fetchAnnouncementsWithCompletionBlock:^(NSUInteger numAdded, NSError *err) {
-            
-        }];
-        
-        [[NewspaperStore sharedStore] fetchNewspaperWithCompletionBlock:^(BOOL didAddArticles, NSError *err) {
-            
-        }];
         
         // Go to the welcome screen
         WelcomeViewController *welcomeVC = [[[WelcomeViewController alloc] init] autorelease];
