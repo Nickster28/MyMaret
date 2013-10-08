@@ -14,7 +14,11 @@
 #import "AppDelegate.h"
 
 
-@interface ClassScheduleTableViewController () <ClassEditDismisserDelegate>
+@interface ClassScheduleTableViewController () <ClassEditDismisserDelegate> {
+    
+    // To keep track of whether the sections have an extra "Add" row
+    BOOL hasExtraRowAtEndOfSections;
+}
 @end
 
 @implementation ClassScheduleTableViewController
@@ -35,6 +39,8 @@
 {
     [super setEditing:editing animated:animated];
     
+    hasExtraRowAtEndOfSections = editing;
+    
     //Make an array of the indexpaths of the last row in each section
     NSMutableArray *indexPaths = [NSMutableArray array];
     for (NSUInteger i = 0; i < [self.tableView numberOfSections]; i++) {
@@ -52,23 +58,6 @@
         
         [self.tableView insertRowsAtIndexPaths:indexPaths
                               withRowAnimation:UITableViewRowAnimationTop];
-        
-        
-        /* We also want to reload the currently visible cells
-        NSMutableArray *reloadIPs = [NSMutableArray array];
-        
-        NSArray *visibleCells = self.tableView.visibleCells;
-        for (UITableViewCell *cell in visibleCells) {
-            [reloadIPs addObject:[self.tableView indexPathForCell:cell]];
-        }*/
-        
-        //[self.tableView reloadRowsAtIndexPaths:reloadIPs
-          //                    withRowAnimation:UITableViewRowAnimationFade];
-        double delayInSeconds = 0.2;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self.tableView reloadData];
-        });
         
     } else {
         [self.tableView deleteRowsAtIndexPaths:indexPaths
@@ -136,7 +125,7 @@
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView.isEditing && indexPath.row + 1 == [tableView numberOfRowsInSection:indexPath.section]) {
+    if (hasExtraRowAtEndOfSections && indexPath.row + 1 == [tableView numberOfRowsInSection:indexPath.section]) {
         
         return UITableViewCellEditingStyleInsert;
     }

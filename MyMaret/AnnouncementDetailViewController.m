@@ -50,9 +50,7 @@
     
     if (!self.navigationController.toolbarHidden)
         [self.navigationController setToolbarHidden:YES animated:YES];
-    
-    [super viewWillAppear:animated];
-    
+        
     // Configure the layer used to draw the divider line
     CALayer *dividerLayer = [[CALayer alloc] init];
     [dividerLayer setBounds:CGRectMake(0,0,self.bodyTextView.bounds.size.width - 20.0, 1.0)];
