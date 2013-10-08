@@ -129,7 +129,7 @@
     } else if (indexPath.row == 3) {
         DateTimePickerCell *drawerCell = [tableView dequeueReusableCellWithIdentifier:@"dueDatePickerCell" forIndexPath:indexPath];
         
-        DateTimeDisplayCell *parentCell = (DateTimeDisplayCell *)[tableView cellForRowAtIndexPath:self.drawerParentIndexPath];
+        __weak DateTimeDisplayCell *parentCell = (DateTimeDisplayCell *)[tableView cellForRowAtIndexPath:self.drawerParentIndexPath];
         
         // Set the delegate to be its parent cell
         [drawerCell setDelegate:parentCell];
@@ -169,7 +169,7 @@
     
     
     // If the keyboard is visible, dismiss it
-    TextEditCell *nameCell = (TextEditCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    __weak TextEditCell *nameCell = (TextEditCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     [nameCell dismissKeyboard];
     
     
@@ -210,7 +210,7 @@
         }
         
         // If the keyboard is visible, dismiss it
-        TextEditCell *nameCell = (TextEditCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        __weak TextEditCell *nameCell = (TextEditCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         [nameCell dismissKeyboard];
     }
 }

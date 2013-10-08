@@ -51,11 +51,11 @@
     if (!self.selectedIP || (indexPath.row != self.selectedIP.row)) {
         
         // Remove the checkmark from the old choice
-        UITableViewCell *oldCell = [self.tableView cellForRowAtIndexPath:self.selectedIP];
+        __weak UITableViewCell *oldCell = [self.tableView cellForRowAtIndexPath:self.selectedIP];
         [oldCell setAccessoryType:UITableViewCellAccessoryNone];
         
         // Put a checkmark next to the newly selected cell
-        UITableViewCell *selectedCell = [self.tableView cellForRowAtIndexPath:indexPath];
+        __weak UITableViewCell *selectedCell = [self.tableView cellForRowAtIndexPath:indexPath];
         [selectedCell setAccessoryType:UITableViewCellAccessoryCheckmark];
         
         // Tell our delegate that we changed the selected class

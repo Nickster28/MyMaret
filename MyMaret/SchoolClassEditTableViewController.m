@@ -343,7 +343,7 @@
     }
     
     // If the keyboard is visible, dismiss it
-    TextEditCell *nameCell = (TextEditCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    __weak TextEditCell *nameCell = (TextEditCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     [nameCell dismissKeyboard];
     
     

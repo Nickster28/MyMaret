@@ -5,6 +5,8 @@
 //  Created by Nick Troccoli on 7/28/13.
 //  Copyright (c) 2013 Nick. All rights reserved.
 //
+// Thanks to http://stackoverflow.com/questions/13780153/uicollectionview-animate-cell-size-change-on-selection for making sure I use __weak when I call cellForRowAtIndexPath (since the cells are already
+// onscreen!)
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
