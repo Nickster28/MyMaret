@@ -798,9 +798,7 @@ static Class gSignInClass = Nil;
             
             // Download announcements and the newspaper
             [[AnnouncementsStore sharedStore] fetchAnnouncementsWithCompletionBlock:^(NSUInteger numAdded, NSError *err) {
-#if DEBUG
-                NSLog([NSString stringWithFormat:@"%d added", numAdded]);
-#endif
+
             }];
             
             [[NewspaperStore sharedStore] fetchNewspaperWithCompletionBlock:^(BOOL didAddArticles, NSError *err) {
