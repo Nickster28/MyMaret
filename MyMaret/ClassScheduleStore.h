@@ -35,6 +35,13 @@ extern const NSUInteger todayIndexKey;
 - (void)fetchClassScheduleWithCompletionBlock:(void (^)(NSError *error))completionBlock;
 
 
+
+/*! Creates a new blank schedule.  Call this method if the user is not
+ * an official user and cannot have their schedule downloaded automatically.
+ */
+- (void)createEmptySchedule;
+
+
 // **** ALL CLASS ACCESS IS DONE VIA INDICES **** //
 // This works more easily with tableViews/row indices
 

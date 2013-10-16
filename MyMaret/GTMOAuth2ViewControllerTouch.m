@@ -848,6 +848,8 @@ static Class gSignInClass = Nil;
                     [object setObject:[NSNumber numberWithBool:NO] forKey:@"shouldReceiveEmails"];
                     [object saveInBackground];
                 } else if ([error code] == kPFErrorObjectNotFound) {
+                    [[ClassScheduleStore sharedStore] createEmptySchedule];
+                    
                     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Whoops!"
                                                                  message:@"Sorry, but we weren't able to identify you as a member of the Upper School.  You're still able to use all of the features of MyMaret, but you'll be unable to send announcements from within the app or have your schedule downloaded automatically.  If you need to send an announcement, please send it via email.  If you think this is an error, drop us a line by tapping on the \"Contact Us\" button in Settings."
                                                                 delegate:nil

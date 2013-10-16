@@ -157,7 +157,7 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
         
         // If we haven't saved one yet, download it from Parse (if the user is a student)
         if (!_classScheduleDictionary &&
-            [[NSUserDefaults standardUserDefaults] integerForKey:MyMaretUserGradeKey] <= 12) {
+            [[NSUserDefaults standardUserDefaults] integerForKey:MyMaretUserGradeKey] <= 12 && ![[[NSUserDefaults standardUserDefaults] objectForKey:MyMaretUserEmailKey] isEqualToString:@""]) {
             
             [self fetchClassScheduleWithCompletionBlock:^(NSError *error) {
                 
@@ -241,16 +241,7 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 - (void)createNewClassScheduleDictionary
 {
     // Make a new dictionary to hold the class schedule (keys = strings (days), values = arrays of SchoolClasses)
-    [self setClassScheduleDictionary:[[NSDictionary alloc] initWithObjects:@[[NSMutableArray array],
-                                                                             [NSMutableArray array],
-                                                                             [NSMutableArray array],
-                                                                             [NSMutableArray array],
-                                                                             [NSMutableArray array]]
-                                                                   forKeys:@[@"Monday",
-                                                                             @"Tuesday",
-                                                                             @"Wednesday",
-                                                                             @"Thursday",
-                                                                             @"Friday"]]];
+    [self createEmptySchedule];
     
     // Get a dictionary where keys = strings (days), values = arrays of times as strings
     NSDictionary *classTimes = [self schoolClassTimes];
@@ -417,6 +408,23 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
 }
 
 
+- (void)createEmptySchedule
+{
+    [self setClassScheduleDictionary:[[NSDictionary alloc] initWithObjects:@[[NSMutableArray array],
+                                                                             [NSMutableArray array],
+                                                                             [NSMutableArray array],
+                                                                             [NSMutableArray array],
+                                                                             [NSMutableArray array]]
+                                                                   forKeys:@[@"Monday",
+                                                                             @"Tuesday",
+                                                                             @"Wednesday",
+                                                                             @"Thursday",
+                                                                             @"Friday"]]];
+    
+    [self saveChanges];
+}
+
+
 
 - (BOOL)isClassNamed:(NSString *)className onDayWithIndex:(NSUInteger)dayIndex
 {
@@ -533,6 +541,11 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
             
             [self configureScheduleWithClasses:filteredClasses];
             [self saveChanges];
+        } else if (error && error.code == kPFErrorObjectNotFound) {
+            
+            // Otherwise make a blank schedule
+            [self createEmptySchedule];
+            error = nil;
         }
         
         if (completionBlock) completionBlock(error);
