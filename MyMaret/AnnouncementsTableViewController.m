@@ -72,7 +72,7 @@
     // If there is no email address, the user is not an official Upper School user
     if (![[[NSUserDefaults standardUserDefaults] objectForKey:MyMaretUserEmailKey] isEqualToString:@""])
         [self.navigationController setToolbarHidden:NO animated:YES];
-    else [self.navigationController setToolbarHidden:YES animated:YES];
+    else [self.navigationController setToolbarHidden:YES animated:NO];
     
     if ([self shouldDisplayNewestAnnouncement]) {
         [self refreshAnnouncements];
