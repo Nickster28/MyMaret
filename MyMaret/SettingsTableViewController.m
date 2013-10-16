@@ -44,6 +44,9 @@
                                            cancelButtonTitle:@"Got it!"
                                            otherButtonTitles:nil];
         [av show];
+        
+        [self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]
+                                      animated:YES];
         return;
     }
     
@@ -67,7 +70,7 @@
     
     // Deselect the "Contact Us" cell
     [self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:0
-                                                              inSection:0]
+                                                              inSection:2]
                                   animated:YES];
     
     if (error) {
@@ -166,7 +169,7 @@
                                                forIndexPath:indexPath];
         
         // Display the app version
-        [[cell detailTextLabel] setText:@"2.0"];
+        [[cell detailTextLabel] setText:@"2.0.1"];
         
         [[cell textLabel] setText:@"MyMaret Version"];
         
