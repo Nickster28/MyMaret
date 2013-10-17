@@ -106,6 +106,7 @@
         
     } else if (pageIndex == 0) {
         self.imageView.layer.borderWidth = 0.0;
+        [self.startButton setHidden:YES];
         
     } else {
         [self.startButton setHidden:YES];
