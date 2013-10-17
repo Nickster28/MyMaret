@@ -43,8 +43,9 @@
 
 
 /*! Cleans out assignments that are due in the past.
+ * @return true or false depending on whether or not assignments were cleaned out or not.
  */
-- (void)removeOldAssignments;
+- (BOOL)removeOldAssignments;
 
 
 

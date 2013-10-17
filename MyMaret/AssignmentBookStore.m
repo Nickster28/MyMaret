@@ -188,8 +188,11 @@
 }
 
 
-- (void)removeOldAssignments
+- (BOOL)removeOldAssignments
 {
+    // An indicator for whether or not we removed announcements
+    BOOL didRemoveAnnouncements = FALSE;
+    
     NSDateComponents *todayDateComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSWeekdayCalendarUnit) fromDate:[NSDate date]];
     
     // Iterate through all of the days we have assignments due to see if
@@ -198,6 +201,8 @@
         
         // If we're at or past today, break
         if ((dateCompsKey.month > todayDateComps.month) || (dateCompsKey.month == todayDateComps.month && dateCompsKey.day >= todayDateComps.day)) break;
+        
+        didRemoveAnnouncements = TRUE;
         
         // Otherwise, we need to delete all the assignments on this day
         NSUInteger dayIndex = [self indexForDayWithDateComponents:dateCompsKey];
@@ -209,6 +214,8 @@
             [self removeAssignmentWithDayIndex:dayIndex assignmentIndex:i];
         }
     }
+    
+    return didRemoveAnnouncements;
 }
 
 

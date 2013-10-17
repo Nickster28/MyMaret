@@ -44,8 +44,11 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
     
     [self setUpSegmentedControl];
     
-    // Delete old assignments
-    [[AssignmentBookStore sharedStore] removeOldAssignments];
+    // Delete old assignments - if there were old assignments,
+    // reload the table
+    if ([[AssignmentBookStore sharedStore] removeOldAssignments]) {
+        [self.tableView reloadData];
+    }
 }
 
 
