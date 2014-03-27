@@ -26,6 +26,7 @@
 - (void)bindAssignment:(Assignment *)assignment
   shouldDisplayDueTime:(BOOL)shouldDisplayDueTime shouldDisplayClass:(BOOL)shouldDisplayClass
 {
+    
     [[self assignmentLabel] setText:[assignment assignmentName]];
     
     // Only display the class if we're supposed to
@@ -60,6 +61,34 @@
     
     [[self dueLabel] setAttributedText:attrString];
     
+    
+    
+    // Configure the swipe right action
+    
+    // Set the view appearance
+    if ([self respondsToSelector:@selector(setSeparatorInset:)]) {
+        self.separatorInset = UIEdgeInsetsZero;
+    }
+    
+    [self.contentView setBackgroundColor:[UIColor whiteColor]];
+    [self setDefaultColor:[UIColor lightSchoolColor]];
+    
+    
+    UIImage *turnInImage = [UIImage imageNamed:@"TurnInLogo"];
+    UIImageView *turnInImageView = [[UIImageView alloc] initWithImage:turnInImage];
+    [turnInImageView setContentMode:UIViewContentModeCenter];
+    
+    // Notify our assignment state delegate when the user swipes the assignment to the right
+    [self setSwipeGestureWithView:turnInImageView
+                            color:[UIColor lightSchoolColor]
+                             mode:MCSwipeTableViewCellModeExit
+                            state:MCSwipeTableViewCellState1
+                  completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
+        
+                      [self.assignmentCompletionDelegate setAssignmentCellAsTurnedIn:self];
+        
+    }];
+    
 }
 
 
@@ -69,13 +98,13 @@
         [sender setImage:[UIImage imageNamed:@"assignmentCompletedIcon"]
                 forState:UIControlStateNormal];
         
-        [self.delegate setAssignmentCell:self asCompleted:true];
+        [self.assignmentCompletionDelegate setAssignmentCell:self asCompleted:true];
         [self setIsChecked:true];
     } else {
         [sender setImage:[UIImage imageNamed:@"assignmentNotCompletedIcon"]
                 forState:UIControlStateNormal];
         
-        [self.delegate setAssignmentCell:self asCompleted:false];
+        [self.assignmentCompletionDelegate setAssignmentCell:self asCompleted:false];
         [self setIsChecked:false];
     }
 }

@@ -149,7 +149,7 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
     AssignmentCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // We want to know when a user finishes an assignment
-    [cell setDelegate:self];
+    [cell setAssignmentCompletionDelegate:self];
     
     // Get the assignment at the given index
     Assignment *currentAssignment;
@@ -195,7 +195,8 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
     
     
     
-/*- (void)blah
+- (void)setAssignmentCellAsTurnedIn:(AssignmentCell *)cell
+{
     NSIndexPath *completedIP = [self.tableView indexPathForCell:cell];
     
     NSUInteger numAssignmentsInSection;
@@ -217,23 +218,18 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
                                                         assignmentIndex:completedIP.row];
     }
     
-    double delayInSeconds = 0.5;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        
-        // Remove the assignment from our table
-        // If this was the only assignment in the section, remove the whole section
-        // Otherwise, just remove the row
-        if (numAssignmentsInSection == 0) {
-            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:completedIP.section]
-                          withRowAnimation:UITableViewRowAnimationRight];
-        } else {
-            [self.tableView deleteRowsAtIndexPaths:@[completedIP]
-                                  withRowAnimation:UITableViewRowAnimationRight];
-        }
-    });
+    // Remove the assignment from our table
+    // If this was the only assignment in the section, remove the whole section
+    // Otherwise, just remove the row
+    if (numAssignmentsInSection == 0) {
+        [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:completedIP.section]
+                      withRowAnimation:UITableViewRowAnimationFade];
+    } else {
+        [self.tableView deleteRowsAtIndexPaths:@[completedIP]
+                              withRowAnimation:UITableViewRowAnimationFade];
+    }
 
-}*/
+}
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -49,6 +49,8 @@
 		016974A717D3113700973B1B /* NewspaperArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 016974A617D3113700973B1B /* NewspaperArticle.m */; };
 		016974A817D3113700973B1B /* NewspaperArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 016974A617D3113700973B1B /* NewspaperArticle.m */; };
 		016EDACF18E3CD9100DD7A32 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016EDACE18E3CD9100DD7A32 /* Parse.framework */; };
+		016EDAD418E3EFD200DD7A32 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 016EDAD118E3EFD200DD7A32 /* LICENSE */; };
+		016EDAD518E3EFD200DD7A32 /* MCSwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 016EDAD318E3EFD200DD7A32 /* MCSwipeTableViewCell.m */; };
 		0171AEC317A6244700F3284C /* AnnouncementsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */; };
 		0177454917A60AC3001625BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454817A60AC3001625BF /* Foundation.framework */; };
 		0177454B17A60AC3001625BF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454A17A60AC3001625BF /* CoreGraphics.framework */; };
@@ -166,6 +168,9 @@
 		016974A517D3113700973B1B /* NewspaperArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewspaperArticle.h; sourceTree = "<group>"; };
 		016974A617D3113700973B1B /* NewspaperArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewspaperArticle.m; sourceTree = "<group>"; };
 		016EDACE18E3CD9100DD7A32 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		016EDAD118E3EFD200DD7A32 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		016EDAD218E3EFD200DD7A32 /* MCSwipeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSwipeTableViewCell.h; sourceTree = "<group>"; };
+		016EDAD318E3EFD200DD7A32 /* MCSwipeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSwipeTableViewCell.m; sourceTree = "<group>"; };
 		0171AEC117A6244700F3284C /* AnnouncementsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementsTableViewController.h; sourceTree = "<group>"; };
 		0171AEC217A6244700F3284C /* AnnouncementsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementsTableViewController.m; sourceTree = "<group>"; };
 		0177454517A60AC3001625BF /* MyMaret.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMaret.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -283,6 +288,16 @@
 			name = "Google Authentication";
 			sourceTree = "<group>";
 		};
+		016EDAD018E3EFD200DD7A32 /* MCSwipeTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				016EDAD118E3EFD200DD7A32 /* LICENSE */,
+				016EDAD218E3EFD200DD7A32 /* MCSwipeTableViewCell.h */,
+				016EDAD318E3EFD200DD7A32 /* MCSwipeTableViewCell.m */,
+			);
+			path = MCSwipeTableViewCell;
+			sourceTree = "<group>";
+		};
 		0177453C17A60AC2001625BF = {
 			isa = PBXGroup;
 			children = (
@@ -348,6 +363,7 @@
 		0177454F17A60AC3001625BF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				016EDAD018E3EFD200DD7A32 /* MCSwipeTableViewCell */,
 				01A4FE3317B97C08007FAB5C /* UIColor+SchoolColor.h */,
 				01A4FE3417B97C08007FAB5C /* UIColor+SchoolColor.m */,
 				016780D917A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.h */,
@@ -621,6 +637,7 @@
 				01BD435C17C9BB22005EF174 /* AnnouncementCell.xib in Resources */,
 				0177456117A60AC3001625BF /* Images.xcassets in Resources */,
 				0124412617D056260091C01E /* WelcomeView.xib in Resources */,
+				016EDAD418E3EFD200DD7A32 /* LICENSE in Resources */,
 				0177455317A60AC3001625BF /* InfoPlist.strings in Resources */,
 				01271A1217C9CB2E003C487C /* MainMenuBackgroundView.xib in Resources */,
 				0177455C17A60AC3001625BF /* Main.storyboard in Resources */,
@@ -672,6 +689,7 @@
 				01DEFF3917DD92F000D355CA /* AssignmentBookStore.m in Sources */,
 				0169749417D2D38900973B1B /* MyMaretFrontViewController.m in Sources */,
 				0197389917C2C21100CB5221 /* AnnouncementDetailViewController.m in Sources */,
+				016EDAD518E3EFD200DD7A32 /* MCSwipeTableViewCell.m in Sources */,
 				01176FE017DC465900DFF2EA /* DateTimePickerCell.m in Sources */,
 				01DAA6B017A7041E00B23BB2 /* MyMaretFrontTableViewController.m in Sources */,
 				017A96DB17A7EB6C003D8A40 /* CalendarViewController.m in Sources */,
@@ -837,7 +855,7 @@
 				INFOPLIST_FILE = "MyMaret/MyMaret-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9F028656-0BA9-4ABE-A1EC-AF885F6B9F19";
+				PROVISIONING_PROFILE = "DF4DEADB-2338-41C4-85A4-512DCB5C81D5";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

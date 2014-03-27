@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MCSwipeTableViewCell.h"
 
 @class Assignment;
 @protocol AssignmentCompletionProtocol;
 
-@interface AssignmentCell : UITableViewCell
+@interface AssignmentCell : MCSwipeTableViewCell;
 @property (nonatomic, strong) IBOutlet UILabel *subtitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *assignmentLabel;
 @property (nonatomic, strong) IBOutlet UILabel *dueLabel;
@@ -21,7 +22,7 @@
 @property (nonatomic) BOOL isChecked;
 
 // We tell the delegate when we've been marked as completed
-@property (nonatomic, weak) id<AssignmentCompletionProtocol> delegate;
+@property (nonatomic, weak) id<AssignmentCompletionProtocol> assignmentCompletionDelegate;
 
 
 
@@ -41,5 +42,8 @@
 
 // Called by the cell to tell its delegate that the assignment is completed
 - (void)setAssignmentCell:(AssignmentCell *)cell asCompleted:(BOOL)isCompleted;
+
+// Called by the cell to tell its delegate that the assignment has been marked as turned in
+- (void)setAssignmentCellAsTurnedIn:(AssignmentCell *)cell;
 
 @end
