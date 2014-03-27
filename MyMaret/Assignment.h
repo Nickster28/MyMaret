@@ -25,6 +25,9 @@
 // The name of the assignment
 @property (nonatomic, strong) NSString *assignmentName;
 
+// Whether or not the assignment has been completed
+@property (nonatomic) BOOL completed;
+
 
 /*! Creates an assignment with the given info.
  * @param assignmentName the name/description of the assignment.

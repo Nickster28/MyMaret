@@ -15,6 +15,7 @@ NSString * const AssignmentDueDateEncodingKey = @"dueDate";
 NSString * const AssignmentClassNameEncodingKey = @"className";
 NSString * const AssignmentDueDateDayDateCompsEncodingKey = @"dueDateDayDateComps";
 NSString * const AssignmentDueTimeStringEncodingKey = @"dueTimeString";
+NSString * const AssignmentCompletedEncodingKey = @"completed";
 
 #define SECONDS_IN_WEEK 604800
 
@@ -29,6 +30,7 @@ NSString * const AssignmentDueTimeStringEncodingKey = @"dueTimeString";
         [self setAssignmentName:assignmentName];
         [self setDueDate:dueDate];
         [self setClassName:className];
+        [self setCompleted:false];
         
         // Pull out the day, month, and weekday to store in our date comps
         [self setDueDateDayDateComps:[[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSWeekdayCalendarUnit)
@@ -65,6 +67,7 @@ NSString * const AssignmentDueTimeStringEncodingKey = @"dueTimeString";
     [aCoder encodeObject:[self className] forKey:AssignmentClassNameEncodingKey];
     [aCoder encodeObject:[self dueDateDayDateComps] forKey:AssignmentDueDateDayDateCompsEncodingKey];
     [aCoder encodeObject:[self dueTimeString] forKey:AssignmentDueTimeStringEncodingKey];
+    [aCoder encodeObject:[NSNumber numberWithBool:[self completed]] forKey:AssignmentCompletedEncodingKey];
 }
 
 
@@ -77,6 +80,7 @@ NSString * const AssignmentDueTimeStringEncodingKey = @"dueTimeString";
         [self setClassName:[aDecoder decodeObjectForKey:AssignmentClassNameEncodingKey]];
         [self setDueDateDayDateComps:[aDecoder decodeObjectForKey:AssignmentDueDateDayDateCompsEncodingKey]];
         [self setDueTimeString:[aDecoder decodeObjectForKey:AssignmentDueTimeStringEncodingKey]];
+        [self setCompleted:[[aDecoder decodeObjectForKey:AssignmentCompletedEncodingKey] boolValue]];
     }
     
     return self;
