@@ -1371,7 +1371,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="markAssignmentAsCompleted:" destination="CKV-R8-S91" eventType="touchUpInside" id="h4K-ih-lcc"/>
+                                                <action selector="changeAssignmentCompletion:" destination="CKV-R8-S91" eventType="touchUpInside" id="GXk-aI-yzL"/>
                                             </connections>
                                         </button>
                                     </subviews>

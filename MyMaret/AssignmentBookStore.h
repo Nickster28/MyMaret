@@ -95,6 +95,16 @@
                        assignmentIndex:(NSUInteger)assignmentIndex;
 
 
+/*! Sets an assignment's completion state as either true or false.
+ * @param classIndex the index of the class the assignment is for.
+ * @param assignmentIndex the index of the assignment within the class.
+ * @param isCompleted a boolean indicating the completion state of the assignment.
+ */
+- (void)setAssignmentWithClassIndex:(NSUInteger)classIndex
+                    assignmentIndex:(NSUInteger)assignmentIndex
+                        asCompleted:(BOOL)isCompleted;
+
+
 
 
 
@@ -144,6 +154,16 @@
  */
 - (void)removeAssignmentWithDayIndex:(NSUInteger)dayIndex
                      assignmentIndex:(NSUInteger)assignmentIndex;
+
+
+/*! Sets an assignment's completion state as either true or false.
+ * @param dayIndex the index of the day on which the assignment is due.
+ * @param assignmentIndex the index of the assignment within the day.
+ * @param isCompleted a boolean indicating the completion state of the assignment.
+ */
+- (void)setAssignmentWithDayIndex:(NSUInteger)dayIndex
+                  assignmentIndex:(NSUInteger)assignmentIndex
+                      asCompleted:(BOOL)isCompleted;
 
 
 

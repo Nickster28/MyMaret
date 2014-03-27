@@ -175,8 +175,27 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
 }
 
 
-- (void)assignmentCellwasMarkedAsCompleted:(AssignmentCell *)cell
+- (void)setAssignmentCell:(AssignmentCell *)cell asCompleted:(BOOL)isCompleted
 {
+    // Find out which cell is being modified
+    NSIndexPath *cellIP = [self.tableView indexPathForCell:cell];
+    
+    // Change the corresponding assignment's completion state
+    if ([self assignmentBookViewIndex] == kMyMaretAssignmentBookViewClass) {
+        [[AssignmentBookStore sharedStore] setAssignmentWithClassIndex:cellIP.section
+                                                       assignmentIndex:cellIP.row
+                                                           asCompleted:isCompleted];
+    } else {
+        [[AssignmentBookStore sharedStore] setAssignmentWithDayIndex:cellIP.section
+                                                     assignmentIndex:cellIP.row
+                                                         asCompleted:isCompleted];
+    }
+}
+    
+    
+    
+    
+/*- (void)blah
     NSIndexPath *completedIP = [self.tableView indexPathForCell:cell];
     
     NSUInteger numAssignmentsInSection;
@@ -214,7 +233,7 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
         }
     });
 
-}
+}*/
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -15,7 +15,7 @@ NSString * const AssignmentDueDateEncodingKey = @"dueDate";
 NSString * const AssignmentClassNameEncodingKey = @"className";
 NSString * const AssignmentDueDateDayDateCompsEncodingKey = @"dueDateDayDateComps";
 NSString * const AssignmentDueTimeStringEncodingKey = @"dueTimeString";
-NSString * const AssignmentCompletedEncodingKey = @"completed";
+NSString * const AssignmentIsCompletedEncodingKey = @"isCompleted";
 
 #define SECONDS_IN_WEEK 604800
 
@@ -30,7 +30,7 @@ NSString * const AssignmentCompletedEncodingKey = @"completed";
         [self setAssignmentName:assignmentName];
         [self setDueDate:dueDate];
         [self setClassName:className];
-        [self setCompleted:false];
+        [self setIsCompleted:false];
         
         // Pull out the day, month, and weekday to store in our date comps
         [self setDueDateDayDateComps:[[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSWeekdayCalendarUnit)
@@ -67,7 +67,7 @@ NSString * const AssignmentCompletedEncodingKey = @"completed";
     [aCoder encodeObject:[self className] forKey:AssignmentClassNameEncodingKey];
     [aCoder encodeObject:[self dueDateDayDateComps] forKey:AssignmentDueDateDayDateCompsEncodingKey];
     [aCoder encodeObject:[self dueTimeString] forKey:AssignmentDueTimeStringEncodingKey];
-    [aCoder encodeObject:[NSNumber numberWithBool:[self completed]] forKey:AssignmentCompletedEncodingKey];
+    [aCoder encodeObject:[NSNumber numberWithBool:[self isCompleted]] forKey:AssignmentIsCompletedEncodingKey];
 }
 
 
@@ -80,7 +80,7 @@ NSString * const AssignmentCompletedEncodingKey = @"completed";
         [self setClassName:[aDecoder decodeObjectForKey:AssignmentClassNameEncodingKey]];
         [self setDueDateDayDateComps:[aDecoder decodeObjectForKey:AssignmentDueDateDayDateCompsEncodingKey]];
         [self setDueTimeString:[aDecoder decodeObjectForKey:AssignmentDueTimeStringEncodingKey]];
-        [self setCompleted:[[aDecoder decodeObjectForKey:AssignmentCompletedEncodingKey] boolValue]];
+        [self setIsCompleted:[[aDecoder decodeObjectForKey:AssignmentIsCompletedEncodingKey] boolValue]];
     }
     
     return self;

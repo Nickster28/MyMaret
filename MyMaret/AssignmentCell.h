@@ -17,6 +17,9 @@
 @property (nonatomic, strong) IBOutlet UILabel *dueLabel;
 @property (nonatomic, strong) IBOutlet UIButton *markCompletedButton;
 
+// Keep track of whether or not the checkbox is already filled
+@property (nonatomic) BOOL isChecked;
+
 // We tell the delegate when we've been marked as completed
 @property (nonatomic, weak) id<AssignmentCompletionProtocol> delegate;
 
@@ -29,7 +32,7 @@
   shouldDisplayDueTime:(BOOL)shouldDisplayDueTime
     shouldDisplayClass:(BOOL)shouldDisplayClass;
 
-- (IBAction)markAssignmentAsCompleted:(UIButton *)sender;
+- (IBAction)changeAssignmentCompletion:(UIButton *)sender;
 
 @end
 
@@ -37,6 +40,6 @@
 @protocol AssignmentCompletionProtocol
 
 // Called by the cell to tell its delegate that the assignment is completed
-- (void)assignmentCellwasMarkedAsCompleted:(AssignmentCell *)cell;
+- (void)setAssignmentCell:(AssignmentCell *)cell asCompleted:(BOOL)isCompleted;
 
 @end

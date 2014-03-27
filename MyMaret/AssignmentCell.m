@@ -32,8 +32,14 @@
     [[self subtitleLabel] setText:[assignment className]];
 
     
-    // Set the image of the button to not completed
-    [[self markCompletedButton] setImage:[UIImage imageNamed:@"assignmentNotCompletedIcon"] forState:UIControlStateNormal];
+    // Set the image of the button to completed or not completed
+    if ([assignment isCompleted]) {
+        [[self markCompletedButton] setImage:[UIImage imageNamed:@"assignmentCompletedIcon"] forState:UIControlStateNormal];
+        [self setIsChecked:true];
+    } else {
+        [[self markCompletedButton] setImage:[UIImage imageNamed:@"assignmentNotCompletedIcon"] forState:UIControlStateNormal];
+        [self setIsChecked:false];
+    }
     
     // Display the appropriate due time/date by making "Due:" in black, and the due date/time in green
     NSMutableAttributedString *attrString;
@@ -57,12 +63,21 @@
 }
 
 
-- (IBAction)markAssignmentAsCompleted:(UIButton *)sender
+- (IBAction)changeAssignmentCompletion:(UIButton *)sender
 {
-    [sender setImage:[UIImage imageNamed:@"assignmentCompletedIcon"]
-            forState:UIControlStateNormal];
-    
-    [self.delegate assignmentCellwasMarkedAsCompleted:self];
+    if (![self isChecked]) {
+        [sender setImage:[UIImage imageNamed:@"assignmentCompletedIcon"]
+                forState:UIControlStateNormal];
+        
+        [self.delegate setAssignmentCell:self asCompleted:true];
+        [self setIsChecked:true];
+    } else {
+        [sender setImage:[UIImage imageNamed:@"assignmentNotCompletedIcon"]
+                forState:UIControlStateNormal];
+        
+        [self.delegate setAssignmentCell:self asCompleted:false];
+        [self setIsChecked:false];
+    }
 }
 
 @end

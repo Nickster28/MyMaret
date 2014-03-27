@@ -377,6 +377,20 @@
 
 
 
+- (void)setAssignmentWithClassIndex:(NSUInteger)classIndex
+                    assignmentIndex:(NSUInteger)assignmentIndex
+                        asCompleted:(BOOL)isCompleted
+{
+    // Fetch the given assignment and change its completion state
+    Assignment *currAssignment = [self assignmentWithClassIndex:classIndex
+                                                assignmentIndex:assignmentIndex];
+    [currAssignment setIsCompleted:isCompleted];
+    
+    [self saveChanges];
+}
+
+
+
 #pragma mark Assignments By Due Date
 /*************** Assignments by Due Date ****************/
 
@@ -463,6 +477,21 @@
     if (assignmentClassIndex != NSNotFound) {
         [self removeAssignmentWithClassIndex:[self indexForClassWithName:[assignmentToDelete className]] assignmentIndex:assignmentClassIndex];
     }
+    
+    [self saveChanges];
+}
+
+
+
+
+- (void)setAssignmentWithDayIndex:(NSUInteger)dayIndex
+                  assignmentIndex:(NSUInteger)assignmentIndex
+                      asCompleted:(BOOL)isCompleted
+{
+    // Fetch the given assignment and change its completion state
+    Assignment *currAssignment = [self assignmentWithDayIndex:dayIndex
+                                              assignmentIndex:assignmentIndex];
+    [currAssignment setIsCompleted:isCompleted];
     
     [self saveChanges];
 }
