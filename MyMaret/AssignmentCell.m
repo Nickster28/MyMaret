@@ -64,6 +64,7 @@
     
     
     // Configure the swipe right action
+    // Thanks to alikaragoz and his MCSwipeTableViewCell demo code for help implementing this
     
     // Set the view appearance
     if ([self respondsToSelector:@selector(setSeparatorInset:)]) {
