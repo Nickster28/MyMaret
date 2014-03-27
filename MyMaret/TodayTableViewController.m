@@ -88,7 +88,7 @@
         NSUInteger numKeys = [self.tableView numberOfSections];
         for (NSUInteger i = 0; i < numKeys; i++) {
             [_emptySectionsDictionary setObject:[NSNumber numberWithBool:FALSE]
-                                   forKey:[NSNumber numberWithInt:i]];
+                                   forKey:[NSNumber numberWithInteger:i]];
         }
     }
     
@@ -99,13 +99,13 @@
 - (void)setSection:(NSUInteger)sectionIndex isEmpty:(BOOL)isEmpty
 {
     [[self emptySectionsDictionary] setObject:[NSNumber numberWithBool:isEmpty]
-                                 forKey:[NSNumber numberWithInt:sectionIndex]];
+                                 forKey:[NSNumber numberWithInteger:sectionIndex]];
 }
 
 
 - (BOOL)sectionIsEmpty:(NSUInteger)sectionIndex
 {
-    return [[[self emptySectionsDictionary] objectForKey:[NSNumber numberWithInt:sectionIndex]] boolValue];
+    return [[[self emptySectionsDictionary] objectForKey:[NSNumber numberWithInteger:sectionIndex]] boolValue];
 }
 
 #pragma mark - Table view data source
@@ -224,6 +224,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // If the section is empty, display a message in the section
+    if ([self sectionIsEmpty:indexPath.section]) {
+        return [self cellForEmptySectionWithIndex:indexPath.section];
+    }
+    
+    // Otherwise, create a cell to display the correct entry in the given section
     switch (indexPath.section) {
         case 0:
             return [self classScheduleCellForIndexPath:indexPath];
@@ -244,18 +250,42 @@
 
 
 
+- (UITableViewCell *)cellForEmptySectionWithIndex:(NSUInteger)sectionIndex
+{
+    // Make a noEntriesCell that tells the user there are no entries for the given section
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"noEntriesCell"
+                                                                 forIndexPath:[NSIndexPath indexPathForRow:0 inSection:sectionIndex]];
+    
+    switch (sectionIndex) {
+        case 0:
+            [[cell textLabel] setText:@"No Classes Today!"];
+            break;
+            
+        case 1:
+            [[cell textLabel] setText:@"None!"];
+            break;
+            
+        case 2:
+            [[cell textLabel] setText:@"No Announcements Today"];
+            break;
+            
+        case 3:
+            [[cell textLabel] setText:@"No Recent Edition"];
+            break;
+            
+        default:
+            [[cell textLabel] setText:@"Error: Could not fetch"];
+            break;
+    }
+    
+    return cell;
+}
+
+
+
 - (UITableViewCell *)classScheduleCellForIndexPath:(NSIndexPath *)ip
 {
-    // If there are no classes today...
-    if ([[ClassScheduleStore sharedStore] numberOfPeriodsInDayWithIndex:todayIndexKey] == 0) {
-        
-        // Return a cell that says that
-        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"noEntriesCell"
-                                                                     forIndexPath:ip];
-        [[cell textLabel] setText:@"No Classes Today!"];
-        
-        return cell;
-    } else if (ip.row == 0) {
+    if (ip.row == 0) {
         
         // Display our "Set today's schedule" cell
         return [self.tableView dequeueReusableCellWithIdentifier:@"daySettingsCell"
@@ -278,18 +308,7 @@
 
 - (UITableViewCell *)assignmentCellForIndexPath:(NSIndexPath *)ip
 {
-    // If there are no assignments due today...
-    if ([[AssignmentBookStore sharedStore] numberOfAssignmentsDueToday] == 0) {
-        
-        // Return a cell that says that
-        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"noEntriesCell"
-                                                                     forIndexPath:ip];
-        [[cell textLabel] setText:@"None!"];
-        
-        return cell;
-    }
-    
-    // Otherwise, get the corresponding assignment and make a cell displaying it
+    // get the corresponding assignment and make a cell displaying it
     Assignment *currAssignment = [[AssignmentBookStore sharedStore] assignmentDueTodayWithAssignmentIndex:ip.row];
     
     AssignmentCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"assignmentCell" forIndexPath:ip];
@@ -305,18 +324,8 @@
 
 - (UITableViewCell *)announcementCellForIndexPath:(NSIndexPath *)ip
 {
-    // If there are no announcements today...
-    if ([[AnnouncementsStore sharedStore] numberOfAnnouncements] == 0) {
-        
-        // Return a cell that says that
-        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"noEntriesCell"
-                                                                     forIndexPath:ip];
-        [[cell textLabel] setText:@"No Announcements Today"];
-        
-        return cell;
-    }
-    
-    // Otherwise, get the corresponding class object and make a cell displaying it
+
+    // get the corresponding announcement object and make a cell displaying it
     Announcement *currAnnouncement = [[AnnouncementsStore sharedStore] announcementAtIndex:ip.row];
     
     AnnouncementCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"announcementCell"
@@ -330,18 +339,7 @@
 
 - (UITableViewCell *)newspaperCellForIndexPath:(NSIndexPath *)ip
 {
-    // If there are no announcements today...
-    if ([[NewspaperStore sharedStore] numberOfArticlesInSection:@"Popular"] == 0) {
-        
-        // Return a cell that says that
-        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"noEntriesCell"
-                                                                     forIndexPath:ip];
-        [[cell textLabel] setText:@"No Recent Edition"];
-        
-        return cell;
-    }
-    
-    // Otherwise, get the corresponding class object and make a cell displaying it
+    // get the corresponding article object and make a cell displaying it
     NewspaperArticle *article = [[NewspaperStore sharedStore] articleInSection:@"Popular"
                                                                        atIndex:ip.row];
     
