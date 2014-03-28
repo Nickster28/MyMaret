@@ -86,7 +86,7 @@
                             state:MCSwipeTableViewCellState1
                   completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
         
-                      [self.assignmentCompletionDelegate setAssignmentCellAsTurnedIn:self];
+                      [self.assignmentStateDelegate deleteAssignmentCell:self];
         
     }];
     
@@ -99,13 +99,13 @@
         [sender setImage:[UIImage imageNamed:@"assignmentCompletedIcon"]
                 forState:UIControlStateNormal];
         
-        [self.assignmentCompletionDelegate setAssignmentCell:self asCompleted:true];
+        [self.assignmentStateDelegate setAssignmentCell:self asCompleted:true];
         [self setIsChecked:true];
     } else {
         [sender setImage:[UIImage imageNamed:@"assignmentNotCompletedIcon"]
                 forState:UIControlStateNormal];
         
-        [self.assignmentCompletionDelegate setAssignmentCell:self asCompleted:false];
+        [self.assignmentStateDelegate setAssignmentCell:self asCompleted:false];
         [self setIsChecked:false];
     }
 }

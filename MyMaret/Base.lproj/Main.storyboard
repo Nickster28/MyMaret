@@ -272,7 +272,7 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="markAssignmentAsCompleted:" destination="K6P-B7-f39" eventType="touchUpInside" id="Caw-dJ-jdu"/>
+                                                <action selector="changeAssignmentCompletion:" destination="K6P-B7-f39" eventType="touchUpInside" id="hi5-sb-RqC"/>
                                             </connections>
                                         </button>
                                     </subviews>

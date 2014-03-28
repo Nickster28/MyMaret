@@ -10,7 +10,7 @@
 #import "MCSwipeTableViewCell.h"
 
 @class Assignment;
-@protocol AssignmentCompletionProtocol;
+@protocol AssignmentStateProtocol;
 
 @interface AssignmentCell : MCSwipeTableViewCell;
 @property (nonatomic, strong) IBOutlet UILabel *subtitleLabel;
@@ -21,8 +21,8 @@
 // Keep track of whether or not the checkbox is already filled
 @property (nonatomic) BOOL isChecked;
 
-// We tell the delegate when we've been marked as completed
-@property (nonatomic, weak) id<AssignmentCompletionProtocol> assignmentCompletionDelegate;
+// We tell the delegate when the state (completed, deleted) of this assignment changes
+@property (nonatomic, weak) id<AssignmentStateProtocol> assignmentStateDelegate;
 
 
 
@@ -38,12 +38,12 @@
 @end
 
 
-@protocol AssignmentCompletionProtocol
+@protocol AssignmentStateProtocol
 
 // Called by the cell to tell its delegate that the assignment is completed
 - (void)setAssignmentCell:(AssignmentCell *)cell asCompleted:(BOOL)isCompleted;
 
-// Called by the cell to tell its delegate that the assignment has been marked as turned in
-- (void)setAssignmentCellAsTurnedIn:(AssignmentCell *)cell;
+// Called by the cell to tell its delegate that the assignment has been deleted
+- (void)deleteAssignmentCell:(AssignmentCell *)cell;
 
 @end

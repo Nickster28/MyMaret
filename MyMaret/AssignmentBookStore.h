@@ -199,4 +199,12 @@
  */
 - (void)removeAssignmentDueTodayWithAssignmentIndex:(NSUInteger)assignmentIndex;
 
+
+
+/*! Sets an assignment due today's completion state as either true or false.
+ * @param assignmentIndex the index of the assignment due today.
+ */
+- (void)setAssignmentDueTodayWithAssignmentIndex:(NSUInteger)assignmentIndex
+                                     asCompleted:(BOOL)isCompleted;
+
 @end

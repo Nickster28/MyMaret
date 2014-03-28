@@ -538,4 +538,15 @@
 }
 
 
+
+// Sets the given assignment's completion state
+- (void)setAssignmentDueTodayWithAssignmentIndex:(NSUInteger)assignmentIndex
+                                     asCompleted:(BOOL)isCompleted
+{
+    Assignment *currAssignment = [self assignmentDueTodayWithAssignmentIndex:assignmentIndex];
+    [currAssignment setIsCompleted:isCompleted];
+    [self saveChanges];
+}
+
+
 @end

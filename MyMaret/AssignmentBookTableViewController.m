@@ -20,7 +20,7 @@ enum kMyMaretAssignmentBookView {
     kMyMaretAssignmentBookViewDate = 1
     };
 
-@interface AssignmentBookTableViewController () <AssignmentCreationDismisserDelegate, AssignmentCompletionProtocol>
+@interface AssignmentBookTableViewController () <AssignmentCreationDismisserDelegate, AssignmentStateProtocol>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *bottomToolbarButton;
 @property (nonatomic) NSUInteger assignmentBookViewIndex;
 
@@ -149,7 +149,7 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
     AssignmentCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // We want to know when a user finishes an assignment
-    [cell setAssignmentCompletionDelegate:self];
+    [cell setAssignmentStateDelegate:self];
     
     // Get the assignment at the given index
     Assignment *currentAssignment;
@@ -175,6 +175,25 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
 }
 
 
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"createAnnouncement"] &&
+        [[segue destinationViewController] isKindOfClass:[UINavigationController class]]) {
+        
+        AssignmentCreationTableViewController *createVC = [[(UINavigationController *)[segue destinationViewController] viewControllers] objectAtIndex:0];
+        
+        // Set ourselves as the delegate
+        [createVC setDelegate:self];
+    }
+}
+
+
+
+#pragma mark AssignmentStateDelegate
+
+
+// Called when the user marks an assignment as completed or not completed
 - (void)setAssignmentCell:(AssignmentCell *)cell asCompleted:(BOOL)isCompleted
 {
     // Find out which cell is being modified
@@ -194,8 +213,8 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
     
     
     
-    
-- (void)setAssignmentCellAsTurnedIn:(AssignmentCell *)cell
+// Called when the user deletes an assignment
+- (void)deleteAssignmentCell:(AssignmentCell *)cell
 {
     NSIndexPath *completedIP = [self.tableView indexPathForCell:cell];
     
@@ -232,17 +251,7 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
 }
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"createAnnouncement"] &&
-        [[segue destinationViewController] isKindOfClass:[UINavigationController class]]) {
-        
-        AssignmentCreationTableViewController *createVC = [[(UINavigationController *)[segue destinationViewController] viewControllers] objectAtIndex:0];
-        
-        // Set ourselves as the delegate
-        [createVC setDelegate:self];
-    }
-}
+
 
 
 #pragma mark Dismisser Protocol

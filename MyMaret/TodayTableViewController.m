@@ -25,7 +25,7 @@
 #import "ArticleDetailViewController.h"
 
 
-@interface TodayTableViewController () <TodayIndexSetterDelegate, AssignmentCompletionProtocol>
+@interface TodayTableViewController () <TodayIndexSetterDelegate, AssignmentStateProtocol>
 
 // Dictionary of section indices to BOOLs to keep track of whether the
 // section is empty
@@ -316,7 +316,7 @@
     [cell bindAssignment:currAssignment shouldDisplayDueTime:YES shouldDisplayClass:YES];
     
     // We should be notified if the user marks the assignment as completed
-    [cell setDelegate:self];
+    [cell setAssignmentStateDelegate:self];
     
     return cell;
 }
@@ -436,9 +436,24 @@
 }
 
 
+#pragma mark AssignmentStateDelegate
+
 
 // Called when the user marks an assignment as completed
-- (void)assignmentCellwasMarkedAsCompleted:(AssignmentCell *)cell
+- (void)setAssignmentCell:(AssignmentCell *)cell asCompleted:(BOOL)isCompleted
+{
+    // Find out which cell is being modified
+    NSIndexPath *cellIP = [self.tableView indexPathForCell:cell];
+    
+    // Change the corresponding assignment's completion state
+    [[AssignmentBookStore sharedStore] setAssignmentDueTodayWithAssignmentIndex:cellIP.row
+                                                                    asCompleted:isCompleted];
+}
+
+
+
+// Called when the user deletes an assignment
+- (void)deleteAssignmentCell:(AssignmentCell *)cell
 {
     NSIndexPath *completedIP = [self.tableView indexPathForCell:cell];
     
@@ -449,28 +464,24 @@
     [[AssignmentBookStore sharedStore] removeAssignmentDueTodayWithAssignmentIndex:completedIP.row];
 
     
-    double delayInSeconds = 0.5;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        
-        // If this is the last assignment, we need to remove its row and THEN ADD ANOTHER row
-        // (The "No assignments" row)
-        if (numAssignmentsInSection == 0) {
-            [self.tableView beginUpdates];
-            [self.tableView deleteRowsAtIndexPaths:@[completedIP]
-                                  withRowAnimation:UITableViewRowAnimationRight];
-            [self.tableView insertRowsAtIndexPaths:@[completedIP]
-                                  withRowAnimation:UITableViewRowAnimationLeft];
-            [self.tableView endUpdates];
+    // If this is the last assignment, we need to remove its row and THEN ADD ANOTHER row
+    // (The "No assignments" row)
+    if (numAssignmentsInSection == 0) {
+        [self.tableView beginUpdates];
+        [self.tableView deleteRowsAtIndexPaths:@[completedIP]
+                              withRowAnimation:UITableViewRowAnimationRight];
+        [self.tableView insertRowsAtIndexPaths:@[completedIP]
+                              withRowAnimation:UITableViewRowAnimationLeft];
+        [self.tableView endUpdates];
         
         // Otherwise, just remove the row
-        } else {
-            [self.tableView deleteRowsAtIndexPaths:@[completedIP]
-                                  withRowAnimation:UITableViewRowAnimationRight];
-        }
-    });
+    } else {
+        [self.tableView deleteRowsAtIndexPaths:@[completedIP]
+                              withRowAnimation:UITableViewRowAnimationRight];
+    }
     
 }
+
 
 
 @end
