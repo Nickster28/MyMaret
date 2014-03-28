@@ -322,6 +322,9 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
     [self.refreshControl beginRefreshing];
     NSUInteger numArticlesOnScreen = [self.tableView numberOfRowsInSection:0];
     
+    // Make a weak version of self to avoid retain cycles
+    NewspaperTableViewController * __weak weakSelf = self;
+    
     // Have the store check for a new edition of the newspaper
     [[NewspaperStore sharedStore] fetchNewspaperWithCompletionBlock:^(BOOL didAddArticles, NSError *err) {
         
@@ -340,14 +343,14 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
                 NSString *sectionTitle = [[NewspaperStore sharedStore] sectionTitleForIndex:[self sectionIndex]];
                 NSUInteger numNewArticles = [[NewspaperStore sharedStore] numberOfArticlesInSection:sectionTitle];
                 
-                [self changeArticleCountFrom:numArticlesOnScreen
+                [weakSelf changeArticleCountFrom:numArticlesOnScreen
                                           to:numNewArticles
                          withRemoveAnimation:UITableViewRowAnimationBottom
                              insertAnimation:UITableViewRowAnimationTop];
             }
         }
         
-        [self.refreshControl endRefreshing];
+        [weakSelf.refreshControl endRefreshing];
     }];
     
 }

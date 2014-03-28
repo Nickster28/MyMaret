@@ -372,20 +372,23 @@
         return;
     }
     
+    // Make a weak version of self to avoid retain cycles
+    SchoolClassEditTableViewController * __weak weakSelf = self;
+    
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         
         // Set the drawer index path accordingly
         if (shouldAdjustDrawerRow) {
-            self.drawerIndexPath = [NSIndexPath indexPathForRow:indexPath.row + 1
+            weakSelf.drawerIndexPath = [NSIndexPath indexPathForRow:indexPath.row + 1
                                                       inSection:indexPath.section];
-        } else self.drawerIndexPath = indexPath;
+        } else weakSelf.drawerIndexPath = indexPath;
         
         // Set the parent cell
-        self.drawerParentIndexPath = [NSIndexPath indexPathForRow:self.drawerIndexPath.row - 1 inSection:self.drawerIndexPath.section];
+        weakSelf.drawerParentIndexPath = [NSIndexPath indexPathForRow:weakSelf.drawerIndexPath.row - 1 inSection:weakSelf.drawerIndexPath.section];
         
         // Animate in the drawer
-        [tableView insertRowsAtIndexPaths:@[self.drawerIndexPath]
+        [tableView insertRowsAtIndexPaths:@[weakSelf.drawerIndexPath]
                          withRowAnimation:UITableViewRowAnimationFade];
     });
 }

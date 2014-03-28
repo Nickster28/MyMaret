@@ -258,10 +258,12 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
 
 - (void)assignmentCreationTableViewControllerDidCreateAssignment:(AssignmentCreationTableViewController *)creationTVC
 {
+    // Make a weak version of self to avoid a retain cycle
+    AssignmentBookTableViewController * __weak weakSelf = self;
     // We have to refresh
     [self dismissViewControllerAnimated:YES
                              completion:^{
-                                 [self.tableView reloadData];
+                                 [weakSelf.tableView reloadData];
                              }];
 }
 

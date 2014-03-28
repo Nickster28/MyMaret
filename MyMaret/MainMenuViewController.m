@@ -77,10 +77,13 @@
 {
     if ([segue isKindOfClass:[SWRevealViewControllerSegue class]] && [segue.destinationViewController isKindOfClass:[UINavigationController class]]) {
         
+        // Make a weak version of self to avoid retain cycles
+        MainMenuViewController * __weak weakSelf = self;
+        
         [(SWRevealViewControllerSegue *)segue setPerformBlock:^(SWRevealViewControllerSegue *segue, UIViewController *startVC, UIViewController *destinationVC) {
             
-            [self.revealViewController setFrontViewController:destinationVC];
-            [self.revealViewController setFrontViewPosition:FrontViewPositionLeft animated:YES];
+            [weakSelf.revealViewController setFrontViewController:destinationVC];
+            [weakSelf.revealViewController setFrontViewPosition:FrontViewPositionLeft animated:YES];
         }];
     }
     

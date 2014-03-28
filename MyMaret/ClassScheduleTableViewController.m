@@ -237,10 +237,12 @@
 
 - (void)schoolClassEditTableViewController:(SchoolClassEditTableViewController *)editTVC didCreateNewClassForSection:(NSUInteger)section
 {
+    // Make a weak version of self to avoid a retain cycle
+    ClassScheduleTableViewController * __weak weakSelf = self;
     // Dismiss an insert a new cell
     [self dismissViewControllerAnimated:YES
                              completion:^{
-                                 [self.tableView reloadData];
+                                 [weakSelf.tableView reloadData];
                              }];
 }
 

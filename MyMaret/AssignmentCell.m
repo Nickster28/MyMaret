@@ -79,6 +79,9 @@
     UIImageView *turnInImageView = [[UIImageView alloc] initWithImage:turnInImage];
     [turnInImageView setContentMode:UIViewContentModeCenter];
     
+    // Make a weak pointer to self so we don't have a retain cycle
+    AssignmentCell * __weak weakSelf = self;
+    
     // Notify our assignment state delegate when the user swipes the assignment to the right
     [self setSwipeGestureWithView:turnInImageView
                             color:[UIColor lightSchoolColor]
@@ -86,7 +89,7 @@
                             state:MCSwipeTableViewCellState1
                   completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
         
-                      [self.assignmentStateDelegate deleteAssignmentCell:self];
+                      [weakSelf.assignmentStateDelegate deleteAssignmentCell:weakSelf];
         
     }];
     

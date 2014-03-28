@@ -184,23 +184,26 @@ NSString * const LoginStatusLoginError = @"LoginStatusLoginError";
     [loginButtonGroup setDuration:1.0];
     
     
+    // Make a weak version of self to avoid retain cycles
+    LoginViewController * __weak weakSelf = self;
+    
     // Wait 1/2 second after the splash logo is done animating
     double delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         
         // Set the model layers' position and opacity
-        [self.loginTitleImageView.layer setPosition:CGPointMake(160.0, 100.0)];
-        [self.loginTitleImageView.layer setOpacity:1.0];
+        [weakSelf.loginTitleImageView.layer setPosition:CGPointMake(160.0, 100.0)];
+        [weakSelf.loginTitleImageView.layer setOpacity:1.0];
         
-        [self.loginButton.layer setPosition:CGPointMake(160.0, 389.0)];
-        [self.loginButton.layer setOpacity:1.0];
+        [weakSelf.loginButton.layer setPosition:CGPointMake(160.0, 389.0)];
+        [weakSelf.loginButton.layer setOpacity:1.0];
         
         
         // Perform the animations!
-        [self.loginTitleImageView.layer addAnimation:titleGroup
+        [weakSelf.loginTitleImageView.layer addAnimation:titleGroup
                                               forKey:@"titleAnimations"];
-        [self.loginButton.layer addAnimation:loginButtonGroup
+        [weakSelf.loginButton.layer addAnimation:loginButtonGroup
                                       forKey:@"loginButtonAnimations"];
     });
 

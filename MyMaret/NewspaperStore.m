@@ -303,19 +303,22 @@ NSString * const MyMaretLastPopularArticleUpdateDateKey = @"MyMaretLastPopularAr
     [query whereKey:@"isPublished" equalTo:[NSNumber numberWithBool:YES]];
     [query orderByDescending:@"readCount"];
     
+    // Make a weak version of self to avoid retain cycles
+    NewspaperStore * __weak weakSelf = self;
+    
     [query findObjectsInBackgroundWithBlock:^(NSArray *articles, NSError *error) {
         
         // If there was no error and there are new articles
         if (!error && articles && [articles count] > 0) {
             
             // Update lastNewspaperUpdate to now
-            [self setLastNewspaperUpdateDate:[NSDate date]];
+            [weakSelf setLastNewspaperUpdateDate:[NSDate date]];
             
             // Add the new announcements to our current array of announcements
-            [self addArticlesToDictionary:articles];
+            [weakSelf addArticlesToDictionary:articles];
             
             // Save all changes
-            [self saveChanges];
+            [weakSelf saveChanges];
             
             completionBlock(true, nil);
             
@@ -367,15 +370,18 @@ NSString * const MyMaretLastPopularArticleUpdateDateKey = @"MyMaretLastPopularAr
         return;
     }
     
+    // Make a weak version of self to avoid retain cycles
+    NewspaperStore * __weak weakSelf = self;
+    
     // Call the cloud function that returns an array of the most popular articles' info
     [PFCloud callFunctionInBackground:@"getMostPopularArticles"
                        withParameters:@{}
                                 block:^(NSArray *popularArticles, NSError *error) {
                                     
                                     if (!error) {
-                                        [self updateMostPopularArticlesWithRanking:popularArticles];
-                                        [self setLastPopularArticleUpdateDate:[NSDate date]];
-                                        [self saveChanges];
+                                        [weakSelf updateMostPopularArticlesWithRanking:popularArticles];
+                                        [weakSelf setLastPopularArticleUpdateDate:[NSDate date]];
+                                        [weakSelf saveChanges];
                                         
                                     } else {
                                         NSLog(@"Error: %@", [[error userInfo] objectForKey:@"error"]);
@@ -398,14 +404,17 @@ NSString * const MyMaretLastPopularArticleUpdateDateKey = @"MyMaretLastPopularAr
     if ([readArticle isUnreadArticle]) {
         [readArticle setIsUnreadArticle:NO];
         
+        // Make a weak version of self to avoid retain cycles
+        NewspaperStore * __weak weakSelf = self;
+        
         [PFCloud callFunctionInBackground:@"incrementArticleReadCount"
                            withParameters: @{@"title": [readArticle articleTitle]}
                                     block:^(NSArray *popularArticles, NSError *error) {
                                         
                                         if (!error) {
-                                            [self updateMostPopularArticlesWithRanking:popularArticles];
-                                            [self setLastPopularArticleUpdateDate:[NSDate date]];
-                                            [self saveChanges];
+                                            [weakSelf updateMostPopularArticlesWithRanking:popularArticles];
+                                            [weakSelf setLastPopularArticleUpdateDate:[NSDate date]];
+                                            [weakSelf saveChanges];
                                             
                                         } else {
                                             NSLog(@"Error: %@", [[error userInfo] objectForKey:@"error"]);

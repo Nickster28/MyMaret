@@ -65,11 +65,14 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    // Make a weak version of self to avoid a retain cycle
+    AssignmentClassChooserTableViewController * __weak weakSelf = self;
+    
     double delayInSeconds = 0.25;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         // Pop ourselves off the VC stack
-        [self.navigationController popViewControllerAnimated:YES];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
     });
 }
 

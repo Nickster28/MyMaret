@@ -312,8 +312,12 @@ typedef NS_ENUM(NSUInteger, MCSwipeTableViewCellDirection) {
         }
         
         else {
+            
+            // NICK ADDED: Make a weak version of self to avoid a retain cycle
+            MCSwipeTableViewCell * __weak weakSelf = self;
+            
             [self swipeToOriginWithCompletion:^{
-                [self executeCompletionBlock];
+                [weakSelf executeCompletionBlock];
             }];
         }
         
@@ -588,17 +592,24 @@ typedef NS_ENUM(NSUInteger, MCSwipeTableViewCellDirection) {
         [_colorIndicatorView setBackgroundColor:color];
     }
     
+    // NICK ADDED: Make a weak version of self to avoid retain cycles
+    MCSwipeTableViewCell * __weak weakSelf = self;
+    
     [UIView animateWithDuration:duration delay:0 options:(UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction) animations:^{
         _contentScreenshotView.frame = frame;
         _slidingView.alpha = 0;
-        [self slideViewWithPercentage:percentage view:_activeView isDragging:self.shouldAnimateIcons];
+        [weakSelf slideViewWithPercentage:percentage view:_activeView isDragging:self.shouldAnimateIcons];
     } completion:^(BOOL finished) {
-        [self executeCompletionBlock];
+        [weakSelf executeCompletionBlock];
     }];
 }
 
 - (void)swipeToOriginWithCompletion:(void(^)(void))completion {
     CGFloat bounceDistance = kMCBounceAmplitude * _currentPercentage;
+    
+    // NICK ADDED: Make a weak version of self to avoid retain cycles
+    MCSwipeTableViewCell * __weak weakSelf = self;
+    
     
     if ([UIView.class respondsToSelector:@selector(animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:)]) {
         
@@ -612,12 +623,12 @@ typedef NS_ENUM(NSUInteger, MCSwipeTableViewCellDirection) {
             _colorIndicatorView.backgroundColor = self.defaultColor;
             
             _slidingView.alpha = 0;
-            [self slideViewWithPercentage:0 view:_activeView isDragging:NO];
+            [weakSelf slideViewWithPercentage:0 view:_activeView isDragging:NO];
             
         } completion:^(BOOL finished) {
             
             _isExited = NO;
-            [self uninstallSwipingView];
+            [weakSelf uninstallSwipingView];
             
             if (completion) {
                 completion();
@@ -633,10 +644,10 @@ typedef NS_ENUM(NSUInteger, MCSwipeTableViewCellDirection) {
             _contentScreenshotView.frame = frame;
             
             _slidingView.alpha = 0;
-            [self slideViewWithPercentage:0 view:_activeView isDragging:NO];
+            [weakSelf slideViewWithPercentage:0 view:_activeView isDragging:NO];
             
             // Setting back the color to the default.
-            _colorIndicatorView.backgroundColor = self.defaultColor;
+            _colorIndicatorView.backgroundColor = weakSelf.defaultColor;
             
         } completion:^(BOOL finished1) {
             
@@ -652,7 +663,7 @@ typedef NS_ENUM(NSUInteger, MCSwipeTableViewCellDirection) {
             } completion:^(BOOL finished2) {
                 
                 _isExited = NO;
-                [self uninstallSwipingView];
+                [weakSelf uninstallSwipingView];
                 
                 if (completion) {
                     completion();

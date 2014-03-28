@@ -78,6 +78,9 @@
     [self.navigationItem.backBarButtonItem setEnabled:NO];
     [self.postButton setCustomView:activityIndicator];
     
+    // Make a weak version of self to avoid a retain cycle
+    AnnouncementCreationBodyViewController * __weak weakSelf = self;
+    
     // Post the announcement
     [[AnnouncementsStore sharedStore] postAnnouncementWithTitle:announcementTitle
                                                            body:announcementBody
@@ -93,11 +96,11 @@
                                                         
                                                         // Stop the activity indicator and re-enable the cancel button
                                                         [activityIndicator stopAnimating];
-                                                        [self.navigationItem.backBarButtonItem setEnabled:YES];
-                                                        [self.postButton setTitle:@"Post"];
+                                                        [weakSelf.navigationItem.backBarButtonItem setEnabled:YES];
+                                                        [weakSelf.postButton setTitle:@"Post"];
                                                         
                                                         // Otherwise, dismiss the modal screen
-                                                    } else [self.presentingViewController dismissViewControllerAnimated:YES
+                                                    } else [weakSelf.presentingViewController dismissViewControllerAnimated:YES
                                                                                                              completion:nil];
                                                 }];
 }

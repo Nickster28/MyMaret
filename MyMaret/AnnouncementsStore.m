@@ -297,14 +297,17 @@ NSString * const AnnouncementsStoreFilterStringToday = @"AnnouncementsStoreFilte
     // Sort the results so we have them newest to oldest
     [query orderByAscending:@"createdAt"];
     
+    // Make a weak version of self to avoid a retain cycle
+    AnnouncementsStore * __weak weakSelf = self;
+    
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // Update lastAnnouncementsUpdate to now
-            [self setLastAnnouncementsUpdate:[NSDate date]];
+            [weakSelf setLastAnnouncementsUpdate:[NSDate date]];
             
             // Add the new announcements to our current array of announcements
-            [self addAnnouncements:objects];
-            [self saveChanges];
+            [weakSelf addAnnouncements:objects];
+            [weakSelf saveChanges];
             
             completionBlock([objects count], nil);
         } else {

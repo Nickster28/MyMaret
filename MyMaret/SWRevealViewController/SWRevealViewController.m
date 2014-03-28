@@ -445,25 +445,28 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
     NSString *identifier = segue.identifier;
     if ( [segue isKindOfClass:[SWRevealViewControllerSegue class]] && sender == nil )
     {
+        // Make a weak version of self to avoid retain cycles
+        SWRevealViewController * __weak weakSelf = self;
+        
         if ( [identifier isEqualToString:SWSegueRearIdentifier] )
         {
             segue.performBlock = ^(SWRevealViewControllerSegue* rvc_segue, UIViewController* svc, UIViewController* dvc)
             {
-                [self _setRearViewController:dvc];
+                [weakSelf _setRearViewController:dvc];
             };
         }
         else if ( [identifier isEqualToString:SWSegueFrontIdentifier] )
         {
             segue.performBlock = ^(SWRevealViewControllerSegue* rvc_segue, UIViewController* svc, UIViewController* dvc)
             {
-                [self _setFrontViewController:dvc];
+                [weakSelf _setFrontViewController:dvc];
             };
         }
         else if ( [identifier isEqualToString:SWSegueRightIdentifier] )
         {
             segue.performBlock = ^(SWRevealViewControllerSegue* rvc_segue, UIViewController* svc, UIViewController* dvc)
             {
-                [self _setRightViewController:dvc];
+                [weakSelf _setRightViewController:dvc];
             };
         }
     }
@@ -981,9 +984,12 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
 // Primitive method for view controller deployment and animated layout to the given position.
 - (void)_setFrontViewPosition:(FrontViewPosition)newPosition withDuration:(NSTimeInterval)duration
 {
-    void (^rearDeploymentCompletion)() = [self _rearViewDeploymentForNewFrontViewPosition:newPosition];
-    void (^rightDeploymentCompletion)() = [self _rightViewDeploymentForNewFrontViewPosition:newPosition];
-    void (^frontDeploymentCompletion)() = [self _frontViewDeploymentForNewFrontViewPosition:newPosition];
+    // Make a weak version of self to avoid retain cycles
+    SWRevealViewController * __weak weakSelf = self;
+    
+    void (^rearDeploymentCompletion)() = [weakSelf _rearViewDeploymentForNewFrontViewPosition:newPosition];
+    void (^rightDeploymentCompletion)() = [weakSelf _rightViewDeploymentForNewFrontViewPosition:newPosition];
+    void (^frontDeploymentCompletion)() = [weakSelf _frontViewDeploymentForNewFrontViewPosition:newPosition];
     
     void (^animations)() = ^()
     {
@@ -992,7 +998,7 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
         [_contentView layoutSubviews];
     
         if ([_delegate respondsToSelector:@selector(revealController:animateToPosition:)])
-            [_delegate revealController:self animateToPosition:_frontViewPosition];
+            [_delegate revealController:weakSelf animateToPosition:_frontViewPosition];
     };
     
     void (^completion)(BOOL) = ^(BOOL finished)
@@ -1000,7 +1006,7 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
         rearDeploymentCompletion();
         rightDeploymentCompletion();
         frontDeploymentCompletion();
-        [self _dequeue];
+        [weakSelf _dequeue];
     };
     
     if ( duration > 0.0f )
@@ -1087,8 +1093,11 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
     
     _frontViewPosition = newPosition;
     
+    // Make a weak version of self to avoid retain cycles
+    SWRevealViewController * __weak weakSelf = self;
+    
     void (^deploymentCompletion)() =
-        [self _deploymentForViewController:_frontViewController inView:_contentView.frontView appear:appear disappear:disappear];
+        [weakSelf _deploymentForViewController:_frontViewController inView:_contentView.frontView appear:appear disappear:disappear];
     
     void (^completion)() = ^()
     {
@@ -1096,7 +1105,7 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
         if ( positionIsChanging )
         {
             if ( [_delegate respondsToSelector:@selector(revealController:didMoveToPosition:)] )
-                [_delegate revealController:self didMoveToPosition:newPosition];
+                [_delegate revealController:weakSelf didMoveToPosition:newPosition];
         }
     };
 
@@ -1212,11 +1221,14 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
     
     if ( toController ) [self addChildViewController:toController];
     
-    void (^deployCompletion)() = [self _deployForViewController:toController inView:view];
+    // Make a weak version of self to avoid retain cycles
+    SWRevealViewController * __weak weakSelf = self;
+    
+    void (^deployCompletion)() = [weakSelf _deployForViewController:toController inView:view];
     
     [fromController willMoveToParentViewController:nil];
     
-    void (^undeployCompletion)() = [self _undeployForViewController:fromController];
+    void (^undeployCompletion)() = [weakSelf _undeployForViewController:fromController];
     
     void (^completionBlock)(void) = ^(void)
     {

@@ -515,6 +515,9 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
     PFQuery *query = [PFQuery queryWithClassName:@"ClassSchedule"];
     [query whereKey:@"emailAddress" equalTo:[[NSUserDefaults standardUserDefaults] stringForKey:MyMaretUserEmailKey]];
     
+    // Make a weak version of self to avoid a retain cycle
+    ClassScheduleStore * __weak weakSelf = self;
+    
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (!error) {
             NSArray *classes = @[[object objectForKey:@"firstPeriod"],
@@ -528,23 +531,23 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
             // If there are any NSNulls in classes, replace them with empty strings
             NSMutableArray *filteredClasses = [NSMutableArray array];
             
-            self.classList = [NSMutableArray array];
+            weakSelf.classList = [NSMutableArray array];
             
             for (NSObject *object in classes) {
                 
                 // Filter out NSNulls and build our class list
                 if ([object isKindOfClass:[NSString class]]) {
                     [filteredClasses addObject:object];
-                    [self.classList addObject:object];
+                    [weakSelf.classList addObject:object];
                 } else [filteredClasses addObject:@"Free"];
             }
             
-            [self configureScheduleWithClasses:filteredClasses];
-            [self saveChanges];
+            [weakSelf configureScheduleWithClasses:filteredClasses];
+            [weakSelf saveChanges];
         } else if (error && error.code == kPFErrorObjectNotFound) {
             
             // Otherwise make a blank schedule
-            [self createEmptySchedule];
+            [weakSelf createEmptySchedule];
             error = nil;
         }
         

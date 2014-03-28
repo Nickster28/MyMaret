@@ -90,6 +90,9 @@
 {
     [self.refreshControl beginRefreshing];
     
+    // Make a weak version of self to avoid a retain cycle
+    AnnouncementsTableViewController * __weak weakSelf = self;
+    
     [[AnnouncementsStore sharedStore] fetchAnnouncementsWithCompletionBlock:^(NSUInteger numAdded, NSError *err) {
         if (err) {
             UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Whoops!"
@@ -107,18 +110,18 @@
                 [rowsToInsert addObject:ip];
             }
             
-            [self.tableView insertRowsAtIndexPaths:rowsToInsert
+            [weakSelf.tableView insertRowsAtIndexPaths:rowsToInsert
                                   withRowAnimation:UITableViewRowAnimationTop];
             
             // If we need to, jump right to the newest announcement added
             // (if the user tapped on a push notification, for example)
-            if ([self shouldDisplayNewestAnnouncement]) {
-                [self setShouldDisplayNewestAnnouncement:NO];
-                [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            if ([weakSelf shouldDisplayNewestAnnouncement]) {
+                [weakSelf setShouldDisplayNewestAnnouncement:NO];
+                [weakSelf tableView:weakSelf.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
             }
         }
         
-        [self.refreshControl endRefreshing];
+        [weakSelf.refreshControl endRefreshing];
     }];
 }
 
