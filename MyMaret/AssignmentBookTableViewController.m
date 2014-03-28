@@ -178,7 +178,7 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"createAnnouncement"] &&
+    if ([[segue identifier] isEqualToString:@"createAssignment"] &&
         [[segue destinationViewController] isKindOfClass:[UINavigationController class]]) {
         
         AssignmentCreationTableViewController *createVC = [[(UINavigationController *)[segue destinationViewController] viewControllers] objectAtIndex:0];

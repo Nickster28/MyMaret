@@ -1414,7 +1414,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" title="Assignment Book" id="zMU-DF-XIT">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="WKF-JY-GZw">
                             <connections>
-                                <segue destination="N6X-mt-i42" kind="modal" identifier="createAnnouncement" id="zYU-5l-Xxg"/>
+                                <segue destination="N6X-mt-i42" kind="modal" identifier="createAssignment" id="zYU-5l-Xxg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
