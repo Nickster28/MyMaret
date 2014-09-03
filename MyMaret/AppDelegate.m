@@ -49,8 +49,12 @@ NSString * const MyMaretPushNotificationTypeNewspaper = @"newspaper";
     // user logs in)
     if ([[NSUserDefaults standardUserDefaults] boolForKey:MyMaretIsLoggedInKey]) {
         // Set up Parse
-        [Parse setApplicationId:@"g4XNB1IGTs2ALhIGahC7QLuoxUsVLfNbOZRjGbJL"
-                      clientKey:@"Z2lViXCIyAIFAjByVjtDZhMUvSwVF8UUe2BMIuWQ"];
+        NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"parseCredentials" ofType:@"plist"]];
+        NSString *applicationId = [dictionary objectForKey:@"parseApplicationId"];
+        NSString *clientKey = [dictionary objectForKey:@"parseClientKey"];
+        
+        [Parse setApplicationId:applicationId
+                      clientKey:clientKey];
         
         // Register for push notifications
         [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];

@@ -7,6 +7,7 @@
 //
 
 #import "Announcement.h"
+#import "NSDate+DueDateStringifier.h"
 
 #define SECONDS_IN_WEEK 604800
 @implementation Announcement
@@ -32,6 +33,7 @@
     [announcement setAnnouncementAuthor:author];
     [announcement setAnnouncementPostDate:[datePosted timeIntervalSinceReferenceDate]];
     [announcement setIsUnreadAnnouncement:YES];
+    [announcement setAnnouncementOrderingValue:0.0];
     
     
     // Make the date components also so we have quick access to the day, month, year, and weekday
@@ -43,52 +45,7 @@
 
 - (NSString *)postDateAsString
 {
-    NSDateComponents *todayDateComponents = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit) fromDate:[NSDate date]];
-    
-    // See if the announcement was posted today
-    if (self.announcementPostDateComps.day == todayDateComponents.day &&
-        self.announcementPostDateComps.month == todayDateComponents.month &&
-        self.announcementPostDateComps.year == todayDateComponents.year) {
-        
-        return @"Today";
-        
-    // See if the announcement was posted some time in the last week
-    } else if (abs([[NSDate dateWithTimeIntervalSinceReferenceDate:self.announcementPostDate] timeIntervalSinceDate:[NSDate date]]) < SECONDS_IN_WEEK) {
-        
-        switch (self.announcementPostDateComps.weekday) {
-            case 1:
-                return @"Sun.";
-                
-            case 2:
-                return @"Mon.";
-                
-            case 3:
-                return @"Tues.";
-                
-            case 4:
-                return @"Wed.";
-                
-            case 5:
-                return @"Thurs.";
-                
-            case 6:
-                return @"Fri.";
-                
-            case 7:
-                return @"Sat.";
-            default: ;
-        }
-    } else {
-    
-        // Otherwise just return the month/day in string form
-        NSNumber *day = [NSNumber numberWithInteger:self.announcementPostDateComps.day];
-        NSNumber *month = [NSNumber numberWithInteger:self.announcementPostDateComps.month];
-    
-        return [NSString stringWithFormat:@"%@/%@", month, day];
-    }
-    
-    // Should never reach here
-    return @"ERROR";
+    return [[NSDate dateWithTimeIntervalSinceReferenceDate:self.announcementPostDate] stringForDueDate];
 }
 
 

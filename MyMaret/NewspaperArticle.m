@@ -148,6 +148,9 @@ NSString * const NewspaperArticleTitleAttrStringEncodingKey = @"titleAttrString"
 //
 //
 //          Body here
+//
+//
+//"
 - (NSString *)description {
     
     NSString *description = [NSString stringWithFormat:@"%@\nBy: %@\n\n\n%@",self.articleTitle, self.articleAuthor, self.articleBody];

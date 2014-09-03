@@ -7,6 +7,7 @@
 //
 
 #import "Assignment.h"
+#import "NSDate+DueDateStringifier.h"
 
 
 // The keys for archiving an assignment
@@ -16,8 +17,6 @@ NSString * const AssignmentClassNameEncodingKey = @"className";
 NSString * const AssignmentDueDateDayDateCompsEncodingKey = @"dueDateDayDateComps";
 NSString * const AssignmentDueTimeStringEncodingKey = @"dueTimeString";
 NSString * const AssignmentIsCompletedEncodingKey = @"isCompleted";
-
-#define SECONDS_IN_WEEK 604800
 
 @implementation Assignment
 
@@ -46,9 +45,9 @@ NSString * const AssignmentIsCompletedEncodingKey = @"isCompleted";
             
             // Get the minutes, adjusting for < 10 (ex. 9:5 vs 9:05)
             NSUInteger minutes = dueDateDateComps.minute;
-            NSString *minutesString = (minutes < 10) ? [NSString stringWithFormat:@"0%d", minutes] : [NSString stringWithFormat:@"%d", minutes];
+            NSString *minutesString = (minutes < 10) ? [NSString stringWithFormat:@"0%lu", (unsigned long)minutes] : [NSString stringWithFormat:@"%lu", (unsigned long)minutes];
             
-            [self setDueTimeString:[NSString stringWithFormat:@"%d:%@", hour, minutesString]];
+            [self setDueTimeString:[NSString stringWithFormat:@"%lu:%@", (unsigned long)hour, minutesString]];
         } else {
             
             // Just put the day it's due
@@ -90,51 +89,7 @@ NSString * const AssignmentIsCompletedEncodingKey = @"isCompleted";
 
 - (NSString *)dueDateAsString
 {
-    NSDateComponents *todayDateComponents = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit) fromDate:[NSDate date]];
-    
-    // See if the announcement was posted today
-    if (self.dueDateDayDateComps.day == todayDateComponents.day &&
-        self.dueDateDayDateComps.month == todayDateComponents.month) {
-        
-        return @"Today";
-        
-        // See if the announcement was posted some time in the last week
-    } else if ([self.dueDate timeIntervalSinceDate:[NSDate date]] < SECONDS_IN_WEEK) {
-        
-        switch (self.dueDateDayDateComps.weekday) {
-            case 1:
-                return @"Sun.";
-                
-            case 2:
-                return @"Mon.";
-                
-            case 3:
-                return @"Tues.";
-                
-            case 4:
-                return @"Wed.";
-                
-            case 5:
-                return @"Thurs.";
-                
-            case 6:
-                return @"Fri.";
-                
-            case 7:
-                return @"Sat.";
-            default: ;
-        }
-    } else {
-        
-        // Otherwise just return the month/day in string form
-        NSNumber *day = [NSNumber numberWithInteger:self.dueDateDayDateComps.day];
-        NSNumber *month = [NSNumber numberWithInteger:self.dueDateDayDateComps.month];
-        
-        return [NSString stringWithFormat:@"%@/%@", month, day];
-    }
-    
-    // Should never reach here
-    return @"ERROR";
+    return [self.dueDate stringForDueDate];
 }
 
 

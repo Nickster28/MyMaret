@@ -27,7 +27,8 @@
      inManagedObjectContext:(NSManagedObjectContext *)context;
 
 
-- (NSString *)postDateAsString;
 - (NSString *)description;
+
+- (NSString *)postDateAsString;
 
 @end

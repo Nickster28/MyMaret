@@ -22,11 +22,6 @@ NSString * const SchoolClassClassEndTimeEncodingKey = @"classEndTime";
     if (self) {
         [self setClassName:name];
         [self setClassTime:timeSlot];
-        
-        // Set the individual times
-        NSArray *times = [timeSlot componentsSeparatedByString:@"-"];
-        [self setClassStartTime:times[0]];
-        [self setClassEndTime:times[1]];
     }
     
     return self;
@@ -35,8 +30,14 @@ NSString * const SchoolClassClassEndTimeEncodingKey = @"classEndTime";
 
 - (void)setClassTime:(NSString *)classTime
 {
+    NSArray *times = @[@"", @""];
+    
+    // If the class time string is invalid, don't try to split it
+    if ([classTime rangeOfString:@"-"].location != NSNotFound) {
+        times = [classTime componentsSeparatedByString:@"-"];
+    }
+    
     // Set the individual times as well
-    NSArray *times = [classTime componentsSeparatedByString:@"-"];
     [self setClassStartTime:times[0]];
     [self setClassEndTime:times[1]];
     

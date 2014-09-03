@@ -779,8 +779,12 @@ static Class gSignInClass = Nil;
         }
         
         // Set up Parse
-        [Parse setApplicationId:@"9HFg8b0VNdu68bNj0XGW4zhQS2JJuJyeV8DlCFge"
-                      clientKey:@"LsKBiPVVNUD8QxTWTr4QI4OJvIy92mWaknqYlsns"];
+        NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"parseCredentials" ofType:@"plist"]];
+        NSString *applicationId = [dictionary objectForKey:@"parseApplicationId"];
+        NSString *clientKey = [dictionary objectForKey:@"parseClientKey"];
+        
+        [Parse setApplicationId:applicationId
+                      clientKey:clientKey];
         
         // Register for push notifications
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];

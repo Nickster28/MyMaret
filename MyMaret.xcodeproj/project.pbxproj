@@ -48,6 +48,12 @@
 		0169749C17D30F8D00973B1B /* NewspaperStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169749A17D30F8D00973B1B /* NewspaperStore.m */; };
 		016974A717D3113700973B1B /* NewspaperArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 016974A617D3113700973B1B /* NewspaperArticle.m */; };
 		016974A817D3113700973B1B /* NewspaperArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 016974A617D3113700973B1B /* NewspaperArticle.m */; };
+		016A968019A916C6002EE462 /* Assignment_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 016A967F19A916C6002EE462 /* Assignment_Tests.m */; };
+		016A968719A91A7F002EE462 /* NSDate+DueDateStringifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 016A968619A91A7F002EE462 /* NSDate+DueDateStringifier.m */; };
+		016A968819A91A7F002EE462 /* NSDate+DueDateStringifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 016A968619A91A7F002EE462 /* NSDate+DueDateStringifier.m */; };
+		016A968A19A91F35002EE462 /* DueDateStringifier_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 016A968919A91F35002EE462 /* DueDateStringifier_Tests.m */; };
+		016E4C3E19A02ED800FC800E /* NewspaperArticle_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 016E4C3D19A02ED800FC800E /* NewspaperArticle_Tests.m */; };
+		016E4C4019A05A8E00FC800E /* SchoolClass_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 016E4C3F19A05A8E00FC800E /* SchoolClass_Tests.m */; };
 		016EDACF18E3CD9100DD7A32 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016EDACE18E3CD9100DD7A32 /* Parse.framework */; };
 		016EDAD418E3EFD200DD7A32 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 016EDAD118E3EFD200DD7A32 /* LICENSE */; };
 		016EDAD518E3EFD200DD7A32 /* MCSwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 016EDAD318E3EFD200DD7A32 /* MCSwipeTableViewCell.m */; };
@@ -71,8 +77,9 @@
 		01A4FE1D17B97304007FAB5C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454817A60AC3001625BF /* Foundation.framework */; };
 		01A4FE1E17B97304007FAB5C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0177454C17A60AC3001625BF /* UIKit.framework */; };
 		01A4FE2417B97304007FAB5C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01A4FE2217B97304007FAB5C /* InfoPlist.strings */; };
-		01A4FE2617B97304007FAB5C /* MyMaret_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A4FE2517B97304007FAB5C /* MyMaret_Tests.m */; };
+		01A4FE2617B97304007FAB5C /* AnnouncementStore_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A4FE2517B97304007FAB5C /* AnnouncementStore_Tests.m */; };
 		01A4FE3517B97C08007FAB5C /* UIColor+SchoolColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A4FE3417B97C08007FAB5C /* UIColor+SchoolColor.m */; };
+		01A69B0F19B6DA8700B6CD7A /* parseCredentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01A69B0E19B6DA8700B6CD7A /* parseCredentials.plist */; };
 		01ACC11E17D5020D008893ED /* SectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ACC11D17D5020D008893ED /* SectionHeaderView.xib */; };
 		01AEAD4517ECD263003D85A2 /* UIViewController+NavigationBarColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 01AEAD4417ECD263003D85A2 /* UIViewController+NavigationBarColor.m */; };
 		01B0BB9917ACA74C0035B3FE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BB9817ACA74C0035B3FE /* CFNetwork.framework */; };
@@ -83,6 +90,8 @@
 		01B0BBA217ACA7810035B3FE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BBA117ACA7810035B3FE /* QuartzCore.framework */; };
 		01B0BBA417ACA78A0035B3FE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BBA317ACA78A0035B3FE /* Security.framework */; };
 		01B0BBA817ACA7980035B3FE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BBA717ACA7980035B3FE /* SystemConfiguration.framework */; };
+		01B44F7819A0077D002EAD51 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B44F6D19A0077D002EAD51 /* libOCMock.a */; };
+		01B44F7A19A01073002EAD51 /* Announcement_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B44F7919A01073002EAD51 /* Announcement_Tests.m */; };
 		01BD435C17C9BB22005EF174 /* AnnouncementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01BD435B17C9BB22005EF174 /* AnnouncementCell.xib */; };
 		01BF139817A89A3B00731690 /* AnnouncementsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139717A89A3B00731690 /* AnnouncementsStore.m */; };
 		01BF139C17A89B8500731690 /* MyMaretCDModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01BF139A17A89B8500731690 /* MyMaretCDModel.xcdatamodeld */; };
@@ -167,6 +176,12 @@
 		0169749A17D30F8D00973B1B /* NewspaperStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewspaperStore.m; sourceTree = "<group>"; };
 		016974A517D3113700973B1B /* NewspaperArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewspaperArticle.h; sourceTree = "<group>"; };
 		016974A617D3113700973B1B /* NewspaperArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewspaperArticle.m; sourceTree = "<group>"; };
+		016A967F19A916C6002EE462 /* Assignment_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Assignment_Tests.m; sourceTree = "<group>"; };
+		016A968519A91A7F002EE462 /* NSDate+DueDateStringifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DueDateStringifier.h"; sourceTree = "<group>"; };
+		016A968619A91A7F002EE462 /* NSDate+DueDateStringifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DueDateStringifier.m"; sourceTree = "<group>"; };
+		016A968919A91F35002EE462 /* DueDateStringifier_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DueDateStringifier_Tests.m; sourceTree = "<group>"; };
+		016E4C3D19A02ED800FC800E /* NewspaperArticle_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewspaperArticle_Tests.m; sourceTree = "<group>"; };
+		016E4C3F19A05A8E00FC800E /* SchoolClass_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolClass_Tests.m; sourceTree = "<group>"; };
 		016EDACE18E3CD9100DD7A32 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		016EDAD118E3EFD200DD7A32 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		016EDAD218E3EFD200DD7A32 /* MCSwipeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSwipeTableViewCell.h; sourceTree = "<group>"; };
@@ -201,10 +216,11 @@
 		01A4FE1B17B97304007FAB5C /* MyMaret Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MyMaret Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01A4FE2117B97304007FAB5C /* MyMaret Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MyMaret Tests-Info.plist"; sourceTree = "<group>"; };
 		01A4FE2317B97304007FAB5C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		01A4FE2517B97304007FAB5C /* MyMaret_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyMaret_Tests.m; sourceTree = "<group>"; };
+		01A4FE2517B97304007FAB5C /* AnnouncementStore_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnnouncementStore_Tests.m; sourceTree = "<group>"; };
 		01A4FE2717B97304007FAB5C /* MyMaret Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyMaret Tests-Prefix.pch"; sourceTree = "<group>"; };
 		01A4FE3317B97C08007FAB5C /* UIColor+SchoolColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+SchoolColor.h"; sourceTree = "<group>"; };
 		01A4FE3417B97C08007FAB5C /* UIColor+SchoolColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SchoolColor.m"; sourceTree = "<group>"; };
+		01A69B0E19B6DA8700B6CD7A /* parseCredentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = parseCredentials.plist; sourceTree = "<group>"; };
 		01ACC11D17D5020D008893ED /* SectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionHeaderView.xib; sourceTree = "<group>"; };
 		01AEAD4317ECD263003D85A2 /* UIViewController+NavigationBarColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NavigationBarColor.h"; sourceTree = "<group>"; };
 		01AEAD4417ECD263003D85A2 /* UIViewController+NavigationBarColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NavigationBarColor.m"; sourceTree = "<group>"; };
@@ -216,6 +232,17 @@
 		01B0BBA117ACA7810035B3FE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		01B0BBA317ACA78A0035B3FE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		01B0BBA717ACA7980035B3FE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		01B44F6D19A0077D002EAD51 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOCMock.a; sourceTree = "<group>"; };
+		01B44F6F19A0077D002EAD51 /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
+		01B44F7019A0077D002EAD51 /* OCMArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMArg.h; sourceTree = "<group>"; };
+		01B44F7119A0077D002EAD51 /* OCMConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMConstraint.h; sourceTree = "<group>"; };
+		01B44F7219A0077D002EAD51 /* OCMLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMLocation.h; sourceTree = "<group>"; };
+		01B44F7319A0077D002EAD51 /* OCMMacroState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMMacroState.h; sourceTree = "<group>"; };
+		01B44F7419A0077D002EAD51 /* OCMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMock.h; sourceTree = "<group>"; };
+		01B44F7519A0077D002EAD51 /* OCMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockObject.h; sourceTree = "<group>"; };
+		01B44F7619A0077D002EAD51 /* OCMRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMRecorder.h; sourceTree = "<group>"; };
+		01B44F7719A0077D002EAD51 /* OCMStubRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMStubRecorder.h; sourceTree = "<group>"; };
+		01B44F7919A01073002EAD51 /* Announcement_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Announcement_Tests.m; sourceTree = "<group>"; };
 		01BD435B17C9BB22005EF174 /* AnnouncementCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnnouncementCell.xib; sourceTree = "<group>"; };
 		01BF139617A89A3B00731690 /* AnnouncementsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementsStore.h; sourceTree = "<group>"; };
 		01BF139717A89A3B00731690 /* AnnouncementsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementsStore.m; sourceTree = "<group>"; };
@@ -264,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01A4FE1C17B97304007FAB5C /* XCTest.framework in Frameworks */,
+				01B44F7819A0077D002EAD51 /* libOCMock.a in Frameworks */,
 				01A4FE1E17B97304007FAB5C /* UIKit.framework in Frameworks */,
 				01A4FE1D17B97304007FAB5C /* Foundation.framework in Frameworks */,
 			);
@@ -302,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				0177454E17A60AC3001625BF /* MyMaret */,
+				01B44F6019A00706002EAD51 /* Libraries */,
 				01A4FE1F17B97304007FAB5C /* MyMaret Tests */,
 				0177454717A60AC3001625BF /* Frameworks */,
 				0177454617A60AC3001625BF /* Products */,
@@ -363,7 +392,10 @@
 		0177454F17A60AC3001625BF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				01A69B0E19B6DA8700B6CD7A /* parseCredentials.plist */,
 				016EDAD018E3EFD200DD7A32 /* MCSwipeTableViewCell */,
+				016A968519A91A7F002EE462 /* NSDate+DueDateStringifier.h */,
+				016A968619A91A7F002EE462 /* NSDate+DueDateStringifier.m */,
 				01A4FE3317B97C08007FAB5C /* UIColor+SchoolColor.h */,
 				01A4FE3417B97C08007FAB5C /* UIColor+SchoolColor.m */,
 				016780D917A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.h */,
@@ -402,7 +434,12 @@
 		01A4FE1F17B97304007FAB5C /* MyMaret Tests */ = {
 			isa = PBXGroup;
 			children = (
-				01A4FE2517B97304007FAB5C /* MyMaret_Tests.m */,
+				016A968919A91F35002EE462 /* DueDateStringifier_Tests.m */,
+				016A967F19A916C6002EE462 /* Assignment_Tests.m */,
+				016E4C3F19A05A8E00FC800E /* SchoolClass_Tests.m */,
+				016E4C3D19A02ED800FC800E /* NewspaperArticle_Tests.m */,
+				01B44F7919A01073002EAD51 /* Announcement_Tests.m */,
+				01A4FE2517B97304007FAB5C /* AnnouncementStore_Tests.m */,
 				01A4FE2017B97304007FAB5C /* Supporting Files */,
 			);
 			path = "MyMaret Tests";
@@ -430,6 +467,31 @@
 				0124412517D056260091C01E /* WelcomeView.xib */,
 			);
 			name = Login;
+			sourceTree = "<group>";
+		};
+		01B44F6019A00706002EAD51 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				01B44F6D19A0077D002EAD51 /* libOCMock.a */,
+				01B44F6E19A0077D002EAD51 /* OCMock */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		01B44F6E19A0077D002EAD51 /* OCMock */ = {
+			isa = PBXGroup;
+			children = (
+				01B44F6F19A0077D002EAD51 /* NSNotificationCenter+OCMAdditions.h */,
+				01B44F7019A0077D002EAD51 /* OCMArg.h */,
+				01B44F7119A0077D002EAD51 /* OCMConstraint.h */,
+				01B44F7219A0077D002EAD51 /* OCMLocation.h */,
+				01B44F7319A0077D002EAD51 /* OCMMacroState.h */,
+				01B44F7419A0077D002EAD51 /* OCMock.h */,
+				01B44F7519A0077D002EAD51 /* OCMockObject.h */,
+				01B44F7619A0077D002EAD51 /* OCMRecorder.h */,
+				01B44F7719A0077D002EAD51 /* OCMStubRecorder.h */,
+			);
+			path = OCMock;
 			sourceTree = "<group>";
 		};
 		01DAA6A817A7002600B23BB2 /* Announcements */ = {
@@ -635,6 +697,7 @@
 				017751D017DE2EB900ED49E5 /* LoginViewController.xib in Resources */,
 				010BC6A617CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib in Resources */,
 				01BD435C17C9BB22005EF174 /* AnnouncementCell.xib in Resources */,
+				01A69B0F19B6DA8700B6CD7A /* parseCredentials.plist in Resources */,
 				0177456117A60AC3001625BF /* Images.xcassets in Resources */,
 				0124412617D056260091C01E /* WelcomeView.xib in Resources */,
 				016EDAD418E3EFD200DD7A32 /* LICENSE in Resources */,
@@ -674,6 +737,7 @@
 				010BC6A517CBB7E90043B9C4 /* GTMOAuth2ViewControllerTouch.m in Sources */,
 				0177455F17A60AC3001625BF /* MainMenuViewController.m in Sources */,
 				013BB66E17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m in Sources */,
+				016A968719A91A7F002EE462 /* NSDate+DueDateStringifier.m in Sources */,
 				01176FCD17DBE0DB00DFF2EA /* ClassScheduleStore.m in Sources */,
 				01176FDC17DC3C3E00DFF2EA /* SchoolClassEditTableViewController.m in Sources */,
 				010E62E217E639E3002F5806 /* Assignment.m in Sources */,
@@ -718,14 +782,20 @@
 			files = (
 				01176FF017DC64F100DFF2EA /* DateTimeDisplayCell.m in Sources */,
 				01176FD517DC122F00DFF2EA /* SchoolClass.m in Sources */,
-				01A4FE2617B97304007FAB5C /* MyMaret_Tests.m in Sources */,
+				016A968019A916C6002EE462 /* Assignment_Tests.m in Sources */,
+				01A4FE2617B97304007FAB5C /* AnnouncementStore_Tests.m in Sources */,
 				016974A817D3113700973B1B /* NewspaperArticle.m in Sources */,
 				0169749C17D30F8D00973B1B /* NewspaperStore.m in Sources */,
 				01176FDD17DC3C3E00DFF2EA /* SchoolClassEditTableViewController.m in Sources */,
+				01B44F7A19A01073002EAD51 /* Announcement_Tests.m in Sources */,
 				01176FD917DC333600DFF2EA /* SchoolClassCell.m in Sources */,
+				016A968A19A91F35002EE462 /* DueDateStringifier_Tests.m in Sources */,
 				01176FCE17DBE0DB00DFF2EA /* ClassScheduleStore.m in Sources */,
+				016A968819A91A7F002EE462 /* NSDate+DueDateStringifier.m in Sources */,
 				01176FE117DC465900DFF2EA /* DateTimePickerCell.m in Sources */,
+				016E4C3E19A02ED800FC800E /* NewspaperArticle_Tests.m in Sources */,
 				01176FE817DC621D00DFF2EA /* TextEditCell.m in Sources */,
+				016E4C4019A05A8E00FC800E /* SchoolClass_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -852,8 +922,17 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyMaret/MyMaret-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = "MyMaret/MyMaret-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "DF4DEADB-2338-41C4-85A4-512DCB5C81D5";
 				WRAPPER_EXTENSION = app;
@@ -872,8 +951,17 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyMaret/MyMaret-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = "MyMaret/MyMaret-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6C7A391C-157E-437C-ADE3-C2FECA57EADD";
 				WRAPPER_EXTENSION = app;
@@ -888,6 +976,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(SRCROOT)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyMaret Tests/MyMaret Tests-Prefix.pch";
@@ -895,8 +984,23 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/OCMock",
+				);
 				INFOPLIST_FILE = "MyMaret Tests/MyMaret Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -911,11 +1015,27 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(SRCROOT)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyMaret Tests/MyMaret Tests-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/OCMock",
+				);
 				INFOPLIST_FILE = "MyMaret Tests/MyMaret Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
