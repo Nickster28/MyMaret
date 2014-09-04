@@ -520,6 +520,9 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
     
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (!error) {
+            [[NSUserDefaults standardUserDefaults] setInteger:[[object objectForKey:@"grade"] integerValue]
+                                                       forKey:MyMaretUserGradeKey];
+            
             NSArray *classes = [object objectForKey:@"classSchedule"];
             
             weakSelf.classList = [NSMutableArray array];

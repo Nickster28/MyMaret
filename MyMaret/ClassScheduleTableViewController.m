@@ -12,6 +12,7 @@
 #import "SchoolClassCell.h"
 #import "SchoolClassEditTableViewController.h"
 #import "AppDelegate.h"
+#import "UIColor+SchoolColor.h"
 
 
 @interface ClassScheduleTableViewController () <ClassEditDismisserDelegate> {
@@ -31,6 +32,37 @@
     
     // Put an edit button in the top right
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    // Add the tableView's refresh control for refreshing announcements
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl setTintColor:[UIColor schoolColor]];
+    [self.refreshControl addTarget:self
+                            action:@selector(refreshClassSchedule)
+                  forControlEvents:UIControlEventValueChanged];
+}
+
+
+- (void)refreshClassSchedule {
+    [self.refreshControl beginRefreshing];
+    
+    // Make a weak version of self to avoid a retain cycle
+    ClassScheduleTableViewController * __weak weakSelf = self;
+    
+    [[ClassScheduleStore sharedStore] fetchClassScheduleWithCompletionBlock:^(NSError *error) {
+        
+        if (error) {
+            UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Whoops!"
+                                                         message:[error localizedDescription]
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+            [av show];
+        } else {
+            [weakSelf.tableView reloadData];
+            [weakSelf.refreshControl endRefreshing];
+        }
+    }];
+
 }
 
 
