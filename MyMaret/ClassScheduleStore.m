@@ -512,7 +512,7 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
     }
     
     // Query for announcements posted after we last checked for announcements
-    PFQuery *query = [PFQuery queryWithClassName:@"ClassSchedule"];
+    PFQuery *query = [PFQuery queryWithClassName:@"Person"];
     [query whereKey:@"emailAddress" equalTo:[[NSUserDefaults standardUserDefaults] stringForKey:MyMaretUserEmailKey]];
     
     // Make a weak version of self to avoid a retain cycle
@@ -520,29 +520,17 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
     
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (!error) {
-            NSArray *classes = @[[object objectForKey:@"firstPeriod"],
-                                 [object objectForKey:@"secondPeriod"],
-                                 [object objectForKey:@"thirdPeriod"],
-                                 [object objectForKey:@"fourthPeriod"],
-                                 [object objectForKey:@"fifthPeriod"],
-                                 [object objectForKey:@"sixthPeriod"],
-                                 [object objectForKey:@"seventhPeriod"]];
-            
-            // If there are any NSNulls in classes, replace them with empty strings
-            NSMutableArray *filteredClasses = [NSMutableArray array];
+            NSArray *classes = [object objectForKey:@"classSchedule"];
             
             weakSelf.classList = [NSMutableArray array];
             
-            for (NSObject *object in classes) {
+            for (NSString *className in classes) {
                 
                 // Filter out NSNulls and build our class list
-                if ([object isKindOfClass:[NSString class]]) {
-                    [filteredClasses addObject:object];
-                    [weakSelf.classList addObject:object];
-                } else [filteredClasses addObject:@"Free"];
+                if (![className isEqualToString:@"Free"]) [weakSelf.classList addObject:className];
             }
             
-            [weakSelf configureScheduleWithClasses:filteredClasses];
+            [weakSelf configureScheduleWithClasses:classes];
             [weakSelf saveChanges];
         } else if (error && error.code == kPFErrorObjectNotFound) {
             
