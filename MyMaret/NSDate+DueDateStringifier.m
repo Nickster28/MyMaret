@@ -25,7 +25,7 @@
         return @"Today";
         
         // See if the announcement was posted some time in the last week
-    } else if (abs([self timeIntervalSinceDate:[NSDate date]]) < SECONDS_IN_WEEK) {
+    } else if (fabs([self timeIntervalSinceDate:[NSDate date]]) < SECONDS_IN_WEEK) {
         
         switch (selfDateComponents.weekday) {
             case 1:

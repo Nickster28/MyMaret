@@ -129,7 +129,7 @@
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     // Now replace the image
-    NSString *newImageName = [NSString stringWithFormat:@"WelcomeImage%d", self.newPageIndex];
+    NSString *newImageName = [NSString stringWithFormat:@"WelcomeImage%lu", (unsigned long)self.newPageIndex];
     [self.imageView setImage:[UIImage imageNamed:newImageName]];
     
     // and fade back in
