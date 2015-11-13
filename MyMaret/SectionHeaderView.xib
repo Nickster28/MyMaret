@@ -75,9 +75,13 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" directionalLockEnabled="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xn1-TA-lPa">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xn1-TA-lPa">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
                     <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="46" id="b9I-gw-cIy"/>
+                        <constraint firstAttribute="width" constant="320" id="vnY-ka-nns"/>
+                    </constraints>
                     <connections>
                         <outlet property="delegate" destination="-1" id="0pu-Z2-7zA"/>
                     </connections>
@@ -85,6 +89,11 @@
             </subviews>
             <animations/>
             <color key="backgroundColor" red="0.90911989795918369" green="0.90911989795918369" blue="0.90911989795918369" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="xn1-TA-lPa" secondAttribute="bottom" id="W1T-jx-dSS"/>
+                <constraint firstItem="xn1-TA-lPa" firstAttribute="top" secondItem="2D9-kX-GG7" secondAttribute="top" id="Y90-3W-9sJ"/>
+                <constraint firstItem="xn1-TA-lPa" firstAttribute="centerX" secondItem="2D9-kX-GG7" secondAttribute="centerX" id="ypS-bt-Ts1"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>

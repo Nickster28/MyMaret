@@ -15,6 +15,8 @@
 #import "AppDelegate.h"
 
 
+#define ARROW_WIDTH_HEIGHT 40.0
+
 @interface NewspaperTableViewController () <UIScrollViewDelegate, UISearchDisplayDelegate>
 
 // The index of the currently selected section
@@ -211,12 +213,15 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
                                     options:nil];
         
         // Configure the scrollview's contents
+        CGRect bounds = [self.sectionsHeaderView bounds];
+        bounds.size.width = self.view.bounds.size.width;
+        [[self sectionsHeaderView] setBounds:bounds];
         [[self sectionsHeaderScrollView] addSubview:[self headerContentView]];
         [[self sectionsHeaderScrollView] setContentSize:[self headerContentView].bounds.size];
         
         
         // Add the left button
-        self.leftArrowButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 3.0, 40.0, 40.0)];
+        self.leftArrowButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 3.0, ARROW_WIDTH_HEIGHT, ARROW_WIDTH_HEIGHT)];
         [self.leftArrowButton setBackgroundColor:[UIColor colorWithRed:0.91 green:0.91 blue:0.91 alpha:1.0]];
         [self.leftArrowButton addTarget:self
                                  action:@selector(changeSection:)
@@ -229,7 +234,7 @@ NSString * const MyMaretNewspaperSectionPrefKey = @"MyMaretNewspaperSectionPrefK
         
         
         // Add the right button
-        self.rightArrowButton = [[UIButton alloc] initWithFrame:CGRectMake(280.0, 3.0, 40.0, 40.0)];
+        self.rightArrowButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width - ARROW_WIDTH_HEIGHT, 3.0, ARROW_WIDTH_HEIGHT, ARROW_WIDTH_HEIGHT)];
         [self.rightArrowButton setBackgroundColor:[UIColor colorWithRed:0.91 green:0.91 blue:0.91 alpha:1.0]];
         [self.rightArrowButton addTarget:self
                                   action:@selector(changeSection:)
