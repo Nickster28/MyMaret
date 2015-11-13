@@ -174,7 +174,7 @@
                                                forIndexPath:indexPath];
         
         // Display the app version
-        [[cell detailTextLabel] setText:@"2.1"];
+        [[cell detailTextLabel] setText:@"2.2"];
         
         [[cell textLabel] setText:@"MyMaret Version"];
         
