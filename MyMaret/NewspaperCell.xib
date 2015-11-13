@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4504" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3734.1"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,9 +14,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="287" height="124"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="277" translatesAutoresizingMaskIntoConstraints="NO" id="5V3-bZ-8Jj">
-                        <rect key="frame" x="10" y="10" width="277" height="45"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="277" translatesAutoresizingMaskIntoConstraints="NO" id="5V3-bZ-8Jj">
+                        <rect key="frame" x="10" y="10" width="277" height="49"/>
+                        <animations/>
                         <attributedString key="attributedText">
                             <fragment content="Digital Exclusive: ">
                                 <attributes>
@@ -35,29 +35,53 @@
                         </attributedString>
                         <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="At the end of her talk, Robinson received a standing ovation from the Maret Upp" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="277" translatesAutoresizingMaskIntoConstraints="NO" id="sXl-4Z-Cr3">
-                        <rect key="frame" x="10" y="54" width="277" height="38"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="At the end of her talk, Robinson received a standing ovation from the Maret Upp" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="277" translatesAutoresizingMaskIntoConstraints="NO" id="sXl-4Z-Cr3">
+                        <rect key="frame" x="10" y="58" width="277" height="34"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="By: Nick Troccoli" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hH6-1q-djI">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By: Nick Troccoli" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hH6-1q-djI">
                         <rect key="frame" x="10" y="94" width="174" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="C3V-fl-B76"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
                         <color key="textColor" red="0.062745098040000002" green="0.41176470590000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Popular Article" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocv-nh-45w">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Popular Article" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocv-nh-45w">
                         <rect key="frame" x="184" y="94" width="103" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="103" id="7Z9-wN-1nx"/>
+                            <constraint firstAttribute="height" constant="21" id="X2w-Cg-8GB"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
                         <color key="textColor" red="0.78431372549019607" green="0.50588235294117645" blue="0.050980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </label>
                 </subviews>
+                <animations/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="hH6-1q-djI" secondAttribute="bottom" constant="9" id="0zY-I1-AfW"/>
+                    <constraint firstItem="hH6-1q-djI" firstAttribute="top" secondItem="sXl-4Z-Cr3" secondAttribute="bottom" constant="2" id="889-TJ-Lsk"/>
+                    <constraint firstAttribute="trailing" secondItem="sXl-4Z-Cr3" secondAttribute="trailing" id="8qe-1k-zto"/>
+                    <constraint firstAttribute="trailing" secondItem="5V3-bZ-8Jj" secondAttribute="trailing" id="PSg-jo-Eb8"/>
+                    <constraint firstItem="5V3-bZ-8Jj" firstAttribute="top" secondItem="KXO-Cq-cUy" secondAttribute="top" constant="10" id="PUc-hB-9iq"/>
+                    <constraint firstAttribute="bottom" secondItem="ocv-nh-45w" secondAttribute="bottom" constant="9" id="PcK-UE-7ys"/>
+                    <constraint firstItem="hH6-1q-djI" firstAttribute="leading" secondItem="KXO-Cq-cUy" secondAttribute="leading" constant="10" id="R82-zu-ESZ"/>
+                    <constraint firstItem="5V3-bZ-8Jj" firstAttribute="leading" secondItem="KXO-Cq-cUy" secondAttribute="leading" constant="10" id="XES-ld-zMY"/>
+                    <constraint firstItem="sXl-4Z-Cr3" firstAttribute="leading" secondItem="KXO-Cq-cUy" secondAttribute="leading" constant="10" id="bec-ja-JLb"/>
+                    <constraint firstItem="ocv-nh-45w" firstAttribute="top" secondItem="sXl-4Z-Cr3" secondAttribute="bottom" constant="2" id="jwy-HF-hyO"/>
+                    <constraint firstAttribute="trailing" secondItem="ocv-nh-45w" secondAttribute="trailing" id="vl9-3R-kfT"/>
+                    <constraint firstItem="sXl-4Z-Cr3" firstAttribute="top" secondItem="5V3-bZ-8Jj" secondAttribute="bottom" constant="-1" id="wX9-tZ-Qlq"/>
+                    <constraint firstItem="ocv-nh-45w" firstAttribute="leading" secondItem="hH6-1q-djI" secondAttribute="trailing" id="yAx-Fd-cLv"/>
+                </constraints>
             </tableViewCellContentView>
+            <animations/>
             <connections>
                 <outlet property="authorLabel" destination="hH6-1q-djI" id="DOh-ol-WUH"/>
                 <outlet property="bodyLabel" destination="sXl-4Z-Cr3" id="2xm-Jw-HmA"/>
