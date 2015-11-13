@@ -9,7 +9,6 @@
 #import "ArticleDetailViewController.h"
 #import "NewspaperArticle.h"
 #import "UIColor+SchoolColor.h"
-#import "UIApplication+iOSVersionChecker.h"
 #import <MessageUI/MessageUI.h>
 
 
@@ -35,11 +34,7 @@
     
     
     // Set the email button image
-    if ([UIApplication isPrevIOS]) {
-        [self.emailButton setImage:[UIImage imageNamed:@"EmailIcon6"]];
-    } else {
-        [self.emailButton setImage:[UIImage imageNamed:@"EmailIcon7"]];
-    }
+    [self.emailButton setImage:[UIImage imageNamed:@"EmailIcon7"]];
     
     // Can we send email?
     if (![MFMailComposeViewController canSendMail]) {

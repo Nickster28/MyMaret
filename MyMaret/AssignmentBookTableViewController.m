@@ -9,7 +9,6 @@
 #import "AssignmentBookTableViewController.h"
 #import "AssignmentBookStore.h"
 #import "Assignment.h"
-#import "UIApplication+iOSVersionChecker.h"
 #import "UIColor+SchoolColor.h"
 #import "AppDelegate.h"
 #import "AssignmentCreationTableViewController.h"
@@ -60,11 +59,6 @@ NSString * const MyMaretAssignmentBookViewPrefKey = @"MyMaretAssignmentBookViewP
     [segControl addTarget:self
                    action:@selector(changeAssignmentBookView:)
          forControlEvents:UIControlEventValueChanged];
-    
-    
-    if ([UIApplication isPrevIOS]) {
-        [segControl setSegmentedControlStyle:UISegmentedControlStyleBar];
-    }
     
     [self.bottomToolbarButton setCustomView:segControl];
     

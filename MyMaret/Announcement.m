@@ -37,7 +37,7 @@
     
     
     // Make the date components also so we have quick access to the day, month, year, and weekday
-    announcement.announcementPostDateComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit) fromDate:datePosted];
+    announcement.announcementPostDateComps = [[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday) fromDate:datePosted];
     
     return announcement;
 }

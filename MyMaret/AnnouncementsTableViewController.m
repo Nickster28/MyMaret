@@ -13,7 +13,6 @@
 #import "AnnouncementCell.h"
 #import "AnnouncementDetailViewController.h"
 #import "AppDelegate.h"
-#import "UIApplication+iOSVersionChecker.h"
 
 @interface AnnouncementsTableViewController () <UISearchDisplayDelegate>
 
@@ -194,9 +193,6 @@
                      scrollPosition:UITableViewScrollPositionNone];
     
     NSString *segueIdentifier = @"showAnnouncement7";
-    if ([UIApplication isPrevIOS]) {
-        segueIdentifier = @"showAnnouncement6";
-    }
     
     // Trigger the detail view controller segue
     [self performSegueWithIdentifier:segueIdentifier

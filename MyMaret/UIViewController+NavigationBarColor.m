@@ -7,7 +7,6 @@
 //
 
 #import "UIViewController+NavigationBarColor.h"
-#import "UIApplication+iOSVersionChecker.h"
 #import "UIColor+SchoolColor.h"
 
 
@@ -18,17 +17,12 @@
 {
     NSAssert(self.navigationController, @"Must have a navigation controller to set the NavigationBar color!");
     
-    // If we're on iOS 7, make the bar translucent green and white
-    // for iOS 6, make the bar green
-    if ([UIApplication isPrevIOS]) {
-        [self.navigationController.navigationBar setTintColor:[UIColor schoolDarkColor]];
-    } else {
-        [self.navigationController.navigationBar setBarTintColor:[UIColor schoolColor]];
-        [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-        [self.navigationController.navigationBar setTranslucent:NO];
-        
-        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    }
+    // make the bar translucent green and white
+    [self.navigationController.navigationBar setBarTintColor:[UIColor schoolColor]];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar setTranslucent:NO];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
 }
 
 

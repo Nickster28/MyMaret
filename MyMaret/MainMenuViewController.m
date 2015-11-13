@@ -8,7 +8,6 @@
 
 #import "MainMenuViewController.h"
 #import "SWRevealViewController.h"
-#import "UIApplication+iOSVersionChecker.h"
 #import "PushNotificationUpdateable.h"
 
 

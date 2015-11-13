@@ -9,7 +9,6 @@
 #import "AnnouncementDetailViewController.h"
 #import "Announcement.h"
 #import <MessageUI/MessageUI.h>
-#import "UIApplication+iOSVersionChecker.h"
 
 @interface AnnouncementDetailViewController () <MFMailComposeViewControllerDelegate>
 
@@ -24,11 +23,7 @@
 	// Do any additional setup after loading the view.
     
     // Set the email button image
-    if ([UIApplication isPrevIOS]) {
-        [self.emailButton setImage:[UIImage imageNamed:@"EmailIcon6"]];
-    } else {
-        [self.emailButton setImage:[UIImage imageNamed:@"EmailIcon7"]];
-    }
+    [self.emailButton setImage:[UIImage imageNamed:@"EmailIcon7"]];
     
     // Can we send email?
     if (![MFMailComposeViewController canSendMail]) {

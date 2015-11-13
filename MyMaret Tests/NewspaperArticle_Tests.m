@@ -56,7 +56,7 @@
 
 - (void)testArticleEdition
 {
-    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:[NSDate date]];
+    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSSecondCalendarUnit) fromDate:[NSDate date]];
     
     // September
     [dateComps setMonth:9];

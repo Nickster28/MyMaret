@@ -9,7 +9,6 @@
 #import "AnnouncementCreationBodyViewController.h"
 #import "AnnouncementsStore.h"
 #import "UIColor+SchoolColor.h"
-#import "UIApplication+iOSVersionChecker.h"
 
 @interface AnnouncementCreationBodyViewController ()
 
@@ -69,9 +68,7 @@
     
     UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     
-    if (![UIApplication isPrevIOS]) {
-        [activityIndicator setColor:[UIColor schoolColor]];
-    }
+    [activityIndicator setColor:[UIColor schoolColor]];
     
     [activityIndicator startAnimating];
     

@@ -38,7 +38,7 @@
 
 - (NSString *)nameOfWeekdayForDate:(NSDate *)date
 {
-    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:NSWeekdayCalendarUnit fromDate:date];
+    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:NSCalendarUnitWeekday fromDate:date];
     switch (dateComps.weekday) {
         case 1:
             return @"Sun.";
@@ -91,7 +91,7 @@
     
     // 7 days ago (should be X/Y)
     postDate = [NSDate dateWithTimeInterval:-NUM_SECONDS_IN_DAY * 7 sinceDate:[NSDate date]];
-    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit) fromDate:postDate];
+    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitMonth) fromDate:postDate];
     
     NSNumber *day = [NSNumber numberWithLong:dateComps.day];
     NSNumber *month = [NSNumber numberWithLong:dateComps.month];
@@ -121,7 +121,7 @@
     
     // 7 days in the future (should be X/Y)
     postDate = [NSDate dateWithTimeInterval:NUM_SECONDS_IN_DAY * 7 + 1 sinceDate:[NSDate date]];
-    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit) fromDate:postDate];
+    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitMonth) fromDate:postDate];
     
     NSNumber *day = [NSNumber numberWithLong:dateComps.day];
     NSNumber *month = [NSNumber numberWithLong:dateComps.month];

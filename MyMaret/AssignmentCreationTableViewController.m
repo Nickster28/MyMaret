@@ -279,7 +279,7 @@
     // Figure out the due date's day index
     
     // Break the date into date components
-    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit) fromDate:dueDate];
+    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday) fromDate:dueDate];
     
     // In NSDateComponents, Sunday = 1 ... Saturday = 7
     // We want Monday = 0 ... Sunday = 6

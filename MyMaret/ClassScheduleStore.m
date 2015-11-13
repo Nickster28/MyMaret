@@ -71,9 +71,9 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
     // If we're not on the day when the index was overriden,
     // ignore it
     if (self.lastTodayIndexOverride) {
-        NSDateComponents *todayComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit)
+        NSDateComponents *todayComps = [[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitMonth)
                                                                        fromDate:[NSDate date]];
-        NSDateComponents *lastOverrideComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit)
+        NSDateComponents *lastOverrideComps = [[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitMonth)
                                                                               fromDate:[self lastTodayIndexOverride]];
         
         if (todayComps.month != lastOverrideComps.month || todayComps.day != lastOverrideComps.day) {
@@ -99,7 +99,7 @@ NSString * const ClassScheduleStoreTodayIndexOverrideDateKey = @"ClassScheduleSt
     }
     
     // If there's no override, we need to figure out what today is
-    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:NSCalendarUnitWeekday fromDate:[NSDate date]];
     
     // In NSDateComponents, Sunday = 1 ... Saturday = 7
     // We want Monday = 0 ... Sunday = 6

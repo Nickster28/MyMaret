@@ -8,9 +8,10 @@
 
 #import "MyMaretFrontViewController.h"
 #import "UIViewController+NavigationBarColor.h"
-#import "UIApplication+iOSVersionChecker.h"
 #import "AppDelegate.h"
 #import "MainMenuViewController.h"
+#import "LoginViewController.h"
+#import "UIColor+SchoolColor.h"
 
 
 
@@ -91,9 +92,7 @@
     // Add the button to open the drawer
     UIBarButtonItem *drawerButton = [[UIBarButtonItem alloc] init];
     
-    if ([UIApplication isPrevIOS]) {
-        [drawerButton setImage:[UIImage imageNamed:@"DrawerIcon6"]];
-    } else [drawerButton setImage:[UIImage imageNamed:@"DrawerIcon7"]];
+    [drawerButton setImage:[UIImage imageNamed:@"DrawerIcon7"]];
     
     [drawerButton setTarget:self.revealViewController];
     [drawerButton setAction:@selector(revealToggle:)];
@@ -109,6 +108,25 @@
     // Set the reveal controller delegate and add a pan gesture to open it
     [self.navigationController.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     [self.revealViewController setDelegate:self];
+}
+
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:MyMaretIsLoggedInKey]) {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        
+        // Put the login viewcontroller inside a nav controller
+        // (required for the google login controller)
+        // but hide the nav bar initially
+        UINavigationController *navController = [[UINavigationController alloc]
+                                                 initWithRootViewController:loginVC];
+        
+        [navController setNavigationBarHidden:YES];
+        [navController.navigationBar setTintColor:[UIColor schoolColor]];
+        [self presentViewController:navController animated:true completion:nil];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated

@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WelcomeViewController">
             <connections>
-                <outlet property="contentView" destination="C38-vG-s1W" id="Yil-aM-eAH"/>
-                <outlet property="imageView" destination="QRj-hq-pwd" id="cZU-cS-9jJ"/>
-                <outlet property="pageControl" destination="bJK-vg-kRR" id="V4s-LC-kS9"/>
-                <outlet property="startButton" destination="B19-om-QuR" id="Qj5-g1-OlM"/>
                 <outlet property="view" destination="bkz-bi-FEa" id="z0o-db-9bz"/>
-                <outlet property="welcomeScrollView" destination="mmb-fO-KtS" id="USE-WO-nfd"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -22,32 +17,22 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashBackground4-6" translatesAutoresizingMaskIntoConstraints="NO" id="u2d-RF-eBw">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <animations/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WelcomeImage0" translatesAutoresizingMaskIntoConstraints="NO" id="QRj-hq-pwd">
-                    <rect key="frame" x="46" y="350" width="228" height="160"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WelcomeImage0" translatesAutoresizingMaskIntoConstraints="NO" id="LSt-oa-cnt">
+                    <rect key="frame" x="69" y="30" width="183" height="110"/>
+                    <animations/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="160" id="4Tq-xG-lHC"/>
+                        <constraint firstAttribute="height" constant="110" id="QEv-sD-NVF"/>
+                        <constraint firstAttribute="width" constant="183" id="dbK-cW-4py"/>
                     </constraints>
                 </imageView>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmb-fO-KtS">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="320" id="Ck7-mW-10Q"/>
-                        <constraint firstAttribute="height" constant="480" id="jvb-l8-Zy5"/>
-                    </constraints>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="oGR-Xe-wgi"/>
-                    </connections>
-                </scrollView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B19-om-QuR">
-                    <rect key="frame" x="68" y="397" width="183" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <rect key="frame" x="69" y="518" width="183" height="30"/>
+                    <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="183" id="aho-2L-z8l"/>
-                        <constraint firstAttribute="height" constant="30" id="cvy-6f-nHY"/>
+                        <constraint firstAttribute="height" constant="30" id="2yE-hr-pK4"/>
+                        <constraint firstAttribute="width" constant="183" id="4iW-CH-nMx"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
                     <state key="normal" title="Start Using MyMaret">
@@ -58,458 +43,240 @@
                         <action selector="dismissWelcomeScreen:" destination="-1" eventType="touchUpInside" id="UbU-oc-CY2"/>
                     </connections>
                 </button>
-                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="8" translatesAutoresizingMaskIntoConstraints="NO" id="bJK-vg-kRR">
-                    <rect key="frame" x="93" y="511" width="134" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to MyMaret!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="196" translatesAutoresizingMaskIntoConstraints="NO" id="dwd-UG-Q0P">
+                    <rect key="frame" x="0.0" y="167" width="320" height="37"/>
+                    <animations/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="37" id="34J-mn-MnD"/>
-                        <constraint firstAttribute="width" constant="134" id="NoF-ph-Cp0"/>
+                        <constraint firstAttribute="width" constant="320" id="2FO-ac-sgg"/>
+                        <constraint firstAttribute="height" constant="37" id="3pW-K3-hMP"/>
                     </constraints>
-                </pageControl>
-            </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="mmb-fO-KtS" firstAttribute="top" secondItem="bkz-bi-FEa" secondAttribute="top" id="04z-me-RJA"/>
-                <constraint firstItem="bJK-vg-kRR" firstAttribute="top" secondItem="QRj-hq-pwd" secondAttribute="bottom" constant="1" id="1IO-ie-ydd"/>
-                <constraint firstAttribute="trailing" secondItem="bJK-vg-kRR" secondAttribute="trailing" constant="93" id="3jt-uC-fEW"/>
-                <constraint firstAttribute="bottom" secondItem="bJK-vg-kRR" secondAttribute="bottom" constant="20" id="JgR-w8-vAS"/>
-                <constraint firstItem="u2d-RF-eBw" firstAttribute="top" secondItem="mmb-fO-KtS" secondAttribute="top" id="KOM-JF-O6J"/>
-                <constraint firstAttribute="trailing" secondItem="mmb-fO-KtS" secondAttribute="trailing" id="Q3y-fZ-mfF"/>
-                <constraint firstItem="bJK-vg-kRR" firstAttribute="top" secondItem="B19-om-QuR" secondAttribute="bottom" constant="84" id="VjA-o4-zlM"/>
-                <constraint firstAttribute="bottom" secondItem="u2d-RF-eBw" secondAttribute="bottom" id="cAt-9u-Yxi"/>
-                <constraint firstItem="B19-om-QuR" firstAttribute="leading" secondItem="bkz-bi-FEa" secondAttribute="leading" constant="68" id="cOq-mX-7FH"/>
-                <constraint firstItem="mmb-fO-KtS" firstAttribute="leading" secondItem="bkz-bi-FEa" secondAttribute="leading" id="d5J-Ov-4YJ"/>
-                <constraint firstItem="bJK-vg-kRR" firstAttribute="leading" secondItem="bkz-bi-FEa" secondAttribute="leading" constant="93" id="m7N-tt-dA5"/>
-                <constraint firstItem="QRj-hq-pwd" firstAttribute="centerX" secondItem="bJK-vg-kRR" secondAttribute="centerX" id="nL2-Bl-9PT"/>
-                <constraint firstItem="u2d-RF-eBw" firstAttribute="leading" secondItem="mmb-fO-KtS" secondAttribute="leading" id="pvp-IY-qLd"/>
-                <constraint firstItem="QRj-hq-pwd" firstAttribute="leading" secondItem="bkz-bi-FEa" secondAttribute="leading" constant="46" id="rzR-4i-2pi"/>
-                <constraint firstAttribute="trailing" secondItem="B19-om-QuR" secondAttribute="trailing" constant="69" id="uyJ-Bd-82L"/>
-            </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-        </view>
-        <view contentMode="scaleToFill" id="C38-vG-s1W">
-            <rect key="frame" x="0.0" y="0.0" width="2560" height="480"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to MyMaret!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="196" translatesAutoresizingMaskIntoConstraints="NO" id="Xzd-CE-t6d">
-                    <rect key="frame" x="62" y="40" width="196" height="74"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="32"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="286" translatesAutoresizingMaskIntoConstraints="NO" id="Trr-i8-hea">
-                    <rect key="frame" x="657" y="30" width="286" height="207"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <attributedString key="attributedText">
-                        <fragment content="Use">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=" ">
-                            <attributes>
-                                <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="Announcements">
-                            <attributes>
-                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=" ">
-                            <attributes>
-                                <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment>
-                            <string key="content">to send and receive Upper School announcements.  When you send an announcement, all Upper School students will receive it - if they don’t have MyMaret, MyMaret will send them an email with the announcement contents.</string>
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="270" translatesAutoresizingMaskIntoConstraints="NO" id="Qaq-c9-DUl">
-                    <rect key="frame" x="345" y="30" width="270" height="131"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <attributedString key="attributedText">
-                        <fragment content="Use ">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="Today">
-                            <attributes>
-                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=" ">
-                            <attributes>
-                                <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="to keep track of today’s classes, assignments due, and announcements as well as the current most popular newspaper articles.">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="270" translatesAutoresizingMaskIntoConstraints="NO" id="FMY-Me-L4m">
-                    <rect key="frame" x="25" y="107" width="270" height="130"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <attributedString key="attributedText">
-                        <fragment content="MyMaret lets you ">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="keep track of what you have going on ">
-                            <attributes>
-                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="today">
-                            <attributes>
-                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=",">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=" ">
-                            <attributes>
-                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="post and read Upper School ">
-                            <attributes>
-                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="announcements">
-                            <attributes>
-                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=", ">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="view the ">
-                            <attributes>
-                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="Maret calendar">
-                            <attributes>
-                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=", ">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="read the ">
-                            <attributes>
-                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="Woodley Leaves">
-                            <attributes>
-                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=", and ">
-                            <attributes>
-                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="keep track of your ">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="class schedule">
-                            <attributes>
-                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=" and ">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="assignments">
-                            <attributes>
-                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=".">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="258" translatesAutoresizingMaskIntoConstraints="NO" id="f5x-Mq-V7w">
-                    <rect key="frame" x="991" y="30" width="258" height="101"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <attributedString key="attributedText">
-                        <fragment content="Use ">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="Calendar">
-                            <attributes>
-                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=" ">
-                            <attributes>
-                                <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="to view school events and sports games that are coming up.  Even see where an event takes place.">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="278" translatesAutoresizingMaskIntoConstraints="NO" id="gtk-8w-1U3">
-                    <rect key="frame" x="1301" y="30" width="278" height="157"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <attributedString key="attributedText">
-                        <fragment content="Use the">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=" Woodley Leaves">
-                            <attributes>
-                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=" ">
-                            <attributes>
-                                <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment>
-                            <string key="content">to read the school newspaper wherever you go.  See which articles are most popular now and read articles that are available exclusively through MyMaret.</string>
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="258" translatesAutoresizingMaskIntoConstraints="NO" id="3jw-cP-rOg">
-                    <rect key="frame" x="1632" y="30" width="258" height="207"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <attributedString key="attributedText">
-                        <fragment content="Use ">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="Class Schedule">
-                            <attributes>
-                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=" ">
-                            <attributes>
-                                <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment>
-                            <string key="content">to keep track of your classes.  When you log in, MyMaret automatically downloads your schedule.  To change it, simply tap on a class, or tap edit to add/remove periods and move periods around.</string>
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="258" translatesAutoresizingMaskIntoConstraints="NO" id="axC-sF-cKe">
-                    <rect key="frame" x="1953" y="30" width="258" height="207"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <attributedString key="attributedText">
-                        <fragment content="Use">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=" ">
-                            <attributes>
-                                <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="Assignments">
-                            <attributes>
-                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=" ">
-                            <attributes>
-                                <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment>
-                            <string key="content">to keep track of your homework.  Just choose what class an assignment is for, and MyMaret will figure out what time it’s due.  Tap the circle to the left of an assignment to mark it as completed.</string>
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="256" translatesAutoresizingMaskIntoConstraints="NO" id="X57-d7-f9p">
-                    <rect key="frame" x="2272" y="30" width="256" height="157"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <attributedString key="attributedText">
-                        <fragment>
-                            <string key="content">And that’s it!  We hope you enjoy using MyMaret.  If you have any questions or comments, feel free to contact us - just go to the</string>
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=" ">
-                            <attributes>
-                                <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="Settings">
-                            <attributes>
-                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=" ">
-                            <attributes>
-                                <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="page.">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="20" name="GillSans"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
-                    <nil key="highlightedColor"/>
-                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ori-UR-biJ">
+                    <rect key="frame" x="0.0" y="206" width="320" height="310"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g9w-fg-5gl">
+                            <rect key="frame" x="8" y="8" width="304" height="294"/>
+                            <subviews>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="270" translatesAutoresizingMaskIntoConstraints="NO" id="tGX-ud-Sed">
+                                    <rect key="frame" x="17" y="201" width="270" height="84"/>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="270" id="6tU-Jx-IFE"/>
+                                        <constraint firstAttribute="height" constant="84" id="8LU-C2-fro"/>
+                                    </constraints>
+                                    <attributedString key="attributedText">
+                                        <fragment content="We hope you enjoy using MyMaret!  If you have any questions or comments, feel free to contact us from ">
+                                            <attributes>
+                                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="Settings">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=".">
+                                            <attributes>
+                                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="12" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="270" translatesAutoresizingMaskIntoConstraints="NO" id="NkW-y8-Zgn">
+                                    <rect key="frame" x="17" y="10" width="270" height="183"/>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="270" id="cyo-uw-3j2"/>
+                                        <constraint firstAttribute="height" constant="183" id="tgn-Yg-r8e"/>
+                                    </constraints>
+                                    <attributedString key="attributedText">
+                                        <fragment content="MyMaret lets you ">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="keep track of what you have going on ">
+                                            <attributes>
+                                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="today">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=",">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=" ">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="post and read Upper School ">
+                                            <attributes>
+                                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="announcements">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=", ">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="view the ">
+                                            <attributes>
+                                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="Maret calendar">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=", ">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="read the ">
+                                            <attributes>
+                                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="Woodley Leaves">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=", and ">
+                                            <attributes>
+                                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="keep track of your ">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="class schedule">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=" and ">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="assignments">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=".  You can even post announcements to users without MyMaret - they'll get an email with what you posted.  ">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="17" name="GillSans"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="304" id="7nw-1k-Lsd"/>
+                                <constraint firstItem="NkW-y8-Zgn" firstAttribute="top" secondItem="g9w-fg-5gl" secondAttribute="top" constant="10" id="cLW-je-xCZ"/>
+                                <constraint firstAttribute="height" constant="294" id="jQf-sT-bWD"/>
+                                <constraint firstAttribute="bottom" secondItem="tGX-ud-Sed" secondAttribute="bottom" constant="9" id="sHW-Jk-dPN"/>
+                                <constraint firstItem="NkW-y8-Zgn" firstAttribute="centerX" secondItem="g9w-fg-5gl" secondAttribute="centerX" id="tUe-cU-2L2"/>
+                                <constraint firstItem="tGX-ud-Sed" firstAttribute="centerX" secondItem="g9w-fg-5gl" secondAttribute="centerX" id="tbl-MK-DeL"/>
+                                <constraint firstItem="tGX-ud-Sed" firstAttribute="top" secondItem="NkW-y8-Zgn" secondAttribute="bottom" priority="750" constant="8" id="uIX-7E-6xn"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <animations/>
+                    <constraints>
+                        <constraint firstItem="g9w-fg-5gl" firstAttribute="centerX" secondItem="Ori-UR-biJ" secondAttribute="centerX" id="O4G-C2-EBR"/>
+                        <constraint firstItem="g9w-fg-5gl" firstAttribute="centerY" secondItem="Ori-UR-biJ" secondAttribute="centerY" id="Xd3-f3-WQm"/>
+                    </constraints>
+                </view>
             </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="B19-om-QuR" firstAttribute="centerX" secondItem="bkz-bi-FEa" secondAttribute="centerX" id="0Hx-4j-i4j"/>
+                <constraint firstAttribute="bottom" secondItem="B19-om-QuR" secondAttribute="bottom" constant="20" id="8Nu-EC-oQ1"/>
+                <constraint firstItem="dwd-UG-Q0P" firstAttribute="centerX" secondItem="bkz-bi-FEa" secondAttribute="centerX" id="ALf-4X-xRk"/>
+                <constraint firstItem="LSt-oa-cnt" firstAttribute="centerX" secondItem="bkz-bi-FEa" secondAttribute="centerX" id="Icr-ic-LbS"/>
+                <constraint firstItem="Ori-UR-biJ" firstAttribute="top" secondItem="dwd-UG-Q0P" secondAttribute="bottom" constant="2" id="PCz-VX-utw"/>
+                <constraint firstItem="Ori-UR-biJ" firstAttribute="centerX" secondItem="bkz-bi-FEa" secondAttribute="centerX" id="Qlh-2t-oTs"/>
+                <constraint firstItem="u2d-RF-eBw" firstAttribute="leading" secondItem="bkz-bi-FEa" secondAttribute="leading" id="XA7-zb-NEq"/>
+                <constraint firstItem="B19-om-QuR" firstAttribute="top" secondItem="Ori-UR-biJ" secondAttribute="bottom" constant="2" id="YDz-Rb-NEr"/>
+                <constraint firstItem="u2d-RF-eBw" firstAttribute="top" secondItem="bkz-bi-FEa" secondAttribute="top" id="b2F-Ei-WVg"/>
+                <constraint firstAttribute="bottom" secondItem="u2d-RF-eBw" secondAttribute="bottom" id="cAt-9u-Yxi"/>
+                <constraint firstItem="Ori-UR-biJ" firstAttribute="leading" secondItem="bkz-bi-FEa" secondAttribute="leading" id="dno-IG-86V"/>
+                <constraint firstAttribute="bottom" secondItem="u2d-RF-eBw" secondAttribute="bottom" id="eYV-5D-xks"/>
+                <constraint firstItem="dwd-UG-Q0P" firstAttribute="top" secondItem="LSt-oa-cnt" secondAttribute="bottom" constant="27" id="j2D-HP-Z6Y"/>
+                <constraint firstItem="LSt-oa-cnt" firstAttribute="top" secondItem="bkz-bi-FEa" secondAttribute="top" constant="30" id="jqT-o4-fQv"/>
+                <constraint firstAttribute="trailing" secondItem="Ori-UR-biJ" secondAttribute="trailing" id="mVU-QU-Hgk"/>
+                <constraint firstAttribute="trailing" secondItem="u2d-RF-eBw" secondAttribute="trailing" id="rXP-uc-auw"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
         </view>
     </objects>
     <resources>

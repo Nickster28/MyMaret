@@ -44,7 +44,7 @@ NSString * const NewspaperArticleTitleAttrStringEncodingKey = @"titleAttrString"
         [self setIsDigitalExclusive:isDigitalExclusive];
     
         // Get the month the self was uploaded
-        NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:NSMonthCalendarUnit fromDate:articlePublishDate];
+        NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:NSCalendarUnitMonth fromDate:articlePublishDate];
     
         // Figure out which month the edition was published in
         switch ([dateComps month]) {

@@ -14,9 +14,9 @@
 
 - (NSString *)stringForDueDate
 {
-    NSDateComponents *todayDateComponents = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit) fromDate:[NSDate date]];
+    NSDateComponents *todayDateComponents = [[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitMonth) fromDate:[NSDate date]];
     
-    NSDateComponents *selfDateComponents = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSWeekdayCalendarUnit) fromDate:self];
+    NSDateComponents *selfDateComponents = [[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitWeekday) fromDate:self];
     
     // See if the announcement was posted today
     if (selfDateComponents.day == todayDateComponents.day &&

@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
             <connections>
-                <outlet property="loginButton" destination="fUC-gY-7sY" id="6Db-T7-fe0"/>
-                <outlet property="loginTitleImageView" destination="2gr-0I-QBo" id="D92-ti-AI8"/>
-                <outlet property="splashBackgroundImageView" destination="avD-4X-rEo" id="6Op-Cm-yVQ"/>
-                <outlet property="splashLogoImageView" destination="9A6-LA-cvT" id="OZj-Ku-2Qv"/>
                 <outlet property="view" destination="1Na-X3-X8T" id="Btf-w3-e9X"/>
             </connections>
         </placeholder>
@@ -21,25 +17,23 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashBackground4-7" translatesAutoresizingMaskIntoConstraints="NO" id="avD-4X-rEo">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="320" id="iqe-5e-rKS"/>
-                    </constraints>
+                    <animations/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashLogo4-7" translatesAutoresizingMaskIntoConstraints="NO" id="9A6-LA-cvT">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="320" id="WNV-nG-ZhW"/>
-                    </constraints>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MyMaretLogo" translatesAutoresizingMaskIntoConstraints="NO" id="2gr-0I-QBo">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MyMaretLogo" translatesAutoresizingMaskIntoConstraints="NO" id="2gr-0I-QBo">
                     <rect key="frame" x="0.0" y="85" width="320" height="106"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="106" id="SR0-NJ-dHl"/>
+                        <constraint firstAttribute="width" constant="320" id="fbr-a1-U2V"/>
+                    </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUC-gY-7sY">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUC-gY-7sY">
                     <rect key="frame" x="24" y="354" width="272" height="90"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="272" id="MnH-Eq-1QE"/>
+                        <constraint firstAttribute="height" constant="90" id="vaM-EH-eHa"/>
+                    </constraints>
                     <state key="normal" image="LogInButton">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -48,24 +42,24 @@
                     </connections>
                 </button>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="avD-4X-rEo" firstAttribute="leading" secondItem="1Na-X3-X8T" secondAttribute="leading" id="Chh-Vr-mmw"/>
-                <constraint firstItem="avD-4X-rEo" firstAttribute="top" secondItem="1Na-X3-X8T" secondAttribute="top" id="GOI-hW-v4m"/>
-                <constraint firstAttribute="trailing" secondItem="9A6-LA-cvT" secondAttribute="trailing" id="RG4-du-CBV"/>
-                <constraint firstItem="9A6-LA-cvT" firstAttribute="top" secondItem="1Na-X3-X8T" secondAttribute="top" id="SJe-BR-H2V"/>
-                <constraint firstAttribute="trailing" secondItem="avD-4X-rEo" secondAttribute="trailing" id="auU-1r-P0W"/>
-                <constraint firstAttribute="bottom" secondItem="9A6-LA-cvT" secondAttribute="bottom" id="d1z-Lr-nTK"/>
-                <constraint firstItem="9A6-LA-cvT" firstAttribute="leading" secondItem="1Na-X3-X8T" secondAttribute="leading" id="eet-e0-3n2"/>
-                <constraint firstAttribute="bottom" secondItem="avD-4X-rEo" secondAttribute="bottom" id="r7y-Nl-biR"/>
+                <constraint firstItem="2gr-0I-QBo" firstAttribute="centerX" secondItem="1Na-X3-X8T" secondAttribute="centerX" id="0El-9s-uCr"/>
+                <constraint firstAttribute="bottom" secondItem="fUC-gY-7sY" secondAttribute="bottom" constant="124" id="0J2-mz-cIr"/>
+                <constraint firstItem="fUC-gY-7sY" firstAttribute="centerX" secondItem="1Na-X3-X8T" secondAttribute="centerX" id="39e-JM-Xm3"/>
+                <constraint firstAttribute="trailing" secondItem="avD-4X-rEo" secondAttribute="trailing" id="6WP-J9-Hge"/>
+                <constraint firstItem="avD-4X-rEo" firstAttribute="top" secondItem="1Na-X3-X8T" secondAttribute="top" id="MIv-ef-xx9"/>
+                <constraint firstItem="avD-4X-rEo" firstAttribute="leading" secondItem="1Na-X3-X8T" secondAttribute="leading" id="dQH-jY-JIy"/>
+                <constraint firstItem="2gr-0I-QBo" firstAttribute="top" secondItem="1Na-X3-X8T" secondAttribute="top" constant="85" id="i76-kl-zPu"/>
+                <constraint firstAttribute="bottom" secondItem="avD-4X-rEo" secondAttribute="bottom" id="kRx-Dn-MEI"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <nil key="simulatedStatusBarMetrics"/>
         </view>
     </objects>
     <resources>
         <image name="LogInButton" width="320" height="106"/>
         <image name="MyMaretLogo" width="320" height="106"/>
         <image name="SplashBackground4-7" width="320" height="568"/>
-        <image name="SplashLogo4-7" width="320" height="568"/>
     </resources>
 </document>

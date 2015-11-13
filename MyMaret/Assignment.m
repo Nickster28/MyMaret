@@ -32,12 +32,12 @@ NSString * const AssignmentIsCompletedEncodingKey = @"isCompleted";
         [self setIsCompleted:false];
         
         // Pull out the day, month, and weekday to store in our date comps
-        [self setDueDateDayDateComps:[[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSWeekdayCalendarUnit)
+        [self setDueDateDayDateComps:[[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitWeekday)
                                                                      fromDate:dueDate]];
         
         if (isNormalDay) {
             // Pull out the time the assignment is due to store in our due time string
-            NSDateComponents *dueDateDateComps = [[NSCalendar currentCalendar] components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:dueDate];
+            NSDateComponents *dueDateDateComps = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:dueDate];
             
             // Get the hour, adjusting for military time
             NSUInteger hour = dueDateDateComps.hour;

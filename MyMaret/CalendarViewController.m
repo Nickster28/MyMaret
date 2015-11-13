@@ -8,7 +8,6 @@
 
 #import "CalendarViewController.h"
 #import "UIColor+SchoolColor.h"
-#import "UIApplication+iOSVersionChecker.h"
 #import "AppDelegate.h"
 #import "MainMenuViewController.h"
 
@@ -60,11 +59,6 @@ NSString * const MyMaretCalendarPrefKey = @"MyMaretCalendarPrefKey";
     [segControl addTarget:self
                    action:@selector(changeCalendar:)
          forControlEvents:UIControlEventValueChanged];
-    
-    
-    if ([UIApplication isPrevIOS]) {
-        [segControl setSegmentedControlStyle:UISegmentedControlStyleBar];
-    }
     
     [self.bottomToolbarButton setCustomView:segControl];
     

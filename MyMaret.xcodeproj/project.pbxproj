@@ -34,7 +34,6 @@
 		01176FE717DC621D00DFF2EA /* TextEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FE617DC621D00DFF2EA /* TextEditCell.m */; };
 		01176FE817DC621D00DFF2EA /* TextEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FE617DC621D00DFF2EA /* TextEditCell.m */; };
 		01176FEF17DC64F100DFF2EA /* DateTimeDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FEE17DC64F100DFF2EA /* DateTimeDisplayCell.m */; };
-		01176FF017DC64F100DFF2EA /* DateTimeDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FEE17DC64F100DFF2EA /* DateTimeDisplayCell.m */; };
 		0124412617D056260091C01E /* WelcomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0124412517D056260091C01E /* WelcomeView.xib */; };
 		0125F75C17BB1C750042EB6F /* AnnouncementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0125F75B17BB1C750042EB6F /* AnnouncementCell.m */; };
 		01271A1217C9CB2E003C487C /* MainMenuBackgroundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01271A1117C9CB2E003C487C /* MainMenuBackgroundView.xib */; };
@@ -42,7 +41,6 @@
 		013E845017F5716B00A20F4B /* AssignmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 013E844F17F5716B00A20F4B /* AssignmentCell.m */; };
 		015191FF17D545CA0073AAEC /* NewspaperCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015191FE17D545CA0073AAEC /* NewspaperCell.m */; };
 		0151920117D545D50073AAEC /* NewspaperCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0151920017D545D50073AAEC /* NewspaperCell.xib */; };
-		016780DB17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */; };
 		0169749417D2D38900973B1B /* MyMaretFrontViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169749317D2D38900973B1B /* MyMaretFrontViewController.m */; };
 		0169749B17D30F8D00973B1B /* NewspaperStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169749A17D30F8D00973B1B /* NewspaperStore.m */; };
 		0169749C17D30F8D00973B1B /* NewspaperStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169749A17D30F8D00973B1B /* NewspaperStore.m */; };
@@ -103,6 +101,8 @@
 		01DEFF3617DD912000D355CA /* AssignmentBookTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DEFF3517DD912000D355CA /* AssignmentBookTableViewController.m */; };
 		01DEFF3917DD92F000D355CA /* AssignmentBookStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DEFF3817DD92F000D355CA /* AssignmentBookStore.m */; };
 		01F576F317E2AF370021CEFA /* TodaySettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F576F217E2AF370021CEFA /* TodaySettingsTableViewController.m */; };
+		6A0D16681BF52BA40095783C /* DateTimeDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FEE17DC64F100DFF2EA /* DateTimeDisplayCell.m */; };
+		6A0D166A1BF550560095783C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A0D16691BF550560095783C /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,8 +167,6 @@
 		015191FD17D545CA0073AAEC /* NewspaperCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewspaperCell.h; sourceTree = "<group>"; };
 		015191FE17D545CA0073AAEC /* NewspaperCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewspaperCell.m; sourceTree = "<group>"; };
 		0151920017D545D50073AAEC /* NewspaperCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewspaperCell.xib; sourceTree = "<group>"; };
-		016780D917A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+iOSVersionChecker.h"; sourceTree = "<group>"; };
-		016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+iOSVersionChecker.m"; sourceTree = "<group>"; };
 		0169749217D2D38900973B1B /* MyMaretFrontViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMaretFrontViewController.h; sourceTree = "<group>"; };
 		0169749317D2D38900973B1B /* MyMaretFrontViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMaretFrontViewController.m; sourceTree = "<group>"; };
 		0169749817D2D70000973B1B /* PushNotificationUpdateable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushNotificationUpdateable.h; sourceTree = "<group>"; };
@@ -263,6 +261,7 @@
 		01DEFF3817DD92F000D355CA /* AssignmentBookStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentBookStore.m; sourceTree = "<group>"; };
 		01F576F117E2AF370021CEFA /* TodaySettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodaySettingsTableViewController.h; sourceTree = "<group>"; };
 		01F576F217E2AF370021CEFA /* TodaySettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodaySettingsTableViewController.m; sourceTree = "<group>"; };
+		6A0D16691BF550560095783C /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -372,6 +371,7 @@
 			children = (
 				0177455717A60AC3001625BF /* AppDelegate.h */,
 				0177455817A60AC3001625BF /* AppDelegate.m */,
+				6A0D16691BF550560095783C /* Launch Screen.storyboard */,
 				0177455A17A60AC3001625BF /* Main.storyboard */,
 				01BF139A17A89B8500731690 /* MyMaretCDModel.xcdatamodeld */,
 				01DAA6AD17A7031800B23BB2 /* Today */,
@@ -398,8 +398,6 @@
 				016A968619A91A7F002EE462 /* NSDate+DueDateStringifier.m */,
 				01A4FE3317B97C08007FAB5C /* UIColor+SchoolColor.h */,
 				01A4FE3417B97C08007FAB5C /* UIColor+SchoolColor.m */,
-				016780D917A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.h */,
-				016780DA17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m */,
 				013BB66C17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.h */,
 				013BB66D17CAEBB100B0E881 /* UIApplication+HasNetworkConnection.m */,
 				01AEAD4317ECD263003D85A2 /* UIViewController+NavigationBarColor.h */,
@@ -700,6 +698,7 @@
 				01BD435C17C9BB22005EF174 /* AnnouncementCell.xib in Resources */,
 				01A69B0F19B6DA8700B6CD7A /* parseCredentials.plist in Resources */,
 				0177456117A60AC3001625BF /* Images.xcassets in Resources */,
+				6A0D166A1BF550560095783C /* Launch Screen.storyboard in Resources */,
 				0124412617D056260091C01E /* WelcomeView.xib in Resources */,
 				016EDAD418E3EFD200DD7A32 /* LICENSE in Resources */,
 				0177455317A60AC3001625BF /* InfoPlist.strings in Resources */,
@@ -769,7 +768,6 @@
 				01DAA6B917A70A1B00B23BB2 /* NewspaperTableViewController.m in Sources */,
 				01176FD417DC122F00DFF2EA /* SchoolClass.m in Sources */,
 				0107E01917CBC8E60099E4E4 /* GTMOAuth2Authentication.m in Sources */,
-				016780DB17A6DBD3009AB9FA /* UIApplication+iOSVersionChecker.m in Sources */,
 				01AEAD4517ECD263003D85A2 /* UIViewController+NavigationBarColor.m in Sources */,
 				015191FF17D545CA0073AAEC /* NewspaperCell.m in Sources */,
 				0107E01C17CBC9430099E4E4 /* GTMHTTPFetcher.m in Sources */,
@@ -781,10 +779,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01176FF017DC64F100DFF2EA /* DateTimeDisplayCell.m in Sources */,
 				01176FD517DC122F00DFF2EA /* SchoolClass.m in Sources */,
 				016A968019A916C6002EE462 /* Assignment_Tests.m in Sources */,
 				01A4FE2617B97304007FAB5C /* AnnouncementStore_Tests.m in Sources */,
+				6A0D16681BF52BA40095783C /* DateTimeDisplayCell.m in Sources */,
 				016974A817D3113700973B1B /* NewspaperArticle.m in Sources */,
 				0169749C17D30F8D00973B1B /* NewspaperStore.m in Sources */,
 				01176FDD17DC3C3E00DFF2EA /* SchoolClassEditTableViewController.m in Sources */,
@@ -918,6 +916,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -929,7 +928,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "MyMaret/MyMaret-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -948,6 +947,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -959,7 +959,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "MyMaret/MyMaret-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

@@ -13,6 +13,11 @@
 #import "UIColor+SchoolColor.h"
 #import "LoginViewController.h"
 #import <Parse/Parse.h>
+#import "NewspaperStore.h"
+#import "ClassScheduleStore.h"
+#import "AnnouncementsStore.h"
+#import "AssignmentBookStore.h"
+
 
 @interface SettingsTableViewController () <MFMailComposeViewControllerDelegate, UIAlertViewDelegate>
 
@@ -246,22 +251,56 @@
     [[PFInstallation currentInstallation] saveInBackground];
     
     // Opt out of push notifications
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeNone];
+    // Register for push notifications
+    UIUserNotificationType userNotificationTypes = UIUserNotificationTypeNone;
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+                                                                             categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
+    // Delete info
+    [[NSUserDefaults standardUserDefaults] setInteger:0
+                                               forKey:MyMaretUserGradeKey];
+    [[NSUserDefaults standardUserDefaults] setObject:@""
+                                              forKey:MyMaretUserNameKey];
+    [[NSUserDefaults standardUserDefaults] setObject:@""
+                                              forKey:MyMaretUserEmailKey];
+    
+    // Clear all the stores
+    [self clearAllStores];
     
     // Make a new login screen and present it
     LoginViewController *loginScreen = [[LoginViewController alloc] init];
-    [loginScreen setLoginStatus:LoginStatusLogout];
     
     UINavigationController *navController = [[UINavigationController alloc]
                                              initWithRootViewController:loginScreen];
     
     [navController setNavigationBarHidden:YES];
     [navController.navigationBar setTintColor:[UIColor schoolColor]];
-    [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    [navController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     
     [self.navigationController presentViewController:navController
                                             animated:YES
                                           completion:nil];
+}
+
+
+- (BOOL)clearAllStores
+{
+    BOOL success = [[AnnouncementsStore sharedStore] clearStore];
+    
+    // Clear each store, only changing success if it's true
+    // and there was an error
+    BOOL result = [[NewspaperStore sharedStore] clearStore];
+    if (success && !result) success = result;
+    
+    result = [[ClassScheduleStore sharedStore] clearStore];
+    if (success && !result) success = result;
+    
+    result = [[AssignmentBookStore sharedStore] clearStore];
+    if (success && !result) success = result;
+    
+    return success;
 }
 
 

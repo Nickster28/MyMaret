@@ -193,7 +193,7 @@
     // An indicator for whether or not we removed announcements
     BOOL didRemoveAnnouncements = FALSE;
     
-    NSDateComponents *todayDateComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSWeekdayCalendarUnit) fromDate:[NSDate date]];
+    NSDateComponents *todayDateComps = [[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitWeekday) fromDate:[NSDate date]];
     
     // Iterate through all of the days we have assignments due to see if
     // there are any assignments that have already been due
@@ -226,7 +226,7 @@
                   isNormalDay:(BOOL)isNormalDay
 {
     // Break the date into date components
-    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit) fromDate:dueDate];
+    NSDateComponents *dateComps = [[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday) fromDate:dueDate];
     
     // In NSDateComponents, Sunday = 1 ... Saturday = 7
     // We want Monday = 0 ... Sunday = 6
@@ -503,7 +503,7 @@
 
 - (void)refreshAssignmentsDueToday
 {
-    NSDateComponents *todayDateComps = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSWeekdayCalendarUnit) fromDate:[NSDate date]];
+    NSDateComponents *todayDateComps = [[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitWeekday) fromDate:[NSDate date]];
     
     // If there are assignments due today, todaysAssignments will be an array of
     // assignments sorted by due date - otherwise, this will be nil
