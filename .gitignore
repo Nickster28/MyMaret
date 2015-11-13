@@ -52,4 +52,4 @@ Carthage/Build
 
 fastlane/report.xml
 fastlane/screenshots
-MyMaret/parseCredentials.plist
+MyMaret/MyMaret/parseCredentials.plist
