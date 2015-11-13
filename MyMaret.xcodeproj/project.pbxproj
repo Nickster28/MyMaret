@@ -77,7 +77,6 @@
 		01A4FE2417B97304007FAB5C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01A4FE2217B97304007FAB5C /* InfoPlist.strings */; };
 		01A4FE2617B97304007FAB5C /* AnnouncementStore_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A4FE2517B97304007FAB5C /* AnnouncementStore_Tests.m */; };
 		01A4FE3517B97C08007FAB5C /* UIColor+SchoolColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A4FE3417B97C08007FAB5C /* UIColor+SchoolColor.m */; };
-		01A69B0F19B6DA8700B6CD7A /* parseCredentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01A69B0E19B6DA8700B6CD7A /* parseCredentials.plist */; };
 		01ACC11E17D5020D008893ED /* SectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ACC11D17D5020D008893ED /* SectionHeaderView.xib */; };
 		01AEAD4517ECD263003D85A2 /* UIViewController+NavigationBarColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 01AEAD4417ECD263003D85A2 /* UIViewController+NavigationBarColor.m */; };
 		01B0BB9917ACA74C0035B3FE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B0BB9817ACA74C0035B3FE /* CFNetwork.framework */; };
@@ -103,6 +102,7 @@
 		01F576F317E2AF370021CEFA /* TodaySettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F576F217E2AF370021CEFA /* TodaySettingsTableViewController.m */; };
 		6A0D16681BF52BA40095783C /* DateTimeDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FEE17DC64F100DFF2EA /* DateTimeDisplayCell.m */; };
 		6A0D166A1BF550560095783C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A0D16691BF550560095783C /* Launch Screen.storyboard */; };
+		6AC0881B1BF5953900F19807 /* parseCredentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6AC0881A1BF5953900F19807 /* parseCredentials.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -218,7 +218,6 @@
 		01A4FE2717B97304007FAB5C /* MyMaret Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyMaret Tests-Prefix.pch"; sourceTree = "<group>"; };
 		01A4FE3317B97C08007FAB5C /* UIColor+SchoolColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+SchoolColor.h"; sourceTree = "<group>"; };
 		01A4FE3417B97C08007FAB5C /* UIColor+SchoolColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SchoolColor.m"; sourceTree = "<group>"; };
-		01A69B0E19B6DA8700B6CD7A /* parseCredentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = parseCredentials.plist; sourceTree = "<group>"; };
 		01ACC11D17D5020D008893ED /* SectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionHeaderView.xib; sourceTree = "<group>"; };
 		01AEAD4317ECD263003D85A2 /* UIViewController+NavigationBarColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NavigationBarColor.h"; sourceTree = "<group>"; };
 		01AEAD4417ECD263003D85A2 /* UIViewController+NavigationBarColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NavigationBarColor.m"; sourceTree = "<group>"; };
@@ -262,6 +261,7 @@
 		01F576F117E2AF370021CEFA /* TodaySettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodaySettingsTableViewController.h; sourceTree = "<group>"; };
 		01F576F217E2AF370021CEFA /* TodaySettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodaySettingsTableViewController.m; sourceTree = "<group>"; };
 		6A0D16691BF550560095783C /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		6AC0881A1BF5953900F19807 /* parseCredentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = parseCredentials.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -392,7 +392,7 @@
 		0177454F17A60AC3001625BF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				01A69B0E19B6DA8700B6CD7A /* parseCredentials.plist */,
+				6AC0881A1BF5953900F19807 /* parseCredentials.plist */,
 				016EDAD018E3EFD200DD7A32 /* MCSwipeTableViewCell */,
 				016A968519A91A7F002EE462 /* NSDate+DueDateStringifier.h */,
 				016A968619A91A7F002EE462 /* NSDate+DueDateStringifier.m */,
@@ -693,10 +693,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0112712717E426CB0007626C /* LICENSE.txt in Resources */,
+				6AC0881B1BF5953900F19807 /* parseCredentials.plist in Resources */,
 				017751D017DE2EB900ED49E5 /* LoginViewController.xib in Resources */,
 				010BC6A617CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib in Resources */,
 				01BD435C17C9BB22005EF174 /* AnnouncementCell.xib in Resources */,
-				01A69B0F19B6DA8700B6CD7A /* parseCredentials.plist in Resources */,
 				0177456117A60AC3001625BF /* Images.xcassets in Resources */,
 				6A0D166A1BF550560095783C /* Launch Screen.storyboard in Resources */,
 				0124412617D056260091C01E /* WelcomeView.xib in Resources */,
