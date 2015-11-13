@@ -102,7 +102,6 @@
 		01F576F317E2AF370021CEFA /* TodaySettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F576F217E2AF370021CEFA /* TodaySettingsTableViewController.m */; };
 		6A0D16681BF52BA40095783C /* DateTimeDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01176FEE17DC64F100DFF2EA /* DateTimeDisplayCell.m */; };
 		6A0D166A1BF550560095783C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A0D16691BF550560095783C /* Launch Screen.storyboard */; };
-		6AC0881B1BF5953900F19807 /* parseCredentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6AC0881A1BF5953900F19807 /* parseCredentials.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -261,7 +260,6 @@
 		01F576F117E2AF370021CEFA /* TodaySettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodaySettingsTableViewController.h; sourceTree = "<group>"; };
 		01F576F217E2AF370021CEFA /* TodaySettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodaySettingsTableViewController.m; sourceTree = "<group>"; };
 		6A0D16691BF550560095783C /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		6AC0881A1BF5953900F19807 /* parseCredentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = parseCredentials.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -392,7 +390,6 @@
 		0177454F17A60AC3001625BF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6AC0881A1BF5953900F19807 /* parseCredentials.plist */,
 				016EDAD018E3EFD200DD7A32 /* MCSwipeTableViewCell */,
 				016A968519A91A7F002EE462 /* NSDate+DueDateStringifier.h */,
 				016A968619A91A7F002EE462 /* NSDate+DueDateStringifier.m */,
@@ -693,7 +690,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0112712717E426CB0007626C /* LICENSE.txt in Resources */,
-				6AC0881B1BF5953900F19807 /* parseCredentials.plist in Resources */,
 				017751D017DE2EB900ED49E5 /* LoginViewController.xib in Resources */,
 				010BC6A617CBB7E90043B9C4 /* GTMOAuth2ViewTouch.xib in Resources */,
 				01BD435C17C9BB22005EF174 /* AnnouncementCell.xib in Resources */,
